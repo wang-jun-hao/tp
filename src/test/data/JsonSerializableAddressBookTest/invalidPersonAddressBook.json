@@ -1,5 +1,6 @@
 {
   "persons": [ {
+    "ic": "S7777777R",
     "name": "Hans Muster",
     "phone": "9482424",
     "email": "invalid@email!3e",
