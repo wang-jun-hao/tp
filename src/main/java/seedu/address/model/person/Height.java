@@ -11,8 +11,9 @@ public class Height {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Height should only contain numbers, and it should be a value between 0 and 300 exclusive";
-    public static final int HEIGHT_MIN = 0;
-    public static final int HEIGHT_MAX = 300;
+    public static final String HEIGHT_UNIT = "cm";
+    private static final int HEIGHT_MIN = 0;
+    private static final int HEIGHT_MAX = 300;
     public final String value;
 
     /**
