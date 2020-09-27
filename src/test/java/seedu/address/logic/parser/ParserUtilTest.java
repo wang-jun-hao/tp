@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Height;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -25,12 +26,14 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_HEIGHT = "18o";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_HEIGHT = "178";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -146,6 +149,29 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseHeight_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseHeight((String) null));
+    }
+
+    @Test
+    public void parseHeight_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseHeight(INVALID_HEIGHT));
+    }
+
+    @Test
+    public void parseHeight_validValueWithoutWhitespace_returnsHeight() throws Exception {
+        Height expectedHeight = new Height(VALID_HEIGHT);
+        assertEquals(expectedHeight, ParserUtil.parseHeight(VALID_HEIGHT));
+    }
+
+    @Test
+    public void parseHeight_validValueWithWhitespace_returnsTrimmedHeight() throws Exception {
+        String heightWithWhitespace = WHITESPACE + VALID_HEIGHT + WHITESPACE;
+        Height expectedHeight = new Height(VALID_HEIGHT);
+        assertEquals(expectedHeight, ParserUtil.parseHeight(heightWithWhitespace));
     }
 
     @Test
