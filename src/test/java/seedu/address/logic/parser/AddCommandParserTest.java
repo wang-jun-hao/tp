@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.IC_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.IC_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_IC_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
@@ -37,6 +38,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Ic;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -52,6 +54,10 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + IC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB
+            + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+
+        // multiple ics - last ic accepted
+        assertParseSuccess(parser, IC_DESC_AMY + IC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB
             + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
         // multiple names - last name accepted
@@ -89,6 +95,10 @@ public class AddCommandParserTest {
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
+        // missing ic prefix
+        assertParseFailure(parser, VALID_IC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + ADDRESS_DESC_BOB, expectedMessage);
+
         // missing name prefix
         assertParseFailure(parser, IC_DESC_BOB + VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB, expectedMessage);
@@ -112,6 +122,10 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
+        // invalid ic
+        assertParseFailure(parser, INVALID_IC_DESC + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+            + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Ic.MESSAGE_CONSTRAINTS);
+
         // invalid name
         assertParseFailure(parser, IC_DESC_BOB + INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB
             + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
