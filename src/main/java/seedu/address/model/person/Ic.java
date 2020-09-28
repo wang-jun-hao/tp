@@ -15,7 +15,7 @@ public class Ic {
             + "2. The xxxxxxx should be a 7-digit number\n"
             + "3. The # is should be a letter";
 
-    public static final String FIRST_CHARACTER_REGEX = "[STFG]";
+    public static final String FIRST_CHARACTER_REGEX = "[STFG]{1,1}";
     public static final String DIGITS_REGEX = "\\d{7,7}";
     public static final String LAST_CHARACTER_REGEX = "\\w{1,1}";
     public static final String VALIDATION_REGEX = FIRST_CHARACTER_REGEX + DIGITS_REGEX + LAST_CHARACTER_REGEX;

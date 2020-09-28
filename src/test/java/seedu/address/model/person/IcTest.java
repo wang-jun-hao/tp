@@ -15,7 +15,7 @@ public class IcTest {
 
     @Test
     public void constructor_invalidIc_throwsIllegalArgumentException() {
-        String invalidIc = "S9922eq3W";
+        String invalidIc = "S9922eq3WA";
         assertThrows(IllegalArgumentException.class, () -> new Ic(invalidIc));
     }
 
