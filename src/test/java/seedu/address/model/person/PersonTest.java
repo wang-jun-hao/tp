@@ -90,7 +90,7 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different address -> returns false
+        // different height -> returns false
         editedAlice = new PersonBuilder(ALICE).withHeight(VALID_HEIGHT_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
