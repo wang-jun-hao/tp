@@ -32,15 +32,8 @@ public class PersonTest {
         // null -> returns false
         assertFalse(ALICE.isSamePerson(null));
 
-        // different phone and email -> returns false
-        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
-        assertFalse(ALICE.isSamePerson(editedAlice));
-
         //different ic -> returns false
-        editedAlice = new PersonBuilder(ALICE).withIc(VALID_IC_BOB).build();
-
-        // different name -> returns false
-        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        Person editedAlice = new PersonBuilder(ALICE).withIc(VALID_IC_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
         // same ic, same name, same phone, different attributes -> returns true
@@ -55,6 +48,15 @@ public class PersonTest {
 
         // same ic, same name, same phone, same email, different attributes -> returns true
         editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+        assertTrue(ALICE.isSamePerson(editedAlice));
+
+        // same ic, same name, different phone, different email -> returns true
+        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
+        assertTrue(ALICE.isSamePerson(editedAlice));
+
+        // same ic, different name, different phone, different email -> returns true
+        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
     }
 
