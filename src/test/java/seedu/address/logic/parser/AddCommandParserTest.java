@@ -80,7 +80,7 @@ public class AddCommandParserTest {
         // multiple addresses - last address accepted
         assertParseSuccess(parser, IC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
             + ADDRESS_DESC_AMY + ADDRESS_DESC_BOB + HEIGHT_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
-      
+
         // multiple heights - last height accepted
         assertParseSuccess(parser, IC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
             + ADDRESS_DESC_BOB + HEIGHT_DESC_AMY + HEIGHT_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
@@ -124,7 +124,7 @@ public class AddCommandParserTest {
         // missing address prefix
         assertParseFailure(parser, IC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + VALID_ADDRESS_BOB + HEIGHT_DESC_BOB, expectedMessage);
-      
+
         // missing height prefix
         assertParseFailure(parser, IC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + VALID_HEIGHT_BOB, expectedMessage);
@@ -155,7 +155,7 @@ public class AddCommandParserTest {
         // invalid address
         assertParseFailure(parser, IC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
             + INVALID_ADDRESS_DESC + HEIGHT_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
-      
+
         // invalid height
         assertParseFailure(parser, IC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + INVALID_HEIGHT_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Height.MESSAGE_CONSTRAINTS);

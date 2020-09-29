@@ -38,7 +38,7 @@ public class SampleDataUtil {
                 new Height("180"), getTagSet("classmates")),
             new Person(new Ic("S9182736Q"), new Name("Roy Balakrishnan"), new Phone("92624417"),
                 new Email("royb@example.com"), new Address("Blk 45 Aljunied Street 85, #11-31"),
-                new Height("165")),
+                new Height("165"), getTagSet("")),
         };
     }
 
