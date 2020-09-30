@@ -1,5 +1,6 @@
 {
   "persons": [ {
+    "ic": "S7777777R",
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
@@ -7,6 +8,7 @@
     "height": "174",
     "tagged": [ "friends" ]
   }, {
+    "ic": "S7777777R",
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
