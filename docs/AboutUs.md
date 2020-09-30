@@ -36,11 +36,11 @@ You can reach us at the email `e0425800@u.nus.edu`
 
 <img src="images/wong-zz.png" width="200px">
 
-[[github](https://github.com/Wong-ZZ)] 
+[[github](https://github.com/Wong-ZZ)]
 [[portfolio](team/johndoe.md)]
 
 * Role: **Developer**
-* Responsibilities: 
+* Responsibilities:
     * Integration
     * Testing
 
@@ -52,7 +52,7 @@ You can reach us at the email `e0425800@u.nus.edu`
 [[portfolio](team/johndoe.md)]
 
 * Role: **Developer**
-* Responsibilities: 
+* Responsibilities:
     * Code Quality
 
 ### Preston Toh
@@ -63,5 +63,5 @@ You can reach us at the email `e0425800@u.nus.edu`
 [[portfolio](team/johndoe.md)]
 
 * Role: **Developer**
-* Responsibilities: 
+* Responsibilities:
     * Scheduling and Tracking
