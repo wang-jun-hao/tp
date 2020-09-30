@@ -39,7 +39,7 @@ public class LogicManager implements Logic {
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
-        
+
         // Logging, safe to ignore
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
