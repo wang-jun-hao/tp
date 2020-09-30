@@ -16,24 +16,33 @@ import seedu.address.model.tag.Tag;
 public class Person {
 
     // Identity fields
+    private final Ic ic;
     private final Name name;
     private final Phone phone;
     private final Email email;
 
     // Data fields
     private final Address address;
+    private final Height height;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Ic ic, Name name, Phone phone, Email email, Address address, Height height,
+                  Set<Tag> tags) {
+        requireAllNonNull(ic, name, phone, email, address, height, tags);
+        this.ic = ic;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.height = height;
         this.tags.addAll(tags);
+    }
+
+    public Ic getIc() {
+        return ic;
     }
 
     public Name getName() {
@@ -50,6 +59,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Height getHeight() {
+        return height;
     }
 
     /**
@@ -70,8 +83,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName())
-                && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getEmail().equals(getEmail()));
+                && otherPerson.getIc().equals(getIc());
     }
 
     /**
@@ -89,29 +101,35 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
+        return otherPerson.getIc().equals(getIc())
+                && otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getHeight().equals(getHeight())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(ic, name, phone, email, address, height, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
+        builder.append(getIc())
+                .append(" Name ")
+                .append(getName())
                 .append(" Phone: ")
                 .append(getPhone())
                 .append(" Email: ")
                 .append(getEmail())
                 .append(" Address: ")
                 .append(getAddress())
+                .append(" Height: ")
+                .append(getHeight())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
