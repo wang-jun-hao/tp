@@ -31,20 +31,20 @@ public class Weight {
      */
     public static boolean isValidWeight(String test) {
         try {
+            // check if valid number
+            Double weight = Double.parseDouble(test);
+
             // check if specified with 1 decimal place
             if (!hasDotAsSecondLastCharacter(test)) {
                 return false;
             }
-
-            // check if valid number
-            Double weight = Double.parseDouble(test);
 
             if (weight <= 0) {
                 return false;
             }
 
             return true;
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | NullPointerException e) {
             return false;
         }
     }
