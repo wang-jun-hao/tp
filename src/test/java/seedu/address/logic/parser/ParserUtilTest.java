@@ -20,6 +20,7 @@ import seedu.address.model.person.Height;
 import seedu.address.model.person.Ic;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -29,6 +30,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_HEIGHT = "18o";
+    private static final String INVALID_WEIGHT = "20.15";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_IC = "S9999999R";
@@ -37,6 +39,7 @@ public class ParserUtilTest {
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_HEIGHT = "178";
+    private static final String VALID_WEIGHT = "65.0";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -198,6 +201,29 @@ public class ParserUtilTest {
         String heightWithWhitespace = WHITESPACE + VALID_HEIGHT + WHITESPACE;
         Height expectedHeight = new Height(VALID_HEIGHT);
         assertEquals(expectedHeight, ParserUtil.parseHeight(heightWithWhitespace));
+    }
+
+    @Test
+    public void parseWeight_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseWeight((String) null));
+    }
+
+    @Test
+    public void parseWeight_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseWeight(INVALID_WEIGHT));
+    }
+
+    @Test
+    public void parseWeight_validValueWithoutWhitespace_returnsWeight() throws Exception {
+        Weight expectedWeight = new Weight(VALID_WEIGHT);
+        assertEquals(expectedWeight, ParserUtil.parseWeight(VALID_WEIGHT));
+    }
+
+    @Test
+    public void parseWeight_validValueWithWhitespace_returnsTrimmedWeight() throws Exception {
+        String weightWithWhitespace = WHITESPACE + VALID_WEIGHT + WHITESPACE;
+        Weight expectedWeight = new Weight(VALID_WEIGHT);
+        assertEquals(expectedWeight, ParserUtil.parseWeight(weightWithWhitespace));
     }
 
     @Test

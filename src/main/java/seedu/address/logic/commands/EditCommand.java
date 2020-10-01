@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_IC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -28,6 +29,7 @@ import seedu.address.model.person.Ic;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -47,6 +49,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_HEIGHT + "HEIGHT] "
+            + "[" + PREFIX_WEIGHT + "WEIGHT] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -105,10 +108,11 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Height updatedHeight = editPersonDescriptor.getHeight().orElse(personToEdit.getHeight());
+        Weight updatedWeight = editPersonDescriptor.getWeight().orElse(personToEdit.getWeight());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedIc, updatedName, updatedPhone, updatedEmail, updatedAddress,
-                          updatedHeight, updatedTags);
+                          updatedHeight, updatedWeight, updatedTags);
     }
 
     @Override
@@ -140,6 +144,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Height height;
+        private Weight weight;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -155,6 +160,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setHeight(toCopy.height);
+            setWeight(toCopy.weight);
             setTags(toCopy.tags);
         }
 
@@ -162,7 +168,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(ic, name, phone, email, address, height, tags);
+            return CollectionUtil.isAnyNonNull(ic, name, phone, email, address, height, weight, tags);
         }
 
         public void setIc(Ic ic) {
@@ -213,6 +219,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(height);
         }
 
+        public void setWeight(Weight weight) {
+            this.weight = weight;
+        }
+
+        public Optional<Weight> getWeight() {
+            return Optional.ofNullable(weight);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -251,6 +265,7 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getHeight().equals(e.getHeight())
+                    && getWeight().equals(e.getWeight())
                     && getTags().equals(e.getTags());
         }
     }
