@@ -148,7 +148,7 @@ class JsonAdaptedPerson {
                     BloodType.class.getSimpleName()));
         }
         if (!BloodType.isValidBloodType(bloodType)) {
-            throw new IllegalValueException(Weight.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(BloodType.MESSAGE_CONSTRAINTS);
         }
         final BloodType modelBloodType = new BloodType(bloodType);
 

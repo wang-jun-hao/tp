@@ -135,33 +135,33 @@ public class AddCommandParserTest {
 
         // missing ic prefix
         assertParseFailure(parser, VALID_IC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB, expectedMessage);
+                + ADDRESS_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB + BLOOD_TYPE_DESC_BOB, expectedMessage);
 
         // missing name prefix
         assertParseFailure(parser, IC_DESC_BOB + VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB, expectedMessage);
+                + ADDRESS_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB + BLOOD_TYPE_DESC_BOB, expectedMessage);
 
         // missing phone prefix
         assertParseFailure(parser, IC_DESC_BOB + NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB, expectedMessage);
+                + ADDRESS_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB + BLOOD_TYPE_DESC_BOB, expectedMessage);
 
         // missing email prefix
         assertParseFailure(parser, IC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB
-                + ADDRESS_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB, expectedMessage);
+                + ADDRESS_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB + BLOOD_TYPE_DESC_BOB, expectedMessage);
 
         // missing address prefix
         assertParseFailure(parser, IC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + VALID_ADDRESS_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB, expectedMessage);
+                + VALID_ADDRESS_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB + BLOOD_TYPE_DESC_BOB, expectedMessage);
 
         // missing height prefix
         assertParseFailure(parser, IC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + VALID_HEIGHT_BOB + WEIGHT_DESC_BOB, expectedMessage);
+                + ADDRESS_DESC_BOB + VALID_HEIGHT_BOB + WEIGHT_DESC_BOB + BLOOD_TYPE_DESC_BOB, expectedMessage);
 
         // missing weight prefix
         assertParseFailure(parser, IC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + HEIGHT_DESC_BOB + VALID_WEIGHT_BOB, expectedMessage);
+                + ADDRESS_DESC_BOB + HEIGHT_DESC_BOB + VALID_WEIGHT_BOB + BLOOD_TYPE_DESC_BOB, expectedMessage);
 
-        // missing weight prefix
+        // missing blood type prefix
         assertParseFailure(parser, IC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB + VALID_BLOOD_TYPE_BOB, expectedMessage);
 

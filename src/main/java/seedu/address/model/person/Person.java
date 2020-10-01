@@ -146,7 +146,7 @@ public class Person {
                 .append(getHeight())
                 .append(" Weight: ")
                 .append(getWeight())
-                .append("Blood type: ")
+                .append(" Blood type: ")
                 .append(getBloodType())
                 .append(" Tags: ");
         getTags().forEach(builder::append);

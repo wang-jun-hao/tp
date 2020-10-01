@@ -18,7 +18,7 @@ public enum BloodTypeEnum {
     /**
      * method to get enum from string input
      * @param label
-     * return required BloodTypeEnum object
+     * @return required BloodTypeEnum object
      */
     public static BloodTypeEnum valueOfLabel(String label) {
         for (BloodTypeEnum e : values()) {

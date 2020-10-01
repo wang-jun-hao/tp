@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represent's a Person's height in the address book.
+ * Represent's a Person's blood type in the address book.
  *
  */
 public class BloodType {
@@ -13,8 +13,8 @@ public class BloodType {
     public final BloodTypeEnum bloodType;
 
     /**
-     * constructor for BloodType object
-     * @param bloodType
+     * Constructor for BloodType object
+     * @param bloodType blood type of the patient
      */
     public BloodType(String bloodType) {
         requireNonNull(bloodType);

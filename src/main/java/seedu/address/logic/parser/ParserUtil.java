@@ -145,10 +145,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String bloodType} into a {@code BloodType}.
+     * Parses a {@code String BloodType} into a {@code BloodType}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code weight} is invalid.
+     * @throws ParseException if the given {@code BloodType} is invalid.
      */
     public static BloodType parseBloodType(String bloodType) throws ParseException {
         requireNonNull(bloodType);

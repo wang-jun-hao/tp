@@ -112,7 +112,7 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withWeight(VALID_WEIGHT_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different weight -> returns false
+        // different blood type -> returns false
         editedAlice = new PersonBuilder(ALICE).withBloodType(VALID_BLOOD_TYPE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
