@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.BloodType;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.Ic;
@@ -18,7 +19,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Weight;
-import seedu.address.model.person.BloodType;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -45,7 +45,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("ic") String ic, @JsonProperty("name") String name,
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
             @JsonProperty("address") String address, @JsonProperty("height") String height,
-            @JsonProperty("weight") String weight, @JsonProperty("blood type") String bloodType , @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("weight") String weight, @JsonProperty("blood type") String bloodType ,
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.ic = ic;
         this.name = name;
         this.phone = phone;
@@ -143,7 +144,8 @@ class JsonAdaptedPerson {
         }
         final Weight modelWeight = new Weight(weight);
         if (bloodType == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, BloodType.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    BloodType.class.getSimpleName()));
         }
         if (!BloodType.isValidBloodType(bloodType)) {
             throw new IllegalValueException(Weight.MESSAGE_CONSTRAINTS);

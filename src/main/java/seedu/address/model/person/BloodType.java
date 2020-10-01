@@ -12,6 +12,10 @@ public class BloodType {
     public static final String MESSAGE_CONSTRAINTS = "Blood type can only be one of the 8 possible blood types";
     public final BloodTypeEnum bloodType;
 
+    /**
+     * constructor for BloodType object
+     * @param bloodType
+     */
     public BloodType(String bloodType) {
         requireNonNull(bloodType);
         checkArgument(isValidBloodType(bloodType), MESSAGE_CONSTRAINTS);

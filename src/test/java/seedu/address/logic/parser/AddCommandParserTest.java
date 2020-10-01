@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.BloodType;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.Ic;
@@ -18,7 +19,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Weight;
-import seedu.address.model.person.BloodType;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
@@ -41,7 +41,7 @@ public class AddCommandParserTest {
 
         // multiple names - last name accepted
         assertParseSuccess(parser, IC_DESC_BOB + NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB
-            + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB+BLOOD_TYPE_DESC_BOB
+            + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB + BLOOD_TYPE_DESC_BOB
                         + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
         // multiple phones - last phone accepted
@@ -151,8 +151,8 @@ public class AddCommandParserTest {
 
         // invalid email
         assertParseFailure(parser, IC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC
-            + ADDRESS_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB + BLOOD_TYPE_DESC_BOB +
-                        TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
+            + ADDRESS_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB + BLOOD_TYPE_DESC_BOB
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, IC_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB

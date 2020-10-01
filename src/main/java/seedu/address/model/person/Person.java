@@ -73,7 +73,9 @@ public class Person {
         return weight;
     }
 
-    public BloodType getBloodType(){return bloodType;}
+    public BloodType getBloodType() {
+        return bloodType;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -125,7 +127,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(ic, name, phone, email, address, height, weight,bloodType, tags);
+        return Objects.hash(ic, name, phone, email, address, height, weight, bloodType, tags);
     }
 
     @Override

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static seedu.address.logic.commands.CommandTestUtil.*;
+
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
-
-import static seedu.address.logic.commands.CommandTestUtil.*;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -20,8 +20,8 @@ public class TypicalPersons {
             .withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withIc("S9234567A").withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withEmail("johnd@example.com").withPhone("98765432").withHeight("170").withWeight("63.5").withBloodType("AB+")
-            .withTags("owesMoney", "friends").build();
+            .withEmail("johnd@example.com").withPhone("98765432").withHeight("170").withWeight("63.5")
+            .withBloodType("AB+").withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withIc("S9876543W").withName("Carl Kurz")
             .withPhone("95352563").withEmail("heinz@example.com").withAddress("wall street").withHeight("162")
             .withWeight("80.8").withBloodType("B+").build();

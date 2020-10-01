@@ -15,6 +15,11 @@ public enum BloodTypeEnum {
         this.label = label;
     }
 
+    /**
+     * method to get enum from string input
+     * @param label
+     * return required BloodTypeEnum object
+     */
     public static BloodTypeEnum valueOfLabel(String label) {
         for (BloodTypeEnum e : values()) {
             if (e.label.equals(label)) {

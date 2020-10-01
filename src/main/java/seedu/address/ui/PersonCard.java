@@ -10,7 +10,6 @@ import javafx.scene.layout.Region;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Weight;
-import seedu.address.model.person.BloodType;
 
 /**
  * An UI component that displays information of a {@code Person}.
