@@ -12,6 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_WEIGHT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BLOOD_TYPE_BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -64,6 +65,10 @@ public class EditPersonDescriptorTest {
 
         // different weight -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withWeight(VALID_WEIGHT_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different blood type -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withBloodType(VALID_BLOOD_TYPE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false

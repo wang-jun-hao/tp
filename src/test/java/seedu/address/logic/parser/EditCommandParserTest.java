@@ -1,44 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.HEIGHT_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.HEIGHT_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.IC_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.IC_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_HEIGHT_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_IC_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_WEIGHT_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_HEIGHT_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_HEIGHT_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_IC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_IC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_WEIGHT_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_WEIGHT_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.WEIGHT_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.WEIGHT_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -58,6 +21,7 @@ import seedu.address.model.person.Ic;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Weight;
+import seedu.address.model.person.BloodType;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
@@ -106,6 +70,8 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
         assertParseFailure(parser, "1" + INVALID_HEIGHT_DESC, Height.MESSAGE_CONSTRAINTS); // invalid height
         assertParseFailure(parser, "1" + INVALID_WEIGHT_DESC, Weight.MESSAGE_CONSTRAINTS); // invalid weight
+        // invalid blood type
+        assertParseFailure(parser, "1" + INVALID_BLOOD_TYPE_DESC, BloodType.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
         // invalid phone followed by valid email
@@ -132,13 +98,13 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + IC_DESC_AMY + PHONE_DESC_BOB + TAG_DESC_HUSBAND
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + HEIGHT_DESC_AMY + WEIGHT_DESC_AMY + NAME_DESC_AMY
-                + TAG_DESC_FRIEND;
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + HEIGHT_DESC_AMY + WEIGHT_DESC_AMY + BLOOD_TYPE_DESC_AMY
+                + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withIc(VALID_IC_AMY)
                 .withName(VALID_NAME_AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_AMY).withHeight(VALID_HEIGHT_AMY).withWeight(VALID_WEIGHT_AMY)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withBloodType(VALID_BLOOD_TYPE_AMY).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -201,6 +167,12 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
+        // blood type
+        userInput = targetIndex.getOneBased() + BLOOD_TYPE_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withBloodType(VALID_BLOOD_TYPE_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
         descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
@@ -212,13 +184,13 @@ public class EditCommandParserTest {
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + IC_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
-                + HEIGHT_DESC_AMY + WEIGHT_DESC_AMY + TAG_DESC_FRIEND + PHONE_DESC_AMY + ADDRESS_DESC_AMY
-                + EMAIL_DESC_AMY + TAG_DESC_FRIEND + IC_DESC_BOB + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB
-                + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB + TAG_DESC_HUSBAND;
+                + HEIGHT_DESC_AMY + WEIGHT_DESC_AMY + BLOOD_TYPE_DESC_AMY + TAG_DESC_FRIEND + PHONE_DESC_AMY
+                + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND + IC_DESC_BOB + PHONE_DESC_BOB + ADDRESS_DESC_BOB
+                + EMAIL_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB + BLOOD_TYPE_DESC_BOB + TAG_DESC_HUSBAND;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withIc(VALID_IC_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withHeight(VALID_HEIGHT_BOB).withWeight(VALID_WEIGHT_BOB)
+                .withHeight(VALID_HEIGHT_BOB).withWeight(VALID_WEIGHT_BOB).withBloodType(VALID_BLOOD_TYPE_BOB)
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -236,9 +208,10 @@ public class EditCommandParserTest {
 
         // other valid values specified
         userInput = targetIndex.getOneBased() + EMAIL_DESC_BOB + INVALID_PHONE_DESC + ADDRESS_DESC_BOB
-                + PHONE_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB;
+                + PHONE_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB + BLOOD_TYPE_DESC_BOB;
         descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withHeight(VALID_HEIGHT_BOB).withWeight(VALID_WEIGHT_BOB).build();
+                .withAddress(VALID_ADDRESS_BOB).withHeight(VALID_HEIGHT_BOB).withWeight(VALID_WEIGHT_BOB)
+                .withBloodType(VALID_BLOOD_TYPE_BOB).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

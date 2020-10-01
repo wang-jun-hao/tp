@@ -9,7 +9,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOOD_TYPE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -30,6 +32,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Weight;
+import seedu.address.model.person.BloodType;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -50,6 +53,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_HEIGHT + "HEIGHT] "
             + "[" + PREFIX_WEIGHT + "WEIGHT] "
+            + "[" + PREFIX_BLOOD_TYPE + "BLOOD TYPE]"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -109,10 +113,11 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Height updatedHeight = editPersonDescriptor.getHeight().orElse(personToEdit.getHeight());
         Weight updatedWeight = editPersonDescriptor.getWeight().orElse(personToEdit.getWeight());
+        BloodType updatedBloodType = editPersonDescriptor.getBloodType().orElse(personToEdit.getBloodType());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedIc, updatedName, updatedPhone, updatedEmail, updatedAddress,
-                          updatedHeight, updatedWeight, updatedTags);
+                          updatedHeight, updatedWeight, updatedBloodType, updatedTags);
     }
 
     @Override
@@ -145,6 +150,7 @@ public class EditCommand extends Command {
         private Address address;
         private Height height;
         private Weight weight;
+        private BloodType bloodType;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -161,6 +167,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setHeight(toCopy.height);
             setWeight(toCopy.weight);
+            setBloodType(toCopy.bloodType);
             setTags(toCopy.tags);
         }
 
@@ -168,7 +175,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(ic, name, phone, email, address, height, weight, tags);
+            return CollectionUtil.isAnyNonNull(ic, name, phone, email, address, height, weight, bloodType, tags);
         }
 
         public void setIc(Ic ic) {
@@ -227,6 +234,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(weight);
         }
 
+        public void setBloodType(BloodType bloodType) {
+            this.bloodType = bloodType;
+        }
+
+        public Optional<BloodType> getBloodType() {
+            return Optional.ofNullable(bloodType);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -266,6 +281,7 @@ public class EditCommand extends Command {
                     && getAddress().equals(e.getAddress())
                     && getHeight().equals(e.getHeight())
                     && getWeight().equals(e.getWeight())
+                    && getBloodType().equals(e.getBloodType())
                     && getTags().equals(e.getTags());
         }
     }
