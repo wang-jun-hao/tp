@@ -51,7 +51,7 @@ For example, the `Logic` component (see the class diagram given below) defines i
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete S9803517G`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -86,7 +86,7 @@ The `UI` component,
 1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 1. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete S9460472B")` API call.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
@@ -236,13 +236,17 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* has a need to keep track of a significant number of patients
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+* Helps users manage a central database for keeping track of patients' records efficiently.
+* Manage patients' records quickly through a simple and intuitive UI.
+* Eliminates the need for physical copies of patients' records.
+* Efficient sharing of data of patients between hospital staff i.e. administrators, nurses, doctors, specialists, etc.
 
 
 ### User stories
@@ -252,55 +256,91 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | registration admin                                       | add a patient along with their details (fields)               |                                                                        |
+| `* * *`  | registration admin                                       | delete a patient's records                | remove unwanted records from the system                                  |
+| `* * *`  | registration admin                                       | search for a patient's information          | retrieve his/her details |
+| `* *` | registration admin | edit a patient's details
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `MediBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+  [3a. OBS detects an error in the entered data.
+    3a1. OBS requests for the correct data.
+    3a2. User enters new data
+    Steps 3a1-3a2 are repeated until the data entered are correct.
+    Use case resumes from step 4.] HI
+
+**UC00 Add a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to add a patient along with the patient's details.
+2. MediBook adds the patient to it's database.
+
+    Use case ends.
+
+**Extensions**
+* 1a. MediBook detects an error in one/some of the fields for the patient's details.
+    * 1a1. MediBook shows an error message.
+    * 1a2. User requests to add the patient again but with edited details.
+    Steps 1a1-1a2 are repeated until the fields provided are correct.
+    Use case resumes from step 2.
+
+**UC01 Find a person**
+
+**MSS**
+
+1. User requests to find a specific patient.
+2. MediBook returns the patient.
+    
+    Use case ends.
+
+**Extensions**
+
+* 1a. MediBook detects if the given IC is invalid.
+    * 1a1. MediBook shows an error message.
+    * 1a2. User requests to find a specific patient by changing the input IC.
+    Steps 1a1-1a2 are repeated until the IC provided is valid.
+    Use case resumes from step 2.
+
+**UC02 Delete a person**
+
+**MSS**
+
+1.  User requests to delete a specific patient.
+2.  MediBook deletes the person.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. MediBook detects if the given IC is invalid.
 
-  Use case ends.
+    * 1a1. MediBook shows an error message.
+    * 1a2. User requests to delete a specific patient by changing the input IC.
+     Steps 1a1-1a2 are repeated until the IC provided is valid.
+     Use case resumes from step 2.
 
-* 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
-
-*{More to be added}*
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 patients without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Should be simple enough for those who are not proficient in using computers to use.
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **IC**: IC in our system refers to the patient's identification numbers as provided in the NRIC or FIN.
+    * The National Registration Identity Card (abbreviation: NRIC) is the compulsory identity document issued to citizens and permanent residents of Singapore.
+    * A Foreign Identification Number, or FIN, is issued to an individual who is a permanent resident of Singapore and long-term pass holders by the Singapore government.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -334,15 +374,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+ 
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `delete S9592739A`<br>
+      Expected: Person with IC S9592739A is deleted from the program. Details of the deleted person shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   2. Test case: `delete A0123456B`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   3. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is an IC that does not belong to any patient)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
@@ -351,6 +391,17 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. To simulate missing data file:
+      1. Delete addressbook.json file located in <project_root>/data.
+      2. Run MediBook.
+      
+      Expected: MediBook starts up with a sample list of 6 patients.
 
-1. _{ more test cases …​ }_
+   2. To simulate corrupted file:
+      1. Locate addressbook.json file located in <project_root>/data.
+      2. Change the field input of a patient to a wrong format. e.g. Change the IC of a patient in the json file to start with 'A' instead of the legal letters 'S,T,F,G'.
+      3. Run MediBook.
+      
+      Expected: MediBook starts up with no patients in the list. A warning is displayed in console "Data file not in the correct format. Will be starting with an empty AddressBook".
+
+2. _{ more test cases …​ }_
