@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.Ic;
@@ -29,6 +30,7 @@ class JsonAdaptedPerson {
 
     private final String ic;
     private final String name;
+    private final String dateOfBirth;
     private final String phone;
     private final String email;
     private final String address;
@@ -41,11 +43,13 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("ic") String ic, @JsonProperty("name") String name,
-            @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-            @JsonProperty("address") String address, @JsonProperty("height") String height,
-            @JsonProperty("weight") String weight, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+                             @JsonProperty("dateOfBirth") String dateOfBirth, @JsonProperty("phone") String phone,
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("height") String height, @JsonProperty("weight") String weight,
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.ic = ic;
         this.name = name;
+        this.dateOfBirth = dateOfBirth;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -62,6 +66,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(Person source) {
         ic = source.getIc().ic;
         name = source.getName().fullName;
+        dateOfBirth = source.getDateOfBirth().value;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
@@ -98,6 +103,15 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         final Name modelName = new Name(name);
+
+        if (dateOfBirth == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    DateOfBirth.class.getSimpleName()));
+        }
+        if (!DateOfBirth.isValidDateOfBirth(dateOfBirth)) {
+            throw new IllegalValueException(DateOfBirth.MESSAGE_CONSTRAINTS);
+        }
+        final DateOfBirth modelDateOfBirth = new DateOfBirth(dateOfBirth);
 
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
@@ -140,7 +154,7 @@ class JsonAdaptedPerson {
         final Weight modelWeight = new Weight(weight);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelIc, modelName, modelPhone, modelEmail, modelAddress, modelHeight,
+        return new Person(modelIc, modelName, modelDateOfBirth, modelPhone, modelEmail, modelAddress, modelHeight,
                 modelWeight, modelTags);
     }
 

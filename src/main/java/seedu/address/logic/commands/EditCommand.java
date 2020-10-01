@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IC;
@@ -23,6 +24,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.Ic;
@@ -45,6 +47,7 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_IC + "IC] "
             + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_DOB + "DATE OF BIRTH] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
@@ -104,6 +107,7 @@ public class EditCommand extends Command {
 
         Ic updatedIc = editPersonDescriptor.getIc().orElse(personToEdit.getIc());
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+        DateOfBirth updatedDateOfBirth = editPersonDescriptor.getDateOfBirth().orElse(personToEdit.getDateOfBirth());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
@@ -111,7 +115,7 @@ public class EditCommand extends Command {
         Weight updatedWeight = editPersonDescriptor.getWeight().orElse(personToEdit.getWeight());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedIc, updatedName, updatedPhone, updatedEmail, updatedAddress,
+        return new Person(updatedIc, updatedName, updatedDateOfBirth, updatedPhone, updatedEmail, updatedAddress,
                           updatedHeight, updatedWeight, updatedTags);
     }
 
@@ -140,6 +144,7 @@ public class EditCommand extends Command {
     public static class EditPersonDescriptor {
         private Ic ic;
         private Name name;
+        private DateOfBirth dateOfBirth;
         private Phone phone;
         private Email email;
         private Address address;
@@ -156,6 +161,7 @@ public class EditCommand extends Command {
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setIc(toCopy.ic);
             setName(toCopy.name);
+            setDateOfBirth(toCopy.dateOfBirth);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
@@ -168,7 +174,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(ic, name, phone, email, address, height, weight, tags);
+            return CollectionUtil.isAnyNonNull(ic, name, dateOfBirth, phone, email, address, height, weight, tags);
         }
 
         public void setIc(Ic ic) {
@@ -185,6 +191,14 @@ public class EditCommand extends Command {
 
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
+        }
+
+        public void setDateOfBirth(DateOfBirth dateOfBirth) {
+            this.dateOfBirth = dateOfBirth;
+        }
+
+        public Optional<DateOfBirth> getDateOfBirth() {
+            return Optional.ofNullable(dateOfBirth);
         }
 
         public void setPhone(Phone phone) {
@@ -261,6 +275,7 @@ public class EditCommand extends Command {
 
             return getIc().equals(e.getIc())
                     && getName().equals(e.getName())
+                    && getDateOfBirth().equals(e.getDateOfBirth())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())

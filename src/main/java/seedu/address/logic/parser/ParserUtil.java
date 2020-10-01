@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.Ic;
@@ -66,6 +67,21 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String dateOfBirth} into a {@code DateOfBirth}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dateOfBirth} is invalid.
+     */
+    public static DateOfBirth parseDateOfBirth(String dateOfBirth) throws ParseException {
+        requireNonNull(dateOfBirth);
+        String trimmedDateOfBirth = dateOfBirth.trim();
+        if (!DateOfBirth.isValidDateOfBirth(trimmedDateOfBirth)) {
+            throw new ParseException(DateOfBirth.MESSAGE_CONSTRAINTS);
+        }
+        return new DateOfBirth(trimmedDateOfBirth);
     }
 
     /**
