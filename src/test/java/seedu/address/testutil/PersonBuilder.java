@@ -10,6 +10,7 @@ import seedu.address.model.person.Ic;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -24,6 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_HEIGHT = "170";
+    public static final String DEFAULT_WEIGHT = "58.7";
 
     private Ic ic;
     private Name name;
@@ -31,6 +33,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Height height;
+    private Weight weight;
     private Set<Tag> tags;
 
     /**
@@ -43,6 +46,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         height = new Height(DEFAULT_HEIGHT);
+        weight = new Weight(DEFAULT_WEIGHT);
         tags = new HashSet<>();
     }
 
@@ -56,6 +60,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         height = personToCopy.getHeight();
+        weight = personToCopy.getWeight();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -115,8 +120,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Weight} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withWeight(String weight) {
+        this.weight = new Weight(weight);
+        return this;
+    }
+
     public Person build() {
-        return new Person(ic, name, phone, email, address, height, tags);
+        return new Person(ic, name, phone, email, address, height, weight, tags);
     }
 
 }
