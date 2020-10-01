@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.BloodType;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
@@ -33,6 +34,7 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_HEIGHT = "18o";
     private static final String INVALID_WEIGHT = "20.15";
+    private static final String INVALID_BLOOD_TYPE = "C+";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_IC = "S9999999R";
@@ -43,6 +45,7 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_HEIGHT = "178";
     private static final String VALID_WEIGHT = "65.0";
+    private static final String VALID_BLOOD_TYPE = "O+";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -250,6 +253,29 @@ public class ParserUtilTest {
         String weightWithWhitespace = WHITESPACE + VALID_WEIGHT + WHITESPACE;
         Weight expectedWeight = new Weight(VALID_WEIGHT);
         assertEquals(expectedWeight, ParserUtil.parseWeight(weightWithWhitespace));
+    }
+
+    @Test
+    public void parseBloodType_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseBloodType((String) null));
+    }
+
+    @Test
+    public void parseBloodType_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBloodType(INVALID_BLOOD_TYPE));
+    }
+
+    @Test
+    public void parseBloodType_validValueWithoutWhitespace_returnsBloodType() throws Exception {
+        BloodType expectedBloodType = new BloodType(VALID_BLOOD_TYPE);
+        assertEquals(expectedBloodType, ParserUtil.parseBloodType(VALID_BLOOD_TYPE));
+    }
+
+    @Test
+    public void parseBloodType_validValueWithWhitespace_returnsTrimmedBloodType() throws Exception {
+        String bloodTypeWithWhitespace = WHITESPACE + VALID_BLOOD_TYPE + WHITESPACE;
+        BloodType expectedBloodType = new BloodType(VALID_BLOOD_TYPE);
+        assertEquals(expectedBloodType, ParserUtil.parseBloodType(bloodTypeWithWhitespace));
     }
 
     @Test

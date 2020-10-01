@@ -8,6 +8,7 @@
     "address": "123, Jurong West Ave 6, #08-111",
     "height": "174",
     "weight": "50.1",
+    "bloodType": "B+",
     "tagged": [ "friends" ]
   }, {
     "ic": "S7777777R",
@@ -17,6 +18,7 @@
     "email": "pauline@example.com",
     "address": "4th street",
     "height": "174",
-    "weight": "50.1"
+    "weight": "50.1",
+    "bloodType": "B+"
   } ]
 }

@@ -69,8 +69,9 @@ public class NameContainsKeywordsPredicateTest {
 
         // Keywords match ic, phone, email, address, height and weight, but does not match name
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("S9999999R", "12345", "alice@email.com", "Main",
-                "Street", "171", "61.2"));
+                "Street", "171", "61.2", "A+"));
         assertFalse(predicate.test(new PersonBuilder().withIc("S9999999R").withName("Alice").withPhone("12345")
-                .withEmail("alice@email.com").withAddress("Main Street").withHeight("171").withWeight("61.2").build()));
+                .withEmail("alice@email.com").withAddress("Main Street").withHeight("171").withWeight("61.2")
+                .withBloodType("A+").build()));
     }
 }

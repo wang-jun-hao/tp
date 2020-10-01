@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BLOOD_TYPE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DOB_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HEIGHT_BOB;
@@ -42,18 +43,19 @@ public class PersonTest {
         // same ic, same name, same phone, different attributes -> returns true
         editedAlice = new PersonBuilder(ALICE).withDateOfBirth(VALID_DOB_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withHeight(VALID_HEIGHT_BOB).withWeight(VALID_WEIGHT_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withBloodType(VALID_BLOOD_TYPE_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // same ic, same name, same email, different attributes -> returns true
         editedAlice = new PersonBuilder(ALICE).withDateOfBirth(VALID_DOB_BOB).withPhone(VALID_PHONE_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withHeight(VALID_HEIGHT_BOB).withWeight(VALID_WEIGHT_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withBloodType(VALID_BLOOD_TYPE_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // same ic, same name, same phone, same email, different attributes -> returns true
         editedAlice = new PersonBuilder(ALICE).withDateOfBirth(VALID_DOB_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withHeight(VALID_HEIGHT_BOB).withWeight(VALID_WEIGHT_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withHeight(VALID_HEIGHT_BOB).withWeight(VALID_WEIGHT_BOB).withBloodType(VALID_BLOOD_TYPE_BOB)
+                .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // same ic, same name, same date of birth, same height, same weight, same address different phone,
@@ -115,6 +117,10 @@ public class PersonTest {
 
         // different weight -> returns false
         editedAlice = new PersonBuilder(ALICE).withWeight(VALID_WEIGHT_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different blood type -> returns false
+        editedAlice = new PersonBuilder(ALICE).withBloodType(VALID_BLOOD_TYPE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false

@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.BloodType;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
@@ -36,6 +37,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final String height;
     private final String weight;
+    private final String bloodType;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -46,6 +48,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("dateOfBirth") String dateOfBirth, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("height") String height, @JsonProperty("weight") String weight,
+                             @JsonProperty("blood type") String bloodType, 
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.ic = ic;
         this.name = name;
@@ -55,6 +58,7 @@ class JsonAdaptedPerson {
         this.address = address;
         this.height = height;
         this.weight = weight;
+        this.bloodType = bloodType;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -72,6 +76,7 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         height = source.getHeight().value;
         weight = source.getWeight().value;
+        bloodType = source.getBloodType().bloodType.label;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -152,10 +157,18 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Weight.MESSAGE_CONSTRAINTS);
         }
         final Weight modelWeight = new Weight(weight);
+        if (bloodType == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    BloodType.class.getSimpleName()));
+        }
+        if (!BloodType.isValidBloodType(bloodType)) {
+            throw new IllegalValueException(BloodType.MESSAGE_CONSTRAINTS);
+        }
+        final BloodType modelBloodType = new BloodType(bloodType);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelIc, modelName, modelDateOfBirth, modelPhone, modelEmail, modelAddress, modelHeight,
-                modelWeight, modelTags);
+                modelWeight, modelBloodType, modelTags);
     }
 
 }

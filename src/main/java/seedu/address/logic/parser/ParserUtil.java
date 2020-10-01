@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.BloodType;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
@@ -130,7 +131,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String Height} into a {@code Height}.
+     * Parses a {@code String height} into a {@code Height}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code height} is invalid.
@@ -145,7 +146,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String Weight} into a {@code Weight}.
+     * Parses a {@code String weight} into a {@code Weight}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code weight} is invalid.
@@ -157,6 +158,21 @@ public class ParserUtil {
             throw new ParseException(Weight.MESSAGE_CONSTRAINTS);
         }
         return new Weight(trimmedWeight);
+    }
+
+    /**
+     * Parses a {@code String BloodType} into a {@code BloodType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code BloodType} is invalid.
+     */
+    public static BloodType parseBloodType(String bloodType) throws ParseException {
+        requireNonNull(bloodType);
+        String trimmedBloodType = bloodType.trim();
+        if (!BloodType.isValidBloodType(trimmedBloodType)) {
+            throw new ParseException(BloodType.MESSAGE_CONSTRAINTS);
+        }
+        return new BloodType(trimmedBloodType);
     }
 
     /**

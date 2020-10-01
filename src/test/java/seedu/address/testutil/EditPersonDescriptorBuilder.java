@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.BloodType;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
@@ -44,6 +45,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setHeight(person.getHeight());
         descriptor.setWeight(person.getWeight());
+        descriptor.setBloodType(person.getBloodType());
         descriptor.setTags(person.getTags());
     }
 
@@ -108,6 +110,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withWeight(String weight) {
         descriptor.setWeight(new Weight(weight));
+        return this;
+    }
+
+    /**
+     * Sets the {@code BloodType} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withBloodType(String bloodType) {
+        descriptor.setBloodType(new BloodType(bloodType));
         return this;
     }
 

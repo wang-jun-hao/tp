@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOOD_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
@@ -46,6 +47,8 @@ public class CommandTestUtil {
     public static final String VALID_HEIGHT_BOB = "166";
     public static final String VALID_WEIGHT_AMY = "49.9";
     public static final String VALID_WEIGHT_BOB = "65.0";
+    public static final String VALID_BLOOD_TYPE_AMY = "A+";
+    public static final String VALID_BLOOD_TYPE_BOB = "B+";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -65,6 +68,8 @@ public class CommandTestUtil {
     public static final String HEIGHT_DESC_BOB = " " + PREFIX_HEIGHT + VALID_HEIGHT_BOB;
     public static final String WEIGHT_DESC_AMY = " " + PREFIX_WEIGHT + VALID_WEIGHT_AMY;
     public static final String WEIGHT_DESC_BOB = " " + PREFIX_WEIGHT + VALID_WEIGHT_BOB;
+    public static final String BLOOD_TYPE_DESC_AMY = " " + PREFIX_BLOOD_TYPE + VALID_BLOOD_TYPE_AMY;
+    public static final String BLOOD_TYPE_DESC_BOB = " " + PREFIX_BLOOD_TYPE + VALID_BLOOD_TYPE_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -77,6 +82,7 @@ public class CommandTestUtil {
     public static final String INVALID_HEIGHT_DESC = " " + PREFIX_HEIGHT + "17o"; // 'o' not allowed in height
     // 2 decimal places is not allowed in weight
     public static final String INVALID_WEIGHT_DESC = " " + PREFIX_WEIGHT + "55.55";
+    public static final String INVALID_BLOOD_TYPE_DESC = " " + PREFIX_BLOOD_TYPE + "C+"; // 'C+' invalid blood type
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -89,11 +95,11 @@ public class CommandTestUtil {
         DESC_AMY = new EditPersonDescriptorBuilder().withIc(VALID_IC_AMY).withName(VALID_NAME_AMY)
                 .withDateOfBirth(VALID_DOB_AMY).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).withHeight(VALID_HEIGHT_AMY)
-                .withWeight(VALID_WEIGHT_AMY).build();
+                .withWeight(VALID_WEIGHT_AMY).withBloodType(VALID_BLOOD_TYPE_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withIc(VALID_IC_BOB).withName(VALID_NAME_BOB)
                 .withDateOfBirth(VALID_DOB_BOB).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withHeight(VALID_HEIGHT_BOB).withWeight(VALID_WEIGHT_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withBloodType(VALID_BLOOD_TYPE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
     /**
