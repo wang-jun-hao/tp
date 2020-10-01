@@ -5,7 +5,7 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `e0425800@u.nus.edu`
+You can reach us at wangjunhao@u.nus.edu, foojingyi@u.nus.edu, E0415577@u.nus.edu, divakar@u.nus.edu, e0425943@u.nus.edu.
 
 ## Project Team
 
