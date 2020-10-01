@@ -23,7 +23,7 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
-            new Person(new Ic("S912()3456A"), new Name("Alex Yeoh"), new DateOfBirth("15-05-1991"),
+            new Person(new Ic("S9123456A"), new Name("Alex Yeoh"), new DateOfBirth("15-05-1991"),
                     new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Address("Blk 30 Geylang Street 29, #06-40"), new Height("173"), new Weight("67.4"),
                     getTagSet("friends")),
