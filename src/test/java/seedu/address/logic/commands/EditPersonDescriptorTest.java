@@ -11,6 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_IC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_WEIGHT_BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -59,6 +60,10 @@ public class EditPersonDescriptorTest {
 
         // different height -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withHeight(VALID_HEIGHT_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different weight -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withWeight(VALID_WEIGHT_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
