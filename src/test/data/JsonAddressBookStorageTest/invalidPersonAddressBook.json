@@ -6,6 +6,7 @@
     "email": "hans@example.com",
     "address": "4th street",
     "height": "170",
-    "weight": "55.9"
+    "weight": "55.9",
+    "bloodType": "O+"
   } ]
 }

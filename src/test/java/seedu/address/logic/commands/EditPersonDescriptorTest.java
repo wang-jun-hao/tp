@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BLOOD_TYPE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HEIGHT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_IC_BOB;
@@ -64,6 +65,10 @@ public class EditPersonDescriptorTest {
 
         // different weight -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withWeight(VALID_WEIGHT_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different blood type -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withBloodType(VALID_BLOOD_TYPE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
