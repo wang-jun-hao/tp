@@ -23,5 +23,4 @@ public enum BloodTypeEnum {
         }
         return null;
     }
-
 }
