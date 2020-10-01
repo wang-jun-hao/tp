@@ -17,6 +17,7 @@ import seedu.address.model.person.Ic;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -32,6 +33,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String height;
+    private final String weight;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -41,13 +43,14 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("ic") String ic, @JsonProperty("name") String name,
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
             @JsonProperty("address") String address, @JsonProperty("height") String height,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("weight") String weight, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.ic = ic;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.height = height;
+        this.weight = weight;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -63,6 +66,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         height = source.getHeight().value;
+        weight = source.getWeight().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -127,8 +131,17 @@ class JsonAdaptedPerson {
         }
         final Height modelHeight = new Height(height);
 
+        if (weight == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Weight.class.getSimpleName()));
+        }
+        if (!Weight.isValidWeight(weight)) {
+            throw new IllegalValueException(Weight.MESSAGE_CONSTRAINTS);
+        }
+        final Weight modelWeight = new Weight(weight);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelIc, modelName, modelPhone, modelEmail, modelAddress, modelHeight, modelTags);
+        return new Person(modelIc, modelName, modelPhone, modelEmail, modelAddress, modelHeight,
+                modelWeight, modelTags);
     }
 
 }
