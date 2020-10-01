@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represent's a Person's blood type in the address book.
- *
+ * Guarantees: immutable; is valid as declared in {@link #isValidBloodType(String)}
  */
 public class BloodType {
 

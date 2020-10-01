@@ -16,7 +16,7 @@ public enum BloodTypeEnum {
     }
 
     /**
-     * method to get enum from string input
+     * Gets enum from string input
      * @param label
      * @return required BloodTypeEnum object
      */
