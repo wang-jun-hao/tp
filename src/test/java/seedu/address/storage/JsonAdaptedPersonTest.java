@@ -167,7 +167,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidBloodType_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_IC, VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, INVALID_BLOOD_TYPE, VALID_TAGS);
-        String expectedMessage = Weight.MESSAGE_CONSTRAINTS;
+        String expectedMessage = BloodType.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
