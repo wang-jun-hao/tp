@@ -114,7 +114,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String Height} into a {@code Height}.
+     * Parses a {@code String height} into a {@code Height}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code height} is invalid.
@@ -129,7 +129,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String Weight} into a {@code Weight}.
+     * Parses a {@code String weight} into a {@code Weight}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code weight} is invalid.
