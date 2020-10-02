@@ -24,20 +24,24 @@ public class Person {
     // Data fields
     private final Address address;
     private final Height height;
+    private final Weight weight;
+    private final BloodType bloodType;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Ic ic, Name name, Phone phone, Email email, Address address, Height height,
-                  Set<Tag> tags) {
-        requireAllNonNull(ic, name, phone, email, address, height, tags);
+    public Person(Ic ic, Name name, Phone phone, Email email, Address address, Height height, Weight weight,
+                  BloodType bloodType, Set<Tag> tags) {
+        requireAllNonNull(ic, name, phone, email, address, height, weight, tags);
         this.ic = ic;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.height = height;
+        this.weight = weight;
+        this.bloodType = bloodType;
         this.tags.addAll(tags);
     }
 
@@ -63,6 +67,14 @@ public class Person {
 
     public Height getHeight() {
         return height;
+    }
+
+    public Weight getWeight() {
+        return weight;
+    }
+
+    public BloodType getBloodType() {
+        return bloodType;
     }
 
     /**
@@ -107,13 +119,15 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getHeight().equals(getHeight())
+                && otherPerson.getWeight().equals(getWeight())
+                && otherPerson.getBloodType().equals(getBloodType())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(ic, name, phone, email, address, height, tags);
+        return Objects.hash(ic, name, phone, email, address, height, weight, bloodType, tags);
     }
 
     @Override
@@ -130,6 +144,10 @@ public class Person {
                 .append(getAddress())
                 .append(" Height: ")
                 .append(getHeight())
+                .append(" Weight: ")
+                .append(getWeight())
+                .append(" Blood type: ")
+                .append(getBloodType())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

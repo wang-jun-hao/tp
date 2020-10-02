@@ -7,6 +7,8 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "height": "174",
+    "weight": "48.5",
+    "bloodType": "A+",
     "tagged" : [ "friends" ]
   }, {
     "ic" : "S9234567A",
@@ -15,6 +17,8 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "height": "170",
+    "weight": "63.5",
+    "bloodType": "AB+",
     "tagged" : [ "owesMoney", "friends" ]
   }, {
     "ic" : "S9876543W",
@@ -23,6 +27,8 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "height": "162",
+    "weight": "80.8",
+    "bloodType": "B+",
     "tagged" : [ ]
   }, {
     "ic" : "T0054321P",
@@ -31,6 +37,8 @@
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "height": "183",
+    "weight": "70.3",
+    "bloodType": "A-",
     "tagged" : [ "friends" ]
   }, {
     "ic" : "F7654321Q",
@@ -39,6 +47,8 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "height": "177",
+    "weight": "43.5",
+    "bloodType": "B-",
     "tagged" : [ ]
   }, {
     "ic" : "S7543210A",
@@ -47,6 +57,8 @@
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "height": "168",
+    "weight": "50.5",
+    "bloodType": "O+",
     "tagged" : [ ]
   }, {
     "ic" : "T0232323I",
@@ -55,6 +67,8 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "height": "169",
+    "weight": "69.2",
+    "bloodType": "A+",
     "tagged" : [ ]
   } ]
 }

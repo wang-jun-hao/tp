@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Weight;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -44,6 +45,10 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label height;
     @FXML
+    private Label weight;
+    @FXML
+    private Label bloodType;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -59,6 +64,8 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         height.setText(person.getHeight().value + Height.HEIGHT_UNIT);
+        weight.setText(person.getWeight().value + Weight.WEIGHT_UNIT);
+        bloodType.setText(person.getBloodType().bloodType.label);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
