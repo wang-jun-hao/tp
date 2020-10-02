@@ -11,6 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.BloodType;
+import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.Ic;
@@ -29,11 +31,13 @@ class JsonAdaptedPerson {
 
     private final String ic;
     private final String name;
+    private final String dateOfBirth;
     private final String phone;
     private final String email;
     private final String address;
     private final String height;
     private final String weight;
+    private final String bloodType;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -41,16 +45,20 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("ic") String ic, @JsonProperty("name") String name,
-            @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-            @JsonProperty("address") String address, @JsonProperty("height") String height,
-            @JsonProperty("weight") String weight, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+                             @JsonProperty("dateOfBirth") String dateOfBirth, @JsonProperty("phone") String phone,
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("height") String height, @JsonProperty("weight") String weight,
+                             @JsonProperty("blood type") String bloodType,
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.ic = ic;
         this.name = name;
+        this.dateOfBirth = dateOfBirth;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.height = height;
         this.weight = weight;
+        this.bloodType = bloodType;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -62,11 +70,13 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(Person source) {
         ic = source.getIc().ic;
         name = source.getName().fullName;
+        dateOfBirth = source.getDateOfBirth().value;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
         height = source.getHeight().value;
         weight = source.getWeight().value;
+        bloodType = source.getBloodType().bloodType.label;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -98,6 +108,15 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         final Name modelName = new Name(name);
+
+        if (dateOfBirth == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    DateOfBirth.class.getSimpleName()));
+        }
+        if (!DateOfBirth.isValidDateOfBirth(dateOfBirth)) {
+            throw new IllegalValueException(DateOfBirth.MESSAGE_CONSTRAINTS);
+        }
+        final DateOfBirth modelDateOfBirth = new DateOfBirth(dateOfBirth);
 
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
@@ -138,10 +157,18 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Weight.MESSAGE_CONSTRAINTS);
         }
         final Weight modelWeight = new Weight(weight);
+        if (bloodType == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    BloodType.class.getSimpleName()));
+        }
+        if (!BloodType.isValidBloodType(bloodType)) {
+            throw new IllegalValueException(BloodType.MESSAGE_CONSTRAINTS);
+        }
+        final BloodType modelBloodType = new BloodType(bloodType);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelIc, modelName, modelPhone, modelEmail, modelAddress, modelHeight,
-                modelWeight, modelTags);
+        return new Person(modelIc, modelName, modelDateOfBirth, modelPhone, modelEmail, modelAddress, modelHeight,
+                modelWeight, modelBloodType, modelTags);
     }
 
 }

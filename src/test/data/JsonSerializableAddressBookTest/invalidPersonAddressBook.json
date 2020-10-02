@@ -2,10 +2,12 @@
   "persons": [ {
     "ic": "S7777777R",
     "name": "Hans Muster",
+    "dateOfBirth": "10-01-1977",
     "phone": "9482424",
     "email": "invalid@email!3e",
     "address": "4th street",
     "height": "171",
-    "weight": "60.1"
+    "weight": "60.1",
+    "bloodType": "A+"
   } ]
 }

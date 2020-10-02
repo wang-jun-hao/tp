@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Weight;
@@ -37,6 +38,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private Label dateOfBirth;
+    @FXML
     private Label phone;
     @FXML
     private Label address;
@@ -46,6 +49,8 @@ public class PersonCard extends UiPart<Region> {
     private Label height;
     @FXML
     private Label weight;
+    @FXML
+    private Label bloodType;
     @FXML
     private FlowPane tags;
 
@@ -58,11 +63,13 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         ic.setText(person.getIc().ic);
         name.setText(person.getName().fullName);
+        dateOfBirth.setText(person.getDateOfBirth().date.format(DateOfBirth.OUTPUT_FORMATTER));
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         height.setText(person.getHeight().value + Height.HEIGHT_UNIT);
         weight.setText(person.getWeight().value + Weight.WEIGHT_UNIT);
+        bloodType.setText(person.getBloodType().bloodType.label);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

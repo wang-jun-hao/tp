@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOOD_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IC;
@@ -23,6 +25,8 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.BloodType;
+import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.Ic;
@@ -45,11 +49,13 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_IC + "IC] "
             + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_DOB + "DATE OF BIRTH] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_HEIGHT + "HEIGHT] "
             + "[" + PREFIX_WEIGHT + "WEIGHT] "
+            + "[" + PREFIX_BLOOD_TYPE + "BLOOD TYPE]"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -104,15 +110,17 @@ public class EditCommand extends Command {
 
         Ic updatedIc = editPersonDescriptor.getIc().orElse(personToEdit.getIc());
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+        DateOfBirth updatedDateOfBirth = editPersonDescriptor.getDateOfBirth().orElse(personToEdit.getDateOfBirth());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Height updatedHeight = editPersonDescriptor.getHeight().orElse(personToEdit.getHeight());
         Weight updatedWeight = editPersonDescriptor.getWeight().orElse(personToEdit.getWeight());
+        BloodType updatedBloodType = editPersonDescriptor.getBloodType().orElse(personToEdit.getBloodType());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedIc, updatedName, updatedPhone, updatedEmail, updatedAddress,
-                          updatedHeight, updatedWeight, updatedTags);
+        return new Person(updatedIc, updatedName, updatedDateOfBirth, updatedPhone, updatedEmail, updatedAddress,
+                          updatedHeight, updatedWeight, updatedBloodType, updatedTags);
     }
 
     @Override
@@ -140,11 +148,13 @@ public class EditCommand extends Command {
     public static class EditPersonDescriptor {
         private Ic ic;
         private Name name;
+        private DateOfBirth dateOfBirth;
         private Phone phone;
         private Email email;
         private Address address;
         private Height height;
         private Weight weight;
+        private BloodType bloodType;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -156,11 +166,13 @@ public class EditCommand extends Command {
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setIc(toCopy.ic);
             setName(toCopy.name);
+            setDateOfBirth(toCopy.dateOfBirth);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setHeight(toCopy.height);
             setWeight(toCopy.weight);
+            setBloodType(toCopy.bloodType);
             setTags(toCopy.tags);
         }
 
@@ -168,7 +180,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(ic, name, phone, email, address, height, weight, tags);
+            return CollectionUtil.isAnyNonNull(ic, name, dateOfBirth, phone, email, address, height, weight,
+                                               bloodType, tags);
         }
 
         public void setIc(Ic ic) {
@@ -185,6 +198,14 @@ public class EditCommand extends Command {
 
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
+        }
+
+        public void setDateOfBirth(DateOfBirth dateOfBirth) {
+            this.dateOfBirth = dateOfBirth;
+        }
+
+        public Optional<DateOfBirth> getDateOfBirth() {
+            return Optional.ofNullable(dateOfBirth);
         }
 
         public void setPhone(Phone phone) {
@@ -227,6 +248,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(weight);
         }
 
+        public void setBloodType(BloodType bloodType) {
+            this.bloodType = bloodType;
+        }
+
+        public Optional<BloodType> getBloodType() {
+            return Optional.ofNullable(bloodType);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -261,11 +290,13 @@ public class EditCommand extends Command {
 
             return getIc().equals(e.getIc())
                     && getName().equals(e.getName())
+                    && getDateOfBirth().equals(e.getDateOfBirth())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getHeight().equals(e.getHeight())
                     && getWeight().equals(e.getWeight())
+                    && getBloodType().equals(e.getBloodType())
                     && getTags().equals(e.getTags());
         }
     }
