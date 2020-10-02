@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.BloodType;
+import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.Ic;
@@ -22,6 +23,7 @@ public class PersonBuilder {
 
     public static final String DEFAULT_IC = "S5436781A";
     public static final String DEFAULT_NAME = "Alice Pauline";
+    public static final String DEFAULT_DOB = "08-09-1954";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
@@ -31,6 +33,7 @@ public class PersonBuilder {
 
     private Ic ic;
     private Name name;
+    private DateOfBirth dateOfBirth;
     private Phone phone;
     private Email email;
     private Address address;
@@ -45,6 +48,7 @@ public class PersonBuilder {
     public PersonBuilder() {
         ic = new Ic(DEFAULT_IC);
         name = new Name(DEFAULT_NAME);
+        dateOfBirth = new DateOfBirth(DEFAULT_DOB);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
@@ -60,6 +64,7 @@ public class PersonBuilder {
     public PersonBuilder(Person personToCopy) {
         ic = personToCopy.getIc();
         name = personToCopy.getName();
+        dateOfBirth = personToCopy.getDateOfBirth();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
@@ -82,6 +87,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withName(String name) {
         this.name = new Name(name);
+        return this;
+    }
+
+    /**
+     * Sets the {@code DateOfBirth} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = new DateOfBirth(dateOfBirth);
         return this;
     }
 
@@ -141,8 +154,12 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+    * Creates Person object based on the fields specified in this PersonBuilder object.
+    */
     public Person build() {
-        return new Person(ic, name, phone, email, address, height, weight, bloodType, tags);
+        return new Person(ic, name, dateOfBirth, phone, email, address, height, weight,
+                          bloodType, tags);
     }
 
 }
