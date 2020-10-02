@@ -15,7 +15,7 @@ public class DateOfBirth {
 
     public static final String MESSAGE_CONSTRAINTS = "Date of birth (DOB) should be of the format \"DD-MM-YYYY\""
             + "where D, M and Y represent digits of the day, month and year of the DOB respectively."
-            + "\nDOB should also have not been passed yet i.e. not in the future.";
+            + "\nDOB should not be in the future.";
     public static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("d MMM yyyy");
     private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public final String value;
