@@ -266,7 +266,7 @@ public class EditCommandParserTest {
 
         // other valid values specified
         userInput = targetIndex.getOneBased() + DOB_DESC_BOB + EMAIL_DESC_BOB + INVALID_PHONE_DESC + ADDRESS_DESC_BOB
-                + PHONE_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB;
+                + PHONE_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB + BLOOD_TYPE_DESC_BOB;
         descriptor = new EditPersonDescriptorBuilder().withDateOfBirth(VALID_DOB_BOB).withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withHeight(VALID_HEIGHT_BOB)
                 .withWeight(VALID_WEIGHT_BOB).withBloodType(VALID_BLOOD_TYPE_BOB).build();
