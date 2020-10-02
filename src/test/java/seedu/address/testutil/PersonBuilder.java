@@ -154,6 +154,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+    * Creates Person object based on the fields specified in this PersonBuilder object.
+    */
     public Person build() {
         return new Person(ic, name, dateOfBirth, phone, email, address, height, weight,
                           bloodType, tags);
