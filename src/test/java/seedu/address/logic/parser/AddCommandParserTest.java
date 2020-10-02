@@ -137,7 +137,7 @@ public class AddCommandParserTest {
                 .build();
         assertParseSuccess(parser, IC_DESC_BOB + NAME_DESC_BOB + DOB_DESC_BOB + PHONE_DESC_BOB
                         + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB
-                        + BLOOD_TYPE_DESC_BOB+ TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                        + BLOOD_TYPE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
             new AddCommand(expectedPersonMultipleTags));
     }
 
