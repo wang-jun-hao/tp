@@ -148,8 +148,8 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + IC_DESC_AMY + PHONE_DESC_BOB + TAG_DESC_HUSBAND
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + HEIGHT_DESC_AMY + WEIGHT_DESC_AMY + BLOOD_TYPE_DESC_AMY
-                + NAME_DESC_AMY + TAG_DESC_FRIEND + DOB_DESC_AMY;
+                + DOB_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + HEIGHT_DESC_AMY + WEIGHT_DESC_AMY 
+                + BLOOD_TYPE_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withIc(VALID_IC_AMY)
                 .withName(VALID_NAME_AMY).withDateOfBirth(VALID_DOB_AMY).withPhone(VALID_PHONE_BOB)
