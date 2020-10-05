@@ -18,6 +18,7 @@ public class Person {
     // Identity fields
     private final Ic ic;
     private final Name name;
+    private final DateOfBirth dateOfBirth;
     private final Phone phone;
     private final Email email;
 
@@ -31,11 +32,12 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Ic ic, Name name, Phone phone, Email email, Address address, Height height, Weight weight,
-                  BloodType bloodType, Set<Tag> tags) {
-        requireAllNonNull(ic, name, phone, email, address, height, weight, tags);
+    public Person(Ic ic, Name name, DateOfBirth dateOfBirth, Phone phone, Email email, Address address, Height height,
+                  Weight weight, BloodType bloodType, Set<Tag> tags) {
+        requireAllNonNull(ic, name, dateOfBirth, phone, email, address, height, weight, bloodType, tags);
         this.ic = ic;
         this.name = name;
+        this.dateOfBirth = dateOfBirth;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -51,6 +53,10 @@ public class Person {
 
     public Name getName() {
         return name;
+    }
+
+    public DateOfBirth getDateOfBirth() {
+        return dateOfBirth;
     }
 
     public Phone getPhone() {
@@ -115,6 +121,7 @@ public class Person {
         Person otherPerson = (Person) other;
         return otherPerson.getIc().equals(getIc())
                 && otherPerson.getName().equals(getName())
+                && otherPerson.getDateOfBirth().equals(getDateOfBirth())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
@@ -127,7 +134,8 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(ic, name, phone, email, address, height, weight, bloodType, tags);
+        return Objects.hash(ic, name, dateOfBirth, phone, email, address, height, weight,
+                            bloodType, tags);
     }
 
     @Override
@@ -136,6 +144,8 @@ public class Person {
         builder.append(getIc())
                 .append(" Name ")
                 .append(getName())
+                .append(" Date of Birth: ")
+                .append(getDateOfBirth())
                 .append(" Phone: ")
                 .append(getPhone())
                 .append(" Email: ")
