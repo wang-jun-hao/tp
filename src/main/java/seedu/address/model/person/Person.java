@@ -154,6 +154,7 @@ public class Person {
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getHeight().equals(getHeight())
                 && otherPerson.getWeight().equals(getWeight())
+                && otherPerson.getBmi().equals(getBmi())
                 && otherPerson.getBloodType().equals(getBloodType())
                 && otherPerson.getTags().equals(getTags());
     }
@@ -161,7 +162,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(ic, name, dateOfBirth, phone, email, address, height, weight,
+        return Objects.hash(ic, name, dateOfBirth, phone, email, address, height, weight, bmi,
                             bloodType, tags);
     }
 
