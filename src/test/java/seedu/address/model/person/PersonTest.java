@@ -58,7 +58,7 @@ public class PersonTest {
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
-        // same ic, same name, same date of birth, same height, same weight, same address different phone,
+        // same ic, same name, same date of birth, same height, same weight, same address, different phone,
         // different email -> returns true
         editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));

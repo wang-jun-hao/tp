@@ -47,6 +47,8 @@ public class CommandTestUtil {
     public static final String VALID_HEIGHT_BOB = "166";
     public static final String VALID_WEIGHT_AMY = "49.9";
     public static final String VALID_WEIGHT_BOB = "65.0";
+    public static final String VALID_BMI_AMY = "16.9";
+    public static final String VALID_BMI_BOB = "23.6";
     public static final String VALID_BLOOD_TYPE_AMY = "A+";
     public static final String VALID_BLOOD_TYPE_BOB = "B+";
     public static final String VALID_TAG_HUSBAND = "husband";

@@ -8,6 +8,7 @@
     "address": "123, Jurong West Ave 6, #08-111",
     "height": "174",
     "weight": "50.1",
+    "bmi": "16.5",
     "bloodType": "B+",
     "tagged": [ "friends" ]
   }, {
@@ -19,6 +20,7 @@
     "address": "4th street",
     "height": "174",
     "weight": "50.1",
+    "bmi": "16.5",
     "bloodType": "B+"
   } ]
 }

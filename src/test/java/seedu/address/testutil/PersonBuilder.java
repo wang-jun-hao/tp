@@ -168,11 +168,19 @@ public class PersonBuilder {
     }
 
     /**
-    * Creates Person object based on the fields specified in this PersonBuilder object.
+    * Creates Person object based on the fields specified in this PersonBuilder object (bmi auto-generated).
     */
     public Person build() {
-        return new Person(ic, name, dateOfBirth, phone, email, address, height, weight, bmi,
+        return new Person(ic, name, dateOfBirth, phone, email, address, height, weight,
                           bloodType, tags);
+    }
+
+    /**
+     * Creates Person object based on the fields specified in this PersonBuilder object (bmi explicitly specified).
+     */
+    public Person buildWithSpecifiedBmi() {
+        return new Person(ic, name, dateOfBirth, phone, email, address, height, weight, bmi,
+                bloodType, tags);
     }
 
 }
