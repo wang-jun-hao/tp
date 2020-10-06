@@ -14,6 +14,7 @@ public class Weight {
     public static final String WEIGHT_UNIT = "kg";
 
     public final String value;
+    private final double numericValue;
 
     /**
      * Constructs a {@code weight}.
@@ -24,6 +25,7 @@ public class Weight {
         requireNonNull(weight);
         checkArgument(isValidWeight(weight), MESSAGE_CONSTRAINTS);
         this.value = weight;
+        this.numericValue = Double.parseDouble(weight);
     }
 
     /**
@@ -60,6 +62,9 @@ public class Weight {
         return true;
     }
 
+    public double getNumericValue() {
+        return numericValue;
+    }
 
     @Override
     public String toString() {

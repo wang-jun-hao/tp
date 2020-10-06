@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.BloodType;
+import seedu.address.model.person.Bmi;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
@@ -37,6 +38,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final String height;
     private final String weight;
+    private final String bmi;
     private final String bloodType;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
@@ -48,7 +50,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("dateOfBirth") String dateOfBirth, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("height") String height, @JsonProperty("weight") String weight,
-                             @JsonProperty("blood type") String bloodType,
+                             @JsonProperty("bmi") String bmi, @JsonProperty("blood type") String bloodType,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.ic = ic;
         this.name = name;
@@ -58,6 +60,7 @@ class JsonAdaptedPerson {
         this.address = address;
         this.height = height;
         this.weight = weight;
+        this.bmi = bmi;
         this.bloodType = bloodType;
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -76,6 +79,7 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         height = source.getHeight().value;
         weight = source.getWeight().value;
+        bmi = source.getBmi().value;
         bloodType = source.getBloodType().bloodType.label;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -157,6 +161,15 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Weight.MESSAGE_CONSTRAINTS);
         }
         final Weight modelWeight = new Weight(weight);
+
+        if (bmi == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Bmi.class.getSimpleName()));
+        }
+        if (!Bmi.isValidBmi(bmi)) {
+            throw new IllegalValueException(Bmi.MESSAGE_CONSTRAINTS);
+        }
+        final Bmi modelBmi = new Bmi(bmi);
+
         if (bloodType == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     BloodType.class.getSimpleName()));
@@ -168,7 +181,7 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelIc, modelName, modelDateOfBirth, modelPhone, modelEmail, modelAddress, modelHeight,
-                modelWeight, modelBloodType, modelTags);
+                modelWeight, modelBmi, modelBloodType, modelTags);
     }
 
 }

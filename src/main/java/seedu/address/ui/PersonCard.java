@@ -50,6 +50,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label weight;
     @FXML
+    private Label bmi;
+    @FXML
     private Label bloodType;
     @FXML
     private FlowPane tags;
@@ -69,6 +71,7 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         height.setText(person.getHeight().value + Height.HEIGHT_UNIT);
         weight.setText(person.getWeight().value + Weight.WEIGHT_UNIT);
+        bmi.setText(person.getBmi().value);
         bloodType.setText(person.getBloodType().bloodType.label);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
