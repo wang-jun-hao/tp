@@ -11,7 +11,7 @@ title: User Guide
     + [Viewing help : help](#help-command)
     + [Adding a patient: add](#add-command)
     + [Deleting a patient : delete](#delete-command)
-    + [Listing all persons : list](#list-command)
+    + [Listing all patients : list](#list-command)
     + [Exiting the program : exit](#exit-command)
     + [Saving the data](#saving)
 + [FAQ](#faq)
