@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.patient.Address;
 import seedu.address.model.patient.BloodType;
+import seedu.address.model.patient.Bmi;
 import seedu.address.model.patient.DateOfBirth;
 import seedu.address.model.patient.Email;
 import seedu.address.model.patient.Height;
@@ -29,6 +30,7 @@ public class PatientBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_HEIGHT = "170";
     public static final String DEFAULT_WEIGHT = "58.7";
+    public static final String DEFAULT_BMI = "20.3";
     public static final String DEFAULT_BLOOD_TYPE = "A+";
 
     private Ic ic;
@@ -39,6 +41,7 @@ public class PatientBuilder {
     private Address address;
     private Height height;
     private Weight weight;
+    private Bmi bmi;
     private BloodType bloodType;
     private Set<Tag> tags;
 
@@ -54,6 +57,7 @@ public class PatientBuilder {
         address = new Address(DEFAULT_ADDRESS);
         height = new Height(DEFAULT_HEIGHT);
         weight = new Weight(DEFAULT_WEIGHT);
+        bmi = new Bmi(DEFAULT_BMI);
         bloodType = new BloodType(DEFAULT_BLOOD_TYPE);
         tags = new HashSet<>();
     }
@@ -70,6 +74,7 @@ public class PatientBuilder {
         address = patientToCopy.getAddress();
         height = patientToCopy.getHeight();
         weight = patientToCopy.getWeight();
+        bmi = patientToCopy.getBmi();
         bloodType = patientToCopy.getBloodType();
         tags = new HashSet<>(patientToCopy.getTags());
     }
@@ -147,6 +152,14 @@ public class PatientBuilder {
     }
 
     /**
+     * Sets the {@code Bmi} of the {@code Patient} that we are building.
+     */
+    public PatientBuilder withBmi(String bmi) {
+        this.bmi = new Bmi(bmi);
+        return this;
+    }
+
+    /**
      * Sets the {@code BloodType} of the {@code Patient} that we are building.
      */
     public PatientBuilder withBloodType(String bloodType) {
@@ -155,11 +168,19 @@ public class PatientBuilder {
     }
 
     /**
-    * Creates Patient object based on the fields specified in this PatientBuilder object.
-    */
+     * Creates Patient object based on the fields specified in this PatientBuilder object (bmi auto-generated).
+     */
     public Patient build() {
         return new Patient(ic, name, dateOfBirth, phone, email, address, height, weight,
-                          bloodType, tags);
+                bloodType, tags);
+    }
+
+    /**
+     * Creates Patient object based on the fields specified in this PatientBuilder object (bmi explicitly specified).
+     */
+    public Patient buildWithSpecifiedBmi() {
+        return new Patient(ic, name, dateOfBirth, phone, email, address, height, weight, bmi,
+                bloodType, tags);
     }
 
 }

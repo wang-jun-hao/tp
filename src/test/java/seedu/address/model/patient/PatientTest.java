@@ -58,7 +58,7 @@ public class PatientTest {
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePatient(editedAlice));
 
-        // same ic, same name, same date of birth, same height, same weight, same address different phone,
+        // same ic, same name, same date of birth, same height, same weight, same address, different phone,
         // different email -> returns true
         editedAlice = new PatientBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
         assertTrue(ALICE.isSamePatient(editedAlice));

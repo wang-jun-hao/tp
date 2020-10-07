@@ -26,6 +26,7 @@ public class Patient {
     private final Address address;
     private final Height height;
     private final Weight weight;
+    private final Bmi bmi;
     private final BloodType bloodType;
     private final Set<Tag> tags = new HashSet<>();
 
@@ -43,6 +44,28 @@ public class Patient {
         this.address = address;
         this.height = height;
         this.weight = weight;
+        this.bmi = new Bmi(weight, height);
+        this.bloodType = bloodType;
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * Every field must be present and not null.
+     * Overloaded constructor of Person with an additional bmi field that has already been computed to bypass
+     * unnecessary re-computation of bmi.
+     */
+    public Patient(Ic ic, Name name, DateOfBirth dateOfBirth, Phone phone, Email email, Address address, Height height,
+                  Weight weight, Bmi bmi, BloodType bloodType, Set<Tag> tags) {
+        requireAllNonNull(ic, name, dateOfBirth, phone, email, address, height, weight, bloodType, tags);
+        this.ic = ic;
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.height = height;
+        this.weight = weight;
+        this.bmi = bmi;
         this.bloodType = bloodType;
         this.tags.addAll(tags);
     }
@@ -77,6 +100,10 @@ public class Patient {
 
     public Weight getWeight() {
         return weight;
+    }
+
+    public Bmi getBmi() {
+        return bmi;
     }
 
     public BloodType getBloodType() {
@@ -127,6 +154,7 @@ public class Patient {
                 && otherPatient.getAddress().equals(getAddress())
                 && otherPatient.getHeight().equals(getHeight())
                 && otherPatient.getWeight().equals(getWeight())
+                && otherPatient.getBmi().equals(getBmi())
                 && otherPatient.getBloodType().equals(getBloodType())
                 && otherPatient.getTags().equals(getTags());
     }
@@ -134,7 +162,7 @@ public class Patient {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(ic, name, dateOfBirth, phone, email, address, height, weight,
+        return Objects.hash(ic, name, dateOfBirth, phone, email, address, height, weight, bmi,
                             bloodType, tags);
     }
 
@@ -156,6 +184,8 @@ public class Patient {
                 .append(getHeight())
                 .append(" Weight: ")
                 .append(getWeight())
+                .append(" BMI: ")
+                .append(getBmi())
                 .append(" Blood type: ")
                 .append(getBloodType())
                 .append(" Tags: ");

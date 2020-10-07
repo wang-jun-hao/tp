@@ -15,6 +15,7 @@ public class Height {
     private static final int HEIGHT_MIN = 0;
     private static final int HEIGHT_MAX = 300;
     public final String value;
+    private final int numericValue;
 
     /**
      * Constructs a {@code Height}.
@@ -25,6 +26,7 @@ public class Height {
         requireNonNull(height);
         checkArgument(isValidHeight(height), MESSAGE_CONSTRAINTS);
         value = height;
+        this.numericValue = Integer.parseInt(height);
     }
 
     /**
@@ -37,6 +39,10 @@ public class Height {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    public int getNumericValue() {
+        return numericValue;
     }
 
     @Override
