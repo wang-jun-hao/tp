@@ -198,7 +198,7 @@ class JsonAdaptedPatient {
         } else {
             modelHeight = Optional.of(new Height(height));
         }
-        
+
         final Optional<Weight> modelWeight;
 
         if (weight.equals(OPTIONAL_FIELD_EMPTY_MESSAGE)) {
