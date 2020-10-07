@@ -2,9 +2,14 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.function.Predicate;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.patient.NameContainsKeywordsPredicate;
+import seedu.address.model.patient.Patient;
 
 /**
  * Finds and lists all patients in address book whose name contains any of the argument keywords.
@@ -19,16 +24,21 @@ public class FindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final List<Predicate<Patient>> predicates;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
-        this.predicate = predicate;
+    public FindCommand(Predicate<Patient> predicate) {
+        this.predicates = Collections.singletonList(predicate);
+    }
+
+    public FindCommand(List<Predicate<Patient>> predicates) {
+        this.predicates = predicates;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPatientList(predicate);
+        Predicate<Patient> combinedPredicates = predicates.stream().reduce(x -> true, Predicate::and);
+        model.updateFilteredPatientList(combinedPredicates);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PATIENT_LISTED_OVERVIEW, model.getFilteredPatientList().size()));
     }
@@ -37,6 +47,6 @@ public class FindCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FindCommand // instanceof handles nulls
-                && predicate.equals(((FindCommand) other).predicate)); // state check
+                && Arrays.equals(predicates.toArray(), ((FindCommand) other).predicates.toArray())); // state check
     }
 }
