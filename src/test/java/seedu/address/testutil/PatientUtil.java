@@ -39,11 +39,27 @@ public class PatientUtil {
         sb.append(PREFIX_NAME + patient.getName().fullName + " ");
         sb.append(PREFIX_DOB + patient.getDateOfBirth().value + " ");
         sb.append(PREFIX_PHONE + patient.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + patient.getEmail().value + " ");
-        sb.append(PREFIX_ADDRESS + patient.getAddress().value + " ");
-        sb.append(PREFIX_HEIGHT + patient.getHeight().value + " ");
-        sb.append(PREFIX_WEIGHT + patient.getWeight().value + " ");
-        sb.append(PREFIX_BLOOD_TYPE + patient.getBloodType().bloodType.label + " ");
+
+        if (patient.getEmail().isPresent()) {
+            sb.append(PREFIX_EMAIL + patient.getEmail().get().value + " ");
+        }
+
+        if (patient.getAddress().isPresent()) {
+            sb.append(PREFIX_ADDRESS + patient.getAddress().get().value + " ");
+        }
+
+        if (patient.getHeight().isPresent()) {
+            sb.append(PREFIX_HEIGHT + patient.getHeight().get().value + " ");
+        }
+
+        if (patient.getWeight().isPresent()) {
+            sb.append(PREFIX_WEIGHT + patient.getWeight().get().value + " ");
+        }
+
+        if (patient.getBloodType().isPresent()) {
+            sb.append(PREFIX_BLOOD_TYPE + patient.getBloodType().get().bloodType.label + " ");
+        }
+
         patient.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -60,12 +76,14 @@ public class PatientUtil {
         descriptor.getDateOfBirth()
             .ifPresent(dateOfBirth -> sb.append(PREFIX_DOB).append(dateOfBirth.value).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
-        descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
-        descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
-        descriptor.getHeight().ifPresent(height -> sb.append(PREFIX_HEIGHT).append(height.value).append(" "));
-        descriptor.getWeight().ifPresent(weight -> sb.append(PREFIX_WEIGHT).append(weight.value).append(" "));
+
+        descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.get().value).append(" "));
+        descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.get().value).append(" "));
+        descriptor.getHeight().ifPresent(height -> sb.append(PREFIX_HEIGHT).append(height.get().value).append(" "));
+        descriptor.getWeight().ifPresent(weight -> sb.append(PREFIX_WEIGHT).append(weight.get().value).append(" "));
         descriptor.getBloodType().ifPresent(bloodType -> sb.append(PREFIX_BLOOD_TYPE)
-                .append(bloodType.bloodType.label).append(" "));
+                .append(bloodType.get().bloodType.label).append(" "));
+
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

@@ -171,7 +171,7 @@ class JsonAdaptedPatient {
 
         final Optional<Email> modelEmail;
 
-        if (email == null) {
+        if (email.equals(OPTIONAL_FIELD_EMPTY_MESSAGE)) {
             modelEmail = Optional.empty();
         } else if (!Email.isValidEmail(email)) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
@@ -181,7 +181,7 @@ class JsonAdaptedPatient {
 
         final Optional<Address> modelAddress;
 
-        if (address == null) {
+        if (address.equals(OPTIONAL_FIELD_EMPTY_MESSAGE)) {
             modelAddress = Optional.empty();
         } else if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
@@ -191,17 +191,17 @@ class JsonAdaptedPatient {
 
         final Optional<Height> modelHeight;
 
-        if (height == null) {
+        if (height.equals(OPTIONAL_FIELD_EMPTY_MESSAGE)) {
             modelHeight = Optional.empty();
         } else if (!Height.isValidHeight(height)) {
             throw new IllegalValueException(Height.MESSAGE_CONSTRAINTS);
         } else {
             modelHeight = Optional.of(new Height(height));
         }
-
+        
         final Optional<Weight> modelWeight;
 
-        if (weight == null) {
+        if (weight.equals(OPTIONAL_FIELD_EMPTY_MESSAGE)) {
             modelWeight = Optional.empty();
         } else if (!Weight.isValidWeight(weight)) {
             throw new IllegalValueException(Weight.MESSAGE_CONSTRAINTS);
@@ -211,7 +211,7 @@ class JsonAdaptedPatient {
 
         final Optional<Bmi> modelBmi;
 
-        if (bmi == null) {
+        if (bmi.equals(OPTIONAL_FIELD_EMPTY_MESSAGE)) {
             modelBmi = Optional.empty();
         } else if (!Bmi.isValidBmi(bmi)) {
             throw new IllegalValueException(Bmi.MESSAGE_CONSTRAINTS);
@@ -220,7 +220,8 @@ class JsonAdaptedPatient {
         }
 
         final Optional<BloodType> modelBloodType;
-        if (bloodType == null) {
+
+        if (bloodType.equals(OPTIONAL_FIELD_EMPTY_MESSAGE)) {
             modelBloodType = Optional.empty();
         } else if (!BloodType.isValidBloodType(bloodType)) {
             throw new IllegalValueException(BloodType.MESSAGE_CONSTRAINTS);

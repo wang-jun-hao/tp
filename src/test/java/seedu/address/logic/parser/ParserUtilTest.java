@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -164,118 +165,99 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAddress_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
-    }
-
-    @Test
     public void parseAddress_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
+        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(Optional.of(INVALID_ADDRESS)));
     }
 
     @Test
     public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
         Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(VALID_ADDRESS));
+        assertEquals(expectedAddress, ParserUtil.parseAddress(Optional.of(VALID_ADDRESS)).get());
     }
 
     @Test
     public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
         String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
         Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
-    }
-
-    @Test
-    public void parseEmail_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
+        assertEquals(expectedAddress, ParserUtil.parseAddress(Optional.of(addressWithWhitespace)).get());
     }
 
     @Test
     public void parseEmail_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseEmail(INVALID_EMAIL));
+        assertThrows(ParseException.class, () -> ParserUtil.parseEmail(Optional.of(INVALID_EMAIL)));
     }
 
     @Test
     public void parseEmail_validValueWithoutWhitespace_returnsEmail() throws Exception {
         Email expectedEmail = new Email(VALID_EMAIL);
-        assertEquals(expectedEmail, ParserUtil.parseEmail(VALID_EMAIL));
+        assertEquals(expectedEmail, ParserUtil.parseEmail(Optional.of(VALID_EMAIL)).get());
     }
 
     @Test
     public void parseEmail_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
-        assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
-    }
-
-    @Test
-    public void parseHeight_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseHeight((String) null));
+        assertEquals(expectedEmail, ParserUtil.parseEmail(Optional.of(emailWithWhitespace)).get());
     }
 
     @Test
     public void parseHeight_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseHeight(INVALID_HEIGHT));
+        assertThrows(ParseException.class, () -> ParserUtil.parseHeight(Optional.of(INVALID_HEIGHT)));
     }
 
     @Test
     public void parseHeight_validValueWithoutWhitespace_returnsHeight() throws Exception {
         Height expectedHeight = new Height(VALID_HEIGHT);
-        assertEquals(expectedHeight, ParserUtil.parseHeight(VALID_HEIGHT));
+        assertEquals(expectedHeight, ParserUtil.parseHeight(Optional.of(VALID_HEIGHT)).get());
     }
 
     @Test
     public void parseHeight_validValueWithWhitespace_returnsTrimmedHeight() throws Exception {
         String heightWithWhitespace = WHITESPACE + VALID_HEIGHT + WHITESPACE;
         Height expectedHeight = new Height(VALID_HEIGHT);
-        assertEquals(expectedHeight, ParserUtil.parseHeight(heightWithWhitespace));
-    }
-
-    @Test
-    public void parseWeight_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseWeight((String) null));
+        assertEquals(expectedHeight, ParserUtil.parseHeight(Optional.of(heightWithWhitespace)).get());
     }
 
     @Test
     public void parseWeight_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseWeight(INVALID_WEIGHT));
+        assertThrows(ParseException.class, () -> ParserUtil.parseWeight(Optional.of(INVALID_WEIGHT)));
     }
 
     @Test
     public void parseWeight_validValueWithoutWhitespace_returnsWeight() throws Exception {
         Weight expectedWeight = new Weight(VALID_WEIGHT);
-        assertEquals(expectedWeight, ParserUtil.parseWeight(VALID_WEIGHT));
+        assertEquals(expectedWeight, ParserUtil.parseWeight(Optional.of(VALID_WEIGHT)).get());
     }
 
     @Test
     public void parseWeight_validValueWithWhitespace_returnsTrimmedWeight() throws Exception {
         String weightWithWhitespace = WHITESPACE + VALID_WEIGHT + WHITESPACE;
         Weight expectedWeight = new Weight(VALID_WEIGHT);
-        assertEquals(expectedWeight, ParserUtil.parseWeight(weightWithWhitespace));
+        assertEquals(expectedWeight, ParserUtil.parseWeight(Optional.of(weightWithWhitespace)).get());
     }
 
     @Test
-    public void parseBloodType_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseBloodType((String) null));
+    public void parseBloodType_null_returnsEmptyOptional() throws Exception {
+        Optional<BloodType> expectedBloodType = Optional.empty();
+        assertEquals(expectedBloodType, ParserUtil.parseBloodType(Optional.ofNullable(null)));
     }
 
     @Test
     public void parseBloodType_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseBloodType(INVALID_BLOOD_TYPE));
+        assertThrows(ParseException.class, () -> ParserUtil.parseBloodType(Optional.of(INVALID_BLOOD_TYPE)));
     }
 
     @Test
     public void parseBloodType_validValueWithoutWhitespace_returnsBloodType() throws Exception {
         BloodType expectedBloodType = new BloodType(VALID_BLOOD_TYPE);
-        assertEquals(expectedBloodType, ParserUtil.parseBloodType(VALID_BLOOD_TYPE));
+        assertEquals(expectedBloodType, ParserUtil.parseBloodType(Optional.of(VALID_BLOOD_TYPE)).get());
     }
 
     @Test
     public void parseBloodType_validValueWithWhitespace_returnsTrimmedBloodType() throws Exception {
         String bloodTypeWithWhitespace = WHITESPACE + VALID_BLOOD_TYPE + WHITESPACE;
         BloodType expectedBloodType = new BloodType(VALID_BLOOD_TYPE);
-        assertEquals(expectedBloodType, ParserUtil.parseBloodType(bloodTypeWithWhitespace));
+        assertEquals(expectedBloodType, ParserUtil.parseBloodType(Optional.of(bloodTypeWithWhitespace)).get());
     }
 
     @Test

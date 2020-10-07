@@ -40,12 +40,12 @@ public class JsonAdaptedPatientTest {
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_DOB = BENSON.getDateOfBirth().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
-    private static final String VALID_EMAIL = BENSON.getEmail().toString();
-    private static final String VALID_ADDRESS = BENSON.getAddress().toString();
-    private static final String VALID_HEIGHT = BENSON.getHeight().toString();
-    private static final String VALID_WEIGHT = BENSON.getWeight().toString();
-    private static final String VALID_BMI = BENSON.getBmi().toString();
-    private static final String VALID_BLOOD_TYPE = BENSON.getBloodType().toString();
+    private static final String VALID_EMAIL = BENSON.getEmail().get().toString();
+    private static final String VALID_ADDRESS = BENSON.getAddress().get().toString();
+    private static final String VALID_HEIGHT = BENSON.getHeight().get().toString();
+    private static final String VALID_WEIGHT = BENSON.getWeight().get().toString();
+    private static final String VALID_BMI = BENSON.getBmi().get().toString();
+    private static final String VALID_BLOOD_TYPE = BENSON.getBloodType().get().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
@@ -129,26 +129,10 @@ public class JsonAdaptedPatientTest {
     }
 
     @Test
-    public void toModelType_nullEmail_throwsIllegalValueException() {
-        JsonAdaptedPatient patient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE, null,
-                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
-    }
-
-    @Test
     public void toModelType_invalidAddress_throwsIllegalValueException() {
         JsonAdaptedPatient patient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE, VALID_EMAIL,
                 INVALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_TAGS);
         String expectedMessage = Address.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
-    }
-
-    @Test
-    public void toModelType_nullAddress_throwsIllegalValueException() {
-        JsonAdaptedPatient patient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE, VALID_EMAIL,
-                null, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
     }
 
@@ -161,26 +145,10 @@ public class JsonAdaptedPatientTest {
     }
 
     @Test
-    public void toModelType_nullHeight_throwsIllegalValueException() {
-        JsonAdaptedPatient patient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE, VALID_EMAIL,
-                VALID_ADDRESS, null, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Height.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
-    }
-
-    @Test
     public void toModelType_invalidWeight_throwsIllegalValueException() {
         JsonAdaptedPatient patient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS, VALID_HEIGHT, INVALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_TAGS);
         String expectedMessage = Weight.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
-    }
-
-    @Test
-    public void toModelType_nullWeight_throwsIllegalValueException() {
-        JsonAdaptedPatient patient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE, VALID_EMAIL,
-                VALID_ADDRESS, VALID_HEIGHT, null, VALID_BMI, VALID_BLOOD_TYPE, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Weight.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
     }
 
@@ -193,26 +161,10 @@ public class JsonAdaptedPatientTest {
     }
 
     @Test
-    public void toModelType_nullBmi_throwsIllegalValueException() {
-        JsonAdaptedPatient patient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE, VALID_EMAIL,
-                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, null, VALID_BLOOD_TYPE, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Bmi.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
-    }
-
-    @Test
     public void toModelType_invalidBloodType_throwsIllegalValueException() {
         JsonAdaptedPatient patient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, INVALID_BLOOD_TYPE, VALID_TAGS);
         String expectedMessage = BloodType.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
-    }
-
-    @Test
-    public void toModelType_nullBloodType_throwsIllegalValueException() {
-        JsonAdaptedPatient patient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE, VALID_EMAIL,
-                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, null, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, BloodType.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
     }
 

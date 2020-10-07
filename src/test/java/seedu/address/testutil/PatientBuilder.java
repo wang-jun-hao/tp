@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.patient.Address;
@@ -37,12 +38,12 @@ public class PatientBuilder {
     private Name name;
     private DateOfBirth dateOfBirth;
     private Phone phone;
-    private Email email;
-    private Address address;
-    private Height height;
-    private Weight weight;
-    private Bmi bmi;
-    private BloodType bloodType;
+    private Optional<Email> email;
+    private Optional<Address> address;
+    private Optional<Height> height;
+    private Optional<Weight> weight;
+    private Optional<Bmi> bmi;
+    private Optional<BloodType> bloodType;
     private Set<Tag> tags;
 
     /**
@@ -53,12 +54,12 @@ public class PatientBuilder {
         name = new Name(DEFAULT_NAME);
         dateOfBirth = new DateOfBirth(DEFAULT_DOB);
         phone = new Phone(DEFAULT_PHONE);
-        email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
-        height = new Height(DEFAULT_HEIGHT);
-        weight = new Weight(DEFAULT_WEIGHT);
-        bmi = new Bmi(DEFAULT_BMI);
-        bloodType = new BloodType(DEFAULT_BLOOD_TYPE);
+        email = Optional.of(new Email(DEFAULT_EMAIL));
+        address = Optional.of(new Address(DEFAULT_ADDRESS));
+        height = Optional.of(new Height(DEFAULT_HEIGHT));
+        weight = Optional.of(new Weight(DEFAULT_WEIGHT));
+        bmi = Optional.of(new Bmi(DEFAULT_BMI));
+        bloodType = Optional.of(new BloodType(DEFAULT_BLOOD_TYPE));
         tags = new HashSet<>();
     }
 
@@ -115,7 +116,11 @@ public class PatientBuilder {
      * Sets the {@code Address} of the {@code Patient} that we are building.
      */
     public PatientBuilder withAddress(String address) {
-        this.address = new Address(address);
+        if (address.isBlank()) {
+            this.address = Optional.empty();
+        } else {
+            this.address = Optional.of(new Address(address));
+        }
         return this;
     }
 
@@ -131,7 +136,11 @@ public class PatientBuilder {
      * Sets the {@code Email} of the {@code Patient} that we are building.
      */
     public PatientBuilder withEmail(String email) {
-        this.email = new Email(email);
+        if (email.isBlank()) {
+            this.email = Optional.empty();
+        } else {
+            this.email = Optional.of(new Email(email));
+        }
         return this;
     }
 
@@ -139,7 +148,11 @@ public class PatientBuilder {
      * Sets the {@code Height} of the {@code Patient} that we are building.
      */
     public PatientBuilder withHeight(String height) {
-        this.height = new Height(height);
+        if (height.isBlank()) {
+            this.height = Optional.empty();
+        } else {
+            this.height = Optional.of(new Height(height));
+        }
         return this;
     }
 
@@ -147,7 +160,11 @@ public class PatientBuilder {
      * Sets the {@code Weight} of the {@code Patient} that we are building.
      */
     public PatientBuilder withWeight(String weight) {
-        this.weight = new Weight(weight);
+        if (weight.isBlank()) {
+            this.weight = Optional.empty();
+        } else {
+            this.weight = Optional.of(new Weight(weight));
+        }
         return this;
     }
 
@@ -155,7 +172,11 @@ public class PatientBuilder {
      * Sets the {@code Bmi} of the {@code Patient} that we are building.
      */
     public PatientBuilder withBmi(String bmi) {
-        this.bmi = new Bmi(bmi);
+        if (bmi.isBlank()) {
+            this.bmi = Optional.empty();
+        } else {
+            this.bmi = Optional.of(new Bmi(bmi));
+        }
         return this;
     }
 
@@ -163,7 +184,11 @@ public class PatientBuilder {
      * Sets the {@code BloodType} of the {@code Patient} that we are building.
      */
     public PatientBuilder withBloodType(String bloodType) {
-        this.bloodType = new BloodType(bloodType);
+        if (bloodType.isBlank()) {
+            this.bloodType = Optional.empty();
+        } else {
+            this.bloodType = Optional.of(new BloodType(bloodType));
+        }
         return this;
     }
 

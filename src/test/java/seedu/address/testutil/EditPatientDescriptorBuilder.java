@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -85,7 +86,7 @@ public class EditPatientDescriptorBuilder {
      * Sets the {@code Email} of the {@code EditPatientDescriptor} that we are building.
      */
     public EditPatientDescriptorBuilder withEmail(String email) {
-        descriptor.setEmail(new Email(email));
+        descriptor.setEmail(Optional.of(new Email(email)));
         return this;
     }
 
@@ -93,7 +94,7 @@ public class EditPatientDescriptorBuilder {
      * Sets the {@code Address} of the {@code EditPatientDescriptor} that we are building.
      */
     public EditPatientDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
+        descriptor.setAddress(Optional.of(new Address(address)));
         return this;
     }
 
@@ -101,7 +102,7 @@ public class EditPatientDescriptorBuilder {
      * Sets the {@code Height} of the {@code EditPatientDescriptor} that we are building.
      */
     public EditPatientDescriptorBuilder withHeight(String height) {
-        descriptor.setHeight(new Height(height));
+        descriptor.setHeight(Optional.of(new Height(height)));
         return this;
     }
 
@@ -109,7 +110,7 @@ public class EditPatientDescriptorBuilder {
      * Sets the {@code Weight} of the {@code EditPatientDescriptor} that we are building.
      */
     public EditPatientDescriptorBuilder withWeight(String weight) {
-        descriptor.setWeight(new Weight(weight));
+        descriptor.setWeight(Optional.of(new Weight(weight)));
         return this;
     }
 
@@ -117,7 +118,7 @@ public class EditPatientDescriptorBuilder {
      * Sets the {@code BloodType} of the {@code EditPatientDescriptor} that we are building.
      */
     public EditPatientDescriptorBuilder withBloodType(String bloodType) {
-        descriptor.setBloodType(new BloodType(bloodType));
+        descriptor.setBloodType(Optional.of(new BloodType(bloodType)));
         return this;
     }
 
