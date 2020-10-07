@@ -9,8 +9,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
 /**
- * Represents a medical note entry for a Patient,
- * on a particular date by a particular doctor.
+ * Represents a medical note entry for a Patient in MediBook, on a particular date by a particular doctor.
  * Guarantees: details are present and not null, date and doctor's names are validated, fields are immutable.
  */
 public class MedicalNote {
