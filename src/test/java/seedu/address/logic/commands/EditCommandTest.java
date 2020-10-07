@@ -4,9 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BMI_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HEIGHT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_WEIGHT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPatientAtIndex;
@@ -23,7 +26,10 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.patient.Bmi;
+import seedu.address.model.patient.Height;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.Weight;
 import seedu.address.testutil.EditPatientDescriptorBuilder;
 import seedu.address.testutil.PatientBuilder;
 
@@ -59,6 +65,73 @@ public class EditCommandTest {
 
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+        EditCommand editCommand = new EditCommand(indexLastPatient, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPatient(lastPatient, editedPatient);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_weightFieldSpecifiedUnfilteredList_successWithCorrectUpdatedBmi() {
+        Index indexLastPatient = Index.fromOneBased(model.getFilteredPatientList().size());
+        Patient lastPatient = model.getFilteredPatientList().get(indexLastPatient.getZeroBased());
+
+        Height heightOfLastPatient = lastPatient.getHeight();
+        Bmi expectedBmi = new Bmi(new Weight(VALID_WEIGHT_BOB), heightOfLastPatient);
+
+        PatientBuilder patientInList = new PatientBuilder(lastPatient);
+        Patient editedPatient = patientInList.withWeight(VALID_WEIGHT_BOB).withBmi(expectedBmi.value)
+                .buildWithSpecifiedBmi();
+
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withWeight(VALID_WEIGHT_BOB).build();
+        EditCommand editCommand = new EditCommand(indexLastPatient, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPatient(lastPatient, editedPatient);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_heightFieldSpecifiedUnfilteredList_successWithCorrectUpdatedBmi() {
+        Index indexLastPatient = Index.fromOneBased(model.getFilteredPatientList().size());
+        Patient lastPatient = model.getFilteredPatientList().get(indexLastPatient.getZeroBased());
+
+        Weight weightOfLastPatient = lastPatient.getWeight();
+        Bmi expectedBmi = new Bmi(weightOfLastPatient, new Height(VALID_HEIGHT_BOB));
+
+        PatientBuilder patientInList = new PatientBuilder(lastPatient);
+        Patient editedPatient = patientInList.withHeight(VALID_HEIGHT_BOB).withBmi(expectedBmi.value)
+                .buildWithSpecifiedBmi();
+
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withHeight(VALID_HEIGHT_BOB).build();
+        EditCommand editCommand = new EditCommand(indexLastPatient, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPatient(lastPatient, editedPatient);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_weightAndHeightFieldSpecifiedUnfilteredList_successWithCorrectUpdatedBmi() {
+        Index indexLastPatient = Index.fromOneBased(model.getFilteredPatientList().size());
+        Patient lastPatient = model.getFilteredPatientList().get(indexLastPatient.getZeroBased());
+
+        PatientBuilder patientInList = new PatientBuilder(lastPatient);
+        Patient editedPatient = patientInList.withHeight(VALID_HEIGHT_BOB).withWeight(VALID_WEIGHT_BOB)
+                .withBmi(VALID_BMI_BOB).buildWithSpecifiedBmi();
+
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withHeight(VALID_HEIGHT_BOB)
+                .withWeight(VALID_WEIGHT_BOB).build();
         EditCommand editCommand = new EditCommand(indexLastPatient, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient);

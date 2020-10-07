@@ -8,6 +8,7 @@
     "address": "4th street",
     "height": "168",
     "weight": "60.1",
+    "bmi": "21.3",
     "bloodType": "A+"
   }, {
     "ic": "S7777777R",
@@ -18,6 +19,7 @@
     "address": "4th street",
     "height": "172",
     "weight": "60.2",
+    "bmi": "20.3",
     "bloodType": "B+"
   } ]
 }

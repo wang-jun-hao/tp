@@ -50,6 +50,8 @@ public class PatientCard extends UiPart<Region> {
     @FXML
     private Label weight;
     @FXML
+    private Label bmi;
+    @FXML
     private Label bloodType;
     @FXML
     private FlowPane tags;
@@ -69,6 +71,7 @@ public class PatientCard extends UiPart<Region> {
         email.setText(patient.getEmail().value);
         height.setText(patient.getHeight().value + Height.HEIGHT_UNIT);
         weight.setText(patient.getWeight().value + Weight.WEIGHT_UNIT);
+        bmi.setText(patient.getBmi().value);
         bloodType.setText(patient.getBloodType().bloodType.label);
         patient.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
