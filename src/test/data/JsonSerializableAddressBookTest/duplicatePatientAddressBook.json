@@ -1,0 +1,24 @@
+{
+  "patients": [ {
+    "ic": "S7777777R",
+    "name": "Alice Pauline",
+    "dateOfBirth": "15-09-1997",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "height": "174",
+    "weight": "50.1",
+    "bloodType": "B+",
+    "tagged": [ "friends" ]
+  }, {
+    "ic": "S7777777R",
+    "name": "Alice Pauline",
+    "dateOfBirth": "15-09-1997",
+    "phone": "94351253",
+    "email": "pauline@example.com",
+    "address": "4th street",
+    "height": "174",
+    "weight": "50.1",
+    "bloodType": "B+"
+  } ]
+}
