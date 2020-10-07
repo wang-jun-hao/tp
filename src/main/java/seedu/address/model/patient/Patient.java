@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
@@ -20,21 +21,22 @@ public class Patient {
     private final Name name;
     private final DateOfBirth dateOfBirth;
     private final Phone phone;
-    private final Email email;
+    private final Optional<Email> email;
 
     // Data fields
-    private final Address address;
-    private final Height height;
-    private final Weight weight;
-    private final Bmi bmi;
-    private final BloodType bloodType;
+    private final Optional<Address> address;
+    private final Optional<Height> height;
+    private final Optional<Weight> weight;
+    private final Optional<Bmi> bmi;
+    private final Optional<BloodType> bloodType;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Patient(Ic ic, Name name, DateOfBirth dateOfBirth, Phone phone, Email email, Address address, Height height,
-                   Weight weight, BloodType bloodType, Set<Tag> tags) {
+    public Patient(Ic ic, Name name, DateOfBirth dateOfBirth, Phone phone, Optional<Email> email,
+                   Optional<Address> address, Optional<Height> height, Optional<Weight> weight,
+                   Optional<BloodType> bloodType, Set<Tag> tags) {
         requireAllNonNull(ic, name, dateOfBirth, phone, email, address, height, weight, bloodType, tags);
         this.ic = ic;
         this.name = name;
@@ -44,9 +46,14 @@ public class Patient {
         this.address = address;
         this.height = height;
         this.weight = weight;
-        this.bmi = new Bmi(weight, height);
         this.bloodType = bloodType;
         this.tags.addAll(tags);
+
+        if (height.isEmpty() || weight.isEmpty()) {
+            this.bmi = Optional.empty();
+        } else {
+            this.bmi = Optional.of(new Bmi(weight.get(), height.get()));
+        }
     }
 
     /**
@@ -54,8 +61,9 @@ public class Patient {
      * Overloaded constructor of Person with an additional bmi field that has already been computed to bypass
      * unnecessary re-computation of bmi.
      */
-    public Patient(Ic ic, Name name, DateOfBirth dateOfBirth, Phone phone, Email email, Address address, Height height,
-                  Weight weight, Bmi bmi, BloodType bloodType, Set<Tag> tags) {
+    public Patient(Ic ic, Name name, DateOfBirth dateOfBirth, Phone phone, Optional<Email> email,
+                   Optional<Address> address, Optional<Height> height, Optional<Weight> weight, Optional<Bmi> bmi,
+                   Optional<BloodType> bloodType, Set<Tag> tags) {
         requireAllNonNull(ic, name, dateOfBirth, phone, email, address, height, weight, bloodType, tags);
         this.ic = ic;
         this.name = name;
@@ -86,27 +94,27 @@ public class Patient {
         return phone;
     }
 
-    public Email getEmail() {
+    public Optional<Email> getEmail() {
         return email;
     }
 
-    public Address getAddress() {
+    public Optional<Address> getAddress() {
         return address;
     }
 
-    public Height getHeight() {
+    public Optional<Height> getHeight() {
         return height;
     }
 
-    public Weight getWeight() {
+    public Optional<Weight> getWeight() {
         return weight;
     }
 
-    public Bmi getBmi() {
+    public Optional<Bmi> getBmi() {
         return bmi;
     }
 
-    public BloodType getBloodType() {
+    public Optional<BloodType> getBloodType() {
         return bloodType;
     }
 

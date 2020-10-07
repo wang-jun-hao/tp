@@ -112,11 +112,12 @@ public class EditCommand extends Command {
         Name updatedName = editPatientDescriptor.getName().orElse(patientToEdit.getName());
         DateOfBirth updatedDateOfBirth = editPatientDescriptor.getDateOfBirth().orElse(patientToEdit.getDateOfBirth());
         Phone updatedPhone = editPatientDescriptor.getPhone().orElse(patientToEdit.getPhone());
-        Email updatedEmail = editPatientDescriptor.getEmail().orElse(patientToEdit.getEmail());
-        Address updatedAddress = editPatientDescriptor.getAddress().orElse(patientToEdit.getAddress());
-        Height updatedHeight = editPatientDescriptor.getHeight().orElse(patientToEdit.getHeight());
-        Weight updatedWeight = editPatientDescriptor.getWeight().orElse(patientToEdit.getWeight());
-        BloodType updatedBloodType = editPatientDescriptor.getBloodType().orElse(patientToEdit.getBloodType());
+        Optional<Email> updatedEmail = editPatientDescriptor.getEmail().orElse(patientToEdit.getEmail());
+        Optional<Address> updatedAddress = editPatientDescriptor.getAddress().orElse(patientToEdit.getAddress());
+        Optional<Height> updatedHeight = editPatientDescriptor.getHeight().orElse(patientToEdit.getHeight());
+        Optional<Weight> updatedWeight = editPatientDescriptor.getWeight().orElse(patientToEdit.getWeight());
+        Optional<BloodType> updatedBloodType = editPatientDescriptor.getBloodType()
+                .orElse(patientToEdit.getBloodType());
         Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
 
         return new Patient(updatedIc, updatedName, updatedDateOfBirth, updatedPhone, updatedEmail, updatedAddress,
@@ -150,11 +151,11 @@ public class EditCommand extends Command {
         private Name name;
         private DateOfBirth dateOfBirth;
         private Phone phone;
-        private Email email;
-        private Address address;
-        private Height height;
-        private Weight weight;
-        private BloodType bloodType;
+        private Optional<Email> email;
+        private Optional<Address> address;
+        private Optional<Height> height;
+        private Optional<Weight> weight;
+        private Optional<BloodType> bloodType;
         private Set<Tag> tags;
 
         public EditPatientDescriptor() {}
@@ -216,43 +217,43 @@ public class EditCommand extends Command {
             return Optional.ofNullable(phone);
         }
 
-        public void setEmail(Email email) {
+        public void setEmail(Optional<Email> email) {
             this.email = email;
         }
 
-        public Optional<Email> getEmail() {
+        public Optional<Optional<Email>> getEmail() {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
+        public void setAddress(Optional<Address> address) {
             this.address = address;
         }
 
-        public Optional<Address> getAddress() {
+        public Optional<Optional<Address>> getAddress() {
             return Optional.ofNullable(address);
         }
 
-        public void setHeight(Height height) {
+        public void setHeight(Optional<Height> height) {
             this.height = height;
         }
 
-        public Optional<Height> getHeight() {
+        public Optional<Optional<Height>> getHeight() {
             return Optional.ofNullable(height);
         }
 
-        public void setWeight(Weight weight) {
+        public void setWeight(Optional<Weight> weight) {
             this.weight = weight;
         }
 
-        public Optional<Weight> getWeight() {
+        public Optional<Optional<Weight>> getWeight() {
             return Optional.ofNullable(weight);
         }
 
-        public void setBloodType(BloodType bloodType) {
+        public void setBloodType(Optional<BloodType> bloodType) {
             this.bloodType = bloodType;
         }
 
-        public Optional<BloodType> getBloodType() {
+        public Optional<Optional<BloodType>> getBloodType() {
             return Optional.ofNullable(bloodType);
         }
 
