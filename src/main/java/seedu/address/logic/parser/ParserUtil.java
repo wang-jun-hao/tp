@@ -9,15 +9,15 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.BloodType;
-import seedu.address.model.person.DateOfBirth;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Height;
-import seedu.address.model.person.Ic;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Weight;
+import seedu.address.model.patient.Address;
+import seedu.address.model.patient.BloodType;
+import seedu.address.model.patient.DateOfBirth;
+import seedu.address.model.patient.Email;
+import seedu.address.model.patient.Height;
+import seedu.address.model.patient.Ic;
+import seedu.address.model.patient.Name;
+import seedu.address.model.patient.Phone;
+import seedu.address.model.patient.Weight;
 import seedu.address.model.tag.Tag;
 
 /**
