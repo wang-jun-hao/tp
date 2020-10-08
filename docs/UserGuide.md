@@ -64,6 +64,8 @@ Format: `help`
 
 Adds a patient to the system.
 
+IC, Name, Date of Birth and Phone Number are compulsory fields while the rest are optional.
+
 Format: 
 
 `add i/IC n/NAME d/DATE_OF_BIRTH p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE]`
