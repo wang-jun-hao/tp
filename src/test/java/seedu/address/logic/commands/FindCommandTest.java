@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_PATIENT_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.TypicalPatients.ALICE;
@@ -91,13 +92,21 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywordsMultipleFields_multiplePatientsFound() {
         // name field
-        String expectedMessage = String.format(MESSAGE_PATIENT_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_PATIENT_LISTED_OVERVIEW, 2);
         FieldContainsKeywordsPredicate predicate1 = prepareNamePredicate("Kurz Elle Kunz Pauline");
-        FieldContainsKeywordsPredicate predicate2 = prepareIcPredicate("S9876543W F7654321Q S9777777R");
-        FindCommand command = new FindCommand(Arrays.asList(predicate1, predicate2));
-        expectedModel.updateFilteredPatientList(predicate1.and(predicate2));
+        FieldContainsKeywordsPredicate predicate2 = prepareIcPredicate("S");
+        FieldContainsKeywordsPredicate predicate3 = prepareHeightPredicate("162 174");
+        FindCommand command = new FindCommand(Arrays.asList(predicate1, predicate2, predicate3));
+        expectedModel.updateFilteredPatientList(predicate1.and(predicate2).and(predicate3));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, CARL, ELLE), model.getFilteredPatientList());
+        assertEquals(Arrays.asList(ALICE, CARL), model.getFilteredPatientList());
+    }
+
+    /**
+     * Parses {@code userInput} into a {@code FieldContainsKeywordsPredicate} for the height field.
+     */
+    private FieldContainsKeywordsPredicate prepareHeightPredicate(String userInput) {
+        return new FieldContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")), PREFIX_HEIGHT);
     }
 
     /**
