@@ -15,7 +15,6 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.Prefix;
-import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Tests that a {@code Patient}'s field as specified by the prefix matches with the keyword given.
