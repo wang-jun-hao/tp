@@ -1,6 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_IC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -19,10 +23,19 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all patients whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Finds all patients whose fields matches with the specified keywords (case-insensitive) provided "
+            + "and displays them as a list with index numbers.\nAt least one search field must be specified.\n"
+            + "Parameters: "
+            + PREFIX_IC + "IC... "
+            + PREFIX_NAME + "NAME... "
+            + PREFIX_DOB + "DATE OF BIRTH... "
+            + PREFIX_PHONE + "PHONE... \n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_IC + "S9123456B T1234567G "
+            + PREFIX_NAME + "Alice Bernice Charlotte "
+            + PREFIX_DOB + "28-02-2012 "
+            + PREFIX_PHONE + "98765432 69204068 93210283";
 
     private final List<Predicate<Patient>> predicates;
 
