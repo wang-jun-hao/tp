@@ -109,7 +109,7 @@ public class Patient {
         if (getEmail().isPresent()) {
             return getEmail().get().toString();
         } else {
-            return "N/A";
+            return OPTIONAL_FIELD_EMPTY_MESSAGE;
         }
     }
 
