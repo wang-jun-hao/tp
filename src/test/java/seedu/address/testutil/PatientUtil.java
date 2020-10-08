@@ -77,12 +77,12 @@ public class PatientUtil {
             .ifPresent(dateOfBirth -> sb.append(PREFIX_DOB).append(dateOfBirth.value).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
 
-        descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.get().value).append(" "));
-        descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.get().value).append(" "));
-        descriptor.getHeight().ifPresent(height -> sb.append(PREFIX_HEIGHT).append(height.get().value).append(" "));
-        descriptor.getWeight().ifPresent(weight -> sb.append(PREFIX_WEIGHT).append(weight.get().value).append(" "));
+        descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
+        descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
+        descriptor.getHeight().ifPresent(height -> sb.append(PREFIX_HEIGHT).append(height.value).append(" "));
+        descriptor.getWeight().ifPresent(weight -> sb.append(PREFIX_WEIGHT).append(weight.value).append(" "));
         descriptor.getBloodType().ifPresent(bloodType -> sb.append(PREFIX_BLOOD_TYPE)
-                .append(bloodType.get().bloodType.label).append(" "));
+                .append(bloodType.bloodType.label).append(" "));
 
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();

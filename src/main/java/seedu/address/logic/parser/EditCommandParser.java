@@ -61,20 +61,20 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPatientDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editPatientDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL)));
+            editPatientDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL)).get());
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editPatientDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS)));
+            editPatientDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS)).get());
         }
         if (argMultimap.getValue(PREFIX_HEIGHT).isPresent()) {
-            editPatientDescriptor.setHeight(ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT)));
+            editPatientDescriptor.setHeight(ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT)).get());
         }
         if (argMultimap.getValue(PREFIX_WEIGHT).isPresent()) {
-            editPatientDescriptor.setWeight(ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT)));
+            editPatientDescriptor.setWeight(ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT)).get());
         }
         if (argMultimap.getValue(PREFIX_BLOOD_TYPE).isPresent()) {
             editPatientDescriptor.setBloodType(ParserUtil
-                    .parseBloodType(argMultimap.getValue(PREFIX_BLOOD_TYPE)));
+                    .parseBloodType(argMultimap.getValue(PREFIX_BLOOD_TYPE)).get());
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPatientDescriptor::setTags);
 
