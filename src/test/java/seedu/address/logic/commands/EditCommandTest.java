@@ -80,7 +80,7 @@ public class EditCommandTest {
         Index indexLastPatient = Index.fromOneBased(model.getFilteredPatientList().size());
         Patient lastPatient = model.getFilteredPatientList().get(indexLastPatient.getZeroBased());
 
-        Height heightOfLastPatient = lastPatient.getHeight();
+        Height heightOfLastPatient = lastPatient.getHeight().get();
         Bmi expectedBmi = new Bmi(new Weight(VALID_WEIGHT_BOB), heightOfLastPatient);
 
         PatientBuilder patientInList = new PatientBuilder(lastPatient);
@@ -103,7 +103,7 @@ public class EditCommandTest {
         Index indexLastPatient = Index.fromOneBased(model.getFilteredPatientList().size());
         Patient lastPatient = model.getFilteredPatientList().get(indexLastPatient.getZeroBased());
 
-        Weight weightOfLastPatient = lastPatient.getWeight();
+        Weight weightOfLastPatient = lastPatient.getWeight().get();
         Bmi expectedBmi = new Bmi(weightOfLastPatient, new Height(VALID_HEIGHT_BOB));
 
         PatientBuilder patientInList = new PatientBuilder(lastPatient);

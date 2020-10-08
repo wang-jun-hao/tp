@@ -1,8 +1,11 @@
 package seedu.address.storage;
 
+import static seedu.address.model.patient.Patient.OPTIONAL_FIELD_EMPTY_MESSAGE;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -75,12 +78,49 @@ class JsonAdaptedPatient {
         name = source.getName().fullName;
         dateOfBirth = source.getDateOfBirth().value;
         phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
-        height = source.getHeight().value;
-        weight = source.getWeight().value;
-        bmi = source.getBmi().value;
-        bloodType = source.getBloodType().bloodType.label;
+
+        // email
+        if (source.getEmail().isPresent()) {
+            email = source.stringEmail();
+        } else {
+            email = OPTIONAL_FIELD_EMPTY_MESSAGE;
+        }
+
+        // address
+        if (source.getAddress().isPresent()) {
+            address = source.stringAddress();
+        } else {
+            address = OPTIONAL_FIELD_EMPTY_MESSAGE;
+        }
+
+        // height
+        if (source.getHeight().isPresent()) {
+            height = source.stringHeight();
+        } else {
+            height = OPTIONAL_FIELD_EMPTY_MESSAGE;
+        }
+
+        // weight
+        if (source.getWeight().isPresent()) {
+            weight = source.stringWeight();
+        } else {
+            weight = OPTIONAL_FIELD_EMPTY_MESSAGE;
+        }
+
+        // bmi
+        if (source.getBmi().isPresent()) {
+            bmi = source.stringBmi();
+        } else {
+            bmi = OPTIONAL_FIELD_EMPTY_MESSAGE;
+        }
+
+        // bloodtype
+        if (source.getBloodType().isPresent()) {
+            bloodType = source.stringBloodType();
+        } else {
+            bloodType = OPTIONAL_FIELD_EMPTY_MESSAGE;
+        }
+
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -130,54 +170,65 @@ class JsonAdaptedPatient {
         }
         final Phone modelPhone = new Phone(phone);
 
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
-        }
-        if (!Email.isValidEmail(email)) {
+        final Optional<Email> modelEmail;
+
+        if (email.equals(OPTIONAL_FIELD_EMPTY_MESSAGE)) {
+            modelEmail = Optional.empty();
+        } else if (!Email.isValidEmail(email)) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+        } else {
+            modelEmail = Optional.of(new Email(email));
         }
-        final Email modelEmail = new Email(email);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
-        if (!Address.isValidAddress(address)) {
+        final Optional<Address> modelAddress;
+
+        if (address.equals(OPTIONAL_FIELD_EMPTY_MESSAGE)) {
+            modelAddress = Optional.empty();
+        } else if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        } else {
+            modelAddress = Optional.of(new Address(address));
         }
-        final Address modelAddress = new Address(address);
 
-        if (height == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Height.class.getSimpleName()));
-        }
-        if (!Height.isValidHeight(height)) {
+        final Optional<Height> modelHeight;
+
+        if (height.equals(OPTIONAL_FIELD_EMPTY_MESSAGE)) {
+            modelHeight = Optional.empty();
+        } else if (!Height.isValidHeight(height)) {
             throw new IllegalValueException(Height.MESSAGE_CONSTRAINTS);
+        } else {
+            modelHeight = Optional.of(new Height(height));
         }
-        final Height modelHeight = new Height(height);
 
-        if (weight == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Weight.class.getSimpleName()));
-        }
-        if (!Weight.isValidWeight(weight)) {
+        final Optional<Weight> modelWeight;
+
+        if (weight.equals(OPTIONAL_FIELD_EMPTY_MESSAGE)) {
+            modelWeight = Optional.empty();
+        } else if (!Weight.isValidWeight(weight)) {
             throw new IllegalValueException(Weight.MESSAGE_CONSTRAINTS);
+        } else {
+            modelWeight = Optional.of(new Weight(weight));
         }
-        final Weight modelWeight = new Weight(weight);
 
-        if (bmi == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Bmi.class.getSimpleName()));
-        }
-        if (!Bmi.isValidBmi(bmi)) {
+        final Optional<Bmi> modelBmi;
+
+        if (bmi.equals(OPTIONAL_FIELD_EMPTY_MESSAGE)) {
+            modelBmi = Optional.empty();
+        } else if (!Bmi.isValidBmi(bmi)) {
             throw new IllegalValueException(Bmi.MESSAGE_CONSTRAINTS);
+        } else {
+            modelBmi = Optional.of(new Bmi(bmi));
         }
-        final Bmi modelBmi = new Bmi(bmi);
 
-        if (bloodType == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    BloodType.class.getSimpleName()));
-        }
-        if (!BloodType.isValidBloodType(bloodType)) {
+        final Optional<BloodType> modelBloodType;
+
+        if (bloodType.equals(OPTIONAL_FIELD_EMPTY_MESSAGE)) {
+            modelBloodType = Optional.empty();
+        } else if (!BloodType.isValidBloodType(bloodType)) {
             throw new IllegalValueException(BloodType.MESSAGE_CONSTRAINTS);
+        } else {
+            modelBloodType = Optional.of(new BloodType(bloodType));
         }
-        final BloodType modelBloodType = new BloodType(bloodType);
 
         final Set<Tag> modelTags = new HashSet<>(patientTags);
         return new Patient(modelIc, modelName, modelDateOfBirth, modelPhone, modelEmail, modelAddress, modelHeight,

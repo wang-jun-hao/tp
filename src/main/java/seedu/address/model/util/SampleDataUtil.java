@@ -1,6 +1,7 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -25,29 +26,32 @@ public class SampleDataUtil {
     public static Patient[] getSamplePatients() {
         return new Patient[] {
             new Patient(new Ic("S9123456A"), new Name("Alex Yeoh"), new DateOfBirth("15-05-1991"),
-                    new Phone("87438807"), new Email("alexyeoh@example.com"),
-                    new Address("Blk 30 Geylang Street 29, #06-40"), new Height("173"), new Weight("67.4"),
-                    new BloodType("A+"), getTagSet("friends")),
+                    new Phone("87438807"), Optional.of(new Email("alexyeoh@example.com")),
+                    Optional.of(new Address("Blk 30 Geylang Street 29, #06-40")), Optional.of(new Height("173")),
+                    Optional.of(new Weight("67.4")), Optional.of(new BloodType("A+")), getTagSet("friends")),
             new Patient(new Ic("S8786858D"), new Name("Bernice Yu"), new DateOfBirth("17-09-1987"),
-                    new Phone("99272758"), new Email("berniceyu@example.com"),
-                    new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Height("166"), new Weight("48.2"),
-                    new BloodType("B+"), getTagSet("colleagues", "friends")),
+                    new Phone("99272758"), Optional.of(new Email("berniceyu@example.com")),
+                    Optional.of(new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18")),
+                    Optional.of(new Height("166")), Optional.of(new Weight("48.2")),
+                    Optional.of(new BloodType("B+")), getTagSet("colleagues", "friends")),
             new Patient(new Ic("T1234567G"), new Name("Charlotte Oliveiro"), new DateOfBirth("28-02-2012"),
-                    new Phone("93210283"), new Email("charlotte@example.com"),
-                    new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new Height("175"), new Weight("58.5"),
-                    new BloodType("A+"), getTagSet("neighbours")),
+                    new Phone("93210283"), Optional.of(new Email("charlotte@example.com")),
+                    Optional.of(new Address("Blk 11 Ang Mo Kio Street 74, #11-04")), Optional.of(new Height("175")),
+                    Optional.of(new Weight("58.5")), Optional.of(new BloodType("A+")), getTagSet("neighbours")),
             new Patient(new Ic("F7654321K"), new Name("David Li"), new DateOfBirth("20-12-1976"),
-                    new Phone("91031282"), new Email("lidavid@example.com"),
-                    new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new Height("169"), new Weight("64.9"),
-                    new BloodType("O+"), getTagSet("family")),
+                    new Phone("91031282"), Optional.of(new Email("lidavid@example.com")),
+                    Optional.of(new Address("Blk 436 Serangoon Gardens Street 26, #16-43")),
+                    Optional.of(new Height("169")), Optional.of(new Weight("64.9")),
+                    Optional.of(new BloodType("O+")), getTagSet("family")),
             new Patient(new Ic("G1928374R"), new Name("Irfan Ibrahim"), new DateOfBirth("11-04-2000"),
-                    new Phone("92492021"), new Email("irfan@example.com"),
-                    new Address("Blk 47 Tampines Street 20, #17-35"), new Height("180"), new Weight("80.5"),
-                    new BloodType("AB+"), getTagSet("classmates")),
+                    new Phone("92492021"), Optional.of(new Email("irfan@example.com")),
+                    Optional.of(new Address("Blk 47 Tampines Street 20, #17-35")), Optional.of(new Height("180")),
+                    Optional.of(new Weight("80.5")), Optional.of(new BloodType("AB+")),
+                    getTagSet("classmates")),
             new Patient(new Ic("S9182736Q"), new Name("Roy Balakrishnan"), new DateOfBirth("14-06-1991"),
-                    new Phone("92624417"), new Email("royb@example.com"),
-                    new Address("Blk 45 Aljunied Street 85, #11-31"), new Height("165"), new Weight("60.6"),
-                    new BloodType("A-"), getTagSet("colleagues"))
+                    new Phone("92624417"), Optional.of(new Email("royb@example.com")),
+                    Optional.of(new Address("Blk 45 Aljunied Street 85, #11-31")), Optional.of(new Height("165")),
+                    Optional.of(new Weight("60.6")), Optional.of(new BloodType("A-")), getTagSet("colleagues"))
         };
     }
 

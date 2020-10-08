@@ -41,11 +41,11 @@ public class EditPatientDescriptorBuilder {
         descriptor.setName(patient.getName());
         descriptor.setDateOfBirth(patient.getDateOfBirth());
         descriptor.setPhone(patient.getPhone());
-        descriptor.setEmail(patient.getEmail());
-        descriptor.setAddress(patient.getAddress());
-        descriptor.setHeight(patient.getHeight());
-        descriptor.setWeight(patient.getWeight());
-        descriptor.setBloodType(patient.getBloodType());
+        descriptor.setEmail(patient.getEmail().get());
+        descriptor.setAddress(patient.getAddress().get());
+        descriptor.setHeight(patient.getHeight().get());
+        descriptor.setWeight(patient.getWeight().get());
+        descriptor.setBloodType(patient.getBloodType().get());
         descriptor.setTags(patient.getTags());
     }
 

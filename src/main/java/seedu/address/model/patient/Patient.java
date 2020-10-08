@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
@@ -15,26 +16,29 @@ import seedu.address.model.tag.Tag;
  */
 public class Patient {
 
+    public static final String OPTIONAL_FIELD_EMPTY_MESSAGE = "N/A";
+
     // Identity fields
     private final Ic ic;
     private final Name name;
     private final DateOfBirth dateOfBirth;
     private final Phone phone;
-    private final Email email;
+    private final Optional<Email> email;
 
     // Data fields
-    private final Address address;
-    private final Height height;
-    private final Weight weight;
-    private final Bmi bmi;
-    private final BloodType bloodType;
+    private final Optional<Address> address;
+    private final Optional<Height> height;
+    private final Optional<Weight> weight;
+    private final Optional<Bmi> bmi;
+    private final Optional<BloodType> bloodType;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Patient(Ic ic, Name name, DateOfBirth dateOfBirth, Phone phone, Email email, Address address, Height height,
-                   Weight weight, BloodType bloodType, Set<Tag> tags) {
+    public Patient(Ic ic, Name name, DateOfBirth dateOfBirth, Phone phone, Optional<Email> email,
+                   Optional<Address> address, Optional<Height> height, Optional<Weight> weight,
+                   Optional<BloodType> bloodType, Set<Tag> tags) {
         requireAllNonNull(ic, name, dateOfBirth, phone, email, address, height, weight, bloodType, tags);
         this.ic = ic;
         this.name = name;
@@ -44,9 +48,14 @@ public class Patient {
         this.address = address;
         this.height = height;
         this.weight = weight;
-        this.bmi = new Bmi(weight, height);
         this.bloodType = bloodType;
         this.tags.addAll(tags);
+
+        if (height.isEmpty() || weight.isEmpty()) {
+            this.bmi = Optional.empty();
+        } else {
+            this.bmi = Optional.of(new Bmi(weight.get(), height.get()));
+        }
     }
 
     /**
@@ -54,8 +63,9 @@ public class Patient {
      * Overloaded constructor of Person with an additional bmi field that has already been computed to bypass
      * unnecessary re-computation of bmi.
      */
-    public Patient(Ic ic, Name name, DateOfBirth dateOfBirth, Phone phone, Email email, Address address, Height height,
-                  Weight weight, Bmi bmi, BloodType bloodType, Set<Tag> tags) {
+    public Patient(Ic ic, Name name, DateOfBirth dateOfBirth, Phone phone, Optional<Email> email,
+                   Optional<Address> address, Optional<Height> height, Optional<Weight> weight, Optional<Bmi> bmi,
+                   Optional<BloodType> bloodType, Set<Tag> tags) {
         requireAllNonNull(ic, name, dateOfBirth, phone, email, address, height, weight, bloodType, tags);
         this.ic = ic;
         this.name = name;
@@ -86,28 +96,106 @@ public class Patient {
         return phone;
     }
 
-    public Email getEmail() {
+    public Optional<Email> getEmail() {
         return email;
     }
 
-    public Address getAddress() {
+    /**
+     * Represents the email of the patient for the UI to display.
+     * @return a string representing the email of the patient or N/A if there
+     * is no email.
+     */
+    public String stringEmail() {
+        if (getEmail().isPresent()) {
+            return getEmail().get().toString();
+        } else {
+            return OPTIONAL_FIELD_EMPTY_MESSAGE;
+        }
+    }
+
+    public Optional<Address> getAddress() {
         return address;
     }
 
-    public Height getHeight() {
+    /**
+     * Represents the address of the patient for the UI to display.
+     * @return a string representing the address of the patient or N/A if there
+     * is no address.
+     */
+    public String stringAddress() {
+        if (getAddress().isPresent()) {
+            return getAddress().get().toString();
+        } else {
+            return OPTIONAL_FIELD_EMPTY_MESSAGE;
+        }
+    }
+
+    public Optional<Height> getHeight() {
         return height;
     }
 
-    public Weight getWeight() {
+    /**
+     * Represents the height of the patient for the UI to display.
+     * @return a string representing the height of the patient or N/A if there
+     * is no height.
+     */
+    public String stringHeight() {
+        if (getHeight().isPresent()) {
+            return getHeight().get().toString();
+        } else {
+            return OPTIONAL_FIELD_EMPTY_MESSAGE;
+        }
+    }
+
+    public Optional<Weight> getWeight() {
         return weight;
     }
 
-    public Bmi getBmi() {
+    /**
+     * Represents the weight of the patient for the UI to display.
+     * @return a string representing the weight of the patient or N/A if there
+     * is no weight.
+     */
+    public String stringWeight() {
+        if (getWeight().isPresent()) {
+            return getWeight().get().toString();
+        } else {
+            return OPTIONAL_FIELD_EMPTY_MESSAGE;
+        }
+    }
+
+    public Optional<Bmi> getBmi() {
         return bmi;
     }
 
-    public BloodType getBloodType() {
+    /**
+     * Represents the bmi of the patient for the UI to display.
+     * @return a string representing the bmi of the patient or N/A if there
+     * is no bmi.
+     */
+    public String stringBmi() {
+        if (getBmi().isPresent()) {
+            return getBmi().get().toString();
+        } else {
+            return OPTIONAL_FIELD_EMPTY_MESSAGE;
+        }
+    }
+
+    public Optional<BloodType> getBloodType() {
         return bloodType;
+    }
+
+    /**
+     * Represents the bloodtype of the patient for the UI to display.
+     * @return a string representing the bloodtype of the patient or N/A if there
+     * is no bloodtype.
+     */
+    public String stringBloodType() {
+        if (getBloodType().isPresent()) {
+            return getBloodType().get().toString();
+        } else {
+            return OPTIONAL_FIELD_EMPTY_MESSAGE;
+        }
     }
 
     /**
@@ -177,17 +265,17 @@ public class Patient {
                 .append(" Phone: ")
                 .append(getPhone())
                 .append(" Email: ")
-                .append(getEmail())
+                .append(stringEmail())
                 .append(" Address: ")
-                .append(getAddress())
+                .append(stringAddress())
                 .append(" Height: ")
-                .append(getHeight())
+                .append(stringHeight())
                 .append(" Weight: ")
-                .append(getWeight())
+                .append(stringWeight())
                 .append(" BMI: ")
-                .append(getBmi())
+                .append(stringBmi())
                 .append(" Blood type: ")
-                .append(getBloodType())
+                .append(stringBloodType())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
