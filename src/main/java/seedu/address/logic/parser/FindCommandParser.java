@@ -43,7 +43,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 ArgumentTokenizer.tokenize(args, SUPPORTED_SEARCH_PREFIXES);
 
         boolean isArgumentInvalid = anyPrefixEmpty(argMultimap)
-                || allPrefixesNotProvided(argMultimap)
+                || noPrefixesSpecified(argMultimap)
                 || !argMultimap.getPreamble().isEmpty();
         if (isArgumentInvalid) {
             throw new ParseException(
@@ -60,9 +60,9 @@ public class FindCommandParser implements Parser<FindCommand> {
     }
 
     /**
-     * Returns true if all of the supported prefixes are not specified by the user.
+     * Returns true if the prefixes by the user are all unsupported.
      */
-    private boolean allPrefixesNotProvided(ArgumentMultimap argumentMultimap) {
+    private boolean noPrefixesSpecified(ArgumentMultimap argumentMultimap) {
         return Stream.of(SUPPORTED_SEARCH_PREFIXES).allMatch(prefix -> argumentMultimap.getValue(prefix).isEmpty());
     }
 

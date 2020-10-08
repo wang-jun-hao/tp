@@ -23,6 +23,9 @@ public class FieldContainsKeywordsPredicate implements Predicate<Patient> {
     private final List<String> keywords;
     private final Prefix prefix;
 
+    /**
+     * Creates a predicate for a patient field based on the given prefix and keywords.
+     */
     public FieldContainsKeywordsPredicate(List<String> keywords, Prefix prefix) {
         this.keywords = keywords;
         this.prefix = prefix;
@@ -43,6 +46,7 @@ public class FieldContainsKeywordsPredicate implements Predicate<Patient> {
     }
 
     private String getField(Patient patient) {
+        // switch statement cannot be used since Prefix is not an enum
         if (PREFIX_IC.equals(prefix)) {
             return patient.getIc().ic;
         } else if (PREFIX_NAME.equals(prefix)) {
@@ -60,7 +64,7 @@ public class FieldContainsKeywordsPredicate implements Predicate<Patient> {
         } else if (PREFIX_ADDRESS.equals(prefix)) {
             return patient.getAddress().value;
         } else if (PREFIX_BLOOD_TYPE.equals(prefix)) {
-            return patient.getDateOfBirth().value;
+            return patient.getBloodType().bloodType.label;
         }
         return null;
     }
