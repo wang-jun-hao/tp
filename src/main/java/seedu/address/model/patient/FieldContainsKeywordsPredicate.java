@@ -56,15 +56,15 @@ public class FieldContainsKeywordsPredicate implements Predicate<Patient> {
         } else if (PREFIX_PHONE.equals(prefix)) {
             return patient.getPhone().value;
         } else if (PREFIX_EMAIL.equals(prefix)) {
-            return patient.getEmail().value;
+            return patient.getEmail().map(Email::toString).orElse("");
         } else if (PREFIX_HEIGHT.equals(prefix)) {
-            return patient.getHeight().value;
+            return patient.getHeight().map(Height::toString).orElse("");
         } else if (PREFIX_WEIGHT.equals(prefix)) {
-            return patient.getWeight().value;
+            return patient.getWeight().map(Weight::toString).orElse("");
         } else if (PREFIX_ADDRESS.equals(prefix)) {
-            return patient.getAddress().value;
+            return patient.getAddress().map(Address::toString).orElse("");
         } else if (PREFIX_BLOOD_TYPE.equals(prefix)) {
-            return patient.getBloodType().bloodType.label;
+            return patient.getBloodType().map(BloodType::toString).orElse("");
         }
         return null;
     }
