@@ -1,9 +1,14 @@
 package seedu.address.model.patient;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOOD_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -46,6 +51,16 @@ public class FieldContainsKeywordsPredicate implements Predicate<Patient> {
             return patient.getDateOfBirth().value;
         } else if (PREFIX_PHONE.equals(prefix)) {
             return patient.getPhone().value;
+        } else if (PREFIX_EMAIL.equals(prefix)) {
+            return patient.getEmail().value;
+        } else if (PREFIX_HEIGHT.equals(prefix)) {
+            return patient.getHeight().value;
+        } else if (PREFIX_WEIGHT.equals(prefix)) {
+            return patient.getWeight().value;
+        } else if (PREFIX_ADDRESS.equals(prefix)) {
+            return patient.getAddress().value;
+        } else if (PREFIX_BLOOD_TYPE.equals(prefix)) {
+            return patient.getDateOfBirth().value;
         }
         return null;
     }

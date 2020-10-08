@@ -1,10 +1,15 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOOD_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,7 +29,9 @@ import seedu.address.model.patient.Patient;
 public class FindCommandParser implements Parser<FindCommand> {
     // array of prefixes currently supported by the find command.
     public static final Prefix[] SUPPORTED_SEARCH_PREFIXES =
-            new Prefix[]{ PREFIX_NAME, PREFIX_IC, PREFIX_DOB, PREFIX_PHONE };
+            new Prefix[]{
+                PREFIX_NAME, PREFIX_IC, PREFIX_DOB, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_HEIGHT,
+                PREFIX_WEIGHT, PREFIX_ADDRESS, PREFIX_BLOOD_TYPE};
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
