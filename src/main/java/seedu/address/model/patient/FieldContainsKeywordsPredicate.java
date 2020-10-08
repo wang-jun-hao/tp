@@ -15,6 +15,7 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.Prefix;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Tests that a {@code Patient}'s field as specified by the prefix matches with the keyword given.
@@ -49,21 +50,29 @@ public class FieldContainsKeywordsPredicate implements Predicate<Patient> {
         // switch statement cannot be used since Prefix is not an enum
         if (PREFIX_IC.equals(prefix)) {
             return patient.getIc().ic;
-        } else if (PREFIX_NAME.equals(prefix)) {
+        }
+        if (PREFIX_NAME.equals(prefix)) {
             return patient.getName().fullName;
-        } else if (PREFIX_DOB.equals(prefix)) {
+        }
+        if (PREFIX_DOB.equals(prefix)) {
             return patient.getDateOfBirth().value;
-        } else if (PREFIX_PHONE.equals(prefix)) {
+        }
+        if (PREFIX_PHONE.equals(prefix)) {
             return patient.getPhone().value;
-        } else if (PREFIX_EMAIL.equals(prefix)) {
+        }
+        if (PREFIX_EMAIL.equals(prefix)) {
             return patient.getEmail().map(Email::toString).orElse("");
-        } else if (PREFIX_HEIGHT.equals(prefix)) {
+        }
+        if (PREFIX_HEIGHT.equals(prefix)) {
             return patient.getHeight().map(Height::toString).orElse("");
-        } else if (PREFIX_WEIGHT.equals(prefix)) {
+        }
+        if (PREFIX_WEIGHT.equals(prefix)) {
             return patient.getWeight().map(Weight::toString).orElse("");
-        } else if (PREFIX_ADDRESS.equals(prefix)) {
+        }
+        if (PREFIX_ADDRESS.equals(prefix)) {
             return patient.getAddress().map(Address::toString).orElse("");
-        } else if (PREFIX_BLOOD_TYPE.equals(prefix)) {
+        }
+        if (PREFIX_BLOOD_TYPE.equals(prefix)) {
             return patient.getBloodType().map(BloodType::toString).orElse("");
         }
         return null;
