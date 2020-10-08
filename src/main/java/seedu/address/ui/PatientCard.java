@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.model.patient.Patient.OPTIONAL_FIELD_EMPTY_MESSAGE;
+
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -18,7 +20,6 @@ import seedu.address.model.patient.Weight;
 public class PatientCard extends UiPart<Region> {
 
     private static final String FXML = "PatientListCard.fxml";
-    private static final String OPTIONAL_FIELD_EMPTY_MESSAGE = "N/A";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -71,42 +72,42 @@ public class PatientCard extends UiPart<Region> {
 
         // email
         if (patient.getEmail().isPresent()) {
-            email.setText(patient.getEmail().get().value);
+            email.setText(patient.stringEmail());
         } else {
             email.setText(OPTIONAL_FIELD_EMPTY_MESSAGE);
         }
 
         // address
         if (patient.getAddress().isPresent()) {
-            address.setText(patient.getAddress().get().value);
+            address.setText(patient.stringAddress());
         } else {
             address.setText(OPTIONAL_FIELD_EMPTY_MESSAGE);
         }
 
         // height
         if (patient.getHeight().isPresent()) {
-            height.setText(patient.getHeight().get().value + Height.HEIGHT_UNIT);
+            height.setText(patient.stringHeight() + Height.HEIGHT_UNIT);
         } else {
             height.setText(OPTIONAL_FIELD_EMPTY_MESSAGE);
         }
 
         // weight
         if (patient.getWeight().isPresent()) {
-            weight.setText(patient.getWeight().get().value + Weight.WEIGHT_UNIT);
+            weight.setText(patient.stringWeight() + Weight.WEIGHT_UNIT);
         } else {
             weight.setText(OPTIONAL_FIELD_EMPTY_MESSAGE);
         }
 
         // bmi
         if (patient.getBmi().isPresent()) {
-            bmi.setText(patient.getBmi().get().value);
+            bmi.setText(patient.stringBmi());
         } else {
             bmi.setText(OPTIONAL_FIELD_EMPTY_MESSAGE);
         }
 
         // bloodType
         if (patient.getBloodType().isPresent()) {
-            bloodType.setText(patient.getBloodType().get().bloodType.label);
+            bloodType.setText(patient.stringBloodType());
         } else {
             bloodType.setText(OPTIONAL_FIELD_EMPTY_MESSAGE);
         }

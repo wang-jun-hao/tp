@@ -40,12 +40,12 @@ public class JsonAdaptedPatientTest {
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_DOB = BENSON.getDateOfBirth().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
-    private static final String VALID_EMAIL = BENSON.getEmail().get().toString();
-    private static final String VALID_ADDRESS = BENSON.getAddress().get().toString();
-    private static final String VALID_HEIGHT = BENSON.getHeight().get().toString();
-    private static final String VALID_WEIGHT = BENSON.getWeight().get().toString();
-    private static final String VALID_BMI = BENSON.getBmi().get().toString();
-    private static final String VALID_BLOOD_TYPE = BENSON.getBloodType().get().toString();
+    private static final String VALID_EMAIL = BENSON.stringEmail();
+    private static final String VALID_ADDRESS = BENSON.stringAddress();
+    private static final String VALID_HEIGHT = BENSON.stringHeight();
+    private static final String VALID_WEIGHT = BENSON.stringWeight();
+    private static final String VALID_BMI = BENSON.stringBmi();
+    private static final String VALID_BLOOD_TYPE = BENSON.stringBloodType();
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());

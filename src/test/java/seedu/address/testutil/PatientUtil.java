@@ -41,23 +41,23 @@ public class PatientUtil {
         sb.append(PREFIX_PHONE + patient.getPhone().value + " ");
 
         if (patient.getEmail().isPresent()) {
-            sb.append(PREFIX_EMAIL + patient.getEmail().get().value + " ");
+            sb.append(PREFIX_EMAIL + patient.stringEmail() + " ");
         }
 
         if (patient.getAddress().isPresent()) {
-            sb.append(PREFIX_ADDRESS + patient.getAddress().get().value + " ");
+            sb.append(PREFIX_ADDRESS + patient.stringAddress() + " ");
         }
 
         if (patient.getHeight().isPresent()) {
-            sb.append(PREFIX_HEIGHT + patient.getHeight().get().value + " ");
+            sb.append(PREFIX_HEIGHT + patient.stringHeight() + " ");
         }
 
         if (patient.getWeight().isPresent()) {
-            sb.append(PREFIX_WEIGHT + patient.getWeight().get().value + " ");
+            sb.append(PREFIX_WEIGHT + patient.stringWeight() + " ");
         }
 
         if (patient.getBloodType().isPresent()) {
-            sb.append(PREFIX_BLOOD_TYPE + patient.getBloodType().get().bloodType.label + " ");
+            sb.append(PREFIX_BLOOD_TYPE + patient.stringBloodType() + " ");
         }
 
         patient.getTags().stream().forEach(

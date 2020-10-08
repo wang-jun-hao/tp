@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static seedu.address.model.patient.Patient.OPTIONAL_FIELD_EMPTY_MESSAGE;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -30,7 +32,6 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedPatient {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Patient's %s field is missing!";
-    public static final String OPTIONAL_FIELD_EMPTY_MESSAGE = "N/A";
 
     private final String ic;
     private final String name;
@@ -80,42 +81,42 @@ class JsonAdaptedPatient {
 
         // email
         if (source.getEmail().isPresent()) {
-            email = source.getEmail().get().value;
+            email = source.stringEmail();
         } else {
             email = OPTIONAL_FIELD_EMPTY_MESSAGE;
         }
 
         // address
         if (source.getAddress().isPresent()) {
-            address = source.getAddress().get().value;
+            address = source.stringAddress();
         } else {
             address = OPTIONAL_FIELD_EMPTY_MESSAGE;
         }
 
         // height
         if (source.getHeight().isPresent()) {
-            height = source.getHeight().get().value;
+            height = source.stringHeight();
         } else {
             height = OPTIONAL_FIELD_EMPTY_MESSAGE;
         }
 
         // weight
         if (source.getWeight().isPresent()) {
-            weight = source.getWeight().get().value;
+            weight = source.stringWeight();
         } else {
             weight = OPTIONAL_FIELD_EMPTY_MESSAGE;
         }
 
         // bmi
         if (source.getBmi().isPresent()) {
-            bmi = source.getBmi().get().value;
+            bmi = source.stringBmi();
         } else {
             bmi = OPTIONAL_FIELD_EMPTY_MESSAGE;
         }
 
         // bloodtype
         if (source.getBloodType().isPresent()) {
-            bloodType = source.getBloodType().get().bloodType.label;
+            bloodType = source.stringBloodType();
         } else {
             bloodType = OPTIONAL_FIELD_EMPTY_MESSAGE;
         }

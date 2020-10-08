@@ -16,6 +16,8 @@ import seedu.address.model.tag.Tag;
  */
 public class Patient {
 
+    public static final String OPTIONAL_FIELD_EMPTY_MESSAGE = "N/A";
+
     // Identity fields
     private final Ic ic;
     private final Name name;
@@ -124,7 +126,7 @@ public class Patient {
         if (getAddress().isPresent()) {
             return getAddress().get().toString();
         } else {
-            return "N/A";
+            return OPTIONAL_FIELD_EMPTY_MESSAGE;
         }
     }
 
@@ -141,7 +143,7 @@ public class Patient {
         if (getHeight().isPresent()) {
             return getHeight().get().toString();
         } else {
-            return "N/A";
+            return OPTIONAL_FIELD_EMPTY_MESSAGE;
         }
     }
 
@@ -158,7 +160,7 @@ public class Patient {
         if (getWeight().isPresent()) {
             return getWeight().get().toString();
         } else {
-            return "N/A";
+            return OPTIONAL_FIELD_EMPTY_MESSAGE;
         }
     }
 
@@ -175,7 +177,7 @@ public class Patient {
         if (getBmi().isPresent()) {
             return getBmi().get().toString();
         } else {
-            return "N/A";
+            return OPTIONAL_FIELD_EMPTY_MESSAGE;
         }
     }
 
@@ -192,7 +194,7 @@ public class Patient {
         if (getBloodType().isPresent()) {
             return getBloodType().get().toString();
         } else {
-            return "N/A";
+            return OPTIONAL_FIELD_EMPTY_MESSAGE;
         }
     }
 
