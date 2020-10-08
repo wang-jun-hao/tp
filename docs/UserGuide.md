@@ -86,14 +86,19 @@ Examples:
 
 ### Finding a patient by IC: `find` <a id="find-command"></a>
 
-Finds patient records by their IC.
+Finds patient records by their fields.
 
-Format: `find <IC of patient>`
 
+Format: `find [i/IC] [n/NAME] [d/DATE_OF_BIRTH] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE]`
+
+* At least one field must be specified for the command to be valid
 * The search is case-insensitive. e.g `S9123456A` will match `s9123456a`
-* The full IC must match e.g `S912345` will not match `S9123456A`
+* The search will match substrings e.g `S912345` will match `S9123456A`
+* Search will return all records that matches any of the keywords for each field e.g `n/Alice Bob` will return the records of all patients with name containing `Alice` or `Bob`
 
-Example: `find S9123456A` returns the patient record with IC S9123456A
+Examples: 
+* `find i/S9123456A` returns the patient record with IC `S9123456A`
+* `find n/Billy a/Clementi i/S99` returns the patient records with Name containing `Billy`, Address containing `Clementi` and IC containing `S99`
 
 ### Listing all patients: `list` <a id="list-command"></a>
 
@@ -129,7 +134,7 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add i/IC n/NAME d/DATE_OF_BIRTH p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE] ↵` <br> e.g.,<br>`add i/S9123456A n/Divakar d/29-02-2000 p/91234567` <br> `add i/T0123456Q n/Divakar d/29-02-2000 p/91234567 e/divakarmal@medibook.com a/NUS, Kent Ridge Drive h/178 w/75 b/O+`
 **Delete** | `delete <IC> ↵`<br> e.g., `delete G1234567S`
-**Find** | `find <IC> ↵`<br> e.g., `find G1234567S`
+**Find** | `find [i/IC] [n/NAME] [d/DATE_OF_BIRTH] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE] ↵`<br> e.g., <br> `find i/G1234567S`<br>`find n/Jack i/T00 dob/2000 h/17 a/Changi`
 **List** | `list ↵`
 **Exit** | `exit ↵`
 **Help** | `help ↵`

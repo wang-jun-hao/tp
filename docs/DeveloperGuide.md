@@ -300,10 +300,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. MediBook detects if the given IC is invalid.
+* 1a. MediBook detects an error in the syntax of the command.
     * 1a1. MediBook shows an error message.
-    * 1a2. User requests to find a specific patient by changing the input IC.
-    Steps 1a1-1a2 are repeated until the IC provided is valid.
+    * 1a2. User requests to find the patient again but with an updated syntax.
+    Steps 1a1-1a2 are repeated until the syntax of the command is correct.
     Use case resumes from step 2.
 
 **UC02 Delete a patient**
