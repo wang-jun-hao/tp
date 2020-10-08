@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -39,6 +39,7 @@ public class FindCommand extends Command {
         requireNonNull(model);
         Predicate<Patient> combinedPredicates = predicates.stream().reduce(x -> true, Predicate::and);
         model.updateFilteredPatientList(combinedPredicates);
+
         return new CommandResult(
                 String.format(Messages.MESSAGE_PATIENT_LISTED_OVERVIEW, model.getFilteredPatientList().size()));
     }
@@ -47,6 +48,18 @@ public class FindCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FindCommand // instanceof handles nulls
-                && Arrays.equals(predicates.toArray(), ((FindCommand) other).predicates.toArray())); // state check
+                && arePredicatesEqual(predicates, ((FindCommand) other).predicates)); // state check
+    }
+
+    /**
+     * Checks if the two lists contains the same predicates regardless of order.
+     */
+    private boolean arePredicatesEqual(List<Predicate<Patient>> predicates1, List<Predicate<Patient>> predicates2) {
+        if (predicates1.size() != predicates2.size()) {
+            return false;
+        }
+        HashSet<Predicate<Patient>> predicatesSet = new HashSet<>(predicates1);
+        predicatesSet.removeAll(predicates2);
+        return predicatesSet.isEmpty();
     }
 }

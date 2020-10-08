@@ -1,16 +1,18 @@
 package seedu.address.model.patient;
 
-import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.parser.Prefix;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_IC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.util.List;
 import java.util.function.Predicate;
 
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.parser.Prefix;
 
 /**
- * Tests that a {@code Patient}'s field as specified by the prefix matches the keyword given.
+ * Tests that a {@code Patient}'s field as specified by the prefix matches with the keyword given.
  */
 public class FieldContainsKeywordsPredicate implements Predicate<Patient> {
     private final List<String> keywords;
