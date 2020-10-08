@@ -98,24 +98,102 @@ public class Patient {
         return email;
     }
 
+    /**
+     * Represents the email of the patient for the UI to display.
+     * @return a string representing the email of the patient or N/A if there
+     * is no email.
+     */
+    public String stringEmail() {
+        if (getEmail().isPresent()) {
+            return getEmail().get().toString();
+        } else {
+            return "N/A";
+        }
+    }
+
     public Optional<Address> getAddress() {
         return address;
+    }
+
+    /**
+     * Represents the address of the patient for the UI to display.
+     * @return a string representing the address of the patient or N/A if there
+     * is no address.
+     */
+    public String stringAddress() {
+        if (getAddress().isPresent()) {
+            return getAddress().get().toString();
+        } else {
+            return "N/A";
+        }
     }
 
     public Optional<Height> getHeight() {
         return height;
     }
 
+    /**
+     * Represents the height of the patient for the UI to display.
+     * @return a string representing the height of the patient or N/A if there
+     * is no height.
+     */
+    public String stringHeight() {
+        if (getHeight().isPresent()) {
+            return getHeight().get().toString();
+        } else {
+            return "N/A";
+        }
+    }
+
     public Optional<Weight> getWeight() {
         return weight;
+    }
+
+    /**
+     * Represents the weight of the patient for the UI to display.
+     * @return a string representing the weight of the patient or N/A if there
+     * is no weight.
+     */
+    public String stringWeight() {
+        if (getWeight().isPresent()) {
+            return getWeight().get().toString();
+        } else {
+            return "N/A";
+        }
     }
 
     public Optional<Bmi> getBmi() {
         return bmi;
     }
 
+    /**
+     * Represents the bmi of the patient for the UI to display.
+     * @return a string representing the bmi of the patient or N/A if there
+     * is no bmi.
+     */
+    public String stringBmi() {
+        if (getBmi().isPresent()) {
+            return getBmi().get().toString();
+        } else {
+            return "N/A";
+        }
+    }
+
     public Optional<BloodType> getBloodType() {
         return bloodType;
+    }
+
+    /**
+     * Represents the bloodtype of the patient for the UI to display.
+     * @return a string representing the bloodtype of the patient or N/A if there
+     * is no bloodtype.
+     */
+    public String stringBloodType() {
+        if (getBloodType().isPresent()) {
+            return getBloodType().get().toString();
+        } else {
+            return "N/A";
+        }
     }
 
     /**
@@ -185,17 +263,17 @@ public class Patient {
                 .append(" Phone: ")
                 .append(getPhone())
                 .append(" Email: ")
-                .append(getEmail())
+                .append(stringEmail())
                 .append(" Address: ")
-                .append(getAddress())
+                .append(stringAddress())
                 .append(" Height: ")
-                .append(getHeight())
+                .append(stringHeight())
                 .append(" Weight: ")
-                .append(getWeight())
+                .append(stringWeight())
                 .append(" BMI: ")
-                .append(getBmi())
+                .append(stringBmi())
                 .append(" Blood type: ")
-                .append(getBloodType())
+                .append(stringBloodType())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
