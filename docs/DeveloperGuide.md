@@ -288,6 +288,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a2. User requests to add the patient again but with edited details.
     Steps 1a1-1a2 are repeated until the fields provided are correct.
     Use case resumes from step 2.
+* 1b. MediBook detects a missing compulsory field.
+    * 1b1. MediBook shows an error message.
+    * 1b2. User requests to add the patient again but with compulsory field added.
+    Steps 1b1-1b2 are repeated until the compulsory fields are all provided.
+    Use case resumes from step 2.
 
 **UC01 Find a patient**
 

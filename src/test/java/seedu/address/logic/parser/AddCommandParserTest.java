@@ -31,17 +31,12 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_BLOOD_TYPE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DOB_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_HEIGHT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_IC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_WEIGHT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.WEIGHT_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.WEIGHT_DESC_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -148,6 +143,36 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, IC_DESC_AMY + NAME_DESC_AMY + DOB_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY + HEIGHT_DESC_AMY + WEIGHT_DESC_AMY + BLOOD_TYPE_DESC_AMY,
                 new AddCommand(expectedPatient));
+
+        // missing email
+        expectedPatient = new PatientBuilder(AMY).withEmail("").build();
+        assertParseSuccess(parser, IC_DESC_AMY + NAME_DESC_AMY + DOB_DESC_AMY + PHONE_DESC_AMY
+                + ADDRESS_DESC_AMY + HEIGHT_DESC_AMY + WEIGHT_DESC_AMY + BLOOD_TYPE_DESC_AMY + TAG_DESC_FRIEND,
+                new AddCommand(expectedPatient));
+
+        // missing address
+        expectedPatient = new PatientBuilder(AMY).withAddress("").build();
+        assertParseSuccess(parser, IC_DESC_AMY + NAME_DESC_AMY + DOB_DESC_AMY + PHONE_DESC_AMY
+                + EMAIL_DESC_AMY + HEIGHT_DESC_AMY + WEIGHT_DESC_AMY + BLOOD_TYPE_DESC_AMY + TAG_DESC_FRIEND,
+                new AddCommand(expectedPatient));
+
+        // missing height
+        expectedPatient = new PatientBuilder(AMY).withHeight("").build();
+        assertParseSuccess(parser, IC_DESC_AMY + NAME_DESC_AMY + DOB_DESC_AMY + PHONE_DESC_AMY
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + WEIGHT_DESC_AMY + BLOOD_TYPE_DESC_AMY + TAG_DESC_FRIEND,
+                new AddCommand(expectedPatient));
+
+        // missing weight
+        expectedPatient = new PatientBuilder(AMY).withWeight("").build();
+        assertParseSuccess(parser, IC_DESC_AMY + NAME_DESC_AMY + DOB_DESC_AMY + PHONE_DESC_AMY
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + HEIGHT_DESC_AMY + BLOOD_TYPE_DESC_AMY + TAG_DESC_FRIEND,
+                new AddCommand(expectedPatient));
+
+        // missing bloodType
+        expectedPatient = new PatientBuilder(AMY).withBloodType("").build();
+        assertParseSuccess(parser, IC_DESC_AMY + NAME_DESC_AMY + DOB_DESC_AMY + PHONE_DESC_AMY
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + HEIGHT_DESC_AMY + WEIGHT_DESC_AMY + TAG_DESC_FRIEND,
+                new AddCommand(expectedPatient));
     }
 
     @Test
@@ -173,36 +198,6 @@ public class AddCommandParserTest {
         assertParseFailure(parser, IC_DESC_BOB + NAME_DESC_BOB + DOB_DESC_BOB + VALID_PHONE_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB
                 + BLOOD_TYPE_DESC_BOB, expectedMessage);
-
-        // missing email prefix
-        assertParseFailure(parser, IC_DESC_BOB + NAME_DESC_BOB + DOB_DESC_BOB + PHONE_DESC_BOB
-                + VALID_EMAIL_BOB + ADDRESS_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB
-                + BLOOD_TYPE_DESC_BOB, expectedMessage);
-
-        // missing address prefix
-        assertParseFailure(parser, IC_DESC_BOB + NAME_DESC_BOB + DOB_DESC_BOB + PHONE_DESC_BOB
-                + EMAIL_DESC_BOB + VALID_ADDRESS_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB
-                + BLOOD_TYPE_DESC_BOB, expectedMessage);
-
-        // missing height prefix
-        assertParseFailure(parser, IC_DESC_BOB + NAME_DESC_BOB + DOB_DESC_BOB + PHONE_DESC_BOB
-                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + VALID_HEIGHT_BOB + WEIGHT_DESC_BOB
-                + BLOOD_TYPE_DESC_BOB, expectedMessage);
-
-        // missing weight prefix
-        assertParseFailure(parser, IC_DESC_BOB + NAME_DESC_BOB + DOB_DESC_BOB + PHONE_DESC_BOB
-                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + HEIGHT_DESC_BOB + VALID_WEIGHT_BOB
-                + BLOOD_TYPE_DESC_BOB, expectedMessage);
-
-        // missing blood type prefix
-        assertParseFailure(parser, IC_DESC_BOB + NAME_DESC_BOB + DOB_DESC_BOB + PHONE_DESC_BOB
-                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB
-                + VALID_BLOOD_TYPE_BOB, expectedMessage);
-
-        // all prefixes missing
-        assertParseFailure(parser, VALID_IC_BOB + VALID_NAME_BOB + VALID_DOB_BOB + VALID_PHONE_BOB
-                + VALID_EMAIL_BOB + VALID_ADDRESS_BOB + VALID_HEIGHT_BOB + VALID_WEIGHT_BOB
-                + VALID_BLOOD_TYPE_BOB, expectedMessage);
     }
 
     @Test

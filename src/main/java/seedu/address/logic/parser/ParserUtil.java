@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -101,78 +102,93 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code Optional<String> address} into an {@code Optional<Address>}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+    public static Optional<Address> parseAddress(Optional<String> address) throws ParseException {
+        if (address.isPresent()) {
+            String trimmedAddress = address.get().trim();
+            if (!Address.isValidAddress(trimmedAddress)) {
+                throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+            }
+            return Optional.of(new Address(trimmedAddress));
+        } else {
+            return Optional.empty();
         }
-        return new Address(trimmedAddress);
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code Optional<String> email} into an {@code Optional<Email>}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code email} is invalid.
      */
-    public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+    public static Optional<Email> parseEmail(Optional<String> email) throws ParseException {
+        if (email.isPresent()) {
+            String trimmedEmail = email.get().trim();
+            if (!Email.isValidEmail(trimmedEmail)) {
+                throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+            }
+            return Optional.of(new Email(trimmedEmail));
+        } else {
+            return Optional.empty();
         }
-        return new Email(trimmedEmail);
     }
 
     /**
-     * Parses a {@code String height} into a {@code Height}.
+     * Parses a {@code Optional<String> height} into a {@code Optional<Height>}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code height} is invalid.
      */
-    public static Height parseHeight(String height) throws ParseException {
-        requireNonNull(height);
-        String trimmedHeight = height.trim();
-        if (!Height.isValidHeight(trimmedHeight)) {
-            throw new ParseException(Height.MESSAGE_CONSTRAINTS);
+    public static Optional<Height> parseHeight(Optional<String> height) throws ParseException {
+        if (height.isPresent()) {
+            String trimmedHeight = height.get().trim();
+            if (!Height.isValidHeight(trimmedHeight)) {
+                throw new ParseException(Height.MESSAGE_CONSTRAINTS);
+            }
+            return Optional.of(new Height(trimmedHeight));
+        } else {
+            return Optional.empty();
         }
-        return new Height(trimmedHeight);
     }
 
     /**
-     * Parses a {@code String weight} into a {@code Weight}.
+     * Parses a {@code Optional<String> weight} into a {@code Optional<Weight>}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code weight} is invalid.
      */
-    public static Weight parseWeight(String weight) throws ParseException {
-        requireNonNull(weight);
-        String trimmedWeight = weight.trim();
-        if (!Weight.isValidWeight(trimmedWeight)) {
-            throw new ParseException(Weight.MESSAGE_CONSTRAINTS);
+    public static Optional<Weight> parseWeight(Optional<String> weight) throws ParseException {
+        if (weight.isPresent()) {
+            String trimmedWeight = weight.get().trim();
+            if (!Weight.isValidWeight(trimmedWeight)) {
+                throw new ParseException(Weight.MESSAGE_CONSTRAINTS);
+            }
+            return Optional.of(new Weight(trimmedWeight));
+        } else {
+            return Optional.empty();
         }
-        return new Weight(trimmedWeight);
     }
 
     /**
-     * Parses a {@code String BloodType} into a {@code BloodType}.
+     * Parses a {@code Optional<String> BloodType} into a {@code Optional<BloodType>}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code BloodType} is invalid.
      */
-    public static BloodType parseBloodType(String bloodType) throws ParseException {
-        requireNonNull(bloodType);
-        String trimmedBloodType = bloodType.trim();
-        if (!BloodType.isValidBloodType(trimmedBloodType)) {
-            throw new ParseException(BloodType.MESSAGE_CONSTRAINTS);
+    public static Optional<BloodType> parseBloodType(Optional<String> bloodType) throws ParseException {
+        if (bloodType.isPresent()) {
+            String trimmedBloodType = bloodType.get().trim();
+            if (!BloodType.isValidBloodType(trimmedBloodType)) {
+                throw new ParseException(BloodType.MESSAGE_CONSTRAINTS);
+            }
+            return Optional.of(new BloodType(trimmedBloodType));
+        } else {
+            return Optional.empty();
         }
-        return new BloodType(trimmedBloodType);
     }
 
     /**

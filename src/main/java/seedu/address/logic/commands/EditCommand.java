@@ -112,11 +112,12 @@ public class EditCommand extends Command {
         Name updatedName = editPatientDescriptor.getName().orElse(patientToEdit.getName());
         DateOfBirth updatedDateOfBirth = editPatientDescriptor.getDateOfBirth().orElse(patientToEdit.getDateOfBirth());
         Phone updatedPhone = editPatientDescriptor.getPhone().orElse(patientToEdit.getPhone());
-        Email updatedEmail = editPatientDescriptor.getEmail().orElse(patientToEdit.getEmail());
-        Address updatedAddress = editPatientDescriptor.getAddress().orElse(patientToEdit.getAddress());
-        Height updatedHeight = editPatientDescriptor.getHeight().orElse(patientToEdit.getHeight());
-        Weight updatedWeight = editPatientDescriptor.getWeight().orElse(patientToEdit.getWeight());
-        BloodType updatedBloodType = editPatientDescriptor.getBloodType().orElse(patientToEdit.getBloodType());
+        Optional<Email> updatedEmail = editPatientDescriptor.getEmail().or(patientToEdit::getEmail);
+        Optional<Address> updatedAddress = editPatientDescriptor.getAddress().or(patientToEdit::getAddress);
+        Optional<Height> updatedHeight = editPatientDescriptor.getHeight().or(patientToEdit::getHeight);
+        Optional<Weight> updatedWeight = editPatientDescriptor.getWeight().or(patientToEdit::getWeight);
+        Optional<BloodType> updatedBloodType = editPatientDescriptor.getBloodType()
+                .or(patientToEdit::getBloodType);
         Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
 
         return new Patient(updatedIc, updatedName, updatedDateOfBirth, updatedPhone, updatedEmail, updatedAddress,

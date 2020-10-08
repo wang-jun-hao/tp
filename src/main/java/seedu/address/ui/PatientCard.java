@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.model.patient.Patient.OPTIONAL_FIELD_EMPTY_MESSAGE;
+
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -67,12 +69,49 @@ public class PatientCard extends UiPart<Region> {
         name.setText(patient.getName().fullName);
         dateOfBirth.setText(patient.getDateOfBirth().date.format(DateOfBirth.OUTPUT_FORMATTER));
         phone.setText(patient.getPhone().value);
-        address.setText(patient.getAddress().value);
-        email.setText(patient.getEmail().value);
-        height.setText(patient.getHeight().value + Height.HEIGHT_UNIT);
-        weight.setText(patient.getWeight().value + Weight.WEIGHT_UNIT);
-        bmi.setText(patient.getBmi().value);
-        bloodType.setText(patient.getBloodType().bloodType.label);
+
+        // email
+        if (patient.getEmail().isPresent()) {
+            email.setText(patient.stringEmail());
+        } else {
+            email.setText(OPTIONAL_FIELD_EMPTY_MESSAGE);
+        }
+
+        // address
+        if (patient.getAddress().isPresent()) {
+            address.setText(patient.stringAddress());
+        } else {
+            address.setText(OPTIONAL_FIELD_EMPTY_MESSAGE);
+        }
+
+        // height
+        if (patient.getHeight().isPresent()) {
+            height.setText(patient.stringHeight() + Height.HEIGHT_UNIT);
+        } else {
+            height.setText(OPTIONAL_FIELD_EMPTY_MESSAGE);
+        }
+
+        // weight
+        if (patient.getWeight().isPresent()) {
+            weight.setText(patient.stringWeight() + Weight.WEIGHT_UNIT);
+        } else {
+            weight.setText(OPTIONAL_FIELD_EMPTY_MESSAGE);
+        }
+
+        // bmi
+        if (patient.getBmi().isPresent()) {
+            bmi.setText(patient.stringBmi());
+        } else {
+            bmi.setText(OPTIONAL_FIELD_EMPTY_MESSAGE);
+        }
+
+        // bloodType
+        if (patient.getBloodType().isPresent()) {
+            bloodType.setText(patient.stringBloodType());
+        } else {
+            bloodType.setText(OPTIONAL_FIELD_EMPTY_MESSAGE);
+        }
+
         patient.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
