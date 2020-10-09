@@ -5,6 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_PATIENT_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_IC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.testutil.TypicalPatients.ALICE;
+import static seedu.address.testutil.TypicalPatients.BENSON;
 import static seedu.address.testutil.TypicalPatients.CARL;
 import static seedu.address.testutil.TypicalPatients.ELLE;
 import static seedu.address.testutil.TypicalPatients.FIONA;
@@ -18,7 +24,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.patient.NameContainsKeywordsPredicate;
+import seedu.address.model.patient.FieldContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -29,10 +35,10 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        FieldContainsKeywordsPredicate firstPredicate =
+                new FieldContainsKeywordsPredicate(Collections.singletonList("first"), PREFIX_DOB);
+        FieldContainsKeywordsPredicate secondPredicate =
+                new FieldContainsKeywordsPredicate(Collections.singletonList("second"), PREFIX_IC);
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -57,7 +63,7 @@ public class FindCommandTest {
     @Test
     public void execute_zeroKeywords_noPatientFound() {
         String expectedMessage = String.format(MESSAGE_PATIENT_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
+        FieldContainsKeywordsPredicate predicate = prepareNamePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPatientList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -65,19 +71,55 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePatientsFound() {
+    public void execute_multipleKeywordsSingleField_multiplePatientsFound() {
+        // name field
         String expectedMessage = String.format(MESSAGE_PATIENT_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        FieldContainsKeywordsPredicate predicate = prepareNamePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPatientList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPatientList());
+
+        // ic field
+        expectedMessage = String.format(MESSAGE_PATIENT_LISTED_OVERVIEW, 2);
+        predicate = prepareIcPredicate("S9234567A F7654321Q");
+        command = new FindCommand(predicate);
+        expectedModel.updateFilteredPatientList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(BENSON, ELLE), model.getFilteredPatientList());
+    }
+
+    @Test
+    public void execute_multipleKeywordsMultipleFields_multiplePatientsFound() {
+        // name field
+        String expectedMessage = String.format(MESSAGE_PATIENT_LISTED_OVERVIEW, 2);
+        FieldContainsKeywordsPredicate predicate1 = prepareNamePredicate("Kurz Elle Kunz Pauline");
+        FieldContainsKeywordsPredicate predicate2 = prepareIcPredicate("S");
+        FieldContainsKeywordsPredicate predicate3 = prepareHeightPredicate("162 174");
+        FindCommand command = new FindCommand(Arrays.asList(predicate1, predicate2, predicate3));
+        expectedModel.updateFilteredPatientList(predicate1.and(predicate2).and(predicate3));
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE, CARL), model.getFilteredPatientList());
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code FieldContainsKeywordsPredicate} for the height field.
      */
-    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private FieldContainsKeywordsPredicate prepareHeightPredicate(String userInput) {
+        return new FieldContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")), PREFIX_HEIGHT);
+    }
+
+    /**
+     * Parses {@code userInput} into a {@code FieldContainsKeywordsPredicate} for the name field.
+     */
+    private FieldContainsKeywordsPredicate prepareNamePredicate(String userInput) {
+        return new FieldContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")), PREFIX_NAME);
+    }
+
+    /**
+     * Parses {@code userInput} into a {@code FieldContainsKeywordsPredicate} for the ic field.
+     */
+    private FieldContainsKeywordsPredicate prepareIcPredicate(String userInput) {
+        return new FieldContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")), PREFIX_IC);
     }
 }
