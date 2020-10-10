@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Patient's weight in the address book.
+ * Represents a Patient's weight in the medi book.
  * Guarantees: immutable; is valid as declared in {@link #isValidWeight(String)}
  */
 public class Weight {

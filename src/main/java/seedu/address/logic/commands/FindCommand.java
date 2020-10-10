@@ -16,7 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.patient.Patient;
 
 /**
- * Finds and lists all patients in address book whose name contains any of the argument keywords.
+ * Finds and lists all patients in medi book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {

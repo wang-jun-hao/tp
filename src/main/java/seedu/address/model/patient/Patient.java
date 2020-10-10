@@ -11,7 +11,7 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Patient in the address book.
+ * Represents a Patient in the medi book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Patient {

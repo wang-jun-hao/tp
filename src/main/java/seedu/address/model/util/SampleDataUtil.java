@@ -5,8 +5,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.MediBook;
+import seedu.address.model.ReadOnlyMediBook;
 import seedu.address.model.patient.Address;
 import seedu.address.model.patient.BloodType;
 import seedu.address.model.patient.DateOfBirth;
@@ -20,7 +20,7 @@ import seedu.address.model.patient.Weight;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code MediBook} with sample data.
  */
 public class SampleDataUtil {
     public static Patient[] getSamplePatients() {
@@ -55,8 +55,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyMediBook getSampleMediBook() {
+        MediBook sampleAb = new MediBook();
         for (Patient samplePatient : getSamplePatients()) {
             sampleAb.addPatient(samplePatient);
         }

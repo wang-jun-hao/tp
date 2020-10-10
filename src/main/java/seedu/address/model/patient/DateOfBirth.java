@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents a Patient's date of birth (DOB) in the address book.
+ * Represents a Patient's date of birth (DOB) in the medi book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDateOfBirth(String)}
  */
 public class DateOfBirth {

@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Patient's height in the address book.
+ * Represents a Patient's height in the medi book.
  * Guarantees: immutable; is valid as declared in {@link #isValidHeight(String)}
  */
 public class Height {

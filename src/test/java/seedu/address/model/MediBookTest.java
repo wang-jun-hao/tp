@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_HEIGHT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPatients.ALICE;
-import static seedu.address.testutil.TypicalPatients.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPatients.getTypicalMediBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -23,25 +23,25 @@ import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.exceptions.DuplicatePatientException;
 import seedu.address.testutil.PatientBuilder;
 
-public class AddressBookTest {
+public class MediBookTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final MediBook mediBook = new MediBook();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPatientList());
+        assertEquals(Collections.emptyList(), mediBook.getPatientList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> mediBook.resetData(null));
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyMediBook_replacesData() {
+        MediBook newData = getTypicalMediBook();
+        mediBook.resetData(newData);
+        assertEquals(newData, mediBook);
     }
 
     @Test
@@ -50,47 +50,47 @@ public class AddressBookTest {
         Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .withHeight(VALID_HEIGHT_BOB).build();
         List<Patient> newPatients = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPatients);
+        MediBookStub newData = new MediBookStub(newPatients);
 
-        assertThrows(DuplicatePatientException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicatePatientException.class, () -> mediBook.resetData(newData));
     }
 
     @Test
     public void hasPatient_nullPatient_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPatient(null));
+        assertThrows(NullPointerException.class, () -> mediBook.hasPatient(null));
     }
 
     @Test
-    public void hasPatient_patientNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPatient(ALICE));
+    public void hasPatient_patientNotInMediBook_returnsFalse() {
+        assertFalse(mediBook.hasPatient(ALICE));
     }
 
     @Test
-    public void hasPatient_patientInAddressBook_returnsTrue() {
-        addressBook.addPatient(ALICE);
-        assertTrue(addressBook.hasPatient(ALICE));
+    public void hasPatient_patientInMediBook_returnsTrue() {
+        mediBook.addPatient(ALICE);
+        assertTrue(mediBook.hasPatient(ALICE));
     }
 
     @Test
-    public void hasPatient_patientWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPatient(ALICE);
+    public void hasPatient_patientWithSameIdentityFieldsInMediBook_returnsTrue() {
+        mediBook.addPatient(ALICE);
         Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasPatient(editedAlice));
+        assertTrue(mediBook.hasPatient(editedAlice));
     }
 
     @Test
     public void getPatientList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPatientList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> mediBook.getPatientList().remove(0));
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose patients list can violate interface constraints.
+     * A stub ReadOnlyMediBook whose patients list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class MediBookStub implements ReadOnlyMediBook {
         private final ObservableList<Patient> patients = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Patient> patients) {
+        MediBookStub(Collection<Patient> patients) {
             this.patients.setAll(patients);
         }
 

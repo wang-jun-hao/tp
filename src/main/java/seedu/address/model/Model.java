@@ -35,45 +35,45 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' medi book file path.
      */
-    Path getAddressBookFilePath();
+    Path getMediBookFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' medi book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setMediBookFilePath(Path mediBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces medi book data with the data in {@code mediBook}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setMediBook(ReadOnlyMediBook mediBook);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the MediBook */
+    ReadOnlyMediBook getMediBook();
 
     /**
-     * Returns true if a patient with the same identity as {@code patient} exists in the address book.
+     * Returns true if a patient with the same identity as {@code patient} exists in the medi book.
      */
     boolean hasPatient(Patient patient);
 
     /**
      * Deletes the given patient.
-     * The patient must exist in the address book.
+     * The patient must exist in the medi book.
      */
     void deletePatient(Patient target);
 
     /**
      * Adds the given patient.
-     * {@code patient} must not already exist in the address book.
+     * {@code patient} must not already exist in the medi book.
      */
     void addPatient(Patient patient);
 
     /**
      * Replaces the given patient {@code target} with {@code editedPatient}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the medi book.
      * The patient identity of {@code editedPatient} must not be the same as
-     * another existing patient in the address book.
+     * another existing patient in the medi book.
      */
     void setPatient(Patient target, Patient editedPatient);
 

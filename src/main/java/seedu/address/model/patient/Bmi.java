@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
- * Represents a Person's BMI in the address book, whose value is defined to 1 dp (zero-padded).
+ * Represents a Person's BMI in the medi book, whose value is defined to 1 dp (zero-padded).
  * Guarantees: immutable; is valid as declared in {@link #isValidBmi(String)}
  */
 public class Bmi {

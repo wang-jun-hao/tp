@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.MediBook;
 import seedu.address.model.patient.Patient;
 
 /**
@@ -81,14 +81,14 @@ public class TypicalPatients {
     private TypicalPatients() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical patients.
+     * Returns an {@code MediBook} with all the typical patients.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static MediBook getTypicalMediBook() {
+        MediBook mediBook = new MediBook();
         for (Patient patient : getTypicalPatients()) {
-            ab.addPatient(patient);
+            mediBook.addPatient(patient);
         }
-        return ab;
+        return mediBook;
     }
 
     public static List<Patient> getTypicalPatients() {

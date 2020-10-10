@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represent's a Patient's blood type in the address book.
+ * Represent's a Patient's blood type in the medi book.
  * Guarantees: immutable; is valid as declared in {@link #isValidBloodType(String)}
  */
 public class BloodType {

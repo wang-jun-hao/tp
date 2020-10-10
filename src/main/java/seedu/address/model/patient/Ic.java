@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Patient's ic in the address book.
+ * Represents a Patient's ic in the medi book.
  * Guarantees: immutable; is valid as declared in {@link #isValidIc(String)}
  */
 public class Ic {
