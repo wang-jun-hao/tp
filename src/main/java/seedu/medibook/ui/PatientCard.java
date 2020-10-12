@@ -77,7 +77,7 @@ public class PatientCard extends UiPart<Region> {
             email.setText(OPTIONAL_FIELD_EMPTY_MESSAGE);
         }
 
-        // medibook
+        // address
         if (patient.getAddress().isPresent()) {
             address.setText(patient.stringAddress());
         } else {

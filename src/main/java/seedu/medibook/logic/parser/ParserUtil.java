@@ -102,10 +102,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> medibook} into an {@code Optional<Address>}.
+     * Parses a {@code Optional<String> address} into an {@code Optional<Address>}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code medibook} is invalid.
+     * @throws ParseException if the given {@code address} is invalid.
      */
     public static Optional<Address> parseAddress(Optional<String> address) throws ParseException {
         if (address.isPresent()) {

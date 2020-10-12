@@ -51,7 +51,7 @@ class JsonAdaptedPatient {
     @JsonCreator
     public JsonAdaptedPatient(@JsonProperty("ic") String ic, @JsonProperty("name") String name,
                               @JsonProperty("dateOfBirth") String dateOfBirth, @JsonProperty("phone") String phone,
-                              @JsonProperty("email") String email, @JsonProperty("medibook") String address,
+                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                               @JsonProperty("height") String height, @JsonProperty("weight") String weight,
                               @JsonProperty("bmi") String bmi, @JsonProperty("blood type") String bloodType,
                               @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
@@ -86,7 +86,7 @@ class JsonAdaptedPatient {
             email = OPTIONAL_FIELD_EMPTY_MESSAGE;
         }
 
-        // medibook
+        // address
         if (source.getAddress().isPresent()) {
             address = source.stringAddress();
         } else {

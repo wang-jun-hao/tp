@@ -142,7 +142,7 @@ public class FindCommandParserTest {
                         + emailArg + heightArg + weightArg + bloodTypeArg,
                 expectedFindCommand);
 
-        // multiple medibook - last medibook accepted
+        // multiple address - last address accepted
         assertParseSuccess(parser, nameArg + icArg + dobArg + phoneArg + addressArgAlt + addressArg
                         + emailArg + heightArg + weightArg + bloodTypeArg,
                 expectedFindCommand);

@@ -118,9 +118,9 @@ public class Patient {
     }
 
     /**
-     * Represents the medibook of the patient for the UI to display.
-     * @return a string representing the medibook of the patient or N/A if there
-     * is no medibook.
+     * Represents the address of the patient for the UI to display.
+     * @return a string representing the address of the patient or N/A if there
+     * is no address.
      */
     public String stringAddress() {
         if (getAddress().isPresent()) {
