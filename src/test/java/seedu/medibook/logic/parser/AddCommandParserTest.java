@@ -232,7 +232,7 @@ public class AddCommandParserTest {
                 + BLOOD_TYPE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 Email.MESSAGE_CONSTRAINTS);
 
-        // invalid medibook
+        // invalid address
         assertParseFailure(parser, IC_DESC_BOB + NAME_DESC_BOB + DOB_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB
                 + BLOOD_TYPE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
