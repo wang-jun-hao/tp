@@ -82,7 +82,7 @@ public class FieldContainsKeywordsPredicateTest {
         predicate = new FieldContainsKeywordsPredicate(Collections.singletonList("81234567"), PREFIX_PHONE);
         assertTrue(predicate.test(new PatientBuilder().withPhone("81234567").build()));
 
-        // medibook field
+        // address field
         predicate = new FieldContainsKeywordsPredicate(Collections.singletonList("Clementi"), PREFIX_ADDRESS);
         assertTrue(predicate.test(new PatientBuilder().withAddress("311, Clementi Ave 2, #02-25").build()));
 
@@ -122,7 +122,7 @@ public class FieldContainsKeywordsPredicateTest {
         predicate = new FieldContainsKeywordsPredicate(Collections.singletonList("8123"), PREFIX_PHONE);
         assertTrue(predicate.test(new PatientBuilder().withPhone("81234567").build()));
 
-        // medibook field
+        // address field
         predicate = new FieldContainsKeywordsPredicate(Collections.singletonList("Clement"), PREFIX_ADDRESS);
         assertTrue(predicate.test(new PatientBuilder().withAddress("311, Clementi Ave 2, #02-25").build()));
 
@@ -150,7 +150,7 @@ public class FieldContainsKeywordsPredicateTest {
             new FieldContainsKeywordsPredicate(Arrays.asList("Alice", "Zach"), PREFIX_NAME);
         assertTrue(predicate.test(new PatientBuilder().withName("Alice Bob").build()));
 
-        // medibook
+        // address
         predicate = new FieldContainsKeywordsPredicate(Arrays.asList("311", "Street"), PREFIX_ADDRESS);
         assertTrue(predicate.test(new PatientBuilder().withAddress("311, Clementi Ave 2, #02-25").build()));
 
@@ -176,7 +176,7 @@ public class FieldContainsKeywordsPredicateTest {
         predicate = new FieldContainsKeywordsPredicate(Arrays.asList("81234567", "66669876"), PREFIX_PHONE);
         assertTrue(predicate.test(new PatientBuilder().withPhone("66669876").build()));
 
-        // medibook field
+        // address field
         predicate = new FieldContainsKeywordsPredicate(Arrays.asList("Clementi", "Hougang"), PREFIX_ADDRESS);
         assertTrue(predicate.test(new PatientBuilder().withAddress("311, Clementi Ave 2, #02-25").build()));
 
@@ -209,7 +209,7 @@ public class FieldContainsKeywordsPredicateTest {
         predicate = new FieldContainsKeywordsPredicate(Collections.singletonList("s9876543c"), PREFIX_IC);
         assertTrue(predicate.test(new PatientBuilder().withIc("S9876543C").build()));
 
-        // medibook field
+        // address field
         predicate = new FieldContainsKeywordsPredicate(Arrays.asList("clemENTI"), PREFIX_ADDRESS);
         assertTrue(predicate.test(new PatientBuilder().withAddress("311, Clementi Ave 2, #02-25").build()));
 
@@ -244,7 +244,7 @@ public class FieldContainsKeywordsPredicateTest {
         predicate = new FieldContainsKeywordsPredicate(Collections.emptyList(), PREFIX_PHONE);
         assertFalse(predicate.test(new PatientBuilder().withPhone("66669876").build()));
 
-        // medibook field
+        // address field
         predicate = new FieldContainsKeywordsPredicate(Collections.emptyList(), PREFIX_ADDRESS);
         assertFalse(predicate.test(new PatientBuilder().withAddress("311, Clementi Ave 2, #02-25").build()));
 
@@ -285,7 +285,7 @@ public class FieldContainsKeywordsPredicateTest {
         predicate = new FieldContainsKeywordsPredicate(Arrays.asList("81234567", "66669876"), PREFIX_PHONE);
         assertFalse(predicate.test(new PatientBuilder().withPhone("94210412").build()));
 
-        // medibook field
+        // address field
         predicate = new FieldContainsKeywordsPredicate(Arrays.asList("Orchard", "Bedok"), PREFIX_ADDRESS);
         assertFalse(predicate.test(new PatientBuilder().withAddress("618, Newton Street 52, #01-21").build()));
 
@@ -341,7 +341,7 @@ public class FieldContainsKeywordsPredicateTest {
                 .withEmail("alice@email.com").withAddress("Main Street").withHeight("171").withWeight("61.2")
                 .withBloodType("A+").withDateOfBirth("12-08-1999").build()));
 
-        // keywords match all fields except medibook
+        // keywords match all fields except address
         predicate =
                 new FieldContainsKeywordsPredicate(Arrays.asList("Alice", "S9999999R", "12345", "alice@email.com",
                         "171", "61.2", "A+", "12-08-1999"), PREFIX_ADDRESS);

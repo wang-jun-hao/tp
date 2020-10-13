@@ -150,7 +150,7 @@ public class AddCommandParserTest {
                 + ADDRESS_DESC_AMY + HEIGHT_DESC_AMY + WEIGHT_DESC_AMY + BLOOD_TYPE_DESC_AMY + TAG_DESC_FRIEND,
                 new AddCommand(expectedPatient));
 
-        // missing medibook
+        // missing address
         expectedPatient = new PatientBuilder(AMY).withAddress("").build();
         assertParseSuccess(parser, IC_DESC_AMY + NAME_DESC_AMY + DOB_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + HEIGHT_DESC_AMY + WEIGHT_DESC_AMY + BLOOD_TYPE_DESC_AMY + TAG_DESC_FRIEND,
