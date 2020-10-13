@@ -204,7 +204,7 @@ public class EditCommandTest {
 
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of medi book
+     * but smaller than size of MediBook
      */
     @Test
     public void execute_invalidPatientIndexFilteredList_failure() {

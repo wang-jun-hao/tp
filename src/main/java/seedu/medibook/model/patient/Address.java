@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.medibook.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Patient's medibook in the medi book.
+ * Represents a Patient's address in the medi book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
 public class Address {
@@ -22,7 +22,7 @@ public class Address {
     /**
      * Constructs an {@code Address}.
      *
-     * @param address A valid medibook.
+     * @param address A valid address.
      */
     public Address(String address) {
         requireNonNull(address);

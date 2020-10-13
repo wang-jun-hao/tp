@@ -30,7 +30,7 @@ public class ModelManager implements Model {
         super();
         requireAllNonNull(mediBook, userPrefs);
 
-        logger.fine("Initializing with medi book: " + mediBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with MediBook: " + mediBook + " and user prefs " + userPrefs);
 
         this.mediBook = new MediBook(mediBook);
         this.userPrefs = new UserPrefs(userPrefs);

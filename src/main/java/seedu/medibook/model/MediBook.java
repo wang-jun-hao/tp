@@ -9,7 +9,7 @@ import seedu.medibook.model.patient.Patient;
 import seedu.medibook.model.patient.UniquePatientList;
 
 /**
- * Wraps all data at the medibook-book level
+ * Wraps all data at the mediBook level
  * Duplicates are not allowed (by .isSamePatient comparison)
  */
 public class MediBook implements ReadOnlyMediBook {

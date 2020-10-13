@@ -56,11 +56,11 @@ public class SampleDataUtil {
     }
 
     public static ReadOnlyMediBook getSampleMediBook() {
-        MediBook sampleAb = new MediBook();
+        MediBook sampleMb = new MediBook();
         for (Patient samplePatient : getSamplePatients()) {
-            sampleAb.addPatient(samplePatient);
+            sampleMb.addPatient(samplePatient);
         }
-        return sampleAb;
+        return sampleMb;
     }
 
     /**

@@ -6,7 +6,7 @@ import seedu.medibook.model.patient.Patient;
 /**
  * A utility class to help with building MediBook objects.
  * Example usage: <br>
- *     {@code MediBook ab = new MediBookBuilder().withPatient("John", "Doe").build();}
+ *     {@code MediBook mb = new MediBookBuilder().withPatient("John", "Doe").build();}
  */
 public class MediBookBuilder {
 
