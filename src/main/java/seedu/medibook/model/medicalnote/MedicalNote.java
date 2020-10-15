@@ -45,7 +45,7 @@ public class MedicalNote {
     }
 
     public String getDateString() {
-        return date.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
+        return date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
     public String getDoctorName() {

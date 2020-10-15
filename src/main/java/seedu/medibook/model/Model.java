@@ -70,6 +70,14 @@ public interface Model {
     void addPatient(Patient patient);
 
     /**
+     * Accesses the given patient.
+     * The patient must exist in the medi book.
+     */
+    void accessPatient(Patient patient);
+
+    Patient getPatientToAccess();
+
+    /**
      * Replaces the given patient {@code target} with {@code editedPatient}.
      * {@code target} must exist in the medi book.
      * The patient identity of {@code editedPatient} must not be the same as

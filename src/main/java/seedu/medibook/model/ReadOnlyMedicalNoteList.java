@@ -1,6 +1,7 @@
 package seedu.medibook.model;
 
-import javafx.collections.ObservableList;
+import java.util.List;
+
 import seedu.medibook.model.medicalnote.MedicalNote;
 
 /**
@@ -11,6 +12,6 @@ public interface ReadOnlyMedicalNoteList {
     /**
      * Returns an unmodifiable view of the patient's medical notes.
      */
-    ObservableList<MedicalNote> getMedicalNoteList();
+    List<MedicalNote> getMedicalNoteList();
 
 }

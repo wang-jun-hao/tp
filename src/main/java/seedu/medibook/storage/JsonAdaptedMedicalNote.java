@@ -22,7 +22,7 @@ class JsonAdaptedMedicalNote {
      * Constructs a {@code JsonAdaptedMedicalNote} with the given patient details.
      */
     @JsonCreator
-    public JsonAdaptedMedicalNote(@JsonProperty("date") String date, @JsonProperty("doctor name") String doctorName,
+    public JsonAdaptedMedicalNote(@JsonProperty("date") String date, @JsonProperty("doctorName") String doctorName,
                                   @JsonProperty("content") String content) {
         this.date = date;
         this.doctorName = doctorName;

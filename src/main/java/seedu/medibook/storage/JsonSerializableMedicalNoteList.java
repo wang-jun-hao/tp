@@ -11,14 +11,13 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.medibook.commons.exceptions.IllegalValueException;
 import seedu.medibook.model.ReadOnlyMedicalNoteList;
 import seedu.medibook.model.medicalnote.MedicalNote;
+import seedu.medibook.model.medicalnote.MedicalNoteList;
 
 /**
  * An Immutable MedicalNoteList that is serializable to JSON format.
  */
-@JsonRootName(value = "medicalnotes")
+@JsonRootName(value = "medicalNotes")
 class JsonSerializableMedicalNoteList {
-
-    public static final String MESSAGE_DUPLICATE_PATIENT = "MedicalNote list contains duplicate patient(s).";
 
     private final List<JsonAdaptedMedicalNote> medicalNotes = new ArrayList<>();
 
@@ -26,7 +25,7 @@ class JsonSerializableMedicalNoteList {
      * Constructs a {@code JsonSerializableMedicalNoteList} with the given medical notes.
      */
     @JsonCreator
-    public JsonSerializableMedicalNoteList(@JsonProperty("patients") List<JsonAdaptedMedicalNote> medicalNotes) {
+    public JsonSerializableMedicalNoteList(@JsonProperty("medicalNotes") List<JsonAdaptedMedicalNote> medicalNotes) {
         this.medicalNotes.addAll(medicalNotes);
     }
 
@@ -49,7 +48,7 @@ class JsonSerializableMedicalNoteList {
         MedicalNoteList medicalNoteList = new MedicalNoteList();
         for (JsonAdaptedMedicalNote jsonAdaptedMedicalNote : medicalNotes) {
             MedicalNote medicalNote = jsonAdaptedMedicalNote.toModelType();
-            medicalNoteList.addMedicalNote(medicalNote);
+            medicalNoteList.add(medicalNote);
         }
         return medicalNoteList;
     }
