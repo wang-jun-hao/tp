@@ -1,5 +1,6 @@
 package seedu.medibook.model.patient;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.medibook.commons.util.AppUtil.checkArgument;
 
 import seedu.medibook.model.Date;
@@ -24,6 +25,7 @@ public class DateOfBirth {
      * @param dobString A valid date of birth.
      */
     public DateOfBirth(String dobString) {
+        requireNonNull(dobString);
         checkArgument(isValidDateOfBirth(dobString), MESSAGE_CONSTRAINTS);
         date = new Date(dobString);
         inputValue = date.inputValue;

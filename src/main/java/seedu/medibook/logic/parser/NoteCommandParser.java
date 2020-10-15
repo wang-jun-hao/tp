@@ -1,39 +1,17 @@
 package seedu.medibook.logic.parser;
 
 import static seedu.medibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_BLOOD_TYPE;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_CONTENT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_HEIGHT;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_IC;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
-import java.text.SimpleDateFormat;
-import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.medibook.logic.commands.AddCommand;
 import seedu.medibook.logic.commands.NoteCommand;
 import seedu.medibook.logic.parser.exceptions.ParseException;
 import seedu.medibook.model.Date;
 import seedu.medibook.model.medicalnote.MedicalNote;
-import seedu.medibook.model.patient.Address;
-import seedu.medibook.model.patient.BloodType;
-import seedu.medibook.model.patient.DateOfBirth;
-import seedu.medibook.model.patient.Email;
-import seedu.medibook.model.patient.Height;
-import seedu.medibook.model.patient.Ic;
-import seedu.medibook.model.patient.Name;
 import seedu.medibook.model.patient.Patient;
-import seedu.medibook.model.patient.Phone;
-import seedu.medibook.model.patient.Weight;
-import seedu.medibook.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object
