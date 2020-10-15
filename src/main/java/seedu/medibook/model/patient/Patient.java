@@ -1,6 +1,8 @@
 package seedu.medibook.model.patient;
 
 import static seedu.medibook.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.medibook.model.patient.Height.HEIGHT_UNIT;
+import static seedu.medibook.model.patient.Weight.WEIGHT_UNIT;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -218,6 +220,72 @@ public class Patient {
         return otherPatient != null
                 && otherPatient.getIc().equals(getIc());
     }
+
+    public String getStringIC() {
+        return getIc().ic;
+    }
+
+    public String getStringName(){
+        return this.name.fullName;
+    }
+
+    public String getStringDOB() {
+        return getDateOfBirth().value;
+    }
+
+    public String getStringPhone(){
+        return getPhone().value;
+    }
+
+    public String getStringEmail() {
+        if (getEmail().isPresent()) {
+            return getEmail().get().toString();
+        } else {
+            return "N/A";
+        }
+    }
+
+    public String getStringWeight() {
+        if (getWeight().isPresent()) {
+            return getWeight().get().toString() + WEIGHT_UNIT;
+        } else {
+            return "N/A";
+        }
+    }
+
+    public String getStringHeight() {
+        if (getHeight().isPresent()) {
+            return getHeight().get().toString() + HEIGHT_UNIT;
+        } else {
+            return "N/A";
+        }
+    }
+
+    public String getStringBmi() {
+        if (getBmi().isPresent()) {
+            return getBmi().get().toString();
+        } else {
+            return "N/A";
+        }
+    }
+
+    public String getStringAddress() {
+        if (getAddress().isPresent()) {
+            return getAddress().get().toString();
+        } else {
+            return "N/A";
+        }
+    }
+
+    public String getStringBloodType() {
+        if (getBloodType().isPresent()) {
+            return getBloodType().get().toString();
+        } else {
+            return "N/A";
+        }
+    }
+
+
 
     /**
      * Returns true if both patients have the same identity and data fields.
