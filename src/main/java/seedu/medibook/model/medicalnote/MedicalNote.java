@@ -12,8 +12,6 @@ import seedu.medibook.model.Date;
  * Guarantees: details are present and not null, date and doctor's names are validated, fields are immutable.
  */
 public class MedicalNote {
-    public static final String DATE_MESSAGE_CONSTRAINTS = "Date should be of the format \"DD-MM-YYYY\""
-            + "where D, M and Y represent digits of the day, month and year of the date respectively.";
     public static final String NAME_MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
     public static final String CONTENT_MESSAGE_CONSTRAINTS = "Content should not be blank";

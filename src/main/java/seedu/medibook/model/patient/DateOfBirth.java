@@ -27,7 +27,7 @@ public class DateOfBirth {
     public DateOfBirth(String dobString) {
         requireNonNull(dobString);
         checkArgument(isValidDateOfBirth(dobString), MESSAGE_CONSTRAINTS);
-        date = new Date(dobString);
+        date = new Date(dobString, true);
         inputValue = date.inputValue;
         outputValue = date.outputValue;
     }
@@ -39,8 +39,12 @@ public class DateOfBirth {
         if (!Date.isValidDate(dobString)) {
             return false;
         }
-        Date date = new Date(dobString);
-        return date.isOnOrBeforeToday();
+        try {
+            Date date = new Date(dobString, true);
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
     }
 
     @Override

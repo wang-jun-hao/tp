@@ -18,11 +18,12 @@ class MedicalNoteTest {
         });
         // when doctorName is null
         assertThrows(NullPointerException.class, () -> {
-            new MedicalNote(new Date("15-04-2020"), null, "Patient is asymptomatic.");
+            new MedicalNote(new Date("15-04-2020", true), null,
+                    "Patient is asymptomatic.");
         });
         // when content is null
         assertThrows(NullPointerException.class, () -> {
-            new MedicalNote(new Date("15-04-2020"), "Lydia Yu", null);
+            new MedicalNote(new Date("15-04-2020", true), "Lydia Yu", null);
         });
     }
 
@@ -30,7 +31,7 @@ class MedicalNoteTest {
     public void constructor_invalidDate_throwsIllegalArgumentException() {
         String invalidDate = "15/04/20";
         assertThrows(IllegalArgumentException.class, () -> {
-            new MedicalNote(new Date(invalidDate), "Lydia Yu", "Patient is asymptomatic.");
+            new MedicalNote(new Date(invalidDate, true), "Lydia Yu", "Patient is asymptomatic.");
         });
     }
 
@@ -38,7 +39,7 @@ class MedicalNoteTest {
     public void constructor_invalidDoctorName_throwsIllegalArgumentException() {
         String invalidDoctorName = "";
         assertThrows(IllegalArgumentException.class, () -> {
-            new MedicalNote(new Date("15-04-2020"), invalidDoctorName, "Patient is asymptomatic.");
+            new MedicalNote(new Date("15-04-2020", true), invalidDoctorName, "Patient is asymptomatic.");
         });
     }
 
@@ -46,7 +47,7 @@ class MedicalNoteTest {
     public void constructor_invalidContent_throwsIllegalArgumentException() {
         String invalidContent = "";
         assertThrows(IllegalArgumentException.class, () -> {
-            new MedicalNote(new Date("15-04-2020"), "Lydia Yu", invalidContent);
+            new MedicalNote(new Date("15-04-2020", true), "Lydia Yu", invalidContent);
         });
     }
 

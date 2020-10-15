@@ -11,17 +11,11 @@ import seedu.medibook.logic.commands.NoteCommand;
 import seedu.medibook.logic.parser.exceptions.ParseException;
 import seedu.medibook.model.Date;
 import seedu.medibook.model.medicalnote.MedicalNote;
-import seedu.medibook.model.patient.Patient;
 
 /**
  * Parses input arguments and creates a new AddCommand object
  */
 public class NoteCommandParser implements Parser<NoteCommand> {
-    private final Patient displayedPatient;
-
-    public NoteCommandParser(Patient displayedPatient) {
-        this.displayedPatient = displayedPatient;
-    }
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
@@ -43,7 +37,7 @@ public class NoteCommandParser implements Parser<NoteCommand> {
 
         MedicalNote medicalNote = new MedicalNote(date, name, content);
 
-        return new NoteCommand(displayedPatient, medicalNote);
+        return new NoteCommand(medicalNote);
     }
 
     /**

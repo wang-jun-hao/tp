@@ -15,23 +15,29 @@ import java.time.format.DateTimeParseException;
 public class Date {
     public static final String MESSAGE_CONSTRAINTS = "Date should be of the format \"DD-MM-YYYY\" "
             + "where D, M and Y represent digits of the day, month and year of the date respectively.";
+    public static final String MESSAGE_NON_FUTURE = "Date should not be in the future.";
     public static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("d MMM yyyy");
     private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public final String inputValue;
     public final String outputValue;
     public final LocalDate date;
+    private boolean isNonFuture;
 
     /**
      * Constructs a {@code Date}.
      *
      * @param dateString A valid date.
      */
-    public Date(String dateString) {
+    public Date(String dateString, boolean isNonFuture) {
         requireNonNull(dateString);
         checkArgument(isValidDate(dateString), MESSAGE_CONSTRAINTS);
         date = LocalDate.parse(dateString, INPUT_FORMATTER);
+        if (isNonFuture) {
+            checkArgument(isOnOrBeforeToday(date), MESSAGE_NON_FUTURE);
+        }
         inputValue = dateString;
         outputValue = date.format(OUTPUT_FORMATTER);
+        this.isNonFuture = isNonFuture;
     }
 
     /**
@@ -49,7 +55,7 @@ public class Date {
     /**
      * Returns true if this date is in the past or today.
      */
-    public boolean isOnOrBeforeToday() {
+    private static boolean isOnOrBeforeToday(LocalDate date) {
         LocalDate todayDate = LocalDate.now();
         return date.isBefore(todayDate) || date.isEqual(todayDate);
     }

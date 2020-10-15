@@ -31,21 +31,20 @@ public class NoteCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New medical note entry added:\n%1$s";
     public static final String MESSAGE_DUPLICATE_NOTE = "This medical note entry already exists in the system";
 
-    private final Patient displayedPatient;
     private final MedicalNote newMedicalNote;
 
     /**
      * Creates an AddCommand to add the specified {@code Patient}
      */
-    public NoteCommand(Patient displayedPatient, MedicalNote newMedicalNote) {
+    public NoteCommand(MedicalNote newMedicalNote) {
         requireNonNull(newMedicalNote);
-        this.displayedPatient = displayedPatient;
         this.newMedicalNote = newMedicalNote;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        Patient displayedPatient = model.getPatientToAccess();
 
         assert model.hasPatient(displayedPatient) : "Patient in context does not exist in model";
 

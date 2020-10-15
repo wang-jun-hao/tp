@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_BLOOD_TYPE;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_CONTENT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_HEIGHT;
@@ -53,6 +54,10 @@ public class CommandTestUtil {
     public static final String VALID_BLOOD_TYPE_BOB = "B+";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_NON_FUTURE_DATE = "15-10-2020";
+    public static final String VALID_FUTURE_DATE = "15-10-2030";
+    public static final String VALID_DOCTOR_NAME = "John Doe";
+    public static final String VALID_CONTENT = "Patient is sick.";
 
     public static final String IC_DESC_AMY = " " + PREFIX_IC + VALID_IC_AMY;
     public static final String IC_DESC_BOB = " " + PREFIX_IC + VALID_IC_BOB;
@@ -74,6 +79,10 @@ public class CommandTestUtil {
     public static final String BLOOD_TYPE_DESC_BOB = " " + PREFIX_BLOOD_TYPE + VALID_BLOOD_TYPE_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String NOTE_NON_FUTURE_DATE_DESC = " " + PREFIX_DATE + VALID_NON_FUTURE_DATE;
+    public static final String NOTE_FUTURE_DATE_DESC = " " + PREFIX_DATE + VALID_FUTURE_DATE;
+    public static final String NOTE_DOCTOR_DESC = " " + PREFIX_NAME + VALID_DOCTOR_NAME;
+    public static final String NOTE_CONTENT_DESC = " " + PREFIX_CONTENT + VALID_CONTENT;
 
     public static final String INVALID_IC_DESC = " " + PREFIX_IC + "A222223HH";
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
@@ -86,6 +95,7 @@ public class CommandTestUtil {
     public static final String INVALID_WEIGHT_DESC = " " + PREFIX_WEIGHT + "55.55";
     public static final String INVALID_BLOOD_TYPE_DESC = " " + PREFIX_BLOOD_TYPE + "C+"; // 'C+' invalid blood type
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_NOTE_DATE_DESC = " " + PREFIX_DATE + "2-3-2020"; // incorrect date format
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
