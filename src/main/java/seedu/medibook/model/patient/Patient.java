@@ -35,7 +35,7 @@ public class Patient {
     private final Optional<BloodType> bloodType;
 
     // Default empty fields
-    private final MedicalNoteList medicalNoteList = new MedicalNoteList();
+    private MedicalNoteList medicalNoteList = new MedicalNoteList();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -217,6 +217,14 @@ public class Patient {
      */
     public void addMedicalNote(MedicalNote newMedicalNote) {
         medicalNoteList.add(newMedicalNote);
+    }
+
+    /**
+     * Sets the medical note list object within this patient to the given medical note list.
+     * @param medicalNoteList new medical note list to be stored within patient.
+     */
+    public void setMedicalNoteList(MedicalNoteList medicalNoteList) {
+        this.medicalNoteList = medicalNoteList;
     }
 
     /**

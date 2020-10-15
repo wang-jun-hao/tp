@@ -24,4 +24,13 @@ public class MedicalNoteList {
     public void add(MedicalNote newMedicalNote) {
         innerList.add(newMedicalNote);
     }
+
+    @Override
+    public String toString() {
+        String result = "";
+        for (MedicalNote medicalNote : innerList) {
+            result += medicalNote.toString() + "\n";
+        }
+        return result;
+    }
 }
