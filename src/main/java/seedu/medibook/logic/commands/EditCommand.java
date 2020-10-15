@@ -24,6 +24,7 @@ import seedu.medibook.commons.core.index.Index;
 import seedu.medibook.commons.util.CollectionUtil;
 import seedu.medibook.logic.commands.exceptions.CommandException;
 import seedu.medibook.model.Model;
+import seedu.medibook.model.medicalnote.MedicalNoteList;
 import seedu.medibook.model.patient.Address;
 import seedu.medibook.model.patient.BloodType;
 import seedu.medibook.model.patient.DateOfBirth;
@@ -91,6 +92,8 @@ public class EditCommand extends Command {
 
         Patient patientToEdit = lastShownList.get(index.getZeroBased());
         Patient editedPatient = createEditedPatient(patientToEdit, editPatientDescriptor);
+        MedicalNoteList medicalNoteList = patientToEdit.getMedicalNoteList();
+        editedPatient.setMedicalNoteList(medicalNoteList);
 
         if (!patientToEdit.isSamePatient(editedPatient) && model.hasPatient(editedPatient)) {
             throw new CommandException(MESSAGE_DUPLICATE_PATIENT);

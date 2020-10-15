@@ -228,6 +228,13 @@ public class Patient {
     }
 
     /**
+     * Returns the medical note list object within this patient.
+     */
+    public MedicalNoteList getMedicalNoteList() {
+        return medicalNoteList;
+    }
+
+    /**
      * Returns true if both patients of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two patients.
      */
