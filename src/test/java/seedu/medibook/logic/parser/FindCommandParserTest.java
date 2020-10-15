@@ -6,7 +6,7 @@ import static seedu.medibook.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.medibook.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_BLOOD_TYPE;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DOB;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_IC;
@@ -50,7 +50,7 @@ public class FindCommandParserTest {
 
         String nameArg = generateArgument(PREFIX_NAME, nameKeywords);
         String icArg = generateArgument(PREFIX_IC, icKeywords);
-        String dobArg = generateArgument(PREFIX_DOB, dobKeywords);
+        String dobArg = generateArgument(PREFIX_DATE, dobKeywords);
         String phoneArg = generateArgument(PREFIX_PHONE, phoneKeywords);
         String addressArg = generateArgument(PREFIX_ADDRESS, addressKeywords);
         String emailArg = generateArgument(PREFIX_EMAIL, emailKeywords);
@@ -70,7 +70,7 @@ public class FindCommandParserTest {
 
         String nameArgAlt = generateArgument(PREFIX_NAME, nameKeywordsAlt);
         String icArgAlt = generateArgument(PREFIX_IC, icKeywordsAlt);
-        String dobArgAlt = generateArgument(PREFIX_DOB, dobKeywordsAlt);
+        String dobArgAlt = generateArgument(PREFIX_DATE, dobKeywordsAlt);
         String phoneArgAlt = generateArgument(PREFIX_PHONE, phoneKeywordsAlt);
         String addressArgAlt = generateArgument(PREFIX_ADDRESS, addressKeywordsAlt);
         String emailArgAlt = generateArgument(PREFIX_EMAIL, emailKeywordsAlt);
@@ -83,7 +83,7 @@ public class FindCommandParserTest {
         Predicate<Patient> icPred =
                 new FieldContainsKeywordsPredicate(Arrays.asList(icKeywords), PREFIX_IC);
         Predicate<Patient> dobPred =
-                new FieldContainsKeywordsPredicate(Arrays.asList(dobKeywords), PREFIX_DOB);
+                new FieldContainsKeywordsPredicate(Arrays.asList(dobKeywords), PREFIX_DATE);
         Predicate<Patient> phonePred =
                 new FieldContainsKeywordsPredicate(Arrays.asList(phoneKeywords), PREFIX_PHONE);
         Predicate<Patient> addressPred =

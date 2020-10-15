@@ -8,6 +8,8 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.medibook.model.medicalnote.MedicalNote;
+import seedu.medibook.model.medicalnote.MedicalNoteList;
 import seedu.medibook.model.tag.Tag;
 
 /**
@@ -18,19 +20,22 @@ public class Patient {
 
     public static final String OPTIONAL_FIELD_EMPTY_MESSAGE = "N/A";
 
-    // Identity fields
+    // Compulsory fields
     private final Ic ic;
     private final Name name;
     private final DateOfBirth dateOfBirth;
     private final Phone phone;
-    private final Optional<Email> email;
 
-    // Data fields
+    // Optional fields
+    private final Optional<Email> email;
     private final Optional<Address> address;
     private final Optional<Height> height;
     private final Optional<Weight> weight;
     private final Optional<Bmi> bmi;
     private final Optional<BloodType> bloodType;
+
+    // Default empty fields
+    private final MedicalNoteList medicalNoteList = new MedicalNoteList();
     private final Set<Tag> tags = new HashSet<>();
 
     /**

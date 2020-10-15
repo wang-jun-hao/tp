@@ -3,7 +3,7 @@ package seedu.medibook.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_BLOOD_TYPE;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DOB;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_IC;
@@ -49,7 +49,7 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_IC + "IC] "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_DOB + "DATE OF BIRTH] "
+            + "[" + PREFIX_DATE + "DATE OF BIRTH] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
