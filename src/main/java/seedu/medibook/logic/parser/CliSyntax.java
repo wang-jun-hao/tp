@@ -6,6 +6,7 @@ package seedu.medibook.logic.parser;
 public class CliSyntax {
 
     /* Prefix definitions */
+    public static final Prefix PREFIX_CONTENT = new Prefix("c/");
     public static final Prefix PREFIX_IC = new Prefix("i/");
     public static final Prefix PREFIX_NAME = new Prefix("n/");
     public static final Prefix PREFIX_DATE = new Prefix("d/");
