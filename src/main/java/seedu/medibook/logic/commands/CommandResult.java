@@ -3,9 +3,6 @@ package seedu.medibook.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
-import java.util.Optional;
-
-import seedu.medibook.model.patient.Patient;
 
 /**
  * Represents the result of a command execution.
