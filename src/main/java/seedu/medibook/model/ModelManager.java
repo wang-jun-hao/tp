@@ -23,7 +23,7 @@ public class ModelManager implements Model {
     private final MediBook mediBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Patient> filteredPatients;
-    private Optional<Patient> accessedPatient;
+    private Optional<Patient> accessedPatient = Optional.empty();
 
     /**
      * Initializes a ModelManager with the given mediBook and userPrefs.

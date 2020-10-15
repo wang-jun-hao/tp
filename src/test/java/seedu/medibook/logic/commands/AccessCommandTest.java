@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.medibook.commons.core.Messages;
 import seedu.medibook.commons.core.index.Index;
+import seedu.medibook.logic.commands.exceptions.CommandException;
 import seedu.medibook.model.Model;
 import seedu.medibook.model.ModelManager;
 import seedu.medibook.model.UserPrefs;
@@ -46,8 +47,7 @@ public class AccessCommandTest {
     }
 
     @Test
-    public void execute_validIndexFilteredList_success() {
-        showPatientAtIndex(model, INDEX_FIRST_PATIENT);
+    public void execute_validIndexFilteredList_success() throws CommandException {
 
         Patient patientToAccess = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
         AccessCommand accessCommand = new AccessCommand(INDEX_FIRST_PATIENT);
@@ -57,8 +57,7 @@ public class AccessCommandTest {
                         false, false, true);
 
         Model expectedModel = new ModelManager(model.getMediBook(), new UserPrefs());
-        expectedModel.deletePatient(patientToAccess);
-        showNoPatient(expectedModel);
+        expectedModel.accessPatient(patientToAccess);
 
         assertCommandSuccess(accessCommand, model, expectedCommandResult, expectedModel);
     }
