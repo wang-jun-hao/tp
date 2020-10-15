@@ -19,7 +19,7 @@ public class PersonalDetailsCard extends UiPart<Region> {
     @FXML
     private Label cardHeader;
     @FXML
-    private HBox cardPane;
+    private HBox cardPane; // TODO: table view for details
 
     /**
      * Creates a {@code PersonalDetailsCard} for the given {@code Patient}.
