@@ -40,6 +40,8 @@ public class PatientProfile extends UiPart<Region> {
         this.medicalDetailsCard.getChildren().add(medicalDetailsCard.getRoot());
 
         List<MedicalNote> medicalNotes = new ArrayList<>(); // TODO after implementation of MedicalNote as field
+        medicalNotes.add(new MedicalNote("15-10-2020", "Charlotte Liew",
+                "- Irregular hearbeat \n- Breathing problems"));
         MedicalNotesPanel medicalNotesPanel = new MedicalNotesPanel(medicalNotes);
         this.medicalNotesPanel.getChildren().add(medicalNotesPanel.getRoot());
     }
