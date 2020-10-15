@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.medibook.logic.commands.AccessCommand;
 import seedu.medibook.logic.commands.AddCommand;
 import seedu.medibook.logic.commands.ClearCommand;
 import seedu.medibook.logic.commands.DeleteCommand;
@@ -51,6 +52,13 @@ public class MediBookParserTest {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PATIENT.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PATIENT), command);
+    }
+
+    @Test
+    public void parseCommand_access() throws Exception {
+        AccessCommand command = (AccessCommand) parser.parseCommand(
+                AccessCommand.COMMAND_WORD + " " + INDEX_FIRST_PATIENT.getOneBased());
+        assertEquals(new AccessCommand(INDEX_FIRST_PATIENT), command);
     }
 
     @Test

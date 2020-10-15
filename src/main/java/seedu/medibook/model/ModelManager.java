@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.medibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -22,6 +23,7 @@ public class ModelManager implements Model {
     private final MediBook mediBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Patient> filteredPatients;
+    private Optional<Patient> accessedPatient;
 
     /**
      * Initializes a ModelManager with the given mediBook and userPrefs.
@@ -106,6 +108,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void accessPatient(Patient patient) {
+        this.accessedPatient = Optional.of(patient);
+    }
+
+    @Override
+    public Patient getPatientToAccess() {
+        return this.accessedPatient.orElse(null);
+    }
+
+    @Override
     public void setPatient(Patient target, Patient editedPatient) {
         requireAllNonNull(target, editedPatient);
 
@@ -145,7 +157,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return mediBook.equals(other.mediBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPatients.equals(other.filteredPatients);
+                && filteredPatients.equals(other.filteredPatients)
+                && accessedPatient.equals(other.accessedPatient);
     }
 
 }
