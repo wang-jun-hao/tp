@@ -93,7 +93,7 @@ public class EditCommand extends Command {
         Patient patientToEdit = lastShownList.get(index.getZeroBased());
         Patient editedPatient = createEditedPatient(patientToEdit, editPatientDescriptor);
         MedicalNoteList medicalNoteList = patientToEdit.getMedicalNoteList();
-        editedPatient.setMedicalNoteList(medicalNoteList);
+        editedPatient.setMedicalNoteList(medicalNoteList.makeCopy());
 
         if (!patientToEdit.isSamePatient(editedPatient) && model.hasPatient(editedPatient)) {
             throw new CommandException(MESSAGE_DUPLICATE_PATIENT);

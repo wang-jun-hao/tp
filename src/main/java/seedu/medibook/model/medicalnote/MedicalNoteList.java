@@ -9,12 +9,22 @@ import java.util.List;
 public class MedicalNoteList {
     private final List<MedicalNote> innerList;
 
+    /**
+     * Constructs an empty medical note list object.
+     */
     public MedicalNoteList() {
         innerList = new LinkedList<>();
     }
 
-    public MedicalNoteList(List<MedicalNote> innerList) {
-        this.innerList = innerList;
+    /**
+     * Constructs medical note list object containing medical notes in the given list.
+     * A new copy of the list is made to be stored as the inner list, so that operations on the argument
+     * list does not affect this medical note list object.
+     * @param listOfMedicalNotes list of medical notes
+     */
+    public MedicalNoteList(List<MedicalNote> listOfMedicalNotes) {
+        List<MedicalNote> copyOfList = new LinkedList<>(listOfMedicalNotes);
+        this.innerList = copyOfList;
     }
 
     /**
@@ -23,6 +33,10 @@ public class MedicalNoteList {
      */
     public void add(MedicalNote newMedicalNote) {
         innerList.add(newMedicalNote);
+    }
+
+    public MedicalNoteList makeCopy() {
+        return new MedicalNoteList(innerList);
     }
 
     @Override
