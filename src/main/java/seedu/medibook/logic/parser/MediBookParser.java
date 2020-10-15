@@ -3,6 +3,9 @@ package seedu.medibook.logic.parser;
 import static seedu.medibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.medibook.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,6 +20,12 @@ import seedu.medibook.logic.commands.HelpCommand;
 import seedu.medibook.logic.commands.ListCommand;
 import seedu.medibook.logic.commands.NoteCommand;
 import seedu.medibook.logic.parser.exceptions.ParseException;
+import seedu.medibook.model.patient.DateOfBirth;
+import seedu.medibook.model.patient.Ic;
+import seedu.medibook.model.patient.Name;
+import seedu.medibook.model.patient.Patient;
+import seedu.medibook.model.patient.Phone;
+import seedu.medibook.model.tag.Tag;
 
 /**
  * Parses user input.
@@ -70,7 +79,10 @@ public class MediBookParser {
             return new HelpCommand();
 
         case NoteCommand.COMMAND_WORD:
-            return new NoteCommand();
+            return new NoteCommandParser(new Patient(new Ic("S9806137A"), new Name("junhao"),
+                    new DateOfBirth("19-02-1998"), new Phone("90068112"),
+                    Optional.empty(), Optional.empty(),
+                    Optional.empty(), Optional.empty(), Optional.empty(), new HashSet<Tag>())).parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

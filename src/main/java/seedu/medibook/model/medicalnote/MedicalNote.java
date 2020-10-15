@@ -8,6 +8,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
+import seedu.medibook.model.Date;
+
 /**
  * Represents a medical note entry for a Patient in MediBook, on a particular date by a particular doctor.
  * Guarantees: details are present and not null, date and doctor's names are validated, fields are immutable.
@@ -21,7 +23,7 @@ public class MedicalNote {
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private static final String NAME_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
     /** Date of medical note entry. */
-    public final LocalDate date;
+    public final Date date;
     /** Name of doctor entering the note. */
     public final String doctorName;
     /** Content of the note i.e. relevant information from patient's consultation. */
@@ -36,10 +38,10 @@ public class MedicalNote {
      */
     public MedicalNote(String dateString, String doctorName, String content) {
         requireAllNonNull(dateString, doctorName, content);
-        checkArgument(isValidDate(dateString), DATE_MESSAGE_CONSTRAINTS); // input validation for date
+        checkArgument(Date.isValidDate(dateString), DATE_MESSAGE_CONSTRAINTS); // input validation for date
         checkArgument(isValidDoctorName(doctorName), NAME_MESSAGE_CONSTRAINTS); // input validation for doctor's name
         checkArgument(isValidContent(content), CONTENT_MESSAGE_CONSTRAINTS); // input validation for content
-        this.date = LocalDate.parse(dateString, DATE_FORMATTER);
+        this.date = new Date(dateString);
         this.doctorName = doctorName;
         this.content = content;
     }
@@ -72,7 +74,7 @@ public class MedicalNote {
 
     @Override
     public String toString() {
-        return "Date: " + date.format(DATE_FORMATTER)
+        return "Date: " + date.outputValue
                 + "\nDoctor: " + doctorName
                 + "\n\nNotes: " + content;
     }

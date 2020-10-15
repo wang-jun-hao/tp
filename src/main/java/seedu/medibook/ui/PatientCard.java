@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.medibook.model.patient.DateOfBirth;
 import seedu.medibook.model.patient.Height;
 import seedu.medibook.model.patient.Patient;
 import seedu.medibook.model.patient.Weight;
@@ -67,7 +66,7 @@ public class PatientCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         ic.setText(patient.getIc().ic);
         name.setText(patient.getName().fullName);
-        dateOfBirth.setText(patient.getDateOfBirth().date.format(DateOfBirth.OUTPUT_FORMATTER));
+        dateOfBirth.setText(patient.getDateOfBirth().outputValue);
         phone.setText(patient.getPhone().value);
 
         // email

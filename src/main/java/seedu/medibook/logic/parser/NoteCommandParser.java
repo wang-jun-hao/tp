@@ -13,6 +13,8 @@ import static seedu.medibook.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -20,6 +22,7 @@ import java.util.stream.Stream;
 import seedu.medibook.logic.commands.AddCommand;
 import seedu.medibook.logic.commands.NoteCommand;
 import seedu.medibook.logic.parser.exceptions.ParseException;
+import seedu.medibook.model.medicalnote.MedicalNote;
 import seedu.medibook.model.patient.Address;
 import seedu.medibook.model.patient.BloodType;
 import seedu.medibook.model.patient.DateOfBirth;
@@ -36,6 +39,11 @@ import seedu.medibook.model.tag.Tag;
  * Parses input arguments and creates a new AddCommand object
  */
 public class NoteCommandParser implements Parser<NoteCommand> {
+    private final Patient displayedPatient;
+
+    public NoteCommandParser(Patient displayedPatient) {
+        this.displayedPatient = displayedPatient;
+    }
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
@@ -51,23 +59,19 @@ public class NoteCommandParser implements Parser<NoteCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE));
         }
 
-        String date = ParserUtil.parse
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        DateOfBirth dateOfBirth = ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DATE).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        String date = argMultimap.getValue(PREFIX_DATE).orElse(getTodayDate());
+        String name = argMultimap.getValue(PREFIX_NAME).get();
+        String content = argMultimap.getValue(PREFIX_CONTENT).get();
 
-        Optional<Email> email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL));
-        Optional<Address> address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS));
-        Optional<Height> height = ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT));
-        Optional<Weight> weight = ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT));
-        Optional<BloodType> bloodType = ParserUtil.parseBloodType(argMultimap.getValue(PREFIX_BLOOD_TYPE));
+        MedicalNote medicalNote = new MedicalNote(date, name, content);
 
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        return new NoteCommand(displayedPatient, medicalNote);
+    }
 
-        Patient patient = new Patient(ic, name, dateOfBirth, phone, email, address, height, weight,
-                bloodType, tagList);
-
-        return new NoteCommand(patient);
+    private String getTodayDate() {
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        return formatter.format(date);
     }
 
     /**

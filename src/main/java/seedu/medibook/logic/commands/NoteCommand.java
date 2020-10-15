@@ -31,40 +31,32 @@ public class NoteCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New medical note entry added: %1$s";
     public static final String MESSAGE_DUPLICATE_NOTE = "This medical note entry already exists in the system";
 
-    private final MedicalNote toAdd;
-
-    public NoteCommand() {
-        this.toAdd = null;
-    }
+    private final Patient displayedPatient;
+    private final MedicalNote newMedicalNote;
 
     /**
      * Creates an AddCommand to add the specified {@code Patient}
      */
-    public NoteCommand(MedicalNote medicalNote) {
-        requireNonNull(medicalNote);
-        toAdd = medicalNote;
+    public NoteCommand(Patient displayedPatient, MedicalNote newMedicalNote) {
+        requireNonNull(newMedicalNote);
+        this.displayedPatient = displayedPatient;
+        this.newMedicalNote = newMedicalNote;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        /*
-        if (model.hasPatient(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PATIENT);
-        }
 
-        model.addPatient(toAdd);
+        assert model.hasPatient(displayedPatient) : "Patient in context does not exist in model";
 
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-        */
-        return new CommandResult("Hello from NoteCommand");
+        System.out.println(displayedPatient);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, newMedicalNote));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddCommand // instanceof handles nulls
-                && toAdd.equals(((NoteCommand) other).toAdd));
+                && newMedicalNote.equals(((NoteCommand) other).newMedicalNote));
     }
 }
