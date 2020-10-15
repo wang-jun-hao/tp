@@ -19,14 +19,17 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private MediBookStorage mediBookStorage;
     private UserPrefsStorage userPrefsStorage;
+    private MedicalNoteListStorage medicalNoteListStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code MediBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(MediBookStorage mediBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(MediBookStorage mediBookStorage, UserPrefsStorage userPrefsStorage,
+                          MedicalNoteListStorage medicalNoteListStorage) {
         super();
         this.mediBookStorage = mediBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.medicalNoteListStorage = medicalNoteListStorage;
     }
 
     // ================ UserPrefs methods ==============================

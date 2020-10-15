@@ -23,8 +23,10 @@ import seedu.medibook.model.ReadOnlyUserPrefs;
 import seedu.medibook.model.UserPrefs;
 import seedu.medibook.model.util.SampleDataUtil;
 import seedu.medibook.storage.JsonMediBookStorage;
+import seedu.medibook.storage.JsonMedicalNoteListStorage;
 import seedu.medibook.storage.JsonUserPrefsStorage;
 import seedu.medibook.storage.MediBookStorage;
+import seedu.medibook.storage.MedicalNoteListStorage;
 import seedu.medibook.storage.Storage;
 import seedu.medibook.storage.StorageManager;
 import seedu.medibook.storage.UserPrefsStorage;
@@ -56,8 +58,11 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        MediBookStorage mediBookStorage = new JsonMediBookStorage(userPrefs.getMediBookFilePath());
-        storage = new StorageManager(mediBookStorage, userPrefsStorage);
+        Path mediBookPath = userPrefs.getMediBookFilePath();
+        MediBookStorage mediBookStorage = new JsonMediBookStorage(mediBookPath);
+        Path medicalNoteListPath = mediBookPath.resolve(JsonMedicalNoteListStorage.DIR_NAME);
+        MedicalNoteListStorage medicalNoteListStorage = new JsonMedicalNoteListStorage(medicalNoteListPath);
+        storage = new StorageManager(mediBookStorage, userPrefsStorage, medicalNoteListStorage);
 
         initLogging(config);
 
