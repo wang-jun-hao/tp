@@ -3,6 +3,7 @@ package seedu.medibook.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.medibook.commons.util.AppUtil.checkArgument;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -12,8 +13,8 @@ import java.time.format.DateTimeParseException;
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class Date {
-    public static final String MESSAGE_CONSTRAINTS = "Date should be of the format \"DD-MM-YYYY\""
-            + "where D, M and Y represent digits of the day, month and year of the DOB respectively.";
+    public static final String MESSAGE_CONSTRAINTS = "Date should be of the format \"DD-MM-YYYY\" "
+            + "where D, M and Y represent digits of the day, month and year of the date respectively.";
     public static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("d MMM yyyy");
     private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public final String inputValue;
@@ -51,6 +52,16 @@ public class Date {
     public boolean isOnOrBeforeToday() {
         LocalDate todayDate = LocalDate.now();
         return date.isBefore(todayDate) || date.isEqual(todayDate);
+    }
+
+    /**
+     * Returns today's date as a string.
+     * @return A string representing today's date in the format dd-MM-yyyy
+     */
+    public static String getTodayDate() {
+        java.util.Date date = new java.util.Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        return formatter.format(date);
     }
 
     @Override

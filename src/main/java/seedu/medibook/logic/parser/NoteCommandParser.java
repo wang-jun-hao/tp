@@ -14,7 +14,6 @@ import static seedu.medibook.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -22,6 +21,7 @@ import java.util.stream.Stream;
 import seedu.medibook.logic.commands.AddCommand;
 import seedu.medibook.logic.commands.NoteCommand;
 import seedu.medibook.logic.parser.exceptions.ParseException;
+import seedu.medibook.model.Date;
 import seedu.medibook.model.medicalnote.MedicalNote;
 import seedu.medibook.model.patient.Address;
 import seedu.medibook.model.patient.BloodType;
@@ -59,19 +59,13 @@ public class NoteCommandParser implements Parser<NoteCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE));
         }
 
-        String date = argMultimap.getValue(PREFIX_DATE).orElse(getTodayDate());
+        Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).orElse(Date.getTodayDate()));
         String name = argMultimap.getValue(PREFIX_NAME).get();
         String content = argMultimap.getValue(PREFIX_CONTENT).get();
 
         MedicalNote medicalNote = new MedicalNote(date, name, content);
 
         return new NoteCommand(displayedPatient, medicalNote);
-    }
-
-    private String getTodayDate() {
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        return formatter.format(date);
     }
 
     /**

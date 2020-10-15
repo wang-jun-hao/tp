@@ -28,7 +28,7 @@ public class NoteCommand extends Command {
             + PREFIX_NAME + "John Doe "
             + PREFIX_CONTENT + "Patient has high fever and cough.";
 
-    public static final String MESSAGE_SUCCESS = "New medical note entry added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New medical note entry added:\n%1$s";
     public static final String MESSAGE_DUPLICATE_NOTE = "This medical note entry already exists in the system";
 
     private final Patient displayedPatient;
