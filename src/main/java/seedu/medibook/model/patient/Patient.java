@@ -212,6 +212,14 @@ public class Patient {
     }
 
     /**
+     * Adds medical note to the list of medical notes in this patient
+     * @param newMedicalNote new medical note object to be added to patient
+     */
+    public void addMedicalNote(MedicalNote newMedicalNote) {
+        medicalNoteList.add(newMedicalNote);
+    }
+
+    /**
      * Returns true if both patients of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two patients.
      */
