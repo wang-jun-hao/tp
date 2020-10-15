@@ -5,7 +5,6 @@ import static seedu.medibook.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
