@@ -1,7 +1,5 @@
 package seedu.medibook.model.medicalnote;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;

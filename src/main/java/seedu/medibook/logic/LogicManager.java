@@ -53,6 +53,10 @@ public class LogicManager implements Logic {
             // We can deduce that the previous line of code modifies model in some way
             // since it's being stored here.
             storage.saveMediBook(model.getMediBook());
+            Patient patient = model.getPatientToAccess();
+            if (patient != null) {
+                storage.saveMedicalNoteList(patient.getMedicalNoteList(), patient.getIc());
+            }
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }

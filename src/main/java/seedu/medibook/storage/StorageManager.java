@@ -8,8 +8,10 @@ import java.util.logging.Logger;
 import seedu.medibook.commons.core.LogsCenter;
 import seedu.medibook.commons.exceptions.DataConversionException;
 import seedu.medibook.model.ReadOnlyMediBook;
+import seedu.medibook.model.ReadOnlyMedicalNoteList;
 import seedu.medibook.model.ReadOnlyUserPrefs;
 import seedu.medibook.model.UserPrefs;
+import seedu.medibook.model.patient.Ic;
 
 /**
  * Manages storage of MediBook data in local storage.
@@ -79,4 +81,27 @@ public class StorageManager implements Storage {
         mediBookStorage.saveMediBook(mediBook, filePath);
     }
 
+    // ============================== MedicalNoteList methods ==============================
+    @Override
+    public Optional<ReadOnlyMedicalNoteList> readMedicalNoteList(Ic ic) throws DataConversionException, IOException {
+        return readMedicalNoteList(mediBookStorage.getMediBookFilePath(), ic);
+    }
+
+    @Override
+    public Optional<ReadOnlyMedicalNoteList> readMedicalNoteList(Path filePath, Ic ic)
+            throws DataConversionException, IOException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return medicalNoteListStorage.readMedicalNoteList(filePath, ic);
+    }
+
+    @Override
+    public void saveMedicalNoteList(ReadOnlyMedicalNoteList medicalNoteList, Ic ic) throws IOException {
+        saveMedicalNoteList(medicalNoteList, mediBookStorage.getMediBookFilePath(), ic);
+    }
+
+    @Override
+    public void saveMedicalNoteList(ReadOnlyMedicalNoteList medicalNoteList, Path filePath, Ic ic) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        medicalNoteListStorage.saveMedicalNoteList(medicalNoteList, filePath, ic);
+    }
 }
