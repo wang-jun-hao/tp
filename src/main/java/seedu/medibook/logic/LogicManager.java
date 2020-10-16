@@ -2,6 +2,7 @@ package seedu.medibook.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -38,7 +39,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Patient getPatientToAccess() {
+    public Optional<Patient> getPatientToAccess() {
         return model.getPatientToAccess();
     }
 

@@ -113,8 +113,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Patient getPatientToAccess() {
-        return this.accessedPatient.orElse(null);
+    public Optional<Patient> getPatientToAccess() {
+        return this.accessedPatient;
     }
 
     @Override

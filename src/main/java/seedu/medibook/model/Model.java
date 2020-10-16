@@ -1,6 +1,7 @@
 package seedu.medibook.model;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -75,7 +76,7 @@ public interface Model {
      */
     void accessPatient(Patient patient);
 
-    Patient getPatientToAccess();
+    Optional<Patient> getPatientToAccess();
 
     /**
      * Replaces the given patient {@code target} with {@code editedPatient}.

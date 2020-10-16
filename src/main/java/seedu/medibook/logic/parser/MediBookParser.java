@@ -3,8 +3,6 @@ package seedu.medibook.logic.parser;
 import static seedu.medibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.medibook.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
-import java.util.HashSet;
-import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,12 +18,6 @@ import seedu.medibook.logic.commands.HelpCommand;
 import seedu.medibook.logic.commands.ListCommand;
 import seedu.medibook.logic.commands.NoteCommand;
 import seedu.medibook.logic.parser.exceptions.ParseException;
-import seedu.medibook.model.patient.DateOfBirth;
-import seedu.medibook.model.patient.Ic;
-import seedu.medibook.model.patient.Name;
-import seedu.medibook.model.patient.Patient;
-import seedu.medibook.model.patient.Phone;
-import seedu.medibook.model.tag.Tag;
 
 /**
  * Parses user input.
