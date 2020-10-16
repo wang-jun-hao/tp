@@ -53,13 +53,13 @@ class NoteCommandParserTest {
     @Test
     public void parse_optionalDateMissing_success() {
         assertParseSuccess(parser, NOTE_DOCTOR_DESC + NOTE_CONTENT_DESC,
-                new NoteCommand(new MedicalNote(new Date(VALID_NON_FUTURE_DATE, true),
-                        VALID_DOCTOR_NAME, VALID_CONTENT)));
+                new NoteCommand(new MedicalNote(new Date(), VALID_DOCTOR_NAME, VALID_CONTENT)));
     }
 
     @Test
     public void parse_invalidValue_failure() {
         // invalid date
-        assertParseFailure(parser, INVALID_NOTE_DATE_DESC, Date.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NOTE_DATE_DESC + NOTE_DOCTOR_DESC + NOTE_CONTENT_DESC,
+                Date.MESSAGE_CONSTRAINTS);
     }
 }

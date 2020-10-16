@@ -67,7 +67,7 @@ public class NoteCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddCommand // instanceof handles nulls
+                || (other instanceof NoteCommand // instanceof handles nulls
                 && newMedicalNote.equals(((NoteCommand) other).newMedicalNote));
     }
 }

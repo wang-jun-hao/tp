@@ -16,17 +16,19 @@ public class Date {
     public static final String MESSAGE_CONSTRAINTS = "Date should be of the format \"DD-MM-YYYY\" "
             + "where D, M and Y represent digits of the day, month and year of the date respectively.";
     public static final String MESSAGE_NON_FUTURE = "Date should not be in the future.";
-    public static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("d MMM yyyy");
-    private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private static final String INPUT_STRING_PATTERN = "dd-MM-yyyy";
+    private static final String OUTPUT_STRING_PATTERN = "d MMM yyyy";
+    private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern(INPUT_STRING_PATTERN);
+    private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern(OUTPUT_STRING_PATTERN);
     public final String inputValue;
     public final String outputValue;
     public final LocalDate date;
     private boolean isNonFuture;
 
     /**
-     * Constructs a {@code Date}.
-     *
-     * @param dateString A valid date.
+     * Constructs a {@code Date} set to the given date in string form.
+     * @param dateString a valid string representing the date
+     * @param isNonFuture true if date object represents a date in the past or today
      */
     public Date(String dateString, boolean isNonFuture) {
         requireNonNull(dateString);
@@ -38,6 +40,19 @@ public class Date {
         inputValue = dateString;
         outputValue = date.format(OUTPUT_FORMATTER);
         this.isNonFuture = isNonFuture;
+    }
+
+    /**
+     * Constructs a {@code Date} set to today's date.
+     */
+    public Date() {
+        java.util.Date todayDate = new java.util.Date();
+        SimpleDateFormat formatter = new SimpleDateFormat(INPUT_STRING_PATTERN);
+        String todayDateInString = formatter.format(todayDate);
+        date = LocalDate.parse(todayDateInString, INPUT_FORMATTER);
+        inputValue = todayDateInString;
+        outputValue = date.format(OUTPUT_FORMATTER);
+        isNonFuture = false;
     }
 
     /**
