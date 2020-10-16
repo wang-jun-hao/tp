@@ -40,7 +40,7 @@ public class DateOfBirth {
             return false;
         }
         try {
-            Date date = new Date(dobString, true);
+            new Date(dobString, true);
             return true;
         } catch (IllegalArgumentException e) {
             return false;

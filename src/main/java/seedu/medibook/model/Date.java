@@ -23,7 +23,6 @@ public class Date {
     public final String inputValue;
     public final String outputValue;
     public final LocalDate date;
-    private boolean isNonFuture;
 
     /**
      * Constructs a {@code Date} set to the given date in string form.
@@ -39,7 +38,6 @@ public class Date {
         }
         inputValue = dateString;
         outputValue = date.format(OUTPUT_FORMATTER);
-        this.isNonFuture = isNonFuture;
     }
 
     /**
@@ -52,7 +50,6 @@ public class Date {
         date = LocalDate.parse(todayDateInString, INPUT_FORMATTER);
         inputValue = todayDateInString;
         outputValue = date.format(OUTPUT_FORMATTER);
-        isNonFuture = false;
     }
 
     /**
