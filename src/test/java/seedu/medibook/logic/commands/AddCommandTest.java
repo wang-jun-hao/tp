@@ -114,6 +114,14 @@ public class AddCommandTest {
         }
 
         @Override
+        public void accessPatient(Patient patient) {}
+
+        @Override
+        public Patient getPatientToAccess() {
+            return null;
+        }
+
+        @Override
         public void setMediBook(ReadOnlyMediBook newData) {
             throw new AssertionError("This method should not be called.");
         }

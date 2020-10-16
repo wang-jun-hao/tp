@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.medibook.logic.commands.AccessCommand;
 import seedu.medibook.logic.commands.AddCommand;
 import seedu.medibook.logic.commands.ClearCommand;
 import seedu.medibook.logic.commands.Command;
@@ -79,6 +80,9 @@ public class MediBookParser {
 
         case NoteCommand.COMMAND_WORD:
             return new NoteCommandParser().parse(arguments);
+
+        case AccessCommand.COMMAND_WORD:
+            return new AccessCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
