@@ -89,7 +89,7 @@ public class StorageManager implements Storage {
 
     @Override
     public Optional<ReadOnlyMedicalNoteList> readMedicalNoteList(Ic ic) throws DataConversionException, IOException {
-        return readMedicalNoteList(mediBookStorage.getMediBookFilePath(), ic);
+        return readMedicalNoteList(medicalNoteListStorage.getMedicalNotesDirPath(), ic);
     }
 
     @Override
