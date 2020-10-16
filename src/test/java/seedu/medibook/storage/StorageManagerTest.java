@@ -26,7 +26,9 @@ public class StorageManagerTest {
     public void setUp() {
         JsonMediBookStorage mediBookStorage = new JsonMediBookStorage(getTempFilePath("mb"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(mediBookStorage, userPrefsStorage);
+        JsonMedicalNoteListStorage medicalNoteListStorage =
+                new JsonMedicalNoteListStorage(getTempFilePath("mnl"));
+        storageManager = new StorageManager(mediBookStorage, userPrefsStorage, medicalNoteListStorage);
     }
 
     private Path getTempFilePath(String fileName) {

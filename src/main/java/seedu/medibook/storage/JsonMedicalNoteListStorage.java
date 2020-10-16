@@ -23,8 +23,8 @@ import seedu.medibook.model.patient.Ic;
  */
 public class JsonMedicalNoteListStorage implements MedicalNoteListStorage {
 
-    public static final String DIR_NAME = "medicalnotes";
-    private static final String FORMAT_JSON_NAME = "medicalnotes.json";
+    public static final String NAME_DIR = "medicalnotes";
+    private static final String NAME_EXTENSION = ".json";
     private static final Logger logger = LogsCenter.getLogger(JsonMedicalNoteListStorage.class);
 
     private final Path filePath;
@@ -47,7 +47,11 @@ public class JsonMedicalNoteListStorage implements MedicalNoteListStorage {
     public Optional<ReadOnlyMedicalNoteList> readMedicalNoteList(Path filePath, Ic ic) throws DataConversionException {
         requireNonNull(filePath);
 
-        Path medicalNotesPath = filePath.resolve(ic.toString()).resolve(FORMAT_JSON_NAME);
+        Path medicalNotesPath = filePath.resolve(NAME_DIR).resolve(ic.toString() + NAME_EXTENSION);
+        if (!FileUtil.isFileExists(medicalNotesPath)) {
+            return Optional.empty();
+        }
+
         Optional<JsonSerializableMedicalNoteList> jsonMedicalNoteList = JsonUtil.readJsonFile(
                 medicalNotesPath, JsonSerializableMedicalNoteList.class);
         if (!jsonMedicalNoteList.isPresent()) {
@@ -76,27 +80,9 @@ public class JsonMedicalNoteListStorage implements MedicalNoteListStorage {
         requireNonNull(medicalNoteList);
         requireNonNull(filePath);
 
-        Path medicalNotesPath = filePath.resolve(ic.toString()).resolve(FORMAT_JSON_NAME);
+        Path medicalNotesPath = filePath.resolve(NAME_DIR).resolve(ic.toString() + NAME_EXTENSION);
         FileUtil.createIfMissing(medicalNotesPath);
         JsonUtil.saveJsonFile(new JsonSerializableMedicalNoteList(medicalNoteList), medicalNotesPath);
-    }
-
-    public static void main(String[] args) {
-        MedicalNoteList foo = new MedicalNoteList();
-        foo.add(new MedicalNote("12-12-2020", "banana man", "idk what's happening"));
-        foo.add(new MedicalNote("11-11-2020", "banana woman", "idk what's happening2"));
-
-        try {
-            JsonMedicalNoteListStorage s = new JsonMedicalNoteListStorage(Paths.get("abc", "def"));
-            s.saveMedicalNoteList(foo, new Ic("S9876543Z"));
-            ReadOnlyMedicalNoteList r = s.readMedicalNoteList(new Ic("S9876543Z")).get();
-            r.getMedicalNoteList().forEach(System.out::println);
-
-        } catch (IOException | DataConversionException io) {
-            System.out.println("asdasdsadasd");
-        }
-
-
     }
 
 }
