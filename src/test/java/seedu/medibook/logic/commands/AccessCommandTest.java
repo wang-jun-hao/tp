@@ -7,6 +7,7 @@ import static seedu.medibook.logic.commands.CommandTestUtil.assertCommandSuccess
 import static seedu.medibook.logic.commands.CommandTestUtil.showPatientAtIndex;
 import static seedu.medibook.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
 import static seedu.medibook.testutil.TypicalIndexes.INDEX_SECOND_PATIENT;
+import static seedu.medibook.testutil.TypicalIndexes.INDEX_THIRD_PATIENT;
 import static seedu.medibook.testutil.TypicalPatients.getTypicalMediBook;
 
 import org.junit.jupiter.api.Test;
@@ -69,6 +70,16 @@ public class AccessCommandTest {
         Index outOfBoundIndex = INDEX_SECOND_PATIENT;
         // ensures that outOfBoundIndex is still in bounds of medi book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getMediBook().getPatientList().size());
+
+        AccessCommand accessCommand = new AccessCommand(outOfBoundIndex);
+
+        assertCommandFailure(accessCommand, model, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidOutOfBoundsIndexFilteredList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPatientList().size() + 1);
+        showPatientAtIndex(model, INDEX_FIRST_PATIENT);
 
         AccessCommand accessCommand = new AccessCommand(outOfBoundIndex);
 
