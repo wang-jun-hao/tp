@@ -76,6 +76,16 @@ public class AccessCommandTest {
     }
 
     @Test
+    public void execute_invalidOutOfBoundsIndexFilteredList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPatientList().size() + 1);
+        showPatientAtIndex(model, INDEX_FIRST_PATIENT);
+
+        AccessCommand accessCommand = new AccessCommand(outOfBoundIndex);
+
+        assertCommandFailure(accessCommand, model, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
+    }
+
+    @Test
     public void equals() {
         AccessCommand accessFirstCommand = new AccessCommand(INDEX_FIRST_PATIENT);
         AccessCommand accessSecondCommand = new AccessCommand(INDEX_SECOND_PATIENT);
