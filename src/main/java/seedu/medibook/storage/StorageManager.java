@@ -8,9 +8,9 @@ import java.util.logging.Logger;
 import seedu.medibook.commons.core.LogsCenter;
 import seedu.medibook.commons.exceptions.DataConversionException;
 import seedu.medibook.model.ReadOnlyMediBook;
-import seedu.medibook.model.ReadOnlyMedicalNoteList;
 import seedu.medibook.model.ReadOnlyUserPrefs;
 import seedu.medibook.model.UserPrefs;
+import seedu.medibook.model.medicalnote.ReadOnlyMedicalNoteList;
 import seedu.medibook.model.patient.Ic;
 
 /**

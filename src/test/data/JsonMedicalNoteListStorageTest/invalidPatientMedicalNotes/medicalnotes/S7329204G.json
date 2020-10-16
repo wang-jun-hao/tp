@@ -1,9 +1,5 @@
 {
   "medical notes": [ {
-    "date" : "07-03-2020",
-    "doctor name" : "Dr Farnsworth",
-    "content" : "Good news everyone!"
-  }, {
     "date" : "07-03-invalid",
     "doctor name" : "Dr Zoidberg",
     "content" : "Woop woop woop woop woop!"

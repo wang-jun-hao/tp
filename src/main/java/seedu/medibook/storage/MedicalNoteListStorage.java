@@ -5,8 +5,8 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.medibook.commons.exceptions.DataConversionException;
-import seedu.medibook.model.ReadOnlyMedicalNoteList;
 import seedu.medibook.model.medicalnote.MedicalNoteList;
+import seedu.medibook.model.medicalnote.ReadOnlyMedicalNoteList;
 import seedu.medibook.model.patient.Ic;
 
 /**

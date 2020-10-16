@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -13,9 +12,7 @@ import seedu.medibook.commons.exceptions.DataConversionException;
 import seedu.medibook.commons.exceptions.IllegalValueException;
 import seedu.medibook.commons.util.FileUtil;
 import seedu.medibook.commons.util.JsonUtil;
-import seedu.medibook.model.ReadOnlyMedicalNoteList;
-import seedu.medibook.model.medicalnote.MedicalNote;
-import seedu.medibook.model.medicalnote.MedicalNoteList;
+import seedu.medibook.model.medicalnote.ReadOnlyMedicalNoteList;
 import seedu.medibook.model.patient.Ic;
 
 /**
@@ -46,6 +43,7 @@ public class JsonMedicalNoteListStorage implements MedicalNoteListStorage {
      */
     public Optional<ReadOnlyMedicalNoteList> readMedicalNoteList(Path filePath, Ic ic) throws DataConversionException {
         requireNonNull(filePath);
+        requireNonNull(ic);
 
         Path medicalNotesPath = filePath.resolve(NAME_DIR).resolve(ic.toString() + NAME_EXTENSION);
         if (!FileUtil.isFileExists(medicalNotesPath)) {

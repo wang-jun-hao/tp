@@ -1,8 +1,6 @@
-package seedu.medibook.model;
+package seedu.medibook.model.medicalnote;
 
 import java.util.List;
-
-import seedu.medibook.model.medicalnote.MedicalNote;
 
 /**
  * Unmodifiable view of a medical notes list

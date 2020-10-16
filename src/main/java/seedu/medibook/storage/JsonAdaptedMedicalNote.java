@@ -5,16 +5,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.medibook.commons.exceptions.IllegalValueException;
 import seedu.medibook.model.medicalnote.MedicalNote;
-import seedu.medibook.model.patient.DateOfBirth;
 
 /**
  * Jackson-friendly version of {@link MedicalNote}.
  */
 class JsonAdaptedMedicalNote {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "MedicalNote's %s field is missing!";
+    public static final String MESSAGE_FORMAT_MISSING_FIELD = "MedicalNote's %s field is missing!";
+    public static final String MESSAGE_INVALID_DATE_FIELD = "MedicalNote's Date field is invalid!";
+    public static final String FIELD_CONTENT = "Content";
+    public static final String FIELD_DATE = "Date";
+    public static final String FIELD_DOCTOR_NAME = "Docter Name";
 
     public final String date;
+    @JsonProperty("doctor name")
     public final String doctorName;
     public final String content;
 
@@ -22,7 +26,7 @@ class JsonAdaptedMedicalNote {
      * Constructs a {@code JsonAdaptedMedicalNote} with the given patient details.
      */
     @JsonCreator
-    public JsonAdaptedMedicalNote(@JsonProperty("date") String date, @JsonProperty("doctorName") String doctorName,
+    public JsonAdaptedMedicalNote(@JsonProperty("date") String date, @JsonProperty("doctor name") String doctorName,
                                   @JsonProperty("content") String content) {
         this.date = date;
         this.doctorName = doctorName;
@@ -45,20 +49,23 @@ class JsonAdaptedMedicalNote {
      */
     public MedicalNote toModelType() throws IllegalValueException {
         if (date == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Date"));
+            throw new IllegalValueException(String.format(MESSAGE_FORMAT_MISSING_FIELD, FIELD_DATE));
+        }
+
+        if (!MedicalNote.isValidDate(date)) {
+            throw new IllegalValueException(MESSAGE_INVALID_DATE_FIELD);
         }
 
         final String modelDate = date;
 
         if (doctorName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Doctor Name"));
+            throw new IllegalValueException(String.format(MESSAGE_FORMAT_MISSING_FIELD, FIELD_DOCTOR_NAME));
         }
 
         final String modelDoctorName = doctorName;
 
         if (content == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    DateOfBirth.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MESSAGE_FORMAT_MISSING_FIELD, FIELD_CONTENT));
         }
 
         final String modelContent = content;

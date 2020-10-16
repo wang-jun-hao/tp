@@ -9,23 +9,24 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.medibook.commons.exceptions.IllegalValueException;
-import seedu.medibook.model.ReadOnlyMedicalNoteList;
 import seedu.medibook.model.medicalnote.MedicalNote;
 import seedu.medibook.model.medicalnote.MedicalNoteList;
+import seedu.medibook.model.medicalnote.ReadOnlyMedicalNoteList;
 
 /**
  * An Immutable MedicalNoteList that is serializable to JSON format.
  */
-@JsonRootName(value = "medicalNotes")
+@JsonRootName(value = "medical notes")
 class JsonSerializableMedicalNoteList {
 
+    @JsonProperty("medical notes")
     private final List<JsonAdaptedMedicalNote> medicalNotes = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableMedicalNoteList} with the given medical notes.
      */
     @JsonCreator
-    public JsonSerializableMedicalNoteList(@JsonProperty("medicalNotes") List<JsonAdaptedMedicalNote> medicalNotes) {
+    public JsonSerializableMedicalNoteList(@JsonProperty("medical notes") List<JsonAdaptedMedicalNote> medicalNotes) {
         this.medicalNotes.addAll(medicalNotes);
     }
 

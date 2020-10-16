@@ -4,8 +4,6 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import seedu.medibook.model.ReadOnlyMedicalNoteList;
-
 /**
  * Represents a list of medical notes for a Patient in MediBook.
  */
@@ -62,5 +60,19 @@ public class MedicalNoteList implements ReadOnlyMedicalNoteList {
             result += medicalNote.toString() + "\n";
         }
         return result;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof MedicalNoteList)) {
+            return false;
+        }
+
+        MedicalNoteList otherMedicalNotes = (MedicalNoteList) other;
+        return innerList.equals(otherMedicalNotes.innerList);
     }
 }
