@@ -78,10 +78,7 @@ public class MediBookParser {
             return new HelpCommand();
 
         case NoteCommand.COMMAND_WORD:
-            return new NoteCommandParser(new Patient(new Ic("S9806137A"), new Name("junhao"),
-                    new DateOfBirth("19-02-1998"), new Phone("90068112"),
-                    Optional.empty(), Optional.empty(),
-                    Optional.empty(), Optional.empty(), Optional.empty(), new HashSet<Tag>())).parse(arguments);
+            return new NoteCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
