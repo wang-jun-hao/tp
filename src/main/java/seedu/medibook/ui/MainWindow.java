@@ -189,7 +189,7 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowProfile()) {
-                handleProfile(logic.getPatientToAccess());
+                handleProfile(logic.getPatientToAccess().get());
             }
 
             if (commandResult.isShowHelp()) {
