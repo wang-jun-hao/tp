@@ -10,6 +10,9 @@ import seedu.medibook.logic.commands.exceptions.CommandException;
 import seedu.medibook.model.Model;
 import seedu.medibook.model.patient.Patient;
 
+/**
+ * Accesses a patient's profile in the medi book.
+ */
 public class AccessCommand extends Command {
 
     public static final String COMMAND_WORD = "access";

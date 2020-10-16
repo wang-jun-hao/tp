@@ -48,5 +48,8 @@ public interface Logic {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
+    /**
+     * Returns the current patient accessed by medi book.
+     */
     Patient getPatientToAccess();
 }
