@@ -27,7 +27,7 @@ public class JsonSerializableMedicalNoteListTest {
         JsonSerializableMedicalNoteList dataFromFile = JsonUtil.readJsonFile(TYPICAL_PATIENTS_MEDICAL_NOTES,
                 JsonSerializableMedicalNoteList.class).get();
         MedicalNoteList medicalNotesFromFile = dataFromFile.toModelType();
-        MedicalNoteList typicalPatientsMedicalNotes = TypicalMedicalNotes.getTypicalMedicalNotes();
+        MedicalNoteList typicalPatientsMedicalNotes = TypicalMedicalNotes.getTypicalMedicalNoteList();
         assertEquals(medicalNotesFromFile, typicalPatientsMedicalNotes);
     }
 

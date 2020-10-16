@@ -29,7 +29,7 @@ public class TypicalMedicalNotes {
     /**
      * Returns a {@code MedicalNoteList} with all the typical medical notes.
      */
-    public static MedicalNoteList getTypicalMedicalNotes() {
+    public static MedicalNoteList getTypicalMedicalNoteList() {
         MedicalNoteList medicalNotes = new MedicalNoteList();
         medicalNotes.add(VALID_MEDICAL_NOTE1);
         medicalNotes.add(VALID_MEDICAL_NOTE2);

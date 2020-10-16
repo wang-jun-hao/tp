@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.medibook.testutil.Assert.assertThrows;
 import static seedu.medibook.testutil.TypicalMedicalNotes.VALID_MEDICAL_NOTE1;
 import static seedu.medibook.testutil.TypicalMedicalNotes.VALID_MEDICAL_NOTE2;
-import static seedu.medibook.testutil.TypicalMedicalNotes.getTypicalMedicalNotes;
+import static seedu.medibook.testutil.TypicalMedicalNotes.getTypicalMedicalNoteList;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -68,7 +68,7 @@ public class JsonMedicalNoteListStorageTest {
     @Test
     public void readAndSaveMedicalNoteList_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempMedicalNotes");
-        MedicalNoteList original = getTypicalMedicalNotes();
+        MedicalNoteList original = getTypicalMedicalNoteList();
         JsonMedicalNoteListStorage jsonMedicalNoteListStorage = new JsonMedicalNoteListStorage(filePath);
 
         // Save in new file and read back
