@@ -13,6 +13,12 @@ import seedu.medibook.model.patient.Ic;
  * Represents a storage for {@link MedicalNoteList}.
  */
 public interface MedicalNoteListStorage {
+
+    /**
+     * Returns the file path of the data file.
+     */
+    Path getMedicalNotesDirPath();
+
     /**
      * Returns MedicalNoteList data as a {@link ReadOnlyMedicalNoteList}.
      *   Returns {@code Optional.empty()} if storage file is not found.

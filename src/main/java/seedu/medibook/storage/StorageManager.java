@@ -83,6 +83,11 @@ public class StorageManager implements Storage {
 
     // ============================== MedicalNoteList methods ==============================
     @Override
+    public Path getMedicalNotesDirPath() {
+        return medicalNoteListStorage.getMedicalNotesDirPath();
+    }
+
+    @Override
     public Optional<ReadOnlyMedicalNoteList> readMedicalNoteList(Ic ic) throws DataConversionException, IOException {
         return readMedicalNoteList(mediBookStorage.getMediBookFilePath(), ic);
     }
@@ -96,7 +101,7 @@ public class StorageManager implements Storage {
 
     @Override
     public void saveMedicalNoteList(ReadOnlyMedicalNoteList medicalNoteList, Ic ic) throws IOException {
-        saveMedicalNoteList(medicalNoteList, mediBookStorage.getMediBookFilePath(), ic);
+        saveMedicalNoteList(medicalNoteList, medicalNoteListStorage.getMedicalNotesDirPath(), ic);
     }
 
     @Override

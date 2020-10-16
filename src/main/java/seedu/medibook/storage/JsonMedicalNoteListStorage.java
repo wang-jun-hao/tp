@@ -31,6 +31,11 @@ public class JsonMedicalNoteListStorage implements MedicalNoteListStorage {
     }
 
     @Override
+    public Path getMedicalNotesDirPath() {
+        return filePath;
+    }
+
+    @Override
     public Optional<ReadOnlyMedicalNoteList> readMedicalNoteList(Ic ic) throws DataConversionException {
         return readMedicalNoteList(filePath, ic);
     }
