@@ -16,7 +16,7 @@ import seedu.medibook.model.medicalnote.ReadOnlyMedicalNoteList;
 import seedu.medibook.model.patient.Ic;
 
 /**
- * A class to access MediBook data stored as a json file on the hard disk.
+ * A class to access MedicalNoteList data stored as a json file on the hard disk.
  */
 public class JsonMedicalNoteListStorage implements MedicalNoteListStorage {
 

@@ -96,7 +96,7 @@ public class JsonMedicalNoteListStorageTest {
     }
 
     /**
-     * Saves {@code mediBook} at the specified {@code filePath}.
+     * Saves {@code medicalNoteList} at the specified {@code filePath}.
      */
     private void saveMedicalNoteList(ReadOnlyMedicalNoteList medicalNoteList, String filePath) {
         try {
