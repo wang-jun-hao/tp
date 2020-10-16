@@ -38,6 +38,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public Patient getPatientToAccess() {
+        return model.getPatientToAccess();
+    }
+
+    @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
 
         // Logging, safe to ignore
