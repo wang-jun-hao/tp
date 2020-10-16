@@ -7,7 +7,6 @@ import static seedu.medibook.logic.commands.CommandTestUtil.assertCommandSuccess
 import static seedu.medibook.logic.commands.CommandTestUtil.showPatientAtIndex;
 import static seedu.medibook.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
 import static seedu.medibook.testutil.TypicalIndexes.INDEX_SECOND_PATIENT;
-import static seedu.medibook.testutil.TypicalIndexes.INDEX_THIRD_PATIENT;
 import static seedu.medibook.testutil.TypicalPatients.getTypicalMediBook;
 
 import org.junit.jupiter.api.Test;
