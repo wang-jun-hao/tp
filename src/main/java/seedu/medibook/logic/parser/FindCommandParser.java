@@ -3,7 +3,7 @@ package seedu.medibook.logic.parser;
 import static seedu.medibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_BLOOD_TYPE;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DOB;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_IC;
@@ -30,7 +30,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     // array of prefixes currently supported by the find command.
     public static final Prefix[] SUPPORTED_SEARCH_PREFIXES =
             new Prefix[]{
-                PREFIX_NAME, PREFIX_IC, PREFIX_DOB, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_HEIGHT,
+                PREFIX_NAME, PREFIX_IC, PREFIX_DATE, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_HEIGHT,
                 PREFIX_WEIGHT, PREFIX_ADDRESS, PREFIX_BLOOD_TYPE};
 
     /**

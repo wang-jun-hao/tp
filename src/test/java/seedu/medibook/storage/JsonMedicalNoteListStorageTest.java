@@ -74,19 +74,19 @@ public class JsonMedicalNoteListStorageTest {
         // Save in new file and read back
         jsonMedicalNoteListStorage.saveMedicalNoteList(original, filePath, IC);
         ReadOnlyMedicalNoteList readBack = jsonMedicalNoteListStorage.readMedicalNoteList(filePath, IC).get();
-        assertEquals(original, new MedicalNoteList(readBack));
+        assertEquals(original, new MedicalNoteList(readBack.getMedicalNoteList()));
 
         // Modify data, overwrite exiting file, and read back
         original.add(VALID_MEDICAL_NOTE1);
         jsonMedicalNoteListStorage.saveMedicalNoteList(original, filePath, IC);
         readBack = jsonMedicalNoteListStorage.readMedicalNoteList(filePath, IC).get();
-        assertEquals(original, new MedicalNoteList(readBack));
+        assertEquals(original, new MedicalNoteList(readBack.getMedicalNoteList()));
 
         // Save and read without specifying file path
         original.add(VALID_MEDICAL_NOTE2);
         jsonMedicalNoteListStorage.saveMedicalNoteList(original, IC); // file path not specified
         readBack = jsonMedicalNoteListStorage.readMedicalNoteList(IC).get(); // file path not specified
-        assertEquals(original, new MedicalNoteList(readBack));
+        assertEquals(original, new MedicalNoteList(readBack.getMedicalNoteList()));
 
     }
 

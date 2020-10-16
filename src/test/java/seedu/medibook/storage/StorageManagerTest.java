@@ -82,7 +82,7 @@ public class StorageManagerTest {
         Ic ic = new Ic("T0012393D");
         storageManager.saveMedicalNoteList(original, ic);
         ReadOnlyMedicalNoteList retrieved = storageManager.readMedicalNoteList(ic).get();
-        assertEquals(original, new MedicalNoteList(retrieved));
+        assertEquals(original, new MedicalNoteList(retrieved.getMedicalNoteList()));
     }
 
 }

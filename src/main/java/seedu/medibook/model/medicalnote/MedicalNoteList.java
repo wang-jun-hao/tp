@@ -18,14 +18,6 @@ public class MedicalNoteList implements ReadOnlyMedicalNoteList {
     }
 
     /**
-     * Initializes the data of this {@code MedicalNoteList} with {@code newData}.
-     */
-    public MedicalNoteList(ReadOnlyMedicalNoteList toBeCopied) {
-        this();
-        toBeCopied.getMedicalNoteList().forEach(this::add);
-    }
-
-    /**
      * Constructs medical note list object containing medical notes in the given list.
      * A new copy of the list is made to be stored as the inner list, so that operations on the argument
      * list does not affect this medical note list object.
@@ -75,4 +67,5 @@ public class MedicalNoteList implements ReadOnlyMedicalNoteList {
         MedicalNoteList otherMedicalNotes = (MedicalNoteList) other;
         return innerList.equals(otherMedicalNotes.innerList);
     }
+
 }

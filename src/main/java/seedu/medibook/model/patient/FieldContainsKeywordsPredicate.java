@@ -2,7 +2,7 @@ package seedu.medibook.model.patient;
 
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_BLOOD_TYPE;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DOB;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_IC;
@@ -53,8 +53,8 @@ public class FieldContainsKeywordsPredicate implements Predicate<Patient> {
         if (PREFIX_NAME.equals(prefix)) {
             return patient.getName().fullName;
         }
-        if (PREFIX_DOB.equals(prefix)) {
-            return patient.getDateOfBirth().value;
+        if (PREFIX_DATE.equals(prefix)) {
+            return patient.getDateOfBirth().inputValue;
         }
         if (PREFIX_PHONE.equals(prefix)) {
             return patient.getPhone().value;

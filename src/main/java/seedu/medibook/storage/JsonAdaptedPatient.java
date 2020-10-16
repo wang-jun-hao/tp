@@ -76,7 +76,7 @@ class JsonAdaptedPatient {
     public JsonAdaptedPatient(Patient source) {
         ic = source.getIc().ic;
         name = source.getName().fullName;
-        dateOfBirth = source.getDateOfBirth().value;
+        dateOfBirth = source.getDateOfBirth().inputValue;
         phone = source.getPhone().value;
 
         // email

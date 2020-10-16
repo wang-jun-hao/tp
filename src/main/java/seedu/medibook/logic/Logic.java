@@ -1,6 +1,7 @@
 package seedu.medibook.logic;
 
 import java.nio.file.Path;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.medibook.commons.core.GuiSettings;
@@ -51,5 +52,5 @@ public interface Logic {
     /**
      * Returns the current patient accessed by medi book.
      */
-    Patient getPatientToAccess();
+    Optional<Patient> getPatientToAccess();
 }

@@ -20,7 +20,7 @@ public class Patient {
 
     public static final String OPTIONAL_FIELD_EMPTY_MESSAGE = "N/A";
 
-    // Compulsory  fields
+    // Compulsory fields
     private final Ic ic;
     private final Name name;
     private final DateOfBirth dateOfBirth;
@@ -306,6 +306,7 @@ public class Patient {
                 .append(stringBloodType())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+        builder.append(" Medical Notes: ").append(getMedicalNoteList().toString());
         return builder.toString();
     }
 
