@@ -6,6 +6,7 @@ import static seedu.medibook.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.medibook.logic.commands.AccessCommand;
 import seedu.medibook.logic.commands.AddCommand;
 import seedu.medibook.logic.commands.ClearCommand;
 import seedu.medibook.logic.commands.Command;
@@ -67,6 +68,9 @@ public class MediBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case AccessCommand.COMMAND_WORD:
+            return new AccessCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
