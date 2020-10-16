@@ -36,6 +36,10 @@ public class MedicalNoteList implements ReadOnlyMedicalNoteList {
         innerList.add(newMedicalNote);
     }
 
+    public boolean isEmpty() {
+        return innerList.isEmpty();
+    }
+
     public MedicalNoteList makeCopy() {
         return new MedicalNoteList(innerList);
     }

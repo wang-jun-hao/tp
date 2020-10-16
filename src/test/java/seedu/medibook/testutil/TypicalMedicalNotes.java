@@ -1,5 +1,6 @@
 package seedu.medibook.testutil;
 
+import seedu.medibook.model.Date;
 import seedu.medibook.model.medicalnote.MedicalNote;
 import seedu.medibook.model.medicalnote.MedicalNoteList;
 
@@ -9,19 +10,19 @@ import seedu.medibook.model.medicalnote.MedicalNoteList;
 public class TypicalMedicalNotes {
     // Medical Notes
     public static final MedicalNote VALID_MEDICAL_NOTE1 = new MedicalNote(
-            "01-01-2020",
+            new Date("01-01-2020", true),
             "Dr Strange",
             "Patient is in critical condition."
     );
 
     public static final MedicalNote VALID_MEDICAL_NOTE2 = new MedicalNote(
-            "17-01-2020",
+            new Date("17-01-2020", true),
             "Dr Who",
             "Patient is recovering well."
     );
 
     public static final MedicalNote VALID_MEDICAL_NOTE3 = new MedicalNote(
-            "23-01-2020",
+            new Date("23-01-2020", true),
             "Dr Nick",
             "Patient has fully recovered."
     );
