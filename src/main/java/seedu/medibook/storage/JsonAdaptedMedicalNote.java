@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.medibook.commons.exceptions.IllegalValueException;
 import seedu.medibook.logic.parser.ParserUtil;
+import seedu.medibook.logic.parser.exceptions.ParseException;
 import seedu.medibook.model.Date;
 import seedu.medibook.model.medicalnote.MedicalNote;
 
@@ -13,11 +14,7 @@ import seedu.medibook.model.medicalnote.MedicalNote;
  */
 class JsonAdaptedMedicalNote {
 
-    public static final String MESSAGE_FORMAT_MISSING_FIELD = "MedicalNote's %s field is missing!";
-    public static final String MESSAGE_INVALID_DATE_FIELD = "MedicalNote's Date field is invalid!";
-    public static final String FIELD_CONTENT = "Content";
-    public static final String FIELD_DATE = "Date";
-    public static final String FIELD_DOCTOR_NAME = "Docter Name";
+    public static final String ERROR_MESSAGE_NULL_FIELD = "MedicalNote's fields cannot be null!";
 
     public final String date;
     @JsonProperty("doctor name")
@@ -50,29 +47,14 @@ class JsonAdaptedMedicalNote {
      * @throws IllegalValueException if there were any data constraints violated in the adapted patient.
      */
     public MedicalNote toModelType() throws IllegalValueException {
-        if (date == null) {
-            throw new IllegalValueException(String.format(MESSAGE_FORMAT_MISSING_FIELD, FIELD_DATE));
+        try {
+            final Date modelDate = ParserUtil.parseDate(date);
+            return new MedicalNote(modelDate, doctorName, content);
+        } catch (ParseException | IllegalArgumentException e) {
+            throw new IllegalValueException(e.getMessage());
+        } catch (NullPointerException npe) {
+            throw new IllegalValueException(ERROR_MESSAGE_NULL_FIELD);
         }
-
-        if (!Date.isValidDate(date)) {
-            throw new IllegalValueException(MESSAGE_INVALID_DATE_FIELD);
-        }
-
-        final Date modelDate = ParserUtil.parseDate(date);
-
-        if (doctorName == null) {
-            throw new IllegalValueException(String.format(MESSAGE_FORMAT_MISSING_FIELD, FIELD_DOCTOR_NAME));
-        }
-
-        final String modelDoctorName = doctorName;
-
-        if (content == null) {
-            throw new IllegalValueException(String.format(MESSAGE_FORMAT_MISSING_FIELD, FIELD_CONTENT));
-        }
-
-        final String modelContent = content;
-
-        return new MedicalNote(modelDate, modelDoctorName, modelContent);
     }
 
 }
