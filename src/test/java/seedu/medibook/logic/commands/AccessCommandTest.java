@@ -30,7 +30,7 @@ public class AccessCommandTest {
 
         CommandResult expectedCommandResult =
                 new CommandResult(String.format(AccessCommand.MESSAGE_ACCESS_PATIENT_SUCCESS, patientToAccess),
-                        false, false, true);
+                        false, false, true, false);
 
         ModelManager expectedModel = new ModelManager(model.getMediBook(), new UserPrefs());
         expectedModel.accessPatient(patientToAccess);
@@ -54,7 +54,7 @@ public class AccessCommandTest {
 
         CommandResult expectedCommandResult =
                 new CommandResult(String.format(AccessCommand.MESSAGE_ACCESS_PATIENT_SUCCESS, patientToAccess),
-                        false, false, true);
+                        false, false, true, false);
 
         Model expectedModel = new ModelManager(model.getMediBook(), new UserPrefs());
         expectedModel.accessPatient(patientToAccess);
