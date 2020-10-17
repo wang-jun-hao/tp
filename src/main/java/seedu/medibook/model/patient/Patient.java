@@ -224,7 +224,7 @@ public class Patient {
      * @return a string representing the IC
      */
     public String getStringIC() {
-        return getIc().ic;
+        return getIc().toString();
     }
 
     /**
@@ -232,7 +232,7 @@ public class Patient {
      * @return a string representing the Name
      */
     public String getStringName() {
-        return this.name.fullName;
+        return getName().toString();
     }
 
     /**
@@ -248,7 +248,7 @@ public class Patient {
      * @return a string representing the phone number
      */
     public String getStringPhone() {
-        return getPhone().value;
+        return getPhone().toString();
     }
 
 
