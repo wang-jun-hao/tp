@@ -3,10 +3,9 @@ package seedu.medibook.ui;
 import java.util.logging.Logger;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -39,8 +38,8 @@ public class PatientListPanel extends UiPart<Region> {
         TableColumn<String, Patient> columnName = new TableColumn<>("Name");
         columnName.setCellValueFactory(new PropertyValueFactory<>("stringName"));
 
-        TableColumn<String, Patient> columnDOB = new TableColumn<>("DOB");
-        columnDOB.setCellValueFactory(new PropertyValueFactory<>("stringDOB"));
+        TableColumn<String, Patient> columnDob = new TableColumn<>("DOB");
+        columnDob.setCellValueFactory(new PropertyValueFactory<>("stringDob"));
 
         TableColumn<String, Patient> columnPhone = new TableColumn<>("Phone");
         columnPhone.setCellValueFactory(new PropertyValueFactory<>("stringPhone"));
@@ -64,22 +63,13 @@ public class PatientListPanel extends UiPart<Region> {
         columnBloodType.setCellValueFactory(new PropertyValueFactory<>("stringBloodType"));
 
 
-        patientTableView.getColumns().add(columnIndex);
-        patientTableView.getColumns().add(columnIc);
-        patientTableView.getColumns().add(columnName);
-        patientTableView.getColumns().add(columnDOB);
-        patientTableView.getColumns().add(columnPhone);
-        patientTableView.getColumns().add(columnEmail);
-        patientTableView.getColumns().add(columnAddress);
-        patientTableView.getColumns().add(columnHeight);
-        patientTableView.getColumns().add(columnWeight);
-        patientTableView.getColumns().add(columnBmi);
-        patientTableView.getColumns().add(columnBloodType);
+        patientTableView.getColumns().addAll(columnIndex, columnIc, columnName, columnDob, columnPhone,
+                columnEmail, columnAddress, columnHeight, columnWeight, columnBmi, columnBloodType);
 
         columnIndex.prefWidthProperty().bind(patientTableView.widthProperty().multiply(0.04));
         columnIc.prefWidthProperty().bind(patientTableView.widthProperty().multiply(0.075));
         columnName.prefWidthProperty().bind(patientTableView.widthProperty().multiply(0.125));
-        columnDOB.prefWidthProperty().bind(patientTableView.widthProperty().multiply(0.07));
+        columnDob.prefWidthProperty().bind(patientTableView.widthProperty().multiply(0.07));
         columnPhone.prefWidthProperty().bind(patientTableView.widthProperty().multiply(0.07));
         columnEmail.prefWidthProperty().bind(patientTableView.widthProperty().multiply(0.15));
         columnAddress.prefWidthProperty().bind(patientTableView.widthProperty().multiply(0.22));
@@ -91,7 +81,7 @@ public class PatientListPanel extends UiPart<Region> {
         columnIndex.setResizable(false);
         columnIc.setResizable(false);
         columnName.setResizable(false);
-        columnDOB.setResizable(false);
+        columnDob.setResizable(false);
         columnPhone.setResizable(false);
         columnEmail.setResizable(false);
         columnAddress.setResizable(false);
@@ -103,7 +93,7 @@ public class PatientListPanel extends UiPart<Region> {
         columnIndex.setSortable(false);
         columnIc.setSortable(false);
         columnName.setSortable(false);
-        columnDOB.setSortable(false);
+        columnDob.setSortable(false);
         columnPhone.setSortable(false);
         columnEmail.setSortable(false);
         columnAddress.setSortable(false);
@@ -113,23 +103,7 @@ public class PatientListPanel extends UiPart<Region> {
         columnBloodType.setSortable(false);
 
         patientTableView.getItems().addAll(patientList);
+        patientList.addListener((ListChangeListener<Patient>) c -> patientTableView.setItems(patientList));
+
     }
-
-    /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Patient} using a {@code PatientCard}.
-     */
-    class PatientListViewCell extends ListCell<Patient> {
-        @Override
-        protected void updateItem(Patient patient, boolean empty) {
-            super.updateItem(patient, empty);
-
-            if (empty || patient == null) {
-                setGraphic(null);
-                setText(null);
-            } else {
-                setGraphic(new PatientCard(patient, getIndex() + 1).getRoot());
-            }
-        }
-    }
-
 }

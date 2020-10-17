@@ -1,8 +1,6 @@
 package seedu.medibook.model.patient;
 
 import static seedu.medibook.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.medibook.model.patient.Height.HEIGHT_UNIT;
-import static seedu.medibook.model.patient.Weight.WEIGHT_UNIT;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -107,7 +105,7 @@ public class Patient {
      * @return a string representing the email of the patient or N/A if there
      * is no email.
      */
-    public String stringEmail() {
+    public String getStringEmail() {
         if (getEmail().isPresent()) {
             return getEmail().get().toString();
         } else {
@@ -124,7 +122,7 @@ public class Patient {
      * @return a string representing the address of the patient or N/A if there
      * is no address.
      */
-    public String stringAddress() {
+    public String getStringAddress() {
         if (getAddress().isPresent()) {
             return getAddress().get().toString();
         } else {
@@ -141,7 +139,7 @@ public class Patient {
      * @return a string representing the height of the patient or N/A if there
      * is no height.
      */
-    public String stringHeight() {
+    public String getStringHeight() {
         if (getHeight().isPresent()) {
             return getHeight().get().toString();
         } else {
@@ -158,7 +156,7 @@ public class Patient {
      * @return a string representing the weight of the patient or N/A if there
      * is no weight.
      */
-    public String stringWeight() {
+    public String getStringWeight() {
         if (getWeight().isPresent()) {
             return getWeight().get().toString();
         } else {
@@ -175,7 +173,7 @@ public class Patient {
      * @return a string representing the bmi of the patient or N/A if there
      * is no bmi.
      */
-    public String stringBmi() {
+    public String getStringBmi() {
         if (getBmi().isPresent()) {
             return getBmi().get().toString();
         } else {
@@ -192,7 +190,7 @@ public class Patient {
      * @return a string representing the bloodtype of the patient or N/A if there
      * is no bloodtype.
      */
-    public String stringBloodType() {
+    public String getStringBloodType() {
         if (getBloodType().isPresent()) {
             return getBloodType().get().toString();
         } else {
@@ -221,70 +219,37 @@ public class Patient {
                 && otherPatient.getIc().equals(getIc());
     }
 
+    /**
+     * Represents the IC of the patient for the UI to display.
+     * @return a string representing the IC
+     */
     public String getStringIC() {
         return getIc().ic;
     }
 
-    public String getStringName(){
+    /**
+     * Represents the Name of the patient for the UI to display.
+     * @return a string representing the Name
+     */
+    public String getStringName() {
         return this.name.fullName;
     }
 
-    public String getStringDOB() {
+    /**
+     * Represents the Date of birth of the patient for the UI to display.
+     * @return a string representing the Date of birth
+     */
+    public String getStringDob() {
         return getDateOfBirth().value;
     }
 
-    public String getStringPhone(){
+    /**
+     * Represents the Phone number of the patient for the UI to display.
+     * @return a string representing the phone number
+     */
+    public String getStringPhone() {
         return getPhone().value;
     }
-
-    public String getStringEmail() {
-        if (getEmail().isPresent()) {
-            return getEmail().get().toString();
-        } else {
-            return "N/A";
-        }
-    }
-
-    public String getStringWeight() {
-        if (getWeight().isPresent()) {
-            return getWeight().get().toString() + WEIGHT_UNIT;
-        } else {
-            return "N/A";
-        }
-    }
-
-    public String getStringHeight() {
-        if (getHeight().isPresent()) {
-            return getHeight().get().toString() + HEIGHT_UNIT;
-        } else {
-            return "N/A";
-        }
-    }
-
-    public String getStringBmi() {
-        if (getBmi().isPresent()) {
-            return getBmi().get().toString();
-        } else {
-            return "N/A";
-        }
-    }
-
-    public String getStringAddress() {
-        if (getAddress().isPresent()) {
-            return getAddress().get().toString();
-        } else {
-            return "N/A";
-        }
-    }
-
-    public String getStringBloodType() {
-        if (getBloodType().isPresent()) {
-            return getBloodType().get().toString();
-        } else {
-            return "N/A";
-        }
-    }
-
 
 
     /**
@@ -333,17 +298,17 @@ public class Patient {
                 .append(" Phone: ")
                 .append(getPhone())
                 .append(" Email: ")
-                .append(stringEmail())
+                .append(getStringEmail())
                 .append(" Address: ")
-                .append(stringAddress())
+                .append(getStringAddress())
                 .append(" Height: ")
-                .append(stringHeight())
+                .append(getStringHeight())
                 .append(" Weight: ")
-                .append(stringWeight())
+                .append(getStringWeight())
                 .append(" BMI: ")
-                .append(stringBmi())
+                .append(getStringBmi())
                 .append(" Blood type: ")
-                .append(stringBloodType())
+                .append(getStringBloodType())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
