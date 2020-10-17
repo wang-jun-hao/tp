@@ -71,42 +71,42 @@ public class PatientCard extends UiPart<Region> {
 
         // email
         if (patient.getEmail().isPresent()) {
-            email.setText(patient.stringEmail());
+            email.setText(patient.getStringEmail());
         } else {
             email.setText(OPTIONAL_FIELD_EMPTY_MESSAGE);
         }
 
         // address
         if (patient.getAddress().isPresent()) {
-            address.setText(patient.stringAddress());
+            address.setText(patient.getStringAddress());
         } else {
             address.setText(OPTIONAL_FIELD_EMPTY_MESSAGE);
         }
 
         // height
         if (patient.getHeight().isPresent()) {
-            height.setText(patient.stringHeight() + Height.HEIGHT_UNIT);
+            height.setText(patient.getStringHeight() + Height.HEIGHT_UNIT);
         } else {
             height.setText(OPTIONAL_FIELD_EMPTY_MESSAGE);
         }
 
         // weight
         if (patient.getWeight().isPresent()) {
-            weight.setText(patient.stringWeight() + Weight.WEIGHT_UNIT);
+            weight.setText(patient.getStringWeight() + Weight.WEIGHT_UNIT);
         } else {
             weight.setText(OPTIONAL_FIELD_EMPTY_MESSAGE);
         }
 
         // bmi
         if (patient.getBmi().isPresent()) {
-            bmi.setText(patient.stringBmi());
+            bmi.setText(patient.getStringBmi());
         } else {
             bmi.setText(OPTIONAL_FIELD_EMPTY_MESSAGE);
         }
 
         // bloodType
         if (patient.getBloodType().isPresent()) {
-            bloodType.setText(patient.stringBloodType());
+            bloodType.setText(patient.getStringBloodType());
         } else {
             bloodType.setText(OPTIONAL_FIELD_EMPTY_MESSAGE);
         }
