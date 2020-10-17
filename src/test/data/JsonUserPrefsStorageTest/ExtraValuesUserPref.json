@@ -9,5 +9,6 @@
       "z" : 99
     }
   },
-  "mediBookFilePath" : "medibook.json"
+  "mediBookFilePath" : "medibook.json",
+  "medicalNotesDirPath" : "data"
 }

@@ -2,11 +2,13 @@ package seedu.medibook.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import seedu.medibook.commons.core.GuiSettings;
 import seedu.medibook.commons.core.LogsCenter;
+import seedu.medibook.commons.exceptions.DataConversionException;
 import seedu.medibook.logic.commands.Command;
 import seedu.medibook.logic.commands.CommandResult;
 import seedu.medibook.logic.commands.exceptions.CommandException;
@@ -14,6 +16,7 @@ import seedu.medibook.logic.parser.MediBookParser;
 import seedu.medibook.logic.parser.exceptions.ParseException;
 import seedu.medibook.model.Model;
 import seedu.medibook.model.ReadOnlyMediBook;
+import seedu.medibook.model.medicalnote.MedicalNoteList;
 import seedu.medibook.model.patient.Patient;
 import seedu.medibook.storage.Storage;
 
@@ -21,7 +24,8 @@ import seedu.medibook.storage.Storage;
  * The main LogicManager of the app.
  */
 public class LogicManager implements Logic {
-    public static final String FILE_OPS_ERROR_MESSAGE = "Could not save data to file: ";
+    public static final String FILE_SAVE_ERROR_MESSAGE = "Could not save data to file: ";
+    public static final String FILE_LOAD_ERROR_MESSAGE = "Could not read data from file: ";
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
@@ -35,6 +39,11 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         mediBookParser = new MediBookParser();
+    }
+
+    @Override
+    public Optional<Patient> getPatientToAccess() {
+        return model.getPatientToAccess();
     }
 
     @Override
@@ -53,11 +62,27 @@ public class LogicManager implements Logic {
             // We can deduce that the previous line of code modifies model in some way
             // since it's being stored here.
             storage.saveMediBook(model.getMediBook());
+            Optional<Patient> accessPatient = model.getPatientToAccess();
+            if (accessPatient.isPresent()) {
+                handleMedicalNoteListIo(accessPatient.get());
+            }
         } catch (IOException ioe) {
-            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+            throw new CommandException(FILE_SAVE_ERROR_MESSAGE + ioe, ioe);
+        } catch (DataConversionException dce) {
+            throw new CommandException(FILE_LOAD_ERROR_MESSAGE + dce, dce);
         }
 
         return commandResult;
+    }
+
+    private void handleMedicalNoteListIo(Patient patient) throws IOException, DataConversionException {
+        if (patient.getMedicalNoteList().isEmpty()) {
+            storage.readMedicalNoteList(patient.getIc())
+                    .ifPresent(medicalNotes ->
+                            patient.setMedicalNoteList(new MedicalNoteList(medicalNotes.getMedicalNoteList())));
+        } else {
+            storage.saveMedicalNoteList(patient.getMedicalNoteList(), patient.getIc());
+        }
     }
 
     @Override

@@ -2,6 +2,7 @@ package seedu.medibook.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static seedu.medibook.testutil.TypicalMedicalNotes.getTypicalMedicalNoteList;
 import static seedu.medibook.testutil.TypicalPatients.getTypicalMediBook;
 
 import java.nio.file.Path;
@@ -14,6 +15,9 @@ import seedu.medibook.commons.core.GuiSettings;
 import seedu.medibook.model.MediBook;
 import seedu.medibook.model.ReadOnlyMediBook;
 import seedu.medibook.model.UserPrefs;
+import seedu.medibook.model.medicalnote.MedicalNoteList;
+import seedu.medibook.model.medicalnote.ReadOnlyMedicalNoteList;
+import seedu.medibook.model.patient.Ic;
 
 public class StorageManagerTest {
 
@@ -26,7 +30,9 @@ public class StorageManagerTest {
     public void setUp() {
         JsonMediBookStorage mediBookStorage = new JsonMediBookStorage(getTempFilePath("mb"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(mediBookStorage, userPrefsStorage);
+        JsonMedicalNoteListStorage medicalNoteListStorage =
+                new JsonMedicalNoteListStorage(getTempFilePath("mnl"));
+        storageManager = new StorageManager(mediBookStorage, userPrefsStorage, medicalNoteListStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -63,6 +69,20 @@ public class StorageManagerTest {
     @Test
     public void getMediBookFilePath() {
         assertNotNull(storageManager.getMediBookFilePath());
+    }
+
+    @Test
+    public void medicalNotesReadSave() throws Exception {
+        /*
+         * Note: This is an integration test that verifies the StorageManager is properly wired to the
+         * {@link JsonMedicalNoteListStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonMedicalNoteListStorageTest} class.
+         */
+        MedicalNoteList original = getTypicalMedicalNoteList();
+        Ic ic = new Ic("T0012393D");
+        storageManager.saveMedicalNoteList(original, ic);
+        ReadOnlyMedicalNoteList retrieved = storageManager.readMedicalNoteList(ic).get();
+        assertEquals(original, new MedicalNoteList(retrieved.getMedicalNoteList()));
     }
 
 }

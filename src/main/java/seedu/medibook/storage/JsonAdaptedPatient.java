@@ -76,47 +76,47 @@ class JsonAdaptedPatient {
     public JsonAdaptedPatient(Patient source) {
         ic = source.getIc().ic;
         name = source.getName().fullName;
-        dateOfBirth = source.getDateOfBirth().value;
+        dateOfBirth = source.getDateOfBirth().inputValue;
         phone = source.getPhone().value;
 
         // email
         if (source.getEmail().isPresent()) {
-            email = source.stringEmail();
+            email = source.getStringEmail();
         } else {
             email = OPTIONAL_FIELD_EMPTY_MESSAGE;
         }
 
         // address
         if (source.getAddress().isPresent()) {
-            address = source.stringAddress();
+            address = source.getStringAddress();
         } else {
             address = OPTIONAL_FIELD_EMPTY_MESSAGE;
         }
 
         // height
         if (source.getHeight().isPresent()) {
-            height = source.stringHeight();
+            height = source.getStringHeight();
         } else {
             height = OPTIONAL_FIELD_EMPTY_MESSAGE;
         }
 
         // weight
         if (source.getWeight().isPresent()) {
-            weight = source.stringWeight();
+            weight = source.getStringWeight();
         } else {
             weight = OPTIONAL_FIELD_EMPTY_MESSAGE;
         }
 
         // bmi
         if (source.getBmi().isPresent()) {
-            bmi = source.stringBmi();
+            bmi = source.getStringBmi();
         } else {
             bmi = OPTIONAL_FIELD_EMPTY_MESSAGE;
         }
 
         // bloodtype
         if (source.getBloodType().isPresent()) {
-            bloodType = source.stringBloodType();
+            bloodType = source.getStringBloodType();
         } else {
             bloodType = OPTIONAL_FIELD_EMPTY_MESSAGE;
         }

@@ -8,6 +8,8 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.medibook.model.medicalnote.MedicalNote;
+import seedu.medibook.model.medicalnote.MedicalNoteList;
 import seedu.medibook.model.tag.Tag;
 
 /**
@@ -18,19 +20,22 @@ public class Patient {
 
     public static final String OPTIONAL_FIELD_EMPTY_MESSAGE = "N/A";
 
-    // Identity fields
+    // Compulsory fields
     private final Ic ic;
     private final Name name;
     private final DateOfBirth dateOfBirth;
     private final Phone phone;
-    private final Optional<Email> email;
 
-    // Data fields
+    // Optional fields
+    private final Optional<Email> email;
     private final Optional<Address> address;
     private final Optional<Height> height;
     private final Optional<Weight> weight;
     private final Optional<Bmi> bmi;
     private final Optional<BloodType> bloodType;
+
+    // Default empty fields
+    private MedicalNoteList medicalNoteList = new MedicalNoteList();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -105,7 +110,7 @@ public class Patient {
      * @return a string representing the email of the patient or N/A if there
      * is no email.
      */
-    public String stringEmail() {
+    public String getStringEmail() {
         if (getEmail().isPresent()) {
             return getEmail().get().toString();
         } else {
@@ -122,7 +127,7 @@ public class Patient {
      * @return a string representing the address of the patient or N/A if there
      * is no address.
      */
-    public String stringAddress() {
+    public String getStringAddress() {
         if (getAddress().isPresent()) {
             return getAddress().get().toString();
         } else {
@@ -139,7 +144,7 @@ public class Patient {
      * @return a string representing the height of the patient or N/A if there
      * is no height.
      */
-    public String stringHeight() {
+    public String getStringHeight() {
         if (getHeight().isPresent()) {
             return getHeight().get().toString();
         } else {
@@ -156,7 +161,7 @@ public class Patient {
      * @return a string representing the weight of the patient or N/A if there
      * is no weight.
      */
-    public String stringWeight() {
+    public String getStringWeight() {
         if (getWeight().isPresent()) {
             return getWeight().get().toString();
         } else {
@@ -173,7 +178,7 @@ public class Patient {
      * @return a string representing the bmi of the patient or N/A if there
      * is no bmi.
      */
-    public String stringBmi() {
+    public String getStringBmi() {
         if (getBmi().isPresent()) {
             return getBmi().get().toString();
         } else {
@@ -190,7 +195,7 @@ public class Patient {
      * @return a string representing the bloodtype of the patient or N/A if there
      * is no bloodtype.
      */
-    public String stringBloodType() {
+    public String getStringBloodType() {
         if (getBloodType().isPresent()) {
             return getBloodType().get().toString();
         } else {
@@ -207,6 +212,29 @@ public class Patient {
     }
 
     /**
+     * Adds medical note to the list of medical notes in this patient
+     * @param newMedicalNote new medical note object to be added to patient
+     */
+    public void addMedicalNote(MedicalNote newMedicalNote) {
+        medicalNoteList.add(newMedicalNote);
+    }
+
+    /**
+     * Sets the medical note list object within this patient to the given medical note list.
+     * @param medicalNoteList new medical note list to be stored within patient.
+     */
+    public void setMedicalNoteList(MedicalNoteList medicalNoteList) {
+        this.medicalNoteList = medicalNoteList;
+    }
+
+    /**
+     * Returns the medical note list object within this patient.
+     */
+    public MedicalNoteList getMedicalNoteList() {
+        return medicalNoteList;
+    }
+
+    /**
      * Returns true if both patients of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two patients.
      */
@@ -218,6 +246,39 @@ public class Patient {
         return otherPatient != null
                 && otherPatient.getIc().equals(getIc());
     }
+
+    /**
+     * Represents the IC of the patient for the UI to display.
+     * @return a string representing the IC
+     */
+    public String getStringIc() {
+        return getIc().toString();
+    }
+
+    /**
+     * Represents the Name of the patient for the UI to display.
+     * @return a string representing the Name
+     */
+    public String getStringName() {
+        return getName().toString();
+    }
+
+    /**
+     * Represents the Date of birth of the patient for the UI to display.
+     * @return a string representing the Date of birth
+     */
+    public String getStringDob() {
+        return getDateOfBirth().toString();
+    }
+
+    /**
+     * Represents the Phone number of the patient for the UI to display.
+     * @return a string representing the phone number
+     */
+    public String getStringPhone() {
+        return getPhone().toString();
+    }
+
 
     /**
      * Returns true if both patients have the same identity and data fields.
@@ -265,17 +326,17 @@ public class Patient {
                 .append(" Phone: ")
                 .append(getPhone())
                 .append(" Email: ")
-                .append(stringEmail())
+                .append(getStringEmail())
                 .append(" Address: ")
-                .append(stringAddress())
+                .append(getStringAddress())
                 .append(" Height: ")
-                .append(stringHeight())
+                .append(getStringHeight())
                 .append(" Weight: ")
-                .append(stringWeight())
+                .append(getStringWeight())
                 .append(" BMI: ")
-                .append(stringBmi())
+                .append(getStringBmi())
                 .append(" Blood type: ")
-                .append(stringBloodType())
+                .append(getStringBloodType())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

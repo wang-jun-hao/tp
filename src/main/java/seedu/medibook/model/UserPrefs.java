@@ -15,6 +15,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path mediBookFilePath = Paths.get("data" , "medibook.json");
+    private Path medicalNotesDirPath = Paths.get("data");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -54,6 +55,15 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void setMediBookFilePath(Path mediBookFilePath) {
         requireNonNull(mediBookFilePath);
         this.mediBookFilePath = mediBookFilePath;
+    }
+
+    public Path getMedicalNotesDirPath() {
+        return medicalNotesDirPath;
+    }
+
+    public void setMedicalNotesDirPath(Path medicalNotesDirPath) {
+        requireNonNull(medicalNotesDirPath);
+        this.medicalNotesDirPath = medicalNotesDirPath;
     }
 
     @Override
