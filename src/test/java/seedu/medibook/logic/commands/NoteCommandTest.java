@@ -28,6 +28,8 @@ public class NoteCommandTest {
     @Test
     public void execute_noteOnListView_failure() {
         // set model to hold no optional patient
+        model.resetAccessedPatient();
+
         MedicalNote medicalNote = new MedicalNote(new Date("20-10-2019", true), "John",
                 "Patient is having fever.");
         NoteCommand noteCommand = new NoteCommand(medicalNote);
