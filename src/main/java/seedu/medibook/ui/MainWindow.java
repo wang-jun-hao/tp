@@ -17,6 +17,7 @@ import seedu.medibook.logic.commands.CommandResult;
 import seedu.medibook.logic.commands.exceptions.CommandException;
 import seedu.medibook.logic.parser.exceptions.ParseException;
 import seedu.medibook.model.patient.Patient;
+import seedu.medibook.ui.patientprofile.PatientProfile;
 
 /**
  * The Main Window. Provides the basic application layout containing
