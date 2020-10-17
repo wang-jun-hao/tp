@@ -223,7 +223,7 @@ public class Patient {
      * Represents the IC of the patient for the UI to display.
      * @return a string representing the IC
      */
-    public String getStringIC() {
+    public String getStringIc() {
         return getIc().toString();
     }
 

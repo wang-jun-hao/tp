@@ -1,6 +1,9 @@
 package seedu.medibook.ui;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.IntStream;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.ListChangeListener;
@@ -21,50 +24,63 @@ public class PatientListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(PatientListPanel.class);
 
     @FXML
-    private TableView patientTableView;
+    private TableView<Patient> patientTableView;
 
     /**
      * Creates a {@code PatientListPanel} with the given {@code ObservableList}.
      */
     public PatientListPanel(ObservableList<Patient> patientList) {
         super(FXML);
-        TableColumn<Patient, Number> columnIndex = new TableColumn<Patient, Number>("#");
-        columnIndex.setCellValueFactory(column-> new ReadOnlyObjectWrapper<Number>(patientTableView
-                .getItems().indexOf(column.getValue()) + 1));
+        List<TableColumn<Patient, String>> columns = new ArrayList<>();
+        TableColumn<Patient, String> columnIndex = new TableColumn<>("#");
+        columnIndex.setCellValueFactory(column-> new ReadOnlyObjectWrapper<>(
+                Integer.toString(patientTableView.getItems().indexOf(column.getValue()) + 1)));
+        columns.add(columnIndex);
 
-        TableColumn<String, Patient> columnIc = new TableColumn<>("IC");
-        columnIc.setCellValueFactory(new PropertyValueFactory<>("stringIC"));
+        TableColumn<Patient, String> columnIc = new TableColumn<>("IC");
+        columns.add(columnIc);
 
-        TableColumn<String, Patient> columnName = new TableColumn<>("Name");
-        columnName.setCellValueFactory(new PropertyValueFactory<>("stringName"));
+        TableColumn<Patient, String> columnName = new TableColumn<>("Name");
+        columns.add(columnName);
 
-        TableColumn<String, Patient> columnDob = new TableColumn<>("DOB");
-        columnDob.setCellValueFactory(new PropertyValueFactory<>("stringDob"));
+        TableColumn<Patient, String> columnDob = new TableColumn<>("DOB");
+        columns.add(columnDob);
 
-        TableColumn<String, Patient> columnPhone = new TableColumn<>("Phone");
-        columnPhone.setCellValueFactory(new PropertyValueFactory<>("stringPhone"));
+        TableColumn<Patient, String> columnPhone = new TableColumn<>("Phone");
+        columns.add(columnPhone);
 
-        TableColumn<String, Patient> columnEmail = new TableColumn<>("Email");
-        columnEmail.setCellValueFactory(new PropertyValueFactory<>("stringEmail"));
+        TableColumn<Patient, String> columnEmail = new TableColumn<>("Email");
+        columns.add(columnEmail);
 
-        TableColumn<String, Patient> columnAddress = new TableColumn<>("Address");
-        columnAddress.setCellValueFactory(new PropertyValueFactory<>("stringAddress"));
+        TableColumn<Patient, String> columnAddress = new TableColumn<>("Address");
+        columns.add(columnAddress);
 
-        TableColumn<String, Patient> columnHeight = new TableColumn<>("Height");
-        columnHeight.setCellValueFactory(new PropertyValueFactory<>("stringHeight"));
+        TableColumn<Patient, String> columnHeight = new TableColumn<>("Height");
+        columns.add(columnHeight);
 
-        TableColumn<String, Patient> columnWeight = new TableColumn<>("Weight");
-        columnWeight.setCellValueFactory(new PropertyValueFactory<>("stringWeight"));
+        TableColumn<Patient, String> columnWeight = new TableColumn<>("Weight");
+        columns.add(columnWeight);
 
-        TableColumn<String, Patient> columnBmi = new TableColumn<>("BMI");
-        columnBmi.setCellValueFactory(new PropertyValueFactory<>("stringBmi"));
+        TableColumn<Patient, String> columnBmi = new TableColumn<>("BMI");
+        columns.add(columnBmi);
 
-        TableColumn<String, Patient> columnBloodType = new TableColumn<>("Blood Type");
-        columnBloodType.setCellValueFactory(new PropertyValueFactory<>("stringBloodType"));
+        TableColumn<Patient, String> columnBloodType = new TableColumn<>("Blood Type");
+        columns.add(columnBloodType);
 
-
-        patientTableView.getColumns().addAll(columnIndex, columnIc, columnName, columnDob, columnPhone,
-                columnEmail, columnAddress, columnHeight, columnWeight, columnBmi, columnBloodType);
+        columns.forEach(col -> {
+            String text = col.getText();
+            if (!text.equals("#")) {
+                String[] words = text.split(" ");
+                IntStream.range(0, words.length).forEach(i -> {
+                    words[i] = words[i].substring(0, 1).toUpperCase() + words[i].substring(1).toLowerCase();
+                });
+                String property = "string" + String.join("", words);
+                col.setCellValueFactory(new PropertyValueFactory<>(property));
+            }
+            col.setResizable(false);
+            col.setSortable(false);
+            patientTableView.getColumns().add(col);
+        });
 
         columnIndex.prefWidthProperty().bind(patientTableView.widthProperty().multiply(0.04));
         columnIc.prefWidthProperty().bind(patientTableView.widthProperty().multiply(0.075));
@@ -77,30 +93,6 @@ public class PatientListPanel extends UiPart<Region> {
         columnWeight.prefWidthProperty().bind(patientTableView.widthProperty().multiply(0.0625));
         columnBmi.prefWidthProperty().bind(patientTableView.widthProperty().multiply(0.04));
         columnBloodType.prefWidthProperty().bind(patientTableView.widthProperty().multiply(0.075));
-
-        columnIndex.setResizable(false);
-        columnIc.setResizable(false);
-        columnName.setResizable(false);
-        columnDob.setResizable(false);
-        columnPhone.setResizable(false);
-        columnEmail.setResizable(false);
-        columnAddress.setResizable(false);
-        columnHeight.setResizable(false);
-        columnWeight.setResizable(false);
-        columnBmi.setResizable(false);
-        columnBloodType.setResizable(false);
-
-        columnIndex.setSortable(false);
-        columnIc.setSortable(false);
-        columnName.setSortable(false);
-        columnDob.setSortable(false);
-        columnPhone.setSortable(false);
-        columnEmail.setSortable(false);
-        columnAddress.setSortable(false);
-        columnHeight.setSortable(false);
-        columnWeight.setSortable(false);
-        columnBmi.setSortable(false);
-        columnBloodType.setSortable(false);
 
         patientTableView.getItems().addAll(patientList);
         patientList.addListener((ListChangeListener<Patient>) c -> patientTableView.setItems(patientList));
