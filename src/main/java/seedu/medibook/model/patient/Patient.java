@@ -272,7 +272,8 @@ public class Patient {
                 && otherPatient.getWeight().equals(getWeight())
                 && otherPatient.getBmi().equals(getBmi())
                 && otherPatient.getBloodType().equals(getBloodType())
-                && otherPatient.getTags().equals(getTags());
+                && otherPatient.getTags().equals(getTags())
+                && otherPatient.getMedicalNoteList().equals(getMedicalNoteList());
     }
 
     @Override
