@@ -1,6 +1,7 @@
 package seedu.medibook.model.medicalnote;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -41,6 +42,5 @@ class MedicalNoteListTest {
         MedicalNoteList copiedList = testList.makeCopy();
         assertEquals(testList, copiedList);
         assertTrue(copiedList != testList);
-
     }
 }
