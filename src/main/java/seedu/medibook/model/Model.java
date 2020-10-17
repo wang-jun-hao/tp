@@ -76,6 +76,11 @@ public interface Model {
      */
     void accessPatient(Patient patient);
 
+    /**
+     * Resets the accessed patient.
+     */
+    void resetAccessedPatient();
+
     Optional<Patient> getPatientToAccess();
 
     /**

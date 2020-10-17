@@ -123,6 +123,10 @@ public class AddCommandTest {
         }
 
         @Override
+        public void resetAccessedPatient() {
+        }
+
+        @Override
         public void setMediBook(ReadOnlyMediBook newData) {
             throw new AssertionError("This method should not be called.");
         }
