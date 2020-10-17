@@ -2,7 +2,7 @@ package seedu.medibook.testutil;
 
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_BLOOD_TYPE;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DOB;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_IC;
@@ -37,27 +37,27 @@ public class PatientUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_IC + patient.getIc().ic + " ");
         sb.append(PREFIX_NAME + patient.getName().fullName + " ");
-        sb.append(PREFIX_DOB + patient.getDateOfBirth().value + " ");
+        sb.append(PREFIX_DATE + patient.getDateOfBirth().inputValue + " ");
         sb.append(PREFIX_PHONE + patient.getPhone().value + " ");
 
         if (patient.getEmail().isPresent()) {
-            sb.append(PREFIX_EMAIL + patient.stringEmail() + " ");
+            sb.append(PREFIX_EMAIL + patient.getStringEmail() + " ");
         }
 
         if (patient.getAddress().isPresent()) {
-            sb.append(PREFIX_ADDRESS + patient.stringAddress() + " ");
+            sb.append(PREFIX_ADDRESS + patient.getStringAddress() + " ");
         }
 
         if (patient.getHeight().isPresent()) {
-            sb.append(PREFIX_HEIGHT + patient.stringHeight() + " ");
+            sb.append(PREFIX_HEIGHT + patient.getStringHeight() + " ");
         }
 
         if (patient.getWeight().isPresent()) {
-            sb.append(PREFIX_WEIGHT + patient.stringWeight() + " ");
+            sb.append(PREFIX_WEIGHT + patient.getStringWeight() + " ");
         }
 
         if (patient.getBloodType().isPresent()) {
-            sb.append(PREFIX_BLOOD_TYPE + patient.stringBloodType() + " ");
+            sb.append(PREFIX_BLOOD_TYPE + patient.getStringBloodType() + " ");
         }
 
         patient.getTags().stream().forEach(
@@ -74,7 +74,7 @@ public class PatientUtil {
         descriptor.getIc().ifPresent(ic -> sb.append(PREFIX_IC).append(ic.ic).append(" "));
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getDateOfBirth()
-            .ifPresent(dateOfBirth -> sb.append(PREFIX_DOB).append(dateOfBirth.value).append(" "));
+            .ifPresent(dateOfBirth -> sb.append(PREFIX_DATE).append(dateOfBirth.inputValue).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
 
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));

@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.medibook.commons.core.Messages.MESSAGE_PATIENT_LISTED_OVERVIEW;
 import static seedu.medibook.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DOB;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_IC;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_NAME;
@@ -36,7 +36,7 @@ public class FindCommandTest {
     @Test
     public void equals() {
         FieldContainsKeywordsPredicate firstPredicate =
-                new FieldContainsKeywordsPredicate(Collections.singletonList("first"), PREFIX_DOB);
+                new FieldContainsKeywordsPredicate(Collections.singletonList("first"), PREFIX_DATE);
         FieldContainsKeywordsPredicate secondPredicate =
                 new FieldContainsKeywordsPredicate(Collections.singletonList("second"), PREFIX_IC);
 

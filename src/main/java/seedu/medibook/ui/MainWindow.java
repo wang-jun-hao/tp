@@ -16,6 +16,8 @@ import seedu.medibook.logic.Logic;
 import seedu.medibook.logic.commands.CommandResult;
 import seedu.medibook.logic.commands.exceptions.CommandException;
 import seedu.medibook.logic.parser.exceptions.ParseException;
+import seedu.medibook.model.patient.Patient;
+import seedu.medibook.ui.patientprofile.PatientProfile;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -34,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private PatientListPanel patientListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private PatientProfile patientProfile;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -163,6 +166,19 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    @FXML
+    private void handleProfile(Patient patient) {
+        patientProfile = new PatientProfile(patient);
+        patientListPanelPlaceholder.getChildren().clear();
+        patientListPanelPlaceholder.getChildren().add(patientProfile.getRoot());
+    }
+
+    @FXML
+    private void handleList() {
+        patientListPanelPlaceholder.getChildren().clear();
+        patientListPanelPlaceholder.getChildren().add(patientListPanel.getRoot());
+    }
+
     public PatientListPanel getPatientListPanel() {
         return patientListPanel;
     }
@@ -178,6 +194,14 @@ public class MainWindow extends UiPart<Stage> {
             // Logger details, safe to ignore
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.isShowProfile()) {
+                handleProfile(logic.getPatientToAccess().get());
+            }
+
+            if (commandResult.isShowList()) {
+                handleList();
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

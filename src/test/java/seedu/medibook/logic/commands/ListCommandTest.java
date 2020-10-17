@@ -28,12 +28,18 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        expectedModel.resetAccessedPatient();
+        CommandResult expectedCommandResult = new CommandResult(String.format(ListCommand.MESSAGE_SUCCESS),
+                false, false, false, true);
+        assertCommandSuccess(new ListCommand(), model, expectedCommandResult, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showPatientAtIndex(model, INDEX_FIRST_PATIENT);
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        expectedModel.resetAccessedPatient();
+        CommandResult expectedCommandResult = new CommandResult(String.format(ListCommand.MESSAGE_SUCCESS),
+                false, false, false, true);
+        assertCommandSuccess(new ListCommand(), model, expectedCommandResult, expectedModel);
     }
 }

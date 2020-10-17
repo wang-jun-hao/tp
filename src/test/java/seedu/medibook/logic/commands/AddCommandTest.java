@@ -9,6 +9,7 @@ import static seedu.medibook.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -111,6 +112,18 @@ public class AddCommandTest {
         @Override
         public void addPatient(Patient patient) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void accessPatient(Patient patient) {}
+
+        @Override
+        public Optional<Patient> getPatientToAccess() {
+            return null;
+        }
+
+        @Override
+        public void resetAccessedPatient() {
         }
 
         @Override
