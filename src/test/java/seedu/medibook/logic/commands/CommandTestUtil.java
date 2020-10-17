@@ -4,7 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_BLOOD_TYPE;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DOB;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_CONTENT;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_IC;
@@ -53,13 +54,17 @@ public class CommandTestUtil {
     public static final String VALID_BLOOD_TYPE_BOB = "B+";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_NON_FUTURE_DATE = "15-10-2020";
+    public static final String VALID_FUTURE_DATE = "15-10-2030";
+    public static final String VALID_DOCTOR_NAME = "John Doe";
+    public static final String VALID_CONTENT = "Patient is sick.";
 
     public static final String IC_DESC_AMY = " " + PREFIX_IC + VALID_IC_AMY;
     public static final String IC_DESC_BOB = " " + PREFIX_IC + VALID_IC_BOB;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
-    public static final String DOB_DESC_AMY = " " + PREFIX_DOB + VALID_DOB_AMY;
-    public static final String DOB_DESC_BOB = " " + PREFIX_DOB + VALID_DOB_BOB;
+    public static final String DOB_DESC_AMY = " " + PREFIX_DATE + VALID_DOB_AMY;
+    public static final String DOB_DESC_BOB = " " + PREFIX_DATE + VALID_DOB_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
@@ -74,10 +79,14 @@ public class CommandTestUtil {
     public static final String BLOOD_TYPE_DESC_BOB = " " + PREFIX_BLOOD_TYPE + VALID_BLOOD_TYPE_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String NOTE_NON_FUTURE_DATE_DESC = " " + PREFIX_DATE + VALID_NON_FUTURE_DATE;
+    public static final String NOTE_FUTURE_DATE_DESC = " " + PREFIX_DATE + VALID_FUTURE_DATE;
+    public static final String NOTE_DOCTOR_DESC = " " + PREFIX_NAME + VALID_DOCTOR_NAME;
+    public static final String NOTE_CONTENT_DESC = " " + PREFIX_CONTENT + VALID_CONTENT;
 
     public static final String INVALID_IC_DESC = " " + PREFIX_IC + "A222223HH";
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_DOB_DESC = " " + PREFIX_DOB + "31/12/95"; // '-' should be used instead of '/'
+    public static final String INVALID_DOB_DESC = " " + PREFIX_DATE + "31/12/95"; // '-' should be used instead of '/'
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
@@ -86,6 +95,7 @@ public class CommandTestUtil {
     public static final String INVALID_WEIGHT_DESC = " " + PREFIX_WEIGHT + "55.55";
     public static final String INVALID_BLOOD_TYPE_DESC = " " + PREFIX_BLOOD_TYPE + "C+"; // 'C+' invalid blood type
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_NOTE_DATE_DESC = " " + PREFIX_DATE + "2-3-2020"; // incorrect date format
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

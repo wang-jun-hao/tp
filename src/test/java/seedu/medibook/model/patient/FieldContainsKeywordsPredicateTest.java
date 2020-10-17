@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_BLOOD_TYPE;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DOB;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_IC;
@@ -55,7 +55,7 @@ public class FieldContainsKeywordsPredicateTest {
         assertFalse(firstPredicate.equals(thirdPredicate));
 
         // same keywords, different prefix -> returns false
-        firstPredicateCopy = new FieldContainsKeywordsPredicate(firstPredicateKeywordList, PREFIX_DOB);
+        firstPredicateCopy = new FieldContainsKeywordsPredicate(firstPredicateKeywordList, PREFIX_DATE);
         assertFalse(firstPredicate.equals(firstPredicateCopy));
 
         // same keywords, different prefix (test with different prefix) -> returns false
@@ -75,7 +75,7 @@ public class FieldContainsKeywordsPredicateTest {
         assertTrue(predicate.test(new PatientBuilder().withIc("S9123456Z").build()));
 
         // date of birth field
-        predicate = new FieldContainsKeywordsPredicate(Collections.singletonList("08-09-2010"), PREFIX_DOB);
+        predicate = new FieldContainsKeywordsPredicate(Collections.singletonList("08-09-2010"), PREFIX_DATE);
         assertTrue(predicate.test(new PatientBuilder().withDateOfBirth("08-09-2010").build()));
 
         // phone field
@@ -115,7 +115,7 @@ public class FieldContainsKeywordsPredicateTest {
         assertTrue(predicate.test(new PatientBuilder().withIc("S9123456Z").build()));
 
         // date of birth field
-        predicate = new FieldContainsKeywordsPredicate(Collections.singletonList("2010"), PREFIX_DOB);
+        predicate = new FieldContainsKeywordsPredicate(Collections.singletonList("2010"), PREFIX_DATE);
         assertTrue(predicate.test(new PatientBuilder().withDateOfBirth("08-09-2010").build()));
 
         // phone field
@@ -169,7 +169,7 @@ public class FieldContainsKeywordsPredicateTest {
         assertTrue(predicate.test(new PatientBuilder().withIc("S9876543C").build()));
 
         // date of birth field
-        predicate = new FieldContainsKeywordsPredicate(Arrays.asList("15-03-2002", "08-09-2010"), PREFIX_DOB);
+        predicate = new FieldContainsKeywordsPredicate(Arrays.asList("15-03-2002", "08-09-2010"), PREFIX_DATE);
         assertTrue(predicate.test(new PatientBuilder().withDateOfBirth("15-03-2002").build()));
 
         // phone field
@@ -237,7 +237,7 @@ public class FieldContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new PatientBuilder().withIc("S9876543C").build()));
 
         // date of birth field
-        predicate = new FieldContainsKeywordsPredicate(Collections.emptyList(), PREFIX_DOB);
+        predicate = new FieldContainsKeywordsPredicate(Collections.emptyList(), PREFIX_DATE);
         assertFalse(predicate.test(new PatientBuilder().withDateOfBirth("15-03-2002").build()));
 
         // phone field
@@ -278,7 +278,7 @@ public class FieldContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new PatientBuilder().withIc("S8642024G").build()));
 
         // date of birth field
-        predicate = new FieldContainsKeywordsPredicate(Arrays.asList("15-03-2002", "08-09-2010"), PREFIX_DOB);
+        predicate = new FieldContainsKeywordsPredicate(Arrays.asList("15-03-2002", "08-09-2010"), PREFIX_DATE);
         assertFalse(predicate.test(new PatientBuilder().withDateOfBirth("13-04-1985").build()));
 
         // phone field
@@ -328,7 +328,7 @@ public class FieldContainsKeywordsPredicateTest {
         // keywords match all fields except date of birth
         predicate =
                 new FieldContainsKeywordsPredicate(Arrays.asList("Alice", "S9999999R", "12345", "alice@email.com",
-                        "Main", "Street", "171", "61.2", "A+"), PREFIX_DOB);
+                        "Main", "Street", "171", "61.2", "A+"), PREFIX_DATE);
         assertFalse(predicate.test(new PatientBuilder().withIc("S9999999R").withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withAddress("Main Street").withHeight("171").withWeight("61.2")
                 .withBloodType("A+").withDateOfBirth("12-08-1999").build()));

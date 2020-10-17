@@ -85,6 +85,12 @@ Format: `delete <IC of patient>`
 Examples:
 * `delete T0987654S` deletes the patient record with IC `T0987654S`
 
+### Accessing a patient's profile : `access` <a id="access-command"></a>
+
+Accesses the specified patient in MediBook.
+
+Format: `access <index of patient>`
+
 
 ### Finding a patient by IC: `find` <a id="find-command"></a>
 

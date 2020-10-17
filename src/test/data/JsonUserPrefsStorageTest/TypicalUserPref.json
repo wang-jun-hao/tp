@@ -7,5 +7,6 @@
       "y" : 100
     }
   },
-  "mediBookFilePath" : "medibook.json"
+  "mediBookFilePath" : "medibook.json",
+  "medicalNotesDirPath" : "data"
 }

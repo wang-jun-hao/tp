@@ -21,7 +21,7 @@ public class JsonMediBookStorage implements MediBookStorage {
 
     private static final Logger logger = LogsCenter.getLogger(JsonMediBookStorage.class);
 
-    private Path filePath;
+    private final Path filePath;
 
     public JsonMediBookStorage(Path filePath) {
         this.filePath = filePath;
