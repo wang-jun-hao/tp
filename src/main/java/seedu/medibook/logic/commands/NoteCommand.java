@@ -59,9 +59,7 @@ public class NoteCommand extends Command {
         assert model.hasPatient(displayedPatient) : "Patient in context does not exist in model";
 
         displayedPatient.addMedicalNote(newMedicalNote);
-
-        System.out.println(displayedPatient);
-
+        
         return new CommandResult(String.format(MESSAGE_SUCCESS, newMedicalNote));
     }
 

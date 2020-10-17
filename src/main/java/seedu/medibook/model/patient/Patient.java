@@ -306,7 +306,6 @@ public class Patient {
                 && otherPatient.getBmi().equals(getBmi())
                 && otherPatient.getBloodType().equals(getBloodType())
                 && otherPatient.getTags().equals(getTags());
-        // && otherPatient.getMedicalNoteList().equals(getMedicalNoteList())
     }
 
     @Override
@@ -340,7 +339,6 @@ public class Patient {
                 .append(getStringBloodType())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
-        builder.append(" Medical Notes:").append(getMedicalNoteList());
         return builder.toString();
     }
 
