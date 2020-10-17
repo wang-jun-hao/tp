@@ -36,7 +36,10 @@ public class MedicalDetailsCard extends UiPart<Region> {
 
         cardHeader.setText("Medical Details: ");
         ObservableList<Pair<String, Set>> fields = FXCollections.observableArrayList();
-        fields.add(new Pair<String, Set>("Tags", patient.getTags()));
+        fields.add(new Pair<String, Set>("Tags: ", patient.getTags()));
+
+        detailsListView.setItems(fields);
+        detailsListView.setCellFactory(listView -> new MedicalDetailsListViewCell());
     }
 
     @Override

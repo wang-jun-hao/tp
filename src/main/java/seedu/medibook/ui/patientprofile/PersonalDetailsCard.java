@@ -43,53 +43,54 @@ public class PersonalDetailsCard extends UiPart<Region> {
     private void fillListView() {
         ObservableList<Pair<String, String>> fields = FXCollections.observableArrayList();
 
-        fields.add(new Pair<String, String>("Name: ", patient.getName().fullName));
-        fields.add(new Pair<String, String>("IC: ", patient.getIc().ic));
-        fields.add(new Pair<String, String>("Date Of Birth: ", patient.getDateOfBirth().toString()));
-        fields.add(new Pair<String, String>("Phone Number: ", patient.getPhone().value));
+        fields.add(new Pair<String, String>("Name: ", patient.getStringName()));
+        fields.add(new Pair<String, String>("IC: ", patient.getStringIc()));
+        fields.add(new Pair<String, String>("Date Of Birth: ", patient.getStringDob()));
+        fields.add(new Pair<String, String>("Phone Number: ", patient.getStringPhone()));
 
         // email
         if (patient.getEmail().isPresent()) {
-            fields.add(new Pair<String, String>("Email: ", patient.getEmail().toString()));
+            fields.add(new Pair<String, String>("Email: ", patient.getStringEmail()));
         } else {
             fields.add(new Pair<String, String>("Email: ", OPTIONAL_FIELD_EMPTY_MESSAGE));
         }
 
         // address
         if (patient.getAddress().isPresent()) {
-            fields.add(new Pair<String, String>("Address: ", patient.getAddress().toString()));
+            fields.add(new Pair<String, String>("Address: ", patient.getStringAddress()));
         } else {
             fields.add(new Pair<String, String>("Address: ", OPTIONAL_FIELD_EMPTY_MESSAGE));
         }
 
         // height
         if (patient.getHeight().isPresent()) {
-            fields.add(new Pair<String, String>("Height: ", patient.getHeight().toString() + Height.HEIGHT_UNIT));
+            fields.add(new Pair<String, String>("Height: ", patient.getStringHeight() + Height.HEIGHT_UNIT));
         } else {
             fields.add(new Pair<String, String>("Height: ", OPTIONAL_FIELD_EMPTY_MESSAGE));
         }
 
         // weight
         if (patient.getWeight().isPresent()) {
-            fields.add(new Pair<String, String>("Weight: ", patient.getWeight().toString() + Weight.WEIGHT_UNIT));
+            fields.add(new Pair<String, String>("Weight: ", patient.getStringWeight() + Weight.WEIGHT_UNIT));
         } else {
             fields.add(new Pair<String, String>("Weight: ", OPTIONAL_FIELD_EMPTY_MESSAGE));
         }
 
         // bmi
         if (patient.getBmi().isPresent()) {
-            fields.add(new Pair<String, String>("BMI: ", patient.getBmi().toString()));
+            fields.add(new Pair<String, String>("BMI: ", patient.getStringBmi()));
         } else {
             fields.add(new Pair<String, String>("BMI: ", OPTIONAL_FIELD_EMPTY_MESSAGE));
         }
 
         // bloodType
         if (patient.getBloodType().isPresent()) {
-            fields.add(new Pair<String, String>("Blood Type: ", patient.getBloodType().toString()));
+            fields.add(new Pair<String, String>("Blood Type: ", patient.getStringBloodType()));
         } else {
             fields.add(new Pair<String, String>("Blood Type: ", OPTIONAL_FIELD_EMPTY_MESSAGE));
         }
 
+        detailsListView.setItems(fields);
         detailsListView.setCellFactory(listView -> new PersonalDetailsListViewCell());
     }
 

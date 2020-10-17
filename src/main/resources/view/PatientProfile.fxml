@@ -9,12 +9,12 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
               <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="400.0" prefWidth="295.0">
                   <items>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                      <AnchorPane fx:id="personalDetailsCard" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0"/>
+                      <AnchorPane fx:id="medicalDetailsCard" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
                   </items>
               </SplitPane>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+          <AnchorPane fx:id="medicalNotesPanel" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
         </items>
     </SplitPane>
 </AnchorPane>

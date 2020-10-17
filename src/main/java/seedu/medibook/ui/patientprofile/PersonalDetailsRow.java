@@ -10,7 +10,7 @@ import seedu.medibook.ui.UiPart;
  * An UI component that displays one of the personal details of a {@code Patient} as a row of a list.
  */
 public class PersonalDetailsRow extends UiPart<Region> {
-    private static final String FXML = "ProfileDetailsCard.fxml"; // TODO
+    private static final String FXML = "PersonalDetailsRow.fxml";
 
     @FXML
     private HBox row;

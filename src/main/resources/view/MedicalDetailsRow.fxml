@@ -7,7 +7,7 @@
 
 <HBox id="row" fx:id="row" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <AnchorPane>
-        <Label fx:id="fieldName" styleClass="cell_small_label" text="\$fieldName" />
+        <Label fx:id="fieldName" styleClass="cell_small_label" />
     </AnchorPane>
     <AnchorPane>
         <FlowPane fx:id="tags" />
