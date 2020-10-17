@@ -240,7 +240,7 @@ public class Patient {
      * @return a string representing the Date of birth
      */
     public String getStringDob() {
-        return getDateOfBirth().value;
+        return getDateOfBirth().toString();
     }
 
     /**
