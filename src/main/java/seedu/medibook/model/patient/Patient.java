@@ -339,7 +339,6 @@ public class Patient {
                 .append(getStringBloodType())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
-        builder.append(" Medical Notes: ").append(getMedicalNoteList().toString());
         return builder.toString();
     }
 

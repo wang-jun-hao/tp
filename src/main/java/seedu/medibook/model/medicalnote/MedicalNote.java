@@ -39,6 +39,18 @@ public class MedicalNote {
         this.content = content;
     }
 
+    public String getInputDateString() {
+        return date.inputValue;
+    }
+
+    public String getDoctorName() {
+        return doctorName;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
     /**
      * Returns true if a given string is a valid doctor's name.
      */

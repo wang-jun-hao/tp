@@ -1,12 +1,13 @@
 package seedu.medibook.model.medicalnote;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Represents a list of medical notes for a Patient in MediBook.
  */
-public class MedicalNoteList {
+public class MedicalNoteList implements ReadOnlyMedicalNoteList {
     private final List<MedicalNote> innerList;
 
     /**
@@ -35,8 +36,17 @@ public class MedicalNoteList {
         innerList.add(newMedicalNote);
     }
 
+    public boolean isEmpty() {
+        return innerList.isEmpty();
+    }
+
     public MedicalNoteList makeCopy() {
         return new MedicalNoteList(innerList);
+    }
+
+    @Override
+    public List<MedicalNote> getMedicalNoteList() {
+        return Collections.unmodifiableList(innerList);
     }
 
     @Override
@@ -47,4 +57,19 @@ public class MedicalNoteList {
         }
         return result;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof MedicalNoteList)) {
+            return false;
+        }
+
+        MedicalNoteList otherMedicalNotes = (MedicalNoteList) other;
+        return innerList.equals(otherMedicalNotes.innerList);
+    }
+
 }
