@@ -47,4 +47,18 @@ public class MedicalNoteList {
         }
         return result;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof MedicalNoteList)) {
+            return false;
+        }
+
+        MedicalNoteList otherList = (MedicalNoteList) other;
+        return otherList.innerList.equals(innerList);
+    }
 }
