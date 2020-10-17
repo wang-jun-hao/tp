@@ -172,6 +172,12 @@ public class MainWindow extends UiPart<Stage> {
         patientListPanelPlaceholder.getChildren().add(patientProfile.getRoot());
     }
 
+    @FXML
+    private void handleList() {
+        patientListPanelPlaceholder.getChildren().clear();
+        patientListPanelPlaceholder.getChildren().add(patientListPanel.getRoot());
+    }
+
     public PatientListPanel getPatientListPanel() {
         return patientListPanel;
     }
@@ -190,6 +196,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowProfile()) {
                 handleProfile(logic.getPatientToAccess().get());
+            }
+
+            if (commandResult.isShowList()) {
+                handleList();
             }
 
             if (commandResult.isShowHelp()) {

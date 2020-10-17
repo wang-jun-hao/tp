@@ -41,7 +41,8 @@ public class AccessCommand extends Command {
 
         Patient patientToAccess = lastShownList.get(targetIndex.getZeroBased());
         model.accessPatient(patientToAccess);
-        return new CommandResult(String.format(MESSAGE_ACCESS_PATIENT_SUCCESS, patientToAccess), false, false, true);
+        return new CommandResult(String.format(MESSAGE_ACCESS_PATIENT_SUCCESS, patientToAccess), false,
+                false, true, false);
     }
 
     @Override
