@@ -17,6 +17,7 @@ class DateOfBirthTest {
         String invalidHeight = "13/12/1989";
         assertThrows(IllegalArgumentException.class, () -> new DateOfBirth(invalidHeight));
     }
+
     @Test
     public void isValidDateOfBirth() {
         // invalid date of birth

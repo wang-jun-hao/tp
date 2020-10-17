@@ -23,21 +23,25 @@ public class NoteCommandParser implements Parser<NoteCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public NoteCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_NAME, PREFIX_CONTENT);
+        try {
+            ArgumentMultimap argMultimap =
+                    ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_NAME, PREFIX_CONTENT);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_CONTENT)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE));
+            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_CONTENT)
+                    || !argMultimap.getPreamble().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE));
+            }
+
+            Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).orElse(Date.getTodayDate()));
+            String name = argMultimap.getValue(PREFIX_NAME).get();
+            String content = argMultimap.getValue(PREFIX_CONTENT).get();
+
+            MedicalNote medicalNote = new MedicalNote(date, name, content);
+
+            return new NoteCommand(medicalNote);
+        } catch (IllegalArgumentException iae) {
+            throw new ParseException(iae.getMessage());
         }
-
-        Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).orElse(Date.getTodayDate()));
-        String name = argMultimap.getValue(PREFIX_NAME).get();
-        String content = argMultimap.getValue(PREFIX_CONTENT).get();
-
-        MedicalNote medicalNote = new MedicalNote(date, name, content);
-
-        return new NoteCommand(medicalNote);
     }
 
     /**
