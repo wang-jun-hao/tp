@@ -118,6 +118,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void resetAccessedPatient() {
+        this.accessedPatient = Optional.empty();
+    }
+
+    @Override
     public void setPatient(Patient target, Patient editedPatient) {
         requireAllNonNull(target, editedPatient);
 
