@@ -46,7 +46,7 @@ public class NoteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Optional<Patient> patientOptional = model.getPatientToAccess();
+        Optional<Patient> patientOptional = model.getContext().getPatientToAccess();
 
         if (!patientOptional.isPresent()) {
             throw new CommandException("You can only add medical note to a patient when you are viewing "

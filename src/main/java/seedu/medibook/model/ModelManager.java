@@ -23,7 +23,10 @@ public class ModelManager implements Model {
     private final MediBook mediBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Patient> filteredPatients;
+    private final Context context = new Context();
     private Optional<Patient> accessedPatient = Optional.empty();
+    private Optional<Patient> deletedPatient = Optional.empty();
+    private Optional<Patient> editedPatient = Optional.empty();
 
     /**
      * Initializes a ModelManager with the given mediBook and userPrefs.
@@ -108,25 +111,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void accessPatient(Patient patient) {
-        this.accessedPatient = Optional.of(patient);
-    }
-
-    @Override
-    public Optional<Patient> getPatientToAccess() {
-        return this.accessedPatient;
-    }
-
-    @Override
-    public void resetAccessedPatient() {
-        this.accessedPatient = Optional.empty();
-    }
-
-    @Override
     public void setPatient(Patient target, Patient editedPatient) {
         requireAllNonNull(target, editedPatient);
 
         mediBook.setPatient(target, editedPatient);
+    }
+
+    @Override
+    public Context getContext() {
+        return this.context;
     }
 
     //=========== Filtered Patient List Accessors =============================================================

@@ -1,6 +1,7 @@
 package seedu.medibook.storage;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.medibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -50,14 +51,15 @@ public class JsonMedicalNoteListStorage implements MedicalNoteListStorage {
         requireNonNull(filePath);
         requireNonNull(ic);
 
-        Path medicalNotesPath = filePath.resolve(NAME_DIR).resolve(ic.toString() + NAME_EXTENSION);
+        Path medicalNotesPath = getMedicalNotesPath(ic);
         if (!FileUtil.isFileExists(medicalNotesPath)) {
             return Optional.empty();
         }
 
         Optional<JsonSerializableMedicalNoteList> jsonMedicalNoteList = JsonUtil.readJsonFile(
                 medicalNotesPath, JsonSerializableMedicalNoteList.class);
-        if (!jsonMedicalNoteList.isPresent()) {
+
+        if (jsonMedicalNoteList.isEmpty()) {
             return Optional.empty();
         }
 
@@ -80,12 +82,41 @@ public class JsonMedicalNoteListStorage implements MedicalNoteListStorage {
      * @param filePath location of the data. Cannot be null.
      */
     public void saveMedicalNoteList(ReadOnlyMedicalNoteList medicalNoteList, Path filePath, Ic ic) throws IOException {
-        requireNonNull(medicalNoteList);
-        requireNonNull(filePath);
+        requireAllNonNull(medicalNoteList, filePath, ic);
 
-        Path medicalNotesPath = filePath.resolve(NAME_DIR).resolve(ic.toString() + NAME_EXTENSION);
+        Path medicalNotesPath = getMedicalNotesPath(ic);
         FileUtil.createIfMissing(medicalNotesPath);
         JsonUtil.saveJsonFile(new JsonSerializableMedicalNoteList(medicalNoteList), medicalNotesPath);
     }
 
+    @Override
+    public void deleteMedicalNoteList(Ic ic) throws IOException {
+        deleteMedicalNoteList(filePath, ic);
+    }
+
+    @Override
+    public void deleteMedicalNoteList(Path filePath, Ic ic) throws IOException {
+        requireAllNonNull(filePath, ic);
+
+        Path medicalNotesPath = getMedicalNotesPath(ic);
+        FileUtil.deleteIfExists(medicalNotesPath);
+    }
+
+    @Override
+    public void renameMedicalNoteList(Ic oldIc, Ic newIc) throws IOException {
+        renameMedicalNoteList(filePath, oldIc, newIc);
+    }
+
+    @Override
+    public void renameMedicalNoteList(Path filePath, Ic oldIc, Ic newIc) throws IOException {
+        requireAllNonNull(filePath, oldIc, newIc);
+
+        Path oldMedicalNotesPath = getMedicalNotesPath(oldIc);
+        Path newMedicalNotesPath = getMedicalNotesPath(newIc);
+        FileUtil.renameIfExists(oldMedicalNotesPath, newMedicalNotesPath);
+    }
+
+    private Path getMedicalNotesPath(Ic ic) {
+        return filePath.resolve(NAME_DIR).resolve(ic.toString() + NAME_EXTENSION);
+    }
 }

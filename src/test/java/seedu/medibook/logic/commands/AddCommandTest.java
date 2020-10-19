@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.medibook.commons.core.GuiSettings;
 import seedu.medibook.logic.commands.exceptions.CommandException;
+import seedu.medibook.model.Context;
 import seedu.medibook.model.MediBook;
 import seedu.medibook.model.Model;
 import seedu.medibook.model.ReadOnlyMediBook;
@@ -115,15 +116,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public void accessPatient(Patient patient) {}
-
-        @Override
-        public Optional<Patient> getPatientToAccess() {
-            return null;
-        }
-
-        @Override
-        public void resetAccessedPatient() {
+        public Context getContext() {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override

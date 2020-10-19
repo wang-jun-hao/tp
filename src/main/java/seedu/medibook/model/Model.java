@@ -1,7 +1,6 @@
 package seedu.medibook.model;
 
 import java.nio.file.Path;
-import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -71,19 +70,6 @@ public interface Model {
     void addPatient(Patient patient);
 
     /**
-     * Accesses the given patient.
-     * The patient must exist in the medi book.
-     */
-    void accessPatient(Patient patient);
-
-    /**
-     * Resets the accessed patient.
-     */
-    void resetAccessedPatient();
-
-    Optional<Patient> getPatientToAccess();
-
-    /**
      * Replaces the given patient {@code target} with {@code editedPatient}.
      * {@code target} must exist in the medi book.
      * The patient identity of {@code editedPatient} must not be the same as
@@ -99,4 +85,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPatientList(Predicate<Patient> predicate);
+
+    Context getContext();
 }
