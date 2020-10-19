@@ -51,7 +51,7 @@ public class JsonMedicalNoteListStorage implements MedicalNoteListStorage {
         requireNonNull(filePath);
         requireNonNull(ic);
 
-        Path medicalNotesPath = getMedicalNotesPath(ic);
+        Path medicalNotesPath = getMedicalNotesPath(filePath, ic);
         if (!FileUtil.isFileExists(medicalNotesPath)) {
             return Optional.empty();
         }
@@ -84,7 +84,7 @@ public class JsonMedicalNoteListStorage implements MedicalNoteListStorage {
     public void saveMedicalNoteList(ReadOnlyMedicalNoteList medicalNoteList, Path filePath, Ic ic) throws IOException {
         requireAllNonNull(medicalNoteList, filePath, ic);
 
-        Path medicalNotesPath = getMedicalNotesPath(ic);
+        Path medicalNotesPath = getMedicalNotesPath(filePath, ic);
         FileUtil.createIfMissing(medicalNotesPath);
         JsonUtil.saveJsonFile(new JsonSerializableMedicalNoteList(medicalNoteList), medicalNotesPath);
     }
@@ -98,7 +98,7 @@ public class JsonMedicalNoteListStorage implements MedicalNoteListStorage {
     public void deleteMedicalNoteList(Path filePath, Ic ic) throws IOException {
         requireAllNonNull(filePath, ic);
 
-        Path medicalNotesPath = getMedicalNotesPath(ic);
+        Path medicalNotesPath = getMedicalNotesPath(filePath, ic);
         FileUtil.deleteIfExists(medicalNotesPath);
     }
 
@@ -111,12 +111,12 @@ public class JsonMedicalNoteListStorage implements MedicalNoteListStorage {
     public void renameMedicalNoteList(Path filePath, Ic oldIc, Ic newIc) throws IOException {
         requireAllNonNull(filePath, oldIc, newIc);
 
-        Path oldMedicalNotesPath = getMedicalNotesPath(oldIc);
-        Path newMedicalNotesPath = getMedicalNotesPath(newIc);
+        Path oldMedicalNotesPath = getMedicalNotesPath(filePath, oldIc);
+        Path newMedicalNotesPath = getMedicalNotesPath(filePath, newIc);
         FileUtil.renameIfExists(oldMedicalNotesPath, newMedicalNotesPath);
     }
 
-    private Path getMedicalNotesPath(Ic ic) {
+    private Path getMedicalNotesPath(Path filePath, Ic ic) {
         return filePath.resolve(NAME_DIR).resolve(ic.toString() + NAME_EXTENSION);
     }
 }

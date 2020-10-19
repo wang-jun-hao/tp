@@ -50,8 +50,7 @@ public class JsonMedicalNoteListStorageTest {
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataConversionException.class, () ->
-                readMedicalNoteList("notJsonFormatMedicalNotes", IC));
+        assertThrows(DataConversionException.class, () -> readMedicalNoteList("notJsonFormatMedicalNotes", IC));
     }
 
     @Test
