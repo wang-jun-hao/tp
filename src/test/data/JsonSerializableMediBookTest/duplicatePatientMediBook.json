@@ -10,7 +10,11 @@
     "weight": "50.1",
     "bmi": "16.5",
     "bloodType": "B+",
-    "tagged": [ "friends" ]
+    "tagged": [ "friends" ],
+    "record" : {
+      "heightRecord": { },
+      "weightRecord": { }
+    }
   }, {
     "ic": "S7777777R",
     "name": "Alice Pauline",
@@ -21,6 +25,10 @@
     "height": "174",
     "weight": "50.1",
     "bmi": "16.5",
-    "bloodType": "B+"
+    "bloodType": "B+",
+    "record" : {
+      "heightRecord": { },
+      "weightRecord": { }
+    }
   } ]
 }

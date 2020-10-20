@@ -1,5 +1,6 @@
 package seedu.medibook.model.patient;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.medibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -287,6 +288,7 @@ public class Patient {
      * @return Record object containing the patient's past records
      */
     public Record getRecord() {
+        assert this.record != null : "Record should not be null!";
         return this.record;
     }
 
@@ -294,7 +296,7 @@ public class Patient {
      * Sets the past records of the patient.
      */
     public void setRecord(Record record) {
-        assert record != null : "Record should not be null";
+        requireNonNull(record);
         this.record = record;
     }
 

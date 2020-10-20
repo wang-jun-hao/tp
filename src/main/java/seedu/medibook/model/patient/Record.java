@@ -1,5 +1,7 @@
 package seedu.medibook.model.patient;
 
+import static seedu.medibook.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.HashMap;
 
 import seedu.medibook.model.Date;
@@ -20,6 +22,7 @@ public class Record {
      * Initializes a {@code} Record object with the given height and weight record.
      */
     public Record(HashMap<Date, Height> heightRecord, HashMap<Date, Weight> weightRecord) {
+        requireAllNonNull(heightRecord, weightRecord);
         this.heightRecord = heightRecord;
         this.weightRecord = weightRecord;
     }
@@ -57,10 +60,27 @@ public class Record {
     }
 
     public HashMap<Date, Height> getHeightRecord() {
+        assert heightRecord != null : "Height record should not be null";
         return heightRecord;
     }
 
     public HashMap<Date, Weight> getWeightRecord() {
+        assert weightRecord != null : "Weight record should not be null";
         return weightRecord;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Record)) {
+            return false;
+        }
+
+        Record otherRecord = (Record) other;
+        return otherRecord.getHeightRecord().equals(getHeightRecord())
+                && otherRecord.getWeightRecord().equals(getWeightRecord());
     }
 }

@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
+import seedu.medibook.commons.exceptions.IllegalValueException;
 import seedu.medibook.model.Date;
 import seedu.medibook.model.patient.Height;
 import seedu.medibook.model.patient.Record;
@@ -17,6 +18,10 @@ import seedu.medibook.model.patient.Weight;
  * Jackson-friendly version of {@link Record}.
  */
 class JsonAdaptedRecord {
+
+    public static final String MISSING_HEIGHT_RECORD_MESSAGE = "Record's height record field is missing!";
+    public static final String MISSING_WEIGHT_RECORD_MESSAGE = "Record's Weight record field is missing!";
+
     private final HashMap<String, String> heightRecord;
     private final HashMap<String, String> weightRecord;
 
@@ -61,7 +66,15 @@ class JsonAdaptedRecord {
     /**
      * Converts this Jackson-friendly adapted Record object into the model's {@code Record} object.
      */
-    public Record toModelType() {
+    public Record toModelType() throws IllegalValueException {
+        if (this.heightRecord == null) {
+            throw new IllegalValueException(MISSING_HEIGHT_RECORD_MESSAGE);
+        }
+
+        if (this.weightRecord == null) {
+            throw new IllegalValueException(MISSING_WEIGHT_RECORD_MESSAGE);
+        }
+
         HashMap<Date, Height> heightRecord = toDateHeightMap(this.heightRecord);
         HashMap<Date, Weight> weightRecord = toDateWeightMap(this.weightRecord);
         return new Record(heightRecord, weightRecord);

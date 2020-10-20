@@ -178,6 +178,10 @@ class JsonAdaptedPatient {
 
         final Optional<Email> modelEmail;
 
+        if (email == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+        }
+
         if (email.equals(OPTIONAL_FIELD_EMPTY_MESSAGE)) {
             modelEmail = Optional.empty();
         } else if (!Email.isValidEmail(email)) {
@@ -187,6 +191,10 @@ class JsonAdaptedPatient {
         }
 
         final Optional<Address> modelAddress;
+
+        if (address == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        }
 
         if (address.equals(OPTIONAL_FIELD_EMPTY_MESSAGE)) {
             modelAddress = Optional.empty();
@@ -198,6 +206,10 @@ class JsonAdaptedPatient {
 
         final Optional<Height> modelHeight;
 
+        if (height == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Height.class.getSimpleName()));
+        }
+
         if (height.equals(OPTIONAL_FIELD_EMPTY_MESSAGE)) {
             modelHeight = Optional.empty();
         } else if (!Height.isValidHeight(height)) {
@@ -207,6 +219,10 @@ class JsonAdaptedPatient {
         }
 
         final Optional<Weight> modelWeight;
+
+        if (weight == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Weight.class.getSimpleName()));
+        }
 
         if (weight.equals(OPTIONAL_FIELD_EMPTY_MESSAGE)) {
             modelWeight = Optional.empty();
@@ -218,6 +234,10 @@ class JsonAdaptedPatient {
 
         final Optional<Bmi> modelBmi;
 
+        if (bmi == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Bmi.class.getSimpleName()));
+        }
+
         if (bmi.equals(OPTIONAL_FIELD_EMPTY_MESSAGE)) {
             modelBmi = Optional.empty();
         } else if (!Bmi.isValidBmi(bmi)) {
@@ -227,6 +247,11 @@ class JsonAdaptedPatient {
         }
 
         final Optional<BloodType> modelBloodType;
+
+        if (bloodType == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    BloodType.class.getSimpleName()));
+        }
 
         if (bloodType.equals(OPTIONAL_FIELD_EMPTY_MESSAGE)) {
             modelBloodType = Optional.empty();
@@ -238,12 +263,15 @@ class JsonAdaptedPatient {
 
         final Set<Tag> modelTags = new HashSet<>(patientTags);
 
-        final Patient modelPatient = new Patient(modelIc, modelName, modelDateOfBirth, modelPhone, modelEmail, modelAddress,
-                modelHeight, modelWeight, modelBmi, modelBloodType, modelTags);
+        final Patient modelPatient = new Patient(modelIc, modelName, modelDateOfBirth, modelPhone, modelEmail,
+                modelAddress, modelHeight, modelWeight, modelBmi, modelBloodType, modelTags);
+
+        if (record == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Record.class.getSimpleName()));
+        }
 
         final Record modelRecord = record.toModelType();
-
-        assert modelRecord != null : "Record should not be null";
 
         modelPatient.setRecord(modelRecord);
 
