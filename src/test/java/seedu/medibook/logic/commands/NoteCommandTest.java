@@ -28,7 +28,7 @@ public class NoteCommandTest {
     @Test
     public void execute_noteOnListView_failure() {
         // set model to hold no optional patient
-        model.resetAccessedPatient();
+        model.getContext().resetAccessedPatient();
 
         MedicalNote medicalNote = new MedicalNote(new Date("20-10-2019", true), "John",
                 "Patient is having fever.");
@@ -41,7 +41,7 @@ public class NoteCommandTest {
         Patient targetPatient = model.getFilteredPatientList().get(0);
 
         //TODO: make sure medical note list is loaded first
-        model.accessPatient(targetPatient);
+        model.getContext().accessPatient(targetPatient);
 
         MedicalNote medicalNote = new MedicalNote(new Date("20-10-2019", true), "John",
                 "Patient is having fever.");
@@ -54,7 +54,7 @@ public class NoteCommandTest {
 
         Model expectedModel = new ModelManager(new MediBook(model.getMediBook()), new UserPrefs());
         expectedModel.setPatient(model.getFilteredPatientList().get(0), resultingPatient);
-        expectedModel.accessPatient(targetPatient);
+        expectedModel.getContext().accessPatient(targetPatient);
 
         assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
     }
