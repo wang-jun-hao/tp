@@ -7,6 +7,7 @@ import java.util.List;
 import seedu.medibook.commons.core.Messages;
 import seedu.medibook.commons.core.index.Index;
 import seedu.medibook.logic.commands.exceptions.CommandException;
+import seedu.medibook.model.Context;
 import seedu.medibook.model.Model;
 import seedu.medibook.model.patient.Patient;
 
@@ -40,7 +41,9 @@ public class AccessCommand extends Command {
         }
 
         Patient patientToAccess = lastShownList.get(targetIndex.getZeroBased());
-        model.getContext().accessPatient(patientToAccess);
+        Context context = model.getContext();
+        context.accessPatient(patientToAccess);
+        context.setShouldLoadMedicalNotes(true);
 
         return new CommandResult(String.format(MESSAGE_ACCESS_PATIENT_SUCCESS, patientToAccess), false,
                 false, true, false);

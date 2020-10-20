@@ -22,7 +22,7 @@ import seedu.medibook.model.patient.Ic;
 public class JsonMedicalNoteListStorage implements MedicalNoteListStorage {
 
     public static final String NAME_DIR = "medicalnotes";
-    private static final String NAME_EXTENSION = ".json";
+    public static final String NAME_EXTENSION = ".json";
     private static final Logger logger = LogsCenter.getLogger(JsonMedicalNoteListStorage.class);
 
     private final Path filePath;
@@ -58,10 +58,6 @@ public class JsonMedicalNoteListStorage implements MedicalNoteListStorage {
 
         Optional<JsonSerializableMedicalNoteList> jsonMedicalNoteList = JsonUtil.readJsonFile(
                 medicalNotesPath, JsonSerializableMedicalNoteList.class);
-
-        if (jsonMedicalNoteList.isEmpty()) {
-            return Optional.empty();
-        }
 
         try {
             return Optional.of(jsonMedicalNoteList.get().toModelType());

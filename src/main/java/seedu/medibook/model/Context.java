@@ -5,11 +5,15 @@ import java.util.Optional;
 import seedu.medibook.model.patient.Ic;
 import seedu.medibook.model.patient.Patient;
 
+/**
+ * Wraps the data from the most recently executed command.
+ */
 public class Context {
     private Optional<Patient> accessedPatient = Optional.empty();
+    private boolean shouldLoadMedicalNotes = true;
     private Optional<Patient> deletedPatient = Optional.empty();
     private Optional<Patient> editedPatient = Optional.empty();
-    private Ic editedPatientPrevIc;
+    private Optional<Ic> editedPatientPrevIc = Optional.empty();
 
     /**
      * Accesses the given patient.
@@ -56,7 +60,7 @@ public class Context {
      */
     public void setEditedPatient(Patient patient, Ic prevIc) {
         this.editedPatient = Optional.of(patient);
-        this.editedPatientPrevIc = prevIc;
+        this.editedPatientPrevIc = Optional.of(prevIc);
     }
 
     /**
@@ -69,7 +73,7 @@ public class Context {
     /**
      * Returns the previous Ic of an edited patient assuming the Ic was edited.
      */
-    public Ic getEditedPatientPrevIc() {
+    public Optional<Ic> getEditedPatientPrevIc() {
         return this.editedPatientPrevIc;
     }
 
@@ -78,5 +82,20 @@ public class Context {
      */
     public void resetEditedPatient() {
         this.editedPatient = Optional.empty();
+        this.editedPatientPrevIc = Optional.empty();
+    }
+
+    /**
+     * Returns a boolean on whether the medical notes of a {@code patient} should be loaded.
+     */
+    public boolean getShouldLoadMedicalNotes() {
+        return this.shouldLoadMedicalNotes;
+    }
+
+    /**
+     * Sets the boolean on whether the medical notes of a {@code patient} should be loaded.
+     */
+    public void setShouldLoadMedicalNotes(boolean b) {
+        this.shouldLoadMedicalNotes = b;
     }
 }

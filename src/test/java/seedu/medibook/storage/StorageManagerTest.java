@@ -2,6 +2,7 @@ package seedu.medibook.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.medibook.testutil.TypicalMedicalNotes.getTypicalMedicalNoteList;
 import static seedu.medibook.testutil.TypicalPatients.getTypicalMediBook;
 
@@ -40,6 +41,16 @@ public class StorageManagerTest {
     }
 
     @Test
+    public void getUserPrefsFilePath() {
+        assertEquals(getTempFilePath("prefs"), storageManager.getUserPrefsFilePath());
+    }
+
+    @Test
+    public void getMedicalNotesDirPath() {
+        assertEquals(getTempFilePath("mnl"), storageManager.getMedicalNotesDirPath());
+    }
+
+    @Test
     public void prefsReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
@@ -58,7 +69,7 @@ public class StorageManagerTest {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link JsonMediBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonMediBookStorageTest} class.
+         * More extensive testing of MediBook saving/reading is done in {@link JsonMediBookStorageTest} class.
          */
         MediBook original = getTypicalMediBook();
         storageManager.saveMediBook(original);
@@ -76,13 +87,36 @@ public class StorageManagerTest {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link JsonMedicalNoteListStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonMedicalNoteListStorageTest} class.
+         * More extensive testing of MedicalNoteList saving/reading is done
+         * in {@link JsonMedicalNoteListStorageTest} class.
          */
         MedicalNoteList original = getTypicalMedicalNoteList();
         Ic ic = new Ic("T0012393D");
         storageManager.saveMedicalNoteList(original, ic);
         ReadOnlyMedicalNoteList retrieved = storageManager.readMedicalNoteList(ic).get();
         assertEquals(original, new MedicalNoteList(retrieved.getMedicalNoteList()));
+    }
+
+    @Test
+    public void medicalNotesSaveRenameReadDelete() throws Exception {
+        /*
+         * Note: This is an integration test that verifies the StorageManager is properly wired to the
+         * {@link JsonMedicalNoteListStorage} class.
+         * More extensive testing of MedicalNoteList saving/renaming/reading/deleting is done
+         * in {@link JsonMedicalNoteListStorageTest} class.
+         */
+        MedicalNoteList original = getTypicalMedicalNoteList();
+        Ic oldIc = new Ic("T0012393D");
+        storageManager.saveMedicalNoteList(original, oldIc);
+
+        Ic newIc = new Ic("S4398349Z");
+        storageManager.renameMedicalNoteList(oldIc, newIc);
+
+        ReadOnlyMedicalNoteList retrieved = storageManager.readMedicalNoteList(newIc).get();
+        assertEquals(original, new MedicalNoteList(retrieved.getMedicalNoteList()));
+
+        storageManager.deleteMedicalNoteList(newIc);
+        assertTrue(storageManager.readMedicalNoteList(newIc).isEmpty());
     }
 
 }

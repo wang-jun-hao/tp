@@ -8,6 +8,7 @@ import static seedu.medibook.logic.parser.CliSyntax.PREFIX_NAME;
 import java.util.Optional;
 
 import seedu.medibook.logic.commands.exceptions.CommandException;
+import seedu.medibook.model.Context;
 import seedu.medibook.model.Model;
 import seedu.medibook.model.medicalnote.MedicalNote;
 import seedu.medibook.model.patient.Patient;
@@ -46,7 +47,9 @@ public class NoteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Optional<Patient> patientOptional = model.getContext().getPatientToAccess();
+        Context context = model.getContext();
+        context.setShouldLoadMedicalNotes(false);
+        Optional<Patient> patientOptional = context.getPatientToAccess();
 
         if (!patientOptional.isPresent()) {
             throw new CommandException("You can only add medical note to a patient when you are viewing "
@@ -58,8 +61,6 @@ public class NoteCommand extends Command {
         assert model.hasPatient(displayedPatient) : "Patient in context does not exist in model";
 
         displayedPatient.addMedicalNote(newMedicalNote);
-
-        System.out.println(displayedPatient);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, newMedicalNote));
     }

@@ -118,7 +118,8 @@ public class LogicManager implements Logic {
     }
 
     private void readOrSaveMedicalNoteList(Patient patient) throws IOException, DataConversionException {
-        if (patient.getMedicalNoteList().isEmpty()) {
+        boolean shouldLoadMedicalNotes = model.getContext().getShouldLoadMedicalNotes();
+        if (shouldLoadMedicalNotes) {
             storage.readMedicalNoteList(patient.getIc())
                     .ifPresent(medicalNotes ->
                             patient.setMedicalNoteList(new MedicalNoteList(medicalNotes.getMedicalNoteList())));
@@ -134,9 +135,9 @@ public class LogicManager implements Logic {
 
     private void renameMedicalNoteList(Patient patient) throws IOException {
         Context context = model.getContext();
-        Ic oldIc = context.getEditedPatientPrevIc();
+        Ic oldIc = context.getEditedPatientPrevIc().get();
         Ic newIc = patient.getIc();
         storage.renameMedicalNoteList(oldIc, newIc);
-        model.getContext().resetEditedPatient();
+        context.resetEditedPatient();
     }
 }
