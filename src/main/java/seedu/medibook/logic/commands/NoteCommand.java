@@ -33,6 +33,8 @@ public class NoteCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New medical note entry added:\n%1$s";
     public static final String MESSAGE_DUPLICATE_NOTE = "This medical note entry already exists in the system";
+    public static final String MESSAGE_NOTE_ON_LIST = "You can only add medical note to a patient when you are viewing "
+            + "his/her patient profile. Access the patient profile before adding medical note.";
 
     private final MedicalNote newMedicalNote;
 
@@ -52,8 +54,7 @@ public class NoteCommand extends Command {
         Optional<Patient> patientOptional = context.getPatientToAccess();
 
         if (!patientOptional.isPresent()) {
-            throw new CommandException("You can only add medical note to a patient when you are viewing "
-                    + "his/her patient profile. Access the patient profile before adding medical note.");
+            throw new CommandException(MESSAGE_NOTE_ON_LIST);
         }
 
         Patient displayedPatient = patientOptional.get();

@@ -22,7 +22,7 @@ public class Date {
     private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern(OUTPUT_STRING_PATTERN);
     public final String inputValue;
     public final String outputValue;
-    public final LocalDate date;
+    private final LocalDate date;
 
     /**
      * Constructs a {@code Date} set to the given date in string form.

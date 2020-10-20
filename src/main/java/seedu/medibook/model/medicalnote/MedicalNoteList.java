@@ -64,8 +64,10 @@ public class MedicalNoteList implements ReadOnlyMedicalNoteList {
             return false;
         }
 
-        MedicalNoteList otherMedicalNotes = (MedicalNoteList) other;
-        return innerList.equals(otherMedicalNotes.innerList);
+
+        MedicalNoteList otherList = (MedicalNoteList) other;
+        return otherList.innerList.equals(innerList);
     }
+
 
 }
