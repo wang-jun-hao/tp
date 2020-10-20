@@ -66,6 +66,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Patient patient = new Patient(ic, name, dateOfBirth, phone, email, address, height, weight,
                                    bloodType, tagList);
 
+        height.ifPresent(h -> patient.getRecord().addHeightRecord(h));
+        weight.ifPresent(w -> patient.getRecord().addWeightRecord(w));
+
         return new AddCommand(patient);
     }
 

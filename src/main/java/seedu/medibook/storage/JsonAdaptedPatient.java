@@ -23,6 +23,7 @@ import seedu.medibook.model.patient.Ic;
 import seedu.medibook.model.patient.Name;
 import seedu.medibook.model.patient.Patient;
 import seedu.medibook.model.patient.Phone;
+import seedu.medibook.model.patient.Record;
 import seedu.medibook.model.patient.Weight;
 import seedu.medibook.model.tag.Tag;
 
@@ -43,6 +44,7 @@ class JsonAdaptedPatient {
     private final String weight;
     private final String bmi;
     private final String bloodType;
+    private final JsonAdaptedRecord record;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -54,6 +56,7 @@ class JsonAdaptedPatient {
                               @JsonProperty("email") String email, @JsonProperty("address") String address,
                               @JsonProperty("height") String height, @JsonProperty("weight") String weight,
                               @JsonProperty("bmi") String bmi, @JsonProperty("blood type") String bloodType,
+                              @JsonProperty("record") JsonAdaptedRecord record,
                               @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.ic = ic;
         this.name = name;
@@ -65,6 +68,7 @@ class JsonAdaptedPatient {
         this.weight = weight;
         this.bmi = bmi;
         this.bloodType = bloodType;
+        this.record = record;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -120,6 +124,8 @@ class JsonAdaptedPatient {
         } else {
             bloodType = OPTIONAL_FIELD_EMPTY_MESSAGE;
         }
+
+        record = new JsonAdaptedRecord(source.getRecord());
 
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -231,8 +237,17 @@ class JsonAdaptedPatient {
         }
 
         final Set<Tag> modelTags = new HashSet<>(patientTags);
-        return new Patient(modelIc, modelName, modelDateOfBirth, modelPhone, modelEmail, modelAddress, modelHeight,
-                modelWeight, modelBmi, modelBloodType, modelTags);
+
+        final Patient modelPatient = new Patient(modelIc, modelName, modelDateOfBirth, modelPhone, modelEmail, modelAddress,
+                modelHeight, modelWeight, modelBmi, modelBloodType, modelTags);
+
+        final Record modelRecord = record.toModelType();
+
+        assert modelRecord != null : "Record should not be null";
+
+        modelPatient.setRecord(modelRecord);
+
+        return modelPatient;
     }
 
 }

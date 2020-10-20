@@ -38,6 +38,9 @@ public class Patient {
     private MedicalNoteList medicalNoteList = new MedicalNoteList();
     private final Set<Tag> tags = new HashSet<>();
 
+    // Patient's past records
+    private Record record = new Record();
+
     /**
      * Every field must be present and not null.
      */
@@ -279,6 +282,21 @@ public class Patient {
         return getPhone().toString();
     }
 
+    /**
+     * Returns the past records of the patient.
+     * @return Record object containing the patient's past records
+     */
+    public Record getRecord() {
+        return this.record;
+    }
+
+    /**
+     * Sets the past records of the patient.
+     */
+    public void setRecord(Record record) {
+        assert record != null : "Record should not be null";
+        this.record = record;
+    }
 
     /**
      * Returns true if both patients have the same identity and data fields.
