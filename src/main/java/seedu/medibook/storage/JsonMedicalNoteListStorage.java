@@ -3,7 +3,9 @@ package seedu.medibook.storage;
 import static java.util.Objects.requireNonNull;
 import static seedu.medibook.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -47,6 +49,7 @@ public class JsonMedicalNoteListStorage implements MedicalNoteListStorage {
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
+    @Override
     public Optional<ReadOnlyMedicalNoteList> readMedicalNoteList(Path filePath, Ic ic) throws DataConversionException {
         requireNonNull(filePath);
         requireNonNull(ic);
@@ -77,6 +80,7 @@ public class JsonMedicalNoteListStorage implements MedicalNoteListStorage {
      *
      * @param filePath location of the data. Cannot be null.
      */
+    @Override
     public void saveMedicalNoteList(ReadOnlyMedicalNoteList medicalNoteList, Path filePath, Ic ic) throws IOException {
         requireAllNonNull(medicalNoteList, filePath, ic);
 
@@ -110,6 +114,22 @@ public class JsonMedicalNoteListStorage implements MedicalNoteListStorage {
         Path oldMedicalNotesPath = getMedicalNotesPath(filePath, oldIc);
         Path newMedicalNotesPath = getMedicalNotesPath(filePath, newIc);
         FileUtil.renameIfExists(oldMedicalNotesPath, newMedicalNotesPath);
+    }
+
+    @Override
+    public void deleteAllMedicalNoteList() throws IOException {
+        deleteAllMedicalNoteList(filePath);
+    }
+
+    @Override
+    public void deleteAllMedicalNoteList(Path filePath) throws IOException {
+        requireNonNull(filePath);
+
+        Path dirPath = filePath.resolve(NAME_DIR);
+        Files.walk(dirPath)
+                .filter(Files::isRegularFile)
+                .map(Path::toFile)
+                .forEach(File::delete);
     }
 
     private Path getMedicalNotesPath(Path filePath, Ic ic) {

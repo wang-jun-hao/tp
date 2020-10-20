@@ -92,4 +92,15 @@ public class ContextTest {
         context.setShouldLoadMedicalNotes(true);
         assertTrue(context.getShouldLoadMedicalNotes());
     }
+
+    @Test
+    public void getAndSetShouldDeleteAllMedicalNotes_success() {
+        Context context = new Context();
+
+        context.setShouldDeleteAllMedicalNotes(true);
+        assertTrue(context.getShouldDeleteAllMedicalNotes());
+
+        context.setShouldDeleteAllMedicalNotes(false);
+        assertFalse(context.getShouldDeleteAllMedicalNotes());
+    }
 }

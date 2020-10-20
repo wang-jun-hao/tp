@@ -60,16 +60,26 @@ public interface MedicalNoteListStorage {
     void deleteMedicalNoteList(Path filePath, Ic ic) throws IOException;
 
     /**
-     * Deletes the data file containing the medical notes corresponding to the {@code ic}.
+     * Renames the data file containing the medical notes from the old {@code ic} to the new {@code ic}.
      * @param oldIc cannot be null.
      * @param newIc cannot be null.
-     * @throws IOException if there was any problem deleting the file.
+     * @throws IOException if there was any problem renaming the file.
      */
     void renameMedicalNoteList(Ic oldIc, Ic newIc) throws IOException;
 
     /**
-     * @see #deleteMedicalNoteList(Ic ic)
+     * @see #renameMedicalNoteList(Ic ic, Ic ic)
      */
     void renameMedicalNoteList(Path filePath, Ic oldIc, Ic newIc) throws IOException;
+
+    /**
+     * Deletes all medical notes data file.
+     */
+    void deleteAllMedicalNoteList() throws IOException;
+
+    /**
+     * @see #deleteAllMedicalNoteList()
+     */
+    void deleteAllMedicalNoteList(Path filePath) throws IOException;
 
 }

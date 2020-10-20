@@ -131,4 +131,15 @@ public class StorageManager implements Storage {
         logger.fine("Attempting to rename data file: " + filePath);
         medicalNoteListStorage.renameMedicalNoteList(filePath, oldIc, newIc);
     }
+
+    @Override
+    public void deleteAllMedicalNoteList() throws IOException {
+        deleteAllMedicalNoteList(medicalNoteListStorage.getMedicalNotesDirPath());
+    }
+
+    @Override
+    public void deleteAllMedicalNoteList(Path filePath) throws IOException {
+        logger.fine("Attempting to clear all data files: " + filePath);
+        medicalNoteListStorage.deleteAllMedicalNoteList(filePath);
+    }
 }

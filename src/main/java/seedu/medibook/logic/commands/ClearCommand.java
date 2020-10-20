@@ -18,6 +18,7 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setMediBook(new MediBook());
+        model.getContext().setShouldDeleteAllMedicalNotes(true);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

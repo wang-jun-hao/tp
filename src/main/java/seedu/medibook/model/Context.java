@@ -14,6 +14,7 @@ public class Context {
     private Optional<Patient> deletedPatient = Optional.empty();
     private Optional<Patient> editedPatient = Optional.empty();
     private Optional<Ic> editedPatientPrevIc = Optional.empty();
+    private boolean shouldDeleteAllMedicalNotes = false;
 
     /**
      * Accesses the given patient.
@@ -97,5 +98,19 @@ public class Context {
      */
     public void setShouldLoadMedicalNotes(boolean b) {
         this.shouldLoadMedicalNotes = b;
+    }
+
+    /**
+     * Returns a boolean on whether all medical notes should be cleared.
+     */
+    public boolean getShouldDeleteAllMedicalNotes() {
+        return this.shouldDeleteAllMedicalNotes;
+    }
+
+    /**
+     * Sets the boolean on whether all medical notes should be cleared.
+     */
+    public void setShouldDeleteAllMedicalNotes(boolean b) {
+        this.shouldDeleteAllMedicalNotes = b;
     }
 }

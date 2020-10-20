@@ -131,6 +131,32 @@ public class JsonMedicalNoteListStorageTest {
     }
 
     @Test
+    public void saveAndDeleteAllMedicalNoteList_allInOrder_success() throws Exception {
+        Path filePath = testFolder.resolve("TempMedicalNotes");
+        MedicalNoteList original = getTypicalMedicalNoteList();
+        JsonMedicalNoteListStorage jsonMedicalNoteListStorage = new JsonMedicalNoteListStorage(filePath);
+
+        // Save in new file and check if file exists
+        Ic ic1 = new Ic("T6837664L");
+        jsonMedicalNoteListStorage.saveMedicalNoteList(original, filePath, ic1);
+        assertTrue(FileUtil.isFileExists(filePath.resolve(NAME_DIR).resolve(ic1 + NAME_EXTENSION)));
+
+        Ic ic2 = new Ic("S9674263W");
+        jsonMedicalNoteListStorage.saveMedicalNoteList(original, filePath, ic2);
+        assertTrue(FileUtil.isFileExists(filePath.resolve(NAME_DIR).resolve(ic2 + NAME_EXTENSION)));
+
+        Ic ic3 = new Ic("S6848336I");
+        jsonMedicalNoteListStorage.saveMedicalNoteList(original, filePath, ic3);
+        assertTrue(FileUtil.isFileExists(filePath.resolve(NAME_DIR).resolve(ic3 + NAME_EXTENSION)));
+
+        // Delete the new files created
+        jsonMedicalNoteListStorage.deleteAllMedicalNoteList();
+        assertFalse(FileUtil.isFileExists(filePath.resolve(NAME_DIR).resolve(ic1 + NAME_EXTENSION)));
+        assertFalse(FileUtil.isFileExists(filePath.resolve(NAME_DIR).resolve(ic2 + NAME_EXTENSION)));
+        assertFalse(FileUtil.isFileExists(filePath.resolve(NAME_DIR).resolve(ic3 + NAME_EXTENSION)));
+    }
+
+    @Test
     public void saveAndRenameMedicalNoteList_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempMedicalNotes");
         MedicalNoteList original = getTypicalMedicalNoteList();

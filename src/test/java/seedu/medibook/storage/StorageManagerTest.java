@@ -119,4 +119,38 @@ public class StorageManagerTest {
         assertTrue(storageManager.readMedicalNoteList(newIc).isEmpty());
     }
 
+    @Test
+    public void medicalNotesSaveDeleteAllRead() throws Exception {
+        /*
+         * Note: This is an integration test that verifies the StorageManager is properly wired to the
+         * {@link JsonMedicalNoteListStorage} class.
+         * More extensive testing of MedicalNoteList saving/delete all/read is done
+         * in {@link JsonMedicalNoteListStorageTest} class.
+         */
+        MedicalNoteList original = getTypicalMedicalNoteList();
+        Ic ic1 = new Ic("T6837664L");
+        storageManager.saveMedicalNoteList(original, ic1);
+
+        Ic ic2 = new Ic("S9674263W");
+        storageManager.saveMedicalNoteList(original, ic2);
+
+        Ic ic3 = new Ic("S6848336I");
+        storageManager.saveMedicalNoteList(original, ic3);
+
+        ReadOnlyMedicalNoteList retrieved = storageManager.readMedicalNoteList(ic1).get();
+        assertEquals(original, new MedicalNoteList(retrieved.getMedicalNoteList()));
+
+        retrieved = storageManager.readMedicalNoteList(ic2).get();
+        assertEquals(original, new MedicalNoteList(retrieved.getMedicalNoteList()));
+
+        retrieved = storageManager.readMedicalNoteList(ic3).get();
+        assertEquals(original, new MedicalNoteList(retrieved.getMedicalNoteList()));
+
+        storageManager.deleteAllMedicalNoteList();
+
+        assertTrue(storageManager.readMedicalNoteList(ic1).isEmpty());
+        assertTrue(storageManager.readMedicalNoteList(ic2).isEmpty());
+        assertTrue(storageManager.readMedicalNoteList(ic3).isEmpty());
+    }
+
 }

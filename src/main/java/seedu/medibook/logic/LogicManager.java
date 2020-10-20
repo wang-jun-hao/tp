@@ -104,17 +104,29 @@ public class LogicManager implements Logic {
         Optional<Patient> accessPatient = context.getPatientToAccess();
         if (accessPatient.isPresent()) {
             readOrSaveMedicalNoteList(accessPatient.get());
+            return;
         }
 
         Optional<Patient> deletedPatient = context.getDeletedPatient();
         if (deletedPatient.isPresent()) {
             deleteMedicalNoteList(deletedPatient.get());
+            return;
         }
 
         Optional<Patient> editedPatient = context.getEditedPatient();
         if (editedPatient.isPresent()) {
             renameMedicalNoteList(editedPatient.get());
+            return;
         }
+
+        if (context.getShouldDeleteAllMedicalNotes()) {
+            deleteAllMedicalNotes();
+        }
+    }
+
+    private void deleteAllMedicalNotes() throws IOException {
+        storage.deleteAllMedicalNoteList();
+        model.getContext().setShouldDeleteAllMedicalNotes(false);
     }
 
     private void readOrSaveMedicalNoteList(Patient patient) throws IOException, DataConversionException {
