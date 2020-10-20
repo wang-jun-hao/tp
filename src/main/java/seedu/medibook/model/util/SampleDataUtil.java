@@ -1,10 +1,14 @@
 package seedu.medibook.model.util;
 
+import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import seedu.medibook.model.Date;
 import seedu.medibook.model.MediBook;
 import seedu.medibook.model.ReadOnlyMediBook;
 import seedu.medibook.model.patient.Address;
@@ -16,6 +20,7 @@ import seedu.medibook.model.patient.Ic;
 import seedu.medibook.model.patient.Name;
 import seedu.medibook.model.patient.Patient;
 import seedu.medibook.model.patient.Phone;
+import seedu.medibook.model.patient.Record;
 import seedu.medibook.model.patient.Weight;
 import seedu.medibook.model.tag.Tag;
 
@@ -57,7 +62,8 @@ public class SampleDataUtil {
 
     public static ReadOnlyMediBook getSampleMediBook() {
         MediBook sampleMb = new MediBook();
-        for (Patient samplePatient : getSamplePatients()) {
+        Patient[] initPatients = generateRecords(getSamplePatients());
+        for (Patient samplePatient : initPatients) {
             sampleMb.addPatient(samplePatient);
         }
         return sampleMb;
@@ -70,6 +76,45 @@ public class SampleDataUtil {
         return Arrays.stream(strings)
                 .map(Tag::new)
                 .collect(Collectors.toSet());
+    }
+
+    private static Patient[] generateRecords(Patient[] patients) {
+        for (Patient patient : patients) {
+            LocalDate date = LocalDate.now();
+            String currentHeight = patient.getHeight().get().value;
+            String currentWeight = patient.getWeight().get().value;
+            Record patientRecord = patient.getRecord();
+            double weightVariance = Math.random() * 10;
+            for (int i = 0; i < Math.random() * 20; i++) {
+                String dateString = toDateString(date);
+                Date recordDate = new Date(dateString, true);
+                Height recordHeight = new Height(currentHeight);
+                Weight recordWeight = new Weight(currentWeight);
+                patientRecord.addHeightRecord(recordDate, recordHeight);
+                patientRecord.addWeightRecord(recordDate, recordWeight);
+
+                date = date.minusDays((int) (Math.random() * 20));
+                int updatedHeight = Integer.parseInt(currentHeight) - (int) (Math.random() * 1.5);
+                currentHeight = Integer.toString(updatedHeight);
+
+                double updatedWeight = Double.parseDouble(currentWeight) + (weightVariance * (Math.random() - 0.5));
+                currentWeight = toOneDecimal(Double.toString(updatedWeight));
+            }
+        }
+        return patients;
+    }
+
+    private static String toDateString(LocalDate date) {
+        // LocalDate toString returns dates as yyyy-mm-dd
+        List<String> dateInfo = Arrays.asList(date.toString().split("-"));
+        Collections.reverse(dateInfo);
+        // Reverse the year, month and date position to create a valid date string for the Date class
+        return String.join("-", dateInfo);
+    }
+
+    private static String toOneDecimal(String value) {
+        int decimalPos = value.indexOf(".");
+        return value.substring(0, decimalPos + 2);
     }
 
 }
