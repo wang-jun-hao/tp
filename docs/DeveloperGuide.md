@@ -133,9 +133,42 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Adding medical notes to patients
 
-#### Proposed Implementation
+#### Implementation
+
+* Each medical note is stored as a `MedicalNote` object.
+* Every `patient` has a `MedicalNoteList` object that represents the list of medical notes belonging to that `patient`.
+* `NoteCommandParser` parses user's string input into a `NoteCommand`
+* Target `patient` is retrieved from `ModelManager#getPatientToAccess()`
+
+The following sequence diagram shows how note adding operation works:
+
+![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+
+Design consideration:
+
+`note` command can only be called when viewing a `patient`'s profile
+* Every `patient` in the `model` has a `MedicalNoteList` that is initialised as an empty list at program start-up to optimise start-up time.
+* `MedicalNoteList` of every patient is properly loaded only when necessary (`access` on patient)
+* `access`-ing a `patient` loads the stored medical note list and sets the `MedicalNoteList` of the `patient` to the retrieved list
+* Hence, `note` command can only be called when viewing a `patient`'s profile as it ensures that the `MedicalNoteList` has already been properly loaded by executing `access` command beforehand
+* It also allows for a shorter `note` command as the user does not need to specify the target `patient` as it is automatically selected.
+
+
+
+
+
+
+
+
+
+
 
 The proposed undo/redo mechanism is facilitated by `VersionedMediBook`. It extends `MediBook` with an undo/redo history, stored internally as an `mediBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
