@@ -1,0 +1,29 @@
+@startuml
+!include style.puml
+
+mainframe sd update patient in model
+
+box Logic LOGIC_COLOR_T1
+participant "nc:NoteCommand" as NoteCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant "dp:Patient" as Patient MODEL_COLOR
+end box
+
+activate NoteCommand
+
+NoteCommand --> ModelManager : getPatientToAccess()
+activate ModelManager
+
+ModelManager --> NoteCommand : dp
+deactivate ModelManager
+
+NoteCommand --> Patient : addMedicalNote(mn)
+activate Patient
+
+Patient --> NoteCommand
+deactivate Patient
+
+@enduml

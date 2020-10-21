@@ -1,0 +1,75 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":MediBookParser" as MediBookParser LOGIC_COLOR
+participant ":NoteCommandParser" as NoteCommandParser LOGIC_COLOR
+participant "nc:NoteCommand" as NoteCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "mn:MedicalNote" as MedicalNote MODEL_COLOR
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("note n/Dr John c/Patient...")
+activate LogicManager
+
+LogicManager -> MediBookParser : parseCommand("note n/Dr John c/Patient...")
+activate MediBookParser
+
+create NoteCommandParser
+MediBookParser -> NoteCommandParser
+activate NoteCommandParser
+
+NoteCommandParser --> MediBookParser
+deactivate NoteCommandParser
+
+MediBookParser -> NoteCommandParser : parse("n/Dr John c/Patient...")
+activate NoteCommandParser
+
+create MedicalNote
+NoteCommandParser -> MedicalNote
+activate MedicalNote
+
+MedicalNote --> NoteCommandParser : mn
+deactivate MedicalNote
+
+create NoteCommand
+NoteCommandParser -> NoteCommand : NoteCommand(mn)
+activate NoteCommand
+
+NoteCommand --> NoteCommandParser : nc
+deactivate NoteCommand
+
+NoteCommandParser --> MediBookParser : nc
+deactivate NoteCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+
+NoteCommandParser -[hidden]-> MediBookParser
+destroy NoteCommandParser
+
+MediBookParser --> LogicManager : nc
+deactivate MediBookParser
+
+LogicManager -> NoteCommand : execute()
+activate NoteCommand
+
+ref over NoteCommand, Model : update patient in model
+
+create CommandResult
+NoteCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> NoteCommand : r
+deactivate CommandResult
+
+NoteCommand --> LogicManager : r
+deactivate NoteCommand
+
+[<--LogicManager : r
+deactivate LogicManager
+@enduml
