@@ -58,13 +58,7 @@ deactivate MediBookParser
 LogicManager -> NoteCommand : execute()
 activate NoteCommand
 
-NoteCommand -> Model
-activate Model
-
 ref over NoteCommand, Model : update patient in model
-
-Model --> NoteCommand
-deactivate Model
 
 create CommandResult
 NoteCommand -> CommandResult
