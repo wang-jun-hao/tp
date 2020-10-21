@@ -33,7 +33,6 @@ public class MedicalDetailsRow extends UiPart<Region> {
         this.fieldName.setText(fieldName);
         tags.stream().sorted(Comparator.comparing(tag -> tag.tagName))
             .forEach(tag -> {
-                System.out.println(tag.tagName);
                 this.tags.getChildren().add(new Label(tag.tagName));
             });
     }
