@@ -51,7 +51,7 @@ For example, the `Logic` component (see the class diagram given below) defines i
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete S9803517G`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -67,6 +67,8 @@ The sections below give more details of each component.
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PatientListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+
+A JavaFx TableView is used for the PatientListPanel. Styling for the TableView is done using the `TableView.css` file which is also in the `src/main/resources/view` folder.
 
 The `UI` component,
 
@@ -86,7 +88,7 @@ The `UI` component,
 1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 1. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete S9460472B")` API call.
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
@@ -112,12 +114,6 @@ The `Patient`,
 * stores `IC`, `Name`, `DateOfBirth` and `Phone` objects that represent the patient's IC number, name, date of birth and phone number respectively.
 * stores `Optionals` of `Address`, `Email`, `Height`, `Weight`, `Bmi` and `BloodType` objects.
 * `Bmi` is automatically computed and stored within Optional if both `Height` and `Weight` are present.
-
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `MediBook`, which `Patient` references. This allows `MediBook` to only require one `Tag` object per unique `Tag`, instead of each `Patient` needing their own `Tag` object.<br>
-![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
-
-</div>
 
 
 ### Storage component
@@ -155,19 +151,25 @@ The following sequence diagram shows how note adding operation works:
 
 ![NoteSequenceDiagramSD](images/NoteSequenceDiagramSDUpdatePatientInModel.png)
 
-#### Design consideration:
+#### Design consideration
 
-`note` command can only be called when viewing a `patient`'s profile
+`note` command can only be called when viewing a `patient`'s profile (after an `access` command)
+
+We have decided to implement `note` command this way for 2 reasons:
+1. When user starts MediBook, not all `patient`s' list of medical notes would have been loaded into the program's memory. 
+Only allowing `note` after `access` ensures that the patient's list of medical notes would have been loaded at the point of adding new medical notes.
+2. It allows for a shorter `note` command as the user does not need to specify a target `patient`.
+
+Elaboration on point 1:
 * A medical records software contains many `patients`, each with potentially many `medical note`s.
 * Every `patient` in the `model` has a `MedicalNoteList` that is initialised as an empty list at program start-up to optimise start-up time.
 * `MedicalNoteList` of every patient is properly loaded only when necessary (`access` on patient)
 * `access`-ing a `patient` loads the stored medical note list and sets the `MedicalNoteList` of the `patient` to the retrieved list
 * Hence, `note` command can only be called when viewing a `patient`'s profile as it ensures that the `MedicalNoteList` has already been properly loaded by executing `access` command beforehand
-* It also allows for a shorter `note` command as the user does not need to specify a target `patient`.
 
-### \[Proposed\] Account Creation and Login
+### \[Proposed\] Account creation and login
 
-#### Proposed Implementation
+#### Proposed implementation
 
 The proposed account creation feature is facilitated by a new `CreateAccountCommand`. It extends `Command`, similar to how all the other commands currently work.
 
@@ -194,6 +196,55 @@ Step 2. The UI calls `Logic#login()` with the login information as input.
 Step 3. `Logic#login()` then calls `Storage#checkAccountDetails()` on the login information, to check if the information matches any of the account details saved.
 
 Step 4. If there is no match, an error is thrown. If there is a match, the UI then changes from `LoginWindow` to `MainWindow`, which signifies that the user has succesfully logged in.
+
+### Enhanced find command
+
+#### Implementation
+
+`FindCommand` supports searching by substring for multiple fields with multiple keywords.
+`FindCommand` is facilitated by `FindCommandParser` which creates one or more `FieldContainsKeywordsPredicate`
+(which implements the `Predicate<Patient>` interface) based on the user input.
+Through the `FieldContainsKeywordsPredicate` objects that were created, `FindCommand` then calls 
+`Model#updateFilteredPatientList(predicate)` to filter the list of patient in `Model` based on the user's input search query.
+
+The sequence diagram below illustrates how the `FindCommand` works.
+
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindCommandParser` 
+and `FindCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches
+the end of diagram.
+</div>
+
+Step 1. The user launches the application and inputs `find n/Steve Johnny i/S95 T00 d/2000 1995`.
+This causes the `LogicManager#execute(String input)` method to be called.
+
+Step 2. `MediBookParser#parseCommand(String input)` is then called, creating a new `FindCommandParser`.
+`FindCommandParser#Parse(String arguments)` is then called and in the process, it creates one or more
+`FieldContainsKeywordsPredicate` instances(not shown in the sequence diagram). In this example, `FindCommandParser`
+creates three `FieldContainsKeywordsPredicate` instance, corresponding to the three fields to be searched for.
+
+Step 3. `FindCommand` is initialized with `List<Predicate<Patient>>` containing the `FieldContainsKeywordsPredicate`
+instances that were created in the previous step. This `FindCommand` instance in then finally returned as the result for
+the `MediBookParser#parseCommand(String input)` method call.
+
+Step 4. `FindCommand#execute(Model model)` is called and in turn, `FindCommand` calls the
+`Model#updateFilteredPatientList(Predicate<Patient> predicate)` method which filters the list of
+patient in `Model` based on user's input search query.
+
+The diagram below illustrates the class diagram of the relevant classes for the find feature.
+
+![FindClassDiagram](images/FindClassDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
+`FieldContainsKeywordsPredicate` implements the `Predicate<Patient>` interface.
+</div>
+
+`FieldContainsKeywordsPredicate` is initialized with a `List<String>` containing the keywords to search for and `Prefix`
+which determines which field of the patient to search for. When `FieldContainsKeywordsPredicate#test(Patient patient)`
+is called, it will check if each keyword is a substring of the specified field of the patient. So long as at least one
+of the keyword passes the check, `FieldContainsKeywordsPredicate#test(Patient patient)` will return true.
+
 
 ### \[Proposed\] Data archiving
 
@@ -248,12 +299,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use cases
 
 (For all use cases below, the **System** is the `MediBook` and the **Actor** is the `user`, unless specified otherwise)
-
-  [3a. OBS detects an error in the entered data.
-    3a1. OBS requests for the correct data.
-    3a2. User enters new data
-    Steps 3a1-3a2 are repeated until the data entered are correct.
-    Use case resumes from step 4.] HI
 
 **UC00 Add a patient**
 
@@ -361,15 +406,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a patient while all patients are being shown
 
- 
+   1. Test case: `delete 1`<br>
+      Expected: Patient with index 1 in the list is deleted from the program. Details of the deleted patient shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete S9592739A`<br>
-      Expected: Patient with IC S9592739A is deleted from the program. Details of the deleted patient shown in the status message. Timestamp in the status bar is updated.
-
-   2. Test case: `delete A0123456B`<br>
+   2. Test case: `delete`<br>
       Expected: No patient is deleted. Error details shown in the status message. Status bar remains the same.
 
-   3. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is an IC that does not belong to any patient)<br>
+   3. Other incorrect delete commands to try: `delete <index outside of list range>`, `delete x` <br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
