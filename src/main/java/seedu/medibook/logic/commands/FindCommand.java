@@ -1,7 +1,7 @@
 package seedu.medibook.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DOB;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_IC;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -29,12 +29,12 @@ public class FindCommand extends Command {
             + "Parameters: "
             + PREFIX_IC + "IC... "
             + PREFIX_NAME + "NAME... "
-            + PREFIX_DOB + "DATE OF BIRTH... "
+            + PREFIX_DATE + "DATE OF BIRTH... "
             + PREFIX_PHONE + "PHONE... \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_IC + "S9123456B T1234567G "
             + PREFIX_NAME + "Alice Bernice Charlotte "
-            + PREFIX_DOB + "28-02-2012 "
+            + PREFIX_DATE + "28-02-2012 "
             + PREFIX_PHONE + "98765432 69204068 93210283";
 
     private final List<Predicate<Patient>> predicates;

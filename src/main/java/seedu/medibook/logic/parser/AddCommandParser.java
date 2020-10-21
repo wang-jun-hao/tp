@@ -3,7 +3,7 @@ package seedu.medibook.logic.parser;
 import static seedu.medibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_BLOOD_TYPE;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DOB;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_IC;
@@ -42,17 +42,17 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_IC, PREFIX_NAME, PREFIX_DOB, PREFIX_PHONE, PREFIX_EMAIL,
+                ArgumentTokenizer.tokenize(args, PREFIX_IC, PREFIX_NAME, PREFIX_DATE, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_ADDRESS, PREFIX_HEIGHT, PREFIX_WEIGHT, PREFIX_BLOOD_TYPE, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_IC, PREFIX_NAME, PREFIX_DOB, PREFIX_PHONE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_IC, PREFIX_NAME, PREFIX_DATE, PREFIX_PHONE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
         Ic ic = ParserUtil.parseIc(argMultimap.getValue(PREFIX_IC).get());
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        DateOfBirth dateOfBirth = ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB).get());
+        DateOfBirth dateOfBirth = ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DATE).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
 
         Optional<Email> email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL));

@@ -95,7 +95,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 ### Model component
 
-![Structure of the Model Component](images/ModelClassDiagram.png)
+![Structure of the Model Component](images/ModelClassDiagramUpdated.png)
 
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -105,6 +105,13 @@ The `Model`,
 * stores the medi book data.
 * exposes an unmodifiable `ObservableList<Patient>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
+
+**Patient**
+
+The `Patient`,
+* stores `IC`, `Name`, `DateOfBirth` and `Phone` objects that represent the patient's IC number, name, date of birth and phone number respectively.
+* stores `Optionals` of `Address`, `Email`, `Height`, `Weight`, `Bmi` and `BloodType` objects.
+* `Bmi` is automatically computed and stored within Optional if both `Height` and `Weight` are present.
 
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `MediBook`, which `Patient` references. This allows `MediBook` to only require one `Tag` object per unique `Tag`, instead of each `Patient` needing their own `Tag` object.<br>
@@ -133,85 +140,60 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Adding medical notes to patients
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedMediBook`. It extends `MediBook` with an undo/redo history, stored internally as an `mediBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+* Each medical note is stored as a `MedicalNote` object.
+* Every `patient` has a `MedicalNoteList` object that represents the list of medical notes belonging to that `patient`.
+* `NoteCommandParser` parses user's string input into a `NoteCommand`
+* Target `patient` is retrieved from `ModelManager#getPatientToAccess()`
 
-* `VersionedMediBook#commit()` — Saves the current medi book state in its history.
-* `VersionedMediBook#undo()` — Restores the previous medi book state from its history.
-* `VersionedMediBook#redo()` — Restores a previously undone medi book state from its history.
+The following sequence diagram shows how note adding operation works:
 
-These operations are exposed in the `Model` interface as `Model#commitMediBook()`, `Model#undoMediBook()` and `Model#redoMediBook()` respectively.
+![NoteSequenceDiagramMain](images/NoteSequenceDiagramFocusLogic.png)
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedMediBook` will be initialized with the initial medi book state, and the `currentStatePointer` pointing to that single medi book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th patient in the medi book. The `delete` command calls `Model#commitMediBook()`, causing the modified state of the medi book after the `delete 5` command executes to be saved in the `mediBookStateList`, and the `currentStatePointer` is shifted to the newly inserted medi book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new patient. The `add` command also calls `Model#commitMediBook()`, causing another modified medi book state to be saved into the `mediBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitMediBook()`, so the medi book state will not be saved into the `mediBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the patient was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoMediBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous medi book state, and restores the medi book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial MediBook state, then there are no previous MediBook states to restore. The `undo` command uses `Model#canUndoMediBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoMediBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the medi book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `mediBookStateList.size() - 1`, pointing to the latest medi book state, then there are no undone MediBook states to restore. The `redo` command uses `Model#canRedoMediBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the medi book, such as `list`, will usually not call `Model#commitMediBook()`, `Model#undoMediBook()` or `Model#redoMediBook()`. Thus, the `mediBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitMediBook()`. Since the `currentStatePointer` is not pointing at the end of the `mediBookStateList`, all medi book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-![CommitActivityDiagram](images/CommitActivityDiagram.png)
+![NoteSequenceDiagramSD](images/NoteSequenceDiagramSDUpdatePatientInModel.png)
 
 #### Design consideration:
 
-##### Aspect: How undo & redo executes
+`note` command can only be called when viewing a `patient`'s profile
+* A medical records software contains many `patients`, each with potentially many `medical note`s.
+* Every `patient` in the `model` has a `MedicalNoteList` that is initialised as an empty list at program start-up to optimise start-up time.
+* `MedicalNoteList` of every patient is properly loaded only when necessary (`access` on patient)
+* `access`-ing a `patient` loads the stored medical note list and sets the `MedicalNoteList` of the `patient` to the retrieved list
+* Hence, `note` command can only be called when viewing a `patient`'s profile as it ensures that the `MedicalNoteList` has already been properly loaded by executing `access` command beforehand
+* It also allows for a shorter `note` command as the user does not need to specify a target `patient`.
 
-* **Alternative 1 (current choice):** Saves the entire medi book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+### \[Proposed\] Account Creation and Login
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the patient being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+#### Proposed Implementation
 
-_{more aspects and alternatives to be added}_
+The proposed account creation feature is facilitated by a new `CreateAccountCommand`. It extends `Command`, similar to how all the other commands currently work.
+
+![CreateAccountSequenceDiagram](images/CreateAccountSequenceDiagram.png)
+
+Step 1. The user launches the application and executes `create u/example_username p/example_password`.
+
+Step 2. `Logic#execute(String commandText)` creates a new `CreateAccountCommand` and calls `Storage#saveNewAccountDetails()`.
+
+Step 3. `Storage#saveNewAccountDetails()` converts the new account's username and password into json format and saves it a `AccountDetails.json` file.
+
+The following activity diagram summarises what happens when a user executes a new command to create account.
+
+![CreateAccountActivityDiagram](images/CreateAccountActivityDiagram.png)
+
+The proposed login feature is facilitated by a new `LoginWindow` class in the UI.
+
+![LoginSequenceDiagram](images/LoginSequenceDiagram.png)
+
+Step 1. The user inputs his/her login information.
+
+Step 2. The UI calls `Logic#login()` with the login information as input.
+
+Step 3. `Logic#login()` then calls `Storage#checkAccountDetails()` on the login information, to check if the information matches any of the account details saved.
+
+Step 4. If there is no match, an error is thrown. If there is a match, the UI then changes from `LoginWindow` to `MainWindow`, which signifies that the user has succesfully logged in.
 
 ### \[Proposed\] Data archiving
 

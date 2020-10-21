@@ -10,6 +10,7 @@ import java.util.Set;
 import seedu.medibook.commons.core.index.Index;
 import seedu.medibook.commons.util.StringUtil;
 import seedu.medibook.logic.parser.exceptions.ParseException;
+import seedu.medibook.model.Date;
 import seedu.medibook.model.patient.Address;
 import seedu.medibook.model.patient.BloodType;
 import seedu.medibook.model.patient.DateOfBirth;
@@ -84,6 +85,26 @@ public class ParserUtil {
             throw new ParseException(DateOfBirth.MESSAGE_CONSTRAINTS);
         }
         return new DateOfBirth(trimmedDateOfBirth);
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!Date.isValidDate(trimmedDate)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+
+        try {
+            return new Date(trimmedDate, true);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(Date.MESSAGE_NON_FUTURE);
+        }
     }
 
     /**
