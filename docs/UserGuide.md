@@ -1,7 +1,8 @@
 ---
 layout: page
-title: "MediBook User Guide: Everything you need to know about MediBook"
+title: User Guide
 ---
+<h1>MediBook User Guide: Everything you need to know about MediBook</h1>
 * Table of Contents
 {:toc}
 
