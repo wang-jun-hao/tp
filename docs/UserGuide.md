@@ -123,7 +123,7 @@ Adds a medical note to a patient.
 As a doctor, you can add a medical note to a patient when viewing his/her profile. MediBook will automatically add the 
 to the patient displayed on the screen.
 
-Format: `note [d/DATE_OF_MEDICAL_NOTE] n/NAME_OF_DOCTOR c/CONTENT_OF_MEDICAL_NOTE`
+Format: `note [d/DATE] n/NAME_OF_DOCTOR c/CONTENT_OF_MEDICAL_NOTE`
 
 * You have to be on a patient's profile page to add a medical note. This is done by first `find`-ing the patient by IC
 when on the main list and then `access`-ing the patient's index on the filtered list.
@@ -160,14 +160,13 @@ Patient records are saved in the hard disk automatically after any command that 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
-### Legend:
-↵ = enter key
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add i/IC n/NAME d/DATE_OF_BIRTH p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE] ↵` <br> e.g.,<br>`add i/S9123456A n/Divakar d/29-02-2000 p/91234567` <br> `add i/T0123456Q n/Divakar d/29-02-2000 p/91234567 e/divakarmal@medibook.com a/NUS, Kent Ridge Drive h/178 w/75 b/O+`
-**Delete** | `delete <IC> ↵`<br> e.g., `delete G1234567S`
-**Find** | `find [i/IC] [n/NAME] [d/DATE_OF_BIRTH] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE] ↵`<br> e.g., <br> `find i/G1234567S`<br>`find n/Jack i/T00 dob/2000 h/17 a/Changi`
-**List** | `list ↵`
-**Exit** | `exit ↵`
-**Help** | `help ↵`
+**Add** | `add i/IC n/NAME d/DATE_OF_BIRTH p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE]` <br> e.g.,<br>`add i/S9123456A n/Divakar d/29-02-2000 p/91234567` <br> `add i/T0123456Q n/Divakar d/29-02-2000 p/91234567 e/divakarmal@medibook.com a/NUS, Kent Ridge Drive h/178 w/75 b/O+`
+**Delete** | `delete <IC>`<br> e.g., `delete G1234567S`
+**Find** | `find [i/IC] [n/NAME] [d/DATE_OF_BIRTH] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE]`<br> e.g., <br> `find i/G1234567S`<br>`find n/Jack i/T00 dob/2000 h/17 a/Changi`
+**List** | `list`
+**Note** | `note [d/DATE] n/NAME_OF_DOCTOR c/CONTENT` <br> e.g. `note n/Dr John c/Patient is having fever. Prescribed panadol.`
+**Exit** | `exit`
+**Help** | `help`
