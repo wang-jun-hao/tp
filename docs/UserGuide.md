@@ -73,6 +73,8 @@ Example:
 
 Edits the specified patient's information from MediBook.
 
+The `edit` command is also used to fill in unspecified fields.
+
 * `edit` on a field that already exists will update it from the previous value to the new value
 * `edit` on an optional field that was not specified at the point of adding patient will fill the field with the given value
 
