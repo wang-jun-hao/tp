@@ -12,6 +12,7 @@ title: User Guide
     + [Adding a patient: add](#add-command)
     + [Deleting a patient : delete](#delete-command)
     + [Listing all patients : list](#list-command)
+    + [Adding a medical note : note](#note-command)
     + [Exiting the program : exit](#exit-command)
     + [Saving the data](#saving)
 + [FAQ](#faq)
@@ -91,6 +92,7 @@ Accesses the specified patient in MediBook.
 
 Format: `access <index of patient>`
 
+* Use the `list` command to return to the main list page
 
 ### Finding a patient by IC: `find` <a id="find-command"></a>
 
@@ -113,6 +115,29 @@ Examples:
 Shows a list of all patient's records in the system.
 
 Format: `list`
+
+### Adding a medical note: `note` <a id="note-command"></a>
+
+Adds a medical note to a patient.
+
+As a doctor, you can add a medical note to a patient when viewing his/her profile. MediBook will automatically add the 
+to the patient displayed on the screen.
+
+Format: `note [d/DATE_OF_MEDICAL_NOTE] n/NAME_OF_DOCTOR c/CONTENT_OF_MEDICAL_NOTE`
+
+* You have to be on a patient's profile page to add a medical note. This is done by first `find`-ing the patient by IC
+when on the main list and then `access`-ing the patient's index on the filtered list.
+* For your convenience, the date field can be omitted. MediBook will automatically select today's date.
+* If you specify the date of the medical note, it has to be in the past or today.
+
+Examples:
+
+Context: while viewing the profile page of patient with IC `S9123456A`
+
+* `note n/Dr John Doe c/Patient complains of stomach ache and headache. No signs of fever. Prescribed painkillers and probiotics.`
+
+Adds a medical note that is dated today, by Dr John Doe with content "Patient complains of stomach ache and headache. 
+No signs of fever. Prescribed painkillers and probiotics." to patient with IC S9123456A
 
 ### Exiting the program : `exit` <a id="exit-command"></a>
 
