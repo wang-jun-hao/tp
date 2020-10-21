@@ -51,7 +51,7 @@ For example, the `Logic` component (see the class diagram given below) defines i
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete S9803517G`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -86,7 +86,7 @@ The `UI` component,
 1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 1. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete S9460472B")` API call.
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
@@ -112,12 +112,6 @@ The `Patient`,
 * stores `IC`, `Name`, `DateOfBirth` and `Phone` objects that represent the patient's IC number, name, date of birth and phone number respectively.
 * stores `Optionals` of `Address`, `Email`, `Height`, `Weight`, `Bmi` and `BloodType` objects.
 * `Bmi` is automatically computed and stored within Optional if both `Height` and `Weight` are present.
-
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `MediBook`, which `Patient` references. This allows `MediBook` to only require one `Tag` object per unique `Tag`, instead of each `Patient` needing their own `Tag` object.<br>
-![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
-
-</div>
 
 
 ### Storage component
@@ -155,7 +149,7 @@ The following sequence diagram shows how note adding operation works:
 
 ![NoteSequenceDiagramSD](images/NoteSequenceDiagramSDUpdatePatientInModel.png)
 
-#### Design consideration:
+#### Design consideration
 
 `note` command can only be called when viewing a `patient`'s profile
 * A medical records software contains many `patients`, each with potentially many `medical note`s.
@@ -410,15 +404,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a patient while all patients are being shown
 
- 
+   1. Test case: `delete 1`<br>
+      Expected: Patient with index 1 in the list is deleted from the program. Details of the deleted patient shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete S9592739A`<br>
-      Expected: Patient with IC S9592739A is deleted from the program. Details of the deleted patient shown in the status message. Timestamp in the status bar is updated.
-
-   2. Test case: `delete A0123456B`<br>
+   2. Test case: `delete`<br>
       Expected: No patient is deleted. Error details shown in the status message. Status bar remains the same.
 
-   3. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is an IC that does not belong to any patient)<br>
+   3. Other incorrect delete commands to try: `delete <index outside of list range>`, `delete x` <br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
