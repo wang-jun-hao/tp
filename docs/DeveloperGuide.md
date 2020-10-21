@@ -292,12 +292,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `MediBook` and the **Actor** is the `user`, unless specified otherwise)
 
-  [3a. OBS detects an error in the entered data.
-    3a1. OBS requests for the correct data.
-    3a2. User enters new data
-    Steps 3a1-3a2 are repeated until the data entered are correct.
-    Use case resumes from step 4.] HI
-
 **UC00 Add a patient**
 
 **MSS**
