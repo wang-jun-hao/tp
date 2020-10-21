@@ -90,7 +90,7 @@ Examples:
 
 Accesses the specified patient in MediBook.
 
-Format: `access <index of patient>`
+Format: `access <index>`
 
 * Use the `list` command to return to the main list page
 
