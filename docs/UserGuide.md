@@ -81,10 +81,10 @@ Example:
 
 Deletes the specified patient from MediBook.
 
-Format: `delete <IC of patient>`
+Format: `delete <index>`
 
 Examples:
-* `delete T0987654S` deletes the patient record with IC `T0987654S`
+* `delete 1` deletes the patient with index `1` in the displayed list
 
 ### Accessing a patient's profile : `access` <a id="access-command"></a>
 
@@ -166,7 +166,7 @@ Action | Format, Examples
 
 **Add** | `add i/IC n/NAME d/DATE_OF_BIRTH p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE]` <br> e.g.,<br>`add i/S9123456A n/Divakar d/29-02-2000 p/91234567` <br> `add i/T0123456Q n/Divakar d/29-02-2000 p/91234567 e/divakarmal@medibook.com a/NUS, Kent Ridge Drive h/178 w/75 b/O+`
 **Access** | `access <index>` <br> e.g., `access 1`
-**Delete** | `delete <IC>`<br> e.g., `delete G1234567S`
+**Delete** | `delete <index>`<br> e.g., `delete 1`
 **Find** | `find [i/IC] [n/NAME] [d/DATE_OF_BIRTH] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE]`<br> e.g., <br> `find i/G1234567S`<br>`find n/Jack i/T00 dob/2000 h/17 a/Changi`
 **List** | `list`
 **Note** | `note [d/DATE] n/NAME_OF_DOCTOR c/CONTENT` <br> e.g. `note n/Dr John c/Patient is having fever. Prescribed panadol.`
