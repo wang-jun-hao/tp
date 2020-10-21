@@ -95,7 +95,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 ### Model component
 
-![Structure of the Model Component](images/ModelClassDiagram.png)
+![Structure of the Model Component](images/ModelClassDiagramUpdated.png)
 
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -105,6 +105,13 @@ The `Model`,
 * stores the medi book data.
 * exposes an unmodifiable `ObservableList<Patient>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
+
+**Patient**
+
+The `Patient`,
+* stores `IC`, `Name`, `DateOfBirth` and `Phone` objects that represent the patient's IC number, name, date of birth and phone number respectively.
+* stores `Optionals` of `Address`, `Email`, `Height`, `Weight`, `Bmi` and `BloodType` objects.
+* `Bmi` is automatically computed and stored within Optional if both `Height` and `Weight` are present.
 
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `MediBook`, which `Patient` references. This allows `MediBook` to only require one `Tag` object per unique `Tag`, instead of each `Patient` needing their own `Tag` object.<br>
@@ -245,6 +252,36 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
+
+### \[Proposed\] Account Creation and Login
+
+#### Proposed Implementation
+
+The proposed account creation feature is facilitated by a new `CreateAccountCommand`. It extends `Command`, similar to how all the other commands currently work.
+
+![CreateAccountSequenceDiagram](images/CreateAccountSequenceDiagram.png)
+
+Step 1. The user launches the application and executes `create u/example_username p/example_password`.
+
+Step 2. `Logic#execute(String commandText)` creates a new `CreateAccountCommand` and calls `Storage#saveNewAccountDetails()`.
+
+Step 3. `Storage#saveNewAccountDetails()` converts the new account's username and password into json format and saves it a `AccountDetails.json` file.
+
+The following activity diagram summarises what happens when a user executes a new command to create account.
+
+![CreateAccountActivityDiagram](images/CreateAccountActivityDiagram.png)
+
+The proposed login feature is facilitated by a new `LoginWindow` class in the UI.
+
+![LoginSequenceDiagram](images/LoginSequenceDiagram.png)
+
+Step 1. The user inputs his/her login information.
+
+Step 2. The UI calls `Logic#login()` with the login information as input.
+
+Step 3. `Logic#login()` then calls `Storage#checkAccountDetails()` on the login information, to check if the information matches any of the account details saved.
+
+Step 4. If there is no match, an error is thrown. If there is a match, the UI then changes from `LoginWindow` to `MainWindow`, which signifies that the user has succesfully logged in.
 
 ### \[Proposed\] Data archiving
 
