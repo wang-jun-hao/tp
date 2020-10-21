@@ -64,11 +64,15 @@ The sections below give more details of each component.
 **API** :
 [`Ui.java`](../src/main/java/seedu/medibook/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PatientListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PatientListPanel`, `PatientProfile`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](../src/main/java/seedu/medibook/ui/MainWindow.java) is specified in [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml)
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](../src/main/java/seedu/medibook/ui/MainWindow.java) is specified in [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml).
+
+The PatientListPanel and PatientProfile utilises the same space in the MainWindow. The `Logic` component indicates to MainWindow if there is a need to toggle between the two UI parts based on user commands.
 
 A JavaFx TableView is used for the PatientListPanel. Styling for the TableView is done using the `TableView.css` file which is also in the `src/main/resources/view` folder.
+
+A JavaFx ListView is used for the PersonalDetailsCard and MedicalDetailsCard. The graphics of each row in the ListView is determined by a PersonalDetailsRow or MedicalDetailsRow respetively.
 
 The `UI` component,
 
