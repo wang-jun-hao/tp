@@ -68,6 +68,8 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
+A JavaFx TableView is used for the PatientListPanel. Styling for the TableView is done using the `TableView.css` file which is also in the `src/main/resources/view` folder.
+
 The `UI` component,
 
 * Executes user commands using the `Logic` component.

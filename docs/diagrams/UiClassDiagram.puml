@@ -12,7 +12,6 @@ Class MainWindow
 Class HelpWindow
 Class ResultDisplay
 Class PatientListPanel
-Class PatientCard
 Class StatusBarFooter
 Class CommandBox
 }
@@ -36,18 +35,15 @@ MainWindow *-down-> ResultDisplay
 MainWindow *-down-> PatientListPanel
 MainWindow *-down-> StatusBarFooter
 
-PatientListPanel -down-> PatientCard
-
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
 PatientListPanel --|> UiPart
-PatientCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow -down-|> UiPart
 
-PatientCard ..> Model
+PatientListPanel ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
