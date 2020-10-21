@@ -85,9 +85,9 @@ Format:
 
 Example:
 
-`edit 1 n/Divakar`
+`edit 1 n/Divakar` edits the name of patient with index `1` in the displayed list to `Divakar`
 
-`edit 3 n/Divakar p/91111111 h/201`
+`edit 3 n/Divakar p/91111111 h/201` edits the name, phone number and height of patient with index `3` in the displayed list to `Divakar`, `91111111` and `201`cm  respectively.
 
 ### 3.5 Deleting a patient : `delete`
 
