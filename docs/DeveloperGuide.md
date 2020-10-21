@@ -151,6 +151,28 @@ The following sequence diagram shows how note adding operation works:
 
 ![NoteSequenceDiagramSD](images/NoteSequenceDiagramSDUpdatePatientInModel.png)
 
+Step 1. The user launches the application and `find` the patient to access. 
+
+Note: Every `patient` in the `model` has a `MedicalNoteList` that is initialised as an empty list at 
+program start-up to optimise start-up time.
+
+Step 2. The user then `access`es the patient using the index of the patient in the filtered list. 
+
+Note: `LogicManager` will load the list of medical notes of the `patient` from storage into program's memory via
+`LogicManager#handleMedicalNoteListIo`. `LogicManager` then calls `Patient#setMedicalNoteList()` on the `patient` object to load
+the list of medical notes onto the `patient` object in memory.
+
+Step 3. While on the patient's profile page, the user inputs `note n/Dr John c/Patient...`.
+The user input is handled by `LogicManager`, which then passes it to `MediBookParser` to be parsed.
+
+Step 4. `MediBookParser` creates an instance of `NoteCommandParser` to parse the user input as a `NoteCommand`. It returns 
+a `NoteCommand` object to `LogicManager`
+
+Step 5. `LogicManager` then executes the `NoteCommand` via `NoteCommand#execute()`.
+
+Step 6. `NoteCommand#execute()` identifies the target `patient` object via `ModelManager#getPatientToAccess()`.
+It then updates the model with the new medical note added to the patient using `Patient#addMedicalNote()`.
+
 #### Design consideration
 
 `note` command can only be called when viewing a `patient`'s profile (after an `access` command)
@@ -162,7 +184,6 @@ Only allowing `note` after `access` ensures that the patient's list of medical n
 
 Elaboration on point 1:
 * A medical records software contains many `patients`, each with potentially many `medical note`s.
-* Every `patient` in the `model` has a `MedicalNoteList` that is initialised as an empty list at program start-up to optimise start-up time.
 * `MedicalNoteList` of every patient is properly loaded only when necessary (`access` on patient)
 * `access`-ing a `patient` loads the stored medical note list and sets the `MedicalNoteList` of the `patient` to the retrieved list
 * Hence, `note` command can only be called when viewing a `patient`'s profile as it ensures that the `MedicalNoteList` has already been properly loaded by executing `access` command beforehand
