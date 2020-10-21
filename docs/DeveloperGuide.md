@@ -142,7 +142,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### \[Proposed\] Undo/redo feature
 
-#### Proposed Implementation
+#### Proposed implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedMediBook`. It extends `MediBook` with an undo/redo history, stored internally as an `mediBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
@@ -220,9 +220,9 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Account Creation and Login
+### \[Proposed\] Account creation and login
 
-#### Proposed Implementation
+#### Proposed implementation
 
 The proposed account creation feature is facilitated by a new `CreateAccountCommand`. It extends `Command`, similar to how all the other commands currently work.
 
@@ -249,6 +249,55 @@ Step 2. The UI calls `Logic#login()` with the login information as input.
 Step 3. `Logic#login()` then calls `Storage#checkAccountDetails()` on the login information, to check if the information matches any of the account details saved.
 
 Step 4. If there is no match, an error is thrown. If there is a match, the UI then changes from `LoginWindow` to `MainWindow`, which signifies that the user has succesfully logged in.
+
+### Enhanced find command
+
+#### Implementation
+
+`FindCommand` supports searching by substring for multiple fields with multiple keywords.
+`FindCommand` is facilitated by `FindCommandParser` which creates one or more `FieldContainsKeywordsPredicate`
+(which implements the `Predicate<Patient>` interface) based on the user input.
+Through the `FieldContainsKeywordsPredicate` objects that were created, `FindCommand` then calls 
+`Model#updateFilteredPatientList(predicate)` to filter the list of patient in `Model` based on the user's input search query.
+
+The sequence diagram below illustrates how the `FindCommand` works.
+
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindCommandParser` 
+and `FindCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches
+the end of diagram.
+</div>
+
+Step 1. The user launches the application and inputs `find n/Steve Johnny i/S95 T00 d/2000 1995`.
+This causes the `LogicManager#execute(String input)` method to be called.
+
+Step 2. `MediBookParser#parseCommand(String input)` is then called, creating a new `FindCommandParser`.
+`FindCommandParser#Parse(String arguments)` is then called and in the process, it creates one or more
+`FieldContainsKeywordsPredicate` instances(not shown in the sequence diagram). In this example, `FindCommandParser`
+creates three `FieldContainsKeywordsPredicate` instance, corresponding to the three fields to be searched for.
+
+Step 3. `FindCommand` is initialized with `List<Predicate<Patient>>` containing the `FieldContainsKeywordsPredicate`
+instances that were created in the previous step. This `FindCommand` instance in then finally returned as the result for
+the `MediBookParser#parseCommand(String input)` method call.
+
+Step 4. `FindCommand#execute(Model model)` is called and in turn, `FindCommand` calls the
+`Model#updateFilteredPatientList(Predicate<Patient> predicate)` method which filters the list of
+patient in `Model` based on user's input search query.
+
+The diagram below illustrates the class diagram of the relevant classes for the find feature.
+
+![FindClassDiagram](images/FindClassDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
+`FieldContainsKeywordsPredicate` implements the `Predicate&lt;Patient>` interface.
+</div>
+
+`FieldContainsKeywordsPredicate` is initialized with a `List<String>` containing the keywords to search for and `Prefix`
+which determines which field of the patient to search for. When `FieldContainsKeywordsPredicate#test(Patient patient)`
+is called, it will check if each keyword is a substring of the specified field of the patient. So long as at least one
+of the keyword passes the check, `FieldContainsKeywordsPredicate#test(Patient patient)` will return true.
+
 
 ### \[Proposed\] Data archiving
 
