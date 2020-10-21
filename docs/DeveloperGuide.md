@@ -153,13 +153,19 @@ The following sequence diagram shows how note adding operation works:
 
 #### Design consideration
 
-`note` command can only be called when viewing a `patient`'s profile
+`note` command can only be called when viewing a `patient`'s profile (after an `access` command)
+
+We have decided to implement `note` command this way for 2 reasons:
+1. When user starts MediBook, not all `patient`s' list of medical notes would have been loaded into the program's memory. 
+Only allowing `note` after `access` ensures that the patient's list of medical notes would have been loaded at the point of adding new medical notes.
+2. It allows for a shorter `note` command as the user does not need to specify a target `patient`.
+
+Elaboration on point 1:
 * A medical records software contains many `patients`, each with potentially many `medical note`s.
 * Every `patient` in the `model` has a `MedicalNoteList` that is initialised as an empty list at program start-up to optimise start-up time.
 * `MedicalNoteList` of every patient is properly loaded only when necessary (`access` on patient)
 * `access`-ing a `patient` loads the stored medical note list and sets the `MedicalNoteList` of the `patient` to the retrieved list
 * Hence, `note` command can only be called when viewing a `patient`'s profile as it ensures that the `MedicalNoteList` has already been properly loaded by executing `access` command beforehand
-* It also allows for a shorter `note` command as the user does not need to specify a target `patient`.
 
 ### \[Proposed\] Account creation and login
 
