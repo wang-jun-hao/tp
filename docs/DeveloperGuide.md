@@ -229,7 +229,7 @@ The diagram below illustrates the class diagram of the relevant classes for the 
 ![FindClassDiagram](images/FindClassDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:**
-`FieldContainsKeywordsPredicate` implements the `Predicate&lt;Patient>` interface.
+`FieldContainsKeywordsPredicate` implements the `Predicate<Patient>` interface.
 </div>
 
 `FieldContainsKeywordsPredicate` is initialized with a `List<String>` containing the keywords to search for and `Prefix`
