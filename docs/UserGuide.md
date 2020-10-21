@@ -1,6 +1,6 @@
 ---
 layout: page
-title: MediBook User Guide: Everything you need to know about MediBook
+title: "MediBook User Guide: Everything you need to know about MediBook"
 ---
 * Table of Contents
 {:toc}
@@ -47,8 +47,13 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### 3.2 Listing all patients: `list`
 
-### 3.2 Adding a patient: `add`
+Shows a list of all patient's records in the system.
+
+Format: `list`
+
+### 3.3 Adding a patient: `add`
 
 Adds a patient to the system.
 
@@ -64,7 +69,11 @@ Example:
 
 `add i/T0123456Q n/Divakar d/29-02-2000 p/91234567 e/divakarmal@medibook.com a/NUS, Kent Ridge Drive h/178 w/75 b/O+`
 
-### 3.3 Deleting a patient : `delete`
+### 3.4 Editing a patient: `edit`
+
+TODO
+
+### 3.5 Deleting a patient : `delete`
 
 Deletes the specified patient from MediBook.
 
@@ -73,15 +82,7 @@ Format: `delete <index>`
 Examples:
 * `delete 1` deletes the patient with index `1` in the displayed list
 
-### 3.4 Accessing a patient's profile : `access`
-
-Accesses the specified patient in MediBook.
-
-Format: `access <index>`
-
-* Use the `list` command to return to the main list page
-
-### 3.5 Finding a patient by IC: `find`
+### 3.6 Finding a patient by IC: `find`
 
 Finds patient records by multiple fields and multiple keywords.
 
@@ -97,13 +98,15 @@ Examples:
 * `find i/S9123456A` returns the patient record with IC `S9123456A`
 * `find n/Billy Alice a/Clementi i/S99` returns the patient records with Name containing `Billy` or `Alice`, Address containing `Clementi` and IC containing `S99`
 
-### 3.6 Listing all patients: `list`
+### 3.7 Accessing a patient's profile : `access`
 
-Shows a list of all patient's records in the system.
+Accesses the specified patient in MediBook.
 
-Format: `list`
+Format: `access <index>`
 
-### 3.7 Adding a medical note: `note`
+* Use the `list` command to return to the main list page
+
+### 3.8 Adding a medical note: `note`
 
 Adds a medical note to a patient.
 
@@ -126,13 +129,13 @@ Context: while viewing the profile page of patient with IC `S9123456A`
 Adds a medical note that is dated today, by Dr John Doe with content "Patient complains of stomach ache and headache. 
 No signs of fever. Prescribed painkillers and probiotics." to patient with IC S9123456A
 
-### 3.8 Exiting the program : `exit`
+### 3.9 Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### 3.9 Saving the data
+### 3.10 Saving the data
 
 Patient records are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
@@ -150,11 +153,12 @@ Patient records are saved in the hard disk automatically after any command that 
 
 Action | Format, Examples
 --------|------------------
+**Help** | `help`
+**List** | `list`
 **Add** | `add i/IC n/NAME d/DATE_OF_BIRTH p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE]` <br> e.g.,<br>`add i/S9123456A n/Divakar d/29-02-2000 p/91234567` <br> `add i/T0123456Q n/Divakar d/29-02-2000 p/91234567 e/divakarmal@medibook.com a/NUS, Kent Ridge Drive h/178 w/75 b/O+`
-**Access** | `access <index>` <br> e.g., `access 1`
+**Edit** | TODO
 **Delete** | `delete <index>`<br> e.g., `delete 1`
 **Find** | `find [i/IC] [n/NAME] [d/DATE_OF_BIRTH] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE]`<br> e.g., <br> `find i/G1234567S`<br>`find n/Jack i/T00 dob/2000 h/17 a/Changi`
-**List** | `list`
+**Access** | `access <index>` <br> e.g., `access 1`
 **Note** | `note [d/DATE] n/NAME_OF_DOCTOR c/CONTENT` <br> e.g. `note n/Dr John c/Patient is having fever. Prescribed panadol.`
 **Exit** | `exit`
-**Help** | `help`
