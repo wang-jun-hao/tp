@@ -154,7 +154,7 @@ Step 1. The user launches the application and `find` the patient to access.
 Note: Every `patient` in the `model` has a `MedicalNoteList` that is initialised as an empty list at 
 program start-up to optimise start-up time.
 
-Step 2. The user then `access` the patient using the index of the patient in the filtered list. 
+Step 2. The user then `access`es the patient using the index of the patient in the filtered list. 
 
 Note: `LogicManager` will load the list of medical notes of the `patient` from storage into program's memory via
 `LogicManager#handleMedicalNoteListIo`. `LogicManager` then calls `Patient#setMedicalNoteList()` on the `patient` object to load
