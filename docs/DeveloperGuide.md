@@ -146,7 +146,7 @@ The following sequence diagram shows how note adding operation works:
 
 ![NoteSequenceDiagramSD](images/NoteSequenceDiagramSDUpdatePatientInModel.png)
 
-#### Design consideration:
+#### Design consideration
 
 `note` command can only be called when viewing a `patient`'s profile
 * A medical records software contains many `patients`, each with potentially many `medical note`s.
