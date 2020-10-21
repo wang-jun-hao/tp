@@ -68,6 +68,8 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
+A JavaFx TableView is used for the PatientListPanel. Styling for the TableView is done using the `TableView.css` file which is also in the `src/main/resources/view` folder.
+
 The `UI` component,
 
 * Executes user commands using the `Logic` component.
@@ -151,13 +153,19 @@ The following sequence diagram shows how note adding operation works:
 
 #### Design consideration
 
-`note` command can only be called when viewing a `patient`'s profile
+`note` command can only be called when viewing a `patient`'s profile (after an `access` command)
+
+We have decided to implement `note` command this way for 2 reasons:
+1. When user starts MediBook, not all `patient`s' list of medical notes would have been loaded into the program's memory. 
+Only allowing `note` after `access` ensures that the patient's list of medical notes would have been loaded at the point of adding new medical notes.
+2. It allows for a shorter `note` command as the user does not need to specify a target `patient`.
+
+Elaboration on point 1:
 * A medical records software contains many `patients`, each with potentially many `medical note`s.
 * Every `patient` in the `model` has a `MedicalNoteList` that is initialised as an empty list at program start-up to optimise start-up time.
 * `MedicalNoteList` of every patient is properly loaded only when necessary (`access` on patient)
 * `access`-ing a `patient` loads the stored medical note list and sets the `MedicalNoteList` of the `patient` to the retrieved list
 * Hence, `note` command can only be called when viewing a `patient`'s profile as it ensures that the `MedicalNoteList` has already been properly loaded by executing `access` command beforehand
-* It also allows for a shorter `note` command as the user does not need to specify a target `patient`.
 
 ### \[Proposed\] Account creation and login
 
@@ -291,12 +299,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use cases
 
 (For all use cases below, the **System** is the `MediBook` and the **Actor** is the `user`, unless specified otherwise)
-
-  [3a. OBS detects an error in the entered data.
-    3a1. OBS requests for the correct data.
-    3a2. User enters new data
-    Steps 3a1-3a2 are repeated until the data entered are correct.
-    Use case resumes from step 4.] HI
 
 **UC00 Add a patient**
 
