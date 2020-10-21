@@ -11,6 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import javafx.util.Pair;
 import seedu.medibook.model.patient.Patient;
+import seedu.medibook.model.tag.Tag;
 import seedu.medibook.ui.UiPart;
 
 /**
@@ -25,7 +26,7 @@ public class MedicalDetailsCard extends UiPart<Region> {
     @FXML
     private Label cardHeader;
     @FXML
-    private ListView<Pair<String, Set>> detailsListView;
+    private ListView<Pair<String, Set<Tag>>> detailsListView;
 
     /**
      * Creates a {@code MedicalDetailsCard} for the given {@code Patient}.
@@ -35,8 +36,8 @@ public class MedicalDetailsCard extends UiPart<Region> {
         this.patient = patient;
 
         cardHeader.setText("Medical Details: ");
-        ObservableList<Pair<String, Set>> fields = FXCollections.observableArrayList();
-        fields.add(new Pair<String, Set>("Tags: ", patient.getTags()));
+        ObservableList<Pair<String, Set<Tag>>> fields = FXCollections.observableArrayList();
+        fields.add(new Pair<String, Set<Tag>>("Tags: ", patient.getTags()));
 
         detailsListView.setItems(fields);
         detailsListView.setCellFactory(listView -> new MedicalDetailsListViewCell());
@@ -62,9 +63,9 @@ public class MedicalDetailsCard extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a medical detail field using a {@code MedicalDetailsRow}.
      */
-    class MedicalDetailsListViewCell extends ListCell<Pair<String, Set>> {
+    class MedicalDetailsListViewCell extends ListCell<Pair<String, Set<Tag>>> {
         @Override
-        protected void updateItem(Pair<String, Set> categoryTagsPair, boolean empty) {
+        protected void updateItem(Pair<String, Set<Tag>> categoryTagsPair, boolean empty) {
             super.updateItem(categoryTagsPair, empty);
 
             if (empty || categoryTagsPair == null) {
