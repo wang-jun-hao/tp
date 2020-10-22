@@ -52,6 +52,10 @@ public class MedicalNoteList implements ReadOnlyMedicalNoteList {
         return innerList.isEmpty();
     }
 
+    /**
+     * Creates and return a copy of this medical note list that is not the same object.
+     * @return A copy of this medical note list.
+     */
     public MedicalNoteList makeCopy() {
         List<MedicalNote> copyOfList = new LinkedList<>(innerList);
         return new MedicalNoteList(copyOfList);
