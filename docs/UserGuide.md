@@ -116,11 +116,15 @@ Examples:
 
 ### 3.7 Accessing a patient's profile : `access`
 
-Accesses the specified patient in MediBook.
+Accesses a specified patient's profile in MediBook.
 
 Format: `access <index>`
 
 * Use the `list` command to return to the main list page
+* Each patient's profile consists of 3 sections: Personal Details, Medical Details and Medical Notes.
+    * Personal Details section (top left): Shows the personal details of the patient, including their Name, IC, Date of Birth, and Phone Number, as well as their Email, Address, Height, Weight, BMI and Blood Type if available.
+    * Medical Details section (bottom left): Shows medical details as tags separated into 3 categories (to be implemented), namely: Allergies, (ongoing) Treatments and (preexisting) Conditions.
+    * Medical Notes section (right): A scrollable panel showing the list of medical notes recorded for the specified patient.
 
 ### 3.8 Adding a medical note: `note`
 
