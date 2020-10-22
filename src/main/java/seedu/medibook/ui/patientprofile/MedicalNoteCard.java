@@ -34,8 +34,8 @@ public class MedicalNoteCard extends UiPart<Region> {
         this.medicalNote = medicalNote;
         // TODO: change accordingly based on visibility
         date.setText(medicalNote.date.toString()); // TODO: Make the formatter public or make a get date method
-        doctorName.setText(medicalNote.doctorName);
-        content.setText(medicalNote.content);
+        doctorName.setText(medicalNote.doctor.toString());
+        content.setText(medicalNote.getContentString());
     }
 
     @Override

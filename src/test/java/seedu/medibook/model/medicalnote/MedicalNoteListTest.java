@@ -8,13 +8,16 @@ import java.util.LinkedList;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.medibook.model.Date;
+import seedu.medibook.model.commonfields.Date;
+import seedu.medibook.model.commonfields.Name;
+import seedu.medibook.model.doctor.Doctor;
+import seedu.medibook.model.doctor.Mcr;
 
 class MedicalNoteListTest {
     private final MedicalNote medicalNote1 = new MedicalNote(new Date("20-10-2019", true),
-            "John", "Patient is awesome.");
+            new Doctor(new Name("John"), new Mcr("M52739B")), new Content("Patient is awesome."));
     private final MedicalNote medicalNote2 = new MedicalNote(new Date("25-10-2019", true),
-            "Gary", "Patient is bad.");
+            new Doctor(new Name("Garu"), new Mcr("M12009B")), new Content("Patient is bad."));
 
     @Test
     void add_emptyMedicalNoteList_success() {
@@ -43,5 +46,28 @@ class MedicalNoteListTest {
         MedicalNoteList copiedList = testList.makeCopy();
         assertEquals(testList, copiedList);
         assertTrue(copiedList != testList);
+    }
+
+    @Test
+    void deleteMedicalNoteAtIndex_validIndex_success() {
+        MedicalNoteList medicalNoteList = new MedicalNoteList(
+                new LinkedList<>(Arrays.asList(medicalNote1, medicalNote2)));
+        MedicalNoteList expectedMedicalNoteList = new MedicalNoteList(
+                new LinkedList<>(Arrays.asList(medicalNote2)));
+
+        medicalNoteList.deleteMedicalNoteAtIndex(0);
+
+        assertEquals(expectedMedicalNoteList, medicalNoteList);
+    }
+
+    @Test
+    void getMedicalNoteAtIndex_validIndex_success() {
+        MedicalNoteList medicalNoteList = new MedicalNoteList(
+                new LinkedList<>(Arrays.asList(medicalNote1, medicalNote2)));
+        MedicalNote expectedMedicalNote = medicalNote2;
+
+        MedicalNote actualMedicalNote = medicalNoteList.getMedicalNoteAtIndex(1);
+
+        assertEquals(expectedMedicalNote, actualMedicalNote);
     }
 }
