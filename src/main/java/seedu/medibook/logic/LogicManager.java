@@ -109,4 +109,14 @@ public class LogicManager implements Logic {
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
     }
+
+    @Override
+    public void processLoginInfo(String username, String password) {
+        boolean isAccount = storage.isAccount(username, password);
+        if (isAccount) {
+            System.out.println("yes");
+        } else {
+            System.out.println("bye");
+        }
+    }
 }
