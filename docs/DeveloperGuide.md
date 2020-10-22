@@ -275,6 +275,15 @@ of the keyword passes the check, `FieldContainsKeywordsPredicate#test(Patient pa
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Patient profile (GUI feature)
+This feature allows the application to display a patient's details in a clean and readable fashion.
+
+#### Implementation
+
+The class diagram below is a simplified diagram derived from the [full UI diagram](#ui-component), showing only the classes used to display the patient profile, and the associations between these classes.
+![PatientProfileClassDiagram](images/PatientProfileClassDiagram.png)
+
+Note: All classes in this diagram inherit from the abstract `UiPart` class.
 
 --------------------------------------------------------------------------------------------------------------------
 
