@@ -34,6 +34,7 @@ import seedu.medibook.model.UserPrefs;
 import seedu.medibook.model.patient.Patient;
 import seedu.medibook.storage.JsonMediBookStorage;
 import seedu.medibook.storage.JsonMedicalNoteListStorage;
+import seedu.medibook.storage.JsonUserAccountStorage;
 import seedu.medibook.storage.JsonUserPrefsStorage;
 import seedu.medibook.storage.StorageManager;
 import seedu.medibook.testutil.PatientBuilder;
@@ -53,7 +54,9 @@ public class LogicManagerTest {
                 new JsonMediBookStorage(temporaryFolder.resolve("mediBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         JsonMedicalNoteListStorage medicalNoteListStorage = new JsonMedicalNoteListStorage(temporaryFolder);
-        StorageManager storage = new StorageManager(mediBookStorage, userPrefsStorage, medicalNoteListStorage);
+        JsonUserAccountStorage userAccountStorage = new JsonUserAccountStorage(temporaryFolder);
+        StorageManager storage = new StorageManager(mediBookStorage, userPrefsStorage, medicalNoteListStorage,
+                userAccountStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -83,7 +86,9 @@ public class LogicManagerTest {
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
         JsonMedicalNoteListStorage medicalNoteListStorage = new JsonMedicalNoteListStorage(temporaryFolder);
-        StorageManager storage = new StorageManager(mediBookStorage, userPrefsStorage, medicalNoteListStorage);
+        JsonUserAccountStorage userAccountStorage = new JsonUserAccountStorage(temporaryFolder);
+        StorageManager storage = new StorageManager(mediBookStorage, userPrefsStorage, medicalNoteListStorage,
+                userAccountStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command

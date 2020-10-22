@@ -2,28 +2,17 @@
 layout: page
 title: User Guide
 ---
-# MediBook User Guide: Everything you need to know about MediBook
+<h1>MediBook User Guide: Everything you need to know about MediBook</h1>
+* Table of Contents
+{:toc}
 
-## Table of Contents
-+ [Introduction](#introduction)
-+ [Quick Start](#quick-start)
-+ [Features](#features)
-    + [Viewing help : help](#help-command)
-    + [Adding a patient: add](#add-command)
-    + [Deleting a patient : delete](#delete-command)
-    + [Listing all patients : list](#list-command)
-    + [Exiting the program : exit](#exit-command)
-    + [Saving the data](#saving)
-+ [FAQ](#faq)
-+ [Command Summary](#command-summary)
-
-## Introduction
+## 1. Introduction
 MediBook is a **desktop app for managing patient details, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MediBook can get your patient management tasks done faster than traditional methods.
 
 --------------------------------------------------------------------------------------------------------------------
 
 
-## Quick start
+## 2. Quick start
 
 
 1. Ensure you have Java 11 or above installed in your Computer.
@@ -35,7 +24,7 @@ MediBook is a **desktop app for managing patient details, optimized for use via 
 
 ---------------------------------------------------------------------------------------------------------------
 
-## Features
+## 3. Features
 
 
 <div markdown="block" class="alert alert-info">
@@ -53,14 +42,19 @@ MediBook is a **desktop app for managing patient details, optimized for use via 
 
 </div>
 
-### Viewing help : `help` <a id="help-command"></a>
+### 3.1 Viewing help : `help`
 
 Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### 3.2 Listing all patients: `list`
 
-### Adding a patient: `add` <a id="add-command"></a>
+Shows a list of all patient's records in the system.
+
+Format: `list`
+
+### 3.3 Adding a patient: `add`
 
 Adds a patient to the system.
 
@@ -76,25 +70,37 @@ Example:
 
 `add i/T0123456Q n/Divakar d/29-02-2000 p/91234567 e/divakarmal@medibook.com a/NUS, Kent Ridge Drive h/178 w/75 b/O+`
 
-### Deleting a patient : `delete` <a id="delete-command"></a>
+### 3.4 Editing a patient: `edit`
+
+Edits the specified patient's information from MediBook.
+
+The `edit` command is also used to fill in unspecified fields.
+
+* `edit` on a field that already exists will update it from the previous value to the new value
+* `edit` on an optional field that was not specified at the point of adding patient will fill the field with the given value
+
+Format: 
+
+`edit <index> [i/IC] [n/NAME] [d/DATE OF BIRTH] [p/PHONE] [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD TYPE][t/TAG]`
+
+Example:
+
+`edit 1 n/Divakar` edits the name of patient with index `1` in the displayed list to `Divakar`
+
+`edit 3 n/Divakar p/91111111 h/201` edits the name, phone number and height of patient with index `3` in the displayed list to `Divakar`, `91111111` and `201`cm  respectively.
+
+### 3.5 Deleting a patient : `delete`
 
 Deletes the specified patient from MediBook.
 
-Format: `delete <IC of patient>`
+Format: `delete <index>`
 
 Examples:
-* `delete T0987654S` deletes the patient record with IC `T0987654S`
+* `delete 1` deletes the patient with index `1` in the displayed list
 
-### Accessing a patient's profile : `access` <a id="access-command"></a>
+### 3.6 Finding a patient by IC: `find`
 
-Accesses the specified patient in MediBook.
-
-Format: `access <index of patient>`
-
-
-### Finding a patient by IC: `find` <a id="find-command"></a>
-
-Finds patient records by their fields.
+Finds patient records by multiple fields and multiple keywords.
 
 
 Format: `find [i/IC] [n/NAME] [d/DATE_OF_BIRTH] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE]`
@@ -106,43 +112,73 @@ Format: `find [i/IC] [n/NAME] [d/DATE_OF_BIRTH] [p/PHONE_NUMBER] [e/EMAIL] [a/AD
 
 Examples: 
 * `find i/S9123456A` returns the patient record with IC `S9123456A`
-* `find n/Billy a/Clementi i/S99` returns the patient records with Name containing `Billy`, Address containing `Clementi` and IC containing `S99`
+* `find n/Billy Alice a/Clementi i/S99` returns the patient records with Name containing `Billy` or `Alice`, Address containing `Clementi` and IC containing `S99`
 
-### Listing all patients: `list` <a id="list-command"></a>
+### 3.7 Accessing a patient's profile : `access`
 
-Shows a list of all patient's records in the system.
+Accesses a specified patient's profile in MediBook.
 
-Format: `list`
+Format: `access <index>`
 
-### Exiting the program : `exit` <a id="exit-command"></a>
+* Use the `list` command to return to the main list page
+* Each patient's profile consists of 3 sections: Personal Details, Medical Details and Medical Notes.
+    * Personal Details section (top left): Shows the personal details of the patient, including their Name, IC, Date of Birth, and Phone Number, as well as their Email, Address, Height, Weight, BMI and Blood Type if available.
+    * Medical Details section (bottom left): Shows medical details as tags separated into 3 categories (to be implemented), namely: Allergies, (ongoing) Treatments and (preexisting) Conditions.
+    * Medical Notes section (right): A scrollable panel showing the list of medical notes recorded for the specified patient.
+
+### 3.8 Adding a medical note: `note`
+
+Adds a medical note to a patient.
+
+As a doctor, you can add a medical note to a patient when viewing his/her profile. MediBook will automatically add the 
+to the patient displayed on the screen.
+
+Format: `note [d/DATE] n/NAME_OF_DOCTOR c/CONTENT_OF_MEDICAL_NOTE`
+
+* You have to be on a patient's profile page to add a medical note. This is done by first `find`-ing the patient by IC
+when on the main list and then `access`-ing the patient's index on the filtered list.
+* For your convenience, the date field can be omitted. MediBook will automatically select today's date.
+* If you specify the date of the medical note, it has to be in the past or today.
+
+Examples:
+
+Context: while viewing the profile page of patient with IC `S9123456A`
+
+* `note n/Dr John Doe c/Patient complains of stomach ache and headache. No signs of fever. Prescribed painkillers and probiotics.`
+
+Adds a medical note that is dated today, by Dr John Doe with content "Patient complains of stomach ache and headache. 
+No signs of fever. Prescribed painkillers and probiotics." to patient with IC S9123456A
+
+### 3.9 Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### Saving the data <a id="saving"></a>
+### 3.10 Saving the data
 
 Patient records are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## 4. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MediBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
-### Legend:
-↵ = enter key
+## 5. Command summary
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add i/IC n/NAME d/DATE_OF_BIRTH p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE] ↵` <br> e.g.,<br>`add i/S9123456A n/Divakar d/29-02-2000 p/91234567` <br> `add i/T0123456Q n/Divakar d/29-02-2000 p/91234567 e/divakarmal@medibook.com a/NUS, Kent Ridge Drive h/178 w/75 b/O+`
-**Delete** | `delete <IC> ↵`<br> e.g., `delete G1234567S`
-**Find** | `find [i/IC] [n/NAME] [d/DATE_OF_BIRTH] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE] ↵`<br> e.g., <br> `find i/G1234567S`<br>`find n/Jack i/T00 dob/2000 h/17 a/Changi`
-**List** | `list ↵`
-**Exit** | `exit ↵`
-**Help** | `help ↵`
+**Help** | `help`
+**List** | `list`
+**Add** | `add i/IC n/NAME d/DATE_OF_BIRTH p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE]` <br> e.g.,<br>`add i/S9123456A n/Divakar d/29-02-2000 p/91234567` <br> `add i/T0123456Q n/Divakar d/29-02-2000 p/91234567 e/divakarmal@medibook.com a/NUS, Kent Ridge Drive h/178 w/75 b/O+`
+**Edit** | `edit <index> [i/IC] [n/NAME] [d/DATE OF BIRTH] [p/PHONE] [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD TYPE][t/TAG]` <br> e.g., <br> `edit 1 n/Divakar` <br> `edit 3 n/Divakar p/91111111 h/201`
+**Delete** | `delete <index>`<br> e.g., `delete 1`
+**Find** | `find [i/IC] [n/NAME] [d/DATE_OF_BIRTH] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE]`<br> e.g., <br> `find i/G1234567S`<br>`find n/Jack i/T00 dob/2000 h/17 a/Changi`
+**Access** | `access <index>` <br> e.g., `access 1`
+**Note** | `note [d/DATE] n/NAME_OF_DOCTOR c/CONTENT` <br> e.g. `note n/Dr John c/Patient is having fever. Prescribed panadol.`
+**Exit** | `exit`

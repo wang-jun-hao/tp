@@ -22,16 +22,18 @@ public class StorageManager implements Storage {
     private MediBookStorage mediBookStorage;
     private UserPrefsStorage userPrefsStorage;
     private MedicalNoteListStorage medicalNoteListStorage;
+    private UserAccountStorage userAccountStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code MediBookStorage} and {@code UserPrefStorage}.
      */
     public StorageManager(MediBookStorage mediBookStorage, UserPrefsStorage userPrefsStorage,
-                          MedicalNoteListStorage medicalNoteListStorage) {
+                          MedicalNoteListStorage medicalNoteListStorage, UserAccountStorage userAccountStorage) {
         super();
         this.mediBookStorage = mediBookStorage;
         this.userPrefsStorage = userPrefsStorage;
         this.medicalNoteListStorage = medicalNoteListStorage;
+        this.userAccountStorage = userAccountStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -141,5 +143,17 @@ public class StorageManager implements Storage {
     public void deleteAllMedicalNoteList(Path filePath) throws IOException {
         logger.fine("Attempting to clear all data files: " + filePath);
         medicalNoteListStorage.deleteAllMedicalNoteList(filePath);
+    }
+
+    // ============================== UserAccount methods ==============================
+
+    @Override
+    public Path getUserAccountFilepath() {
+        return userAccountStorage.getUserAccountFilepath();
+    }
+
+    @Override
+    public boolean isAccount(String username, String password) {
+        return userAccountStorage.isAccount(username, password);
     }
 }

@@ -149,4 +149,15 @@ public class LogicManager implements Logic {
         storage.renameMedicalNoteList(oldIc, newIc);
         model.resetEditedPatient();
     }
+
+    @Override
+    public void processLoginInfo(String username, String password) {
+        boolean isAccount = storage.isAccount(username, password);
+        if (isAccount) {
+            System.out.println("yes");
+        } else {
+            System.out.println("bye");
+        }
+    }
+
 }
