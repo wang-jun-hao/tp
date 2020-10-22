@@ -11,6 +11,7 @@ import seedu.medibook.logic.commands.AddCommand;
 import seedu.medibook.logic.commands.ClearCommand;
 import seedu.medibook.logic.commands.Command;
 import seedu.medibook.logic.commands.DeleteCommand;
+import seedu.medibook.logic.commands.DeleteNoteCommand;
 import seedu.medibook.logic.commands.EditCommand;
 import seedu.medibook.logic.commands.ExitCommand;
 import seedu.medibook.logic.commands.FindCommand;
@@ -72,6 +73,9 @@ public class MediBookParser {
 
         case AddNoteCommand.COMMAND_WORD:
             return new AddNoteCommandParser().parse(arguments);
+
+        case DeleteNoteCommand.COMMAND_WORD:
+            return new DeleteNoteCommandParser().parse(arguments);
 
         case AccessCommand.COMMAND_WORD:
             return new AccessCommandParser().parse(arguments);

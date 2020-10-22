@@ -44,6 +44,34 @@ public class MedicalNoteList implements ReadOnlyMedicalNoteList {
         return new MedicalNoteList(innerList);
     }
 
+    /**
+     * Returns number of medical notes contained within this list.
+     */
+    public int size() {
+        return innerList.size();
+    }
+
+    /**
+     * Deletes the medical note at the specified index from the list.
+     * @param index Zero-based index of medical note.
+     */
+    public void deleteMedicalNoteAtIndex(int index) {
+        assert index < size() : "Attempting to delete with out-of-range index";
+
+        innerList.remove(index);
+    }
+
+    /**
+     * Retrieves the medical note at the specified index in the list.
+     * @param index Zero-based index of medical note.
+     * @return
+     */
+    public MedicalNote getMedicalNoteAtIndex(int index) {
+        assert index < size() : "Attempting to get medical note with out-of-range index";
+
+        return innerList.get(index);
+    }
+
     @Override
     public List<MedicalNote> getMedicalNoteList() {
         return Collections.unmodifiableList(innerList);

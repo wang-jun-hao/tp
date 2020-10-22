@@ -33,7 +33,7 @@ public class AddNoteCommandTest {
         MedicalNote medicalNote = new MedicalNote(new Date("20-10-2019", true), "John",
                 "Patient is having fever.");
         AddNoteCommand addNoteCommand = new AddNoteCommand(medicalNote);
-        assertCommandFailure(addNoteCommand, model, AddNoteCommand.MESSAGE_NOTE_ON_LIST);
+        assertCommandFailure(addNoteCommand, model, AddNoteCommand.MESSAGE_ADD_NOTE_ON_LIST);
     }
 
     @Test
