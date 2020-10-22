@@ -1,15 +1,18 @@
 {
   "medical notes" : [ {
     "date" : "invalid date",
-    "doctor name" : "Dr Strange",
+    "doctor name" : "Strange",
+    "doctor mcr" : "MC8270P",
     "content" : "Patient is in critical condition."
   }, {
     "date" : "17-01-2020",
-    "doctor name" : "Dr Who",
+    "doctor name" : "Who",
+    "doctor mcr" : "M87380P",
     "content" : "Patient is recovering well."
   }, {
     "date" : "23-01-2020",
-    "doctor name" : "Dr Nick",
+    "doctor name" : "Nick",
+    "doctor mcr" : "M29380X",
     "content" : "Patient has fully recovered."
   } ]
 }

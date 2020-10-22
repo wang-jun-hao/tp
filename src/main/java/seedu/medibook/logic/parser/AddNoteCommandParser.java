@@ -3,13 +3,18 @@ package seedu.medibook.logic.parser;
 import static seedu.medibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_CONTENT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_MCR;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.stream.Stream;
 
 import seedu.medibook.logic.commands.AddNoteCommand;
 import seedu.medibook.logic.parser.exceptions.ParseException;
-import seedu.medibook.model.Date;
+import seedu.medibook.model.commonfields.Date;
+import seedu.medibook.model.commonfields.Name;
+import seedu.medibook.model.doctor.Doctor;
+import seedu.medibook.model.doctor.Mcr;
+import seedu.medibook.model.medicalnote.Content;
 import seedu.medibook.model.medicalnote.MedicalNote;
 
 /**
@@ -25,18 +30,21 @@ public class AddNoteCommandParser implements Parser<AddNoteCommand> {
     public AddNoteCommand parse(String args) throws ParseException {
         try {
             ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_NAME, PREFIX_CONTENT);
+                    ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_NAME, PREFIX_MCR, PREFIX_CONTENT);
 
-            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_CONTENT)
+            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_MCR, PREFIX_CONTENT)
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddNoteCommand.MESSAGE_USAGE));
             }
 
             Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).orElse(Date.getTodayDate()));
-            String name = argMultimap.getValue(PREFIX_NAME).get();
-            String content = argMultimap.getValue(PREFIX_CONTENT).get();
+            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            Mcr mcr = ParserUtil.parseMcr(argMultimap.getValue(PREFIX_MCR).get());
+            Content content = ParserUtil.parseContent(argMultimap.getValue(PREFIX_CONTENT).get());
 
-            MedicalNote medicalNote = new MedicalNote(date, name, content);
+            Doctor doctor = new Doctor(name, mcr);
+
+            MedicalNote medicalNote = new MedicalNote(date, doctor, content);
 
             return new AddNoteCommand(medicalNote);
         } catch (IllegalArgumentException iae) {

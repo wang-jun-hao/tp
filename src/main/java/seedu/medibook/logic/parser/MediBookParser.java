@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.medibook.logic.commands.AccessCommand;
 import seedu.medibook.logic.commands.AddCommand;
+import seedu.medibook.logic.commands.AddNoteCommand;
 import seedu.medibook.logic.commands.ClearCommand;
 import seedu.medibook.logic.commands.Command;
 import seedu.medibook.logic.commands.DeleteCommand;
@@ -17,7 +18,6 @@ import seedu.medibook.logic.commands.ExitCommand;
 import seedu.medibook.logic.commands.FindCommand;
 import seedu.medibook.logic.commands.HelpCommand;
 import seedu.medibook.logic.commands.ListCommand;
-import seedu.medibook.logic.commands.AddNoteCommand;
 import seedu.medibook.logic.parser.exceptions.ParseException;
 
 /**

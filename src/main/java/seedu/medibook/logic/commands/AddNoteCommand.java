@@ -3,6 +3,7 @@ package seedu.medibook.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_CONTENT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_MCR;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.Optional;
@@ -25,11 +26,13 @@ public class AddNoteCommand extends Command {
             + "in MediBook. "
             + "Parameters: "
             + PREFIX_DATE + "DATE "
-            + PREFIX_NAME + "NAME OF DOCTOR "
+            + PREFIX_NAME + "NAME OF DOCTOR (W/O TITLE) "
+            + PREFIX_MCR + "MEDICAL REGISTRATION NO. OF DOCTOR "
             + PREFIX_CONTENT + "MEDICAL NOTE CONTENT "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DATE + "04-11-1991 "
             + PREFIX_NAME + "John Doe "
+            + PREFIX_MCR + "M17273J "
             + PREFIX_CONTENT + "Patient has high fever and cough.";
 
     public static final String MESSAGE_SUCCESS = "New medical note entry added:\n%1$s";
