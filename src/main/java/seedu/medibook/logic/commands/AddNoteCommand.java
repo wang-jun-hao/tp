@@ -36,7 +36,7 @@ public class AddNoteCommand extends Command {
             + PREFIX_CONTENT + "Patient has high fever and cough.";
 
     public static final String MESSAGE_SUCCESS = "New medical note entry added:\n%1$s";
-    public static final String MESSAGE_DUPLICATE_NOTE = "This medical note entry already exists in the system";
+    public static final String MESSAGE_DUPLICATE_NOTE = "This medical note entry already exists in the system.";
     public static final String MESSAGE_ADD_NOTE_ON_LIST = "You can only add medical note to a patient when you are "
             + "viewing his/her patient profile. Access the patient profile before adding medical note.";
 
@@ -64,6 +64,10 @@ public class AddNoteCommand extends Command {
         Patient displayedPatient = patientOptional.get();
 
         assert model.hasPatient(displayedPatient) : "Patient in context does not exist in model";
+
+        if (displayedPatient.alreadyHasMedicalNote(newMedicalNote)) {
+            throw new CommandException(MESSAGE_DUPLICATE_NOTE);
+        }
 
         displayedPatient.addMedicalNote(newMedicalNote);
 
