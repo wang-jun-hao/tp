@@ -14,6 +14,10 @@ import static seedu.medibook.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_WEIGHT_BOB;
 import static seedu.medibook.testutil.Assert.assertThrows;
 import static seedu.medibook.testutil.TypicalPatients.ALICE;
+import static seedu.medibook.testutil.TypicalPatients.ALICE_MEDICAL_NOTE_1;
+import static seedu.medibook.testutil.TypicalPatients.ALICE_MEDICAL_NOTE_2;
+import static seedu.medibook.testutil.TypicalPatients.BENSON_MEDICAL_NOTE_1;
+import static seedu.medibook.testutil.TypicalPatients.BENSON_MEDICAL_NOTE_2;
 import static seedu.medibook.testutil.TypicalPatients.BOB;
 
 import org.junit.jupiter.api.Test;
@@ -126,5 +130,19 @@ public class PatientTest {
         // different tags -> returns false
         editedAlice = new PatientBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+    }
+
+    @Test
+    public void alreadyHasMedicalNote_duplicatedNote_true() {
+        Patient alice = new PatientBuilder(ALICE).build();
+        assertTrue(alice.alreadyHasMedicalNote(ALICE_MEDICAL_NOTE_1));
+        assertTrue(alice.alreadyHasMedicalNote(ALICE_MEDICAL_NOTE_2));
+    }
+
+    @Test
+    public void alreadyHasMedicalNote_newNote_false() {
+        Patient alice = new PatientBuilder(ALICE).build();
+        assertFalse(alice.alreadyHasMedicalNote(BENSON_MEDICAL_NOTE_1));
+        assertFalse(alice.alreadyHasMedicalNote(BENSON_MEDICAL_NOTE_2));
     }
 }
