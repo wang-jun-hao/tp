@@ -25,7 +25,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.medibook.model.Date;
 import seedu.medibook.model.MediBook;
+import seedu.medibook.model.medicalnote.MedicalNote;
+import seedu.medibook.model.medicalnote.MedicalNoteList;
 import seedu.medibook.model.patient.Patient;
 
 /**
@@ -33,27 +36,82 @@ import seedu.medibook.model.patient.Patient;
  */
 public class TypicalPatients {
 
+    public static final MedicalNoteList ALICE_MEDICAL_NOTE_LIST = new MedicalNoteList();
+    static {
+        ALICE_MEDICAL_NOTE_LIST.add(
+                new MedicalNote(new Date("19-02-2020", true), "Dr John", "Patient is good."));
+        ALICE_MEDICAL_NOTE_LIST.add(
+                new MedicalNote(new Date("25-08-2020", true), "Dr John", "Patient is bad."));
+    }
     public static final Patient ALICE = new PatientBuilder().withIc("S9777777R").withName("Alice Pauline")
             .withDateOfBirth("15-09-1997").withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withHeight("174").withWeight("48.5").withBloodType("A+")
-            .withTags("friends").build();
+            .withTags("friends").withMedicalNoteList(ALICE_MEDICAL_NOTE_LIST).build();
+
+    public static final MedicalNoteList BENSON_MEDICAL_NOTE_LIST = new MedicalNoteList();
+    static {
+        BENSON_MEDICAL_NOTE_LIST.add(
+                new MedicalNote(new Date("14-04-2020", true), "Dr Gary", "Patient is good."));
+        BENSON_MEDICAL_NOTE_LIST.add(
+                new MedicalNote(new Date("28-08-2020", true), "Dr Mary", "Patient is bad."));
+    }
     public static final Patient BENSON = new PatientBuilder().withIc("S9234567A").withName("Benson Meier")
             .withDateOfBirth("01-03-1992").withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432").withHeight("170").withWeight("63.5")
             .withBloodType("AB+").withTags("owesMoney", "friends").build();
+
+    public static final MedicalNoteList CARL_MEDICAL_NOTE_LIST = new MedicalNoteList();
+    static {
+        CARL_MEDICAL_NOTE_LIST.add(
+                new MedicalNote(new Date("02-05-2020", true), "Dr John", "Patient is good."));
+        CARL_MEDICAL_NOTE_LIST.add(
+                new MedicalNote(new Date("12-07-2020", true), "Dr John", "Patient is bad."));
+    }
     public static final Patient CARL = new PatientBuilder().withIc("S9876543W").withName("Carl Kurz")
             .withDateOfBirth("16-01-1998").withPhone("95352563").withEmail("heinz@example.com")
             .withAddress("wall street").withHeight("162").withWeight("80.8").withBloodType("B+").build();
+
+    public static final MedicalNoteList DANIEL_MEDICAL_NOTE_LIST = new MedicalNoteList();
+    static {
+        DANIEL_MEDICAL_NOTE_LIST.add(
+                new MedicalNote(new Date("19-02-2020", true), "Dr John", "Patient is good."));
+        DANIEL_MEDICAL_NOTE_LIST.add(
+                new MedicalNote(new Date("25-08-2020", true), "Dr John", "Patient is bad."));
+    }
     public static final Patient DANIEL = new PatientBuilder().withIc("T0054321P").withName("Daniel Meier")
             .withDateOfBirth("10-10-2000").withPhone("87652533").withEmail("cornelia@example.com")
             .withAddress("10th street").withHeight("183").withWeight("70.3").withBloodType("A-")
             .withTags("friends").build();
+
+    public static final MedicalNoteList ELLE_MEDICAL_NOTE_LIST = new MedicalNoteList();
+    static {
+        ELLE_MEDICAL_NOTE_LIST.add(
+                new MedicalNote(new Date("19-02-2020", true), "Dr John", "Patient is good."));
+        ELLE_MEDICAL_NOTE_LIST.add(
+                new MedicalNote(new Date("25-08-2020", true), "Dr John", "Patient is bad."));
+    }
     public static final Patient ELLE = new PatientBuilder().withIc("F7654321Q").withName("Elle Meyer")
             .withDateOfBirth("05-10-1976").withPhone("9482224").withEmail("werner@example.com")
             .withAddress("michegan ave").withHeight("177").withWeight("43.5").withBloodType("B-").build();
+
+    public static final MedicalNoteList FIONA_MEDICAL_NOTE_LIST = new MedicalNoteList();
+    static {
+        FIONA_MEDICAL_NOTE_LIST.add(
+                new MedicalNote(new Date("19-02-2020", true), "Dr John", "Patient is good."));
+        FIONA_MEDICAL_NOTE_LIST.add(
+                new MedicalNote(new Date("25-08-2020", true), "Dr John", "Patient is bad."));
+    }
     public static final Patient FIONA = new PatientBuilder().withIc("S7543210A").withName("Fiona Kunz")
             .withDateOfBirth("02-07-1975").withPhone("9482427").withEmail("lydia@example.com")
             .withAddress("little tokyo").withHeight("168").withWeight("50.5").withBloodType("O+").build();
+
+    public static final MedicalNoteList GEORGE_MEDICAL_NOTE_LIST = new MedicalNoteList();
+    static {
+        GEORGE_MEDICAL_NOTE_LIST.add(
+                new MedicalNote(new Date("19-02-2020", true), "Dr John", "Patient is good."));
+        GEORGE_MEDICAL_NOTE_LIST.add(
+                new MedicalNote(new Date("25-08-2020", true), "Dr John", "Patient is bad."));
+    }
     public static final Patient GEORGE = new PatientBuilder().withIc("T0232323I").withName("George Best")
             .withDateOfBirth("14-07-2002").withPhone("9482442").withEmail("anna@example.com").withAddress("4th street")
             .withHeight("169").withWeight("69.2").withBloodType("A+").build();
@@ -77,6 +135,8 @@ public class TypicalPatients {
             .withBloodType(VALID_BLOOD_TYPE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
+    public static final int VALID_NOTE_INDEX = 2;
+    public static final int OUT_OF_RANGE_NOTE_INDEX = 3;
 
     private TypicalPatients() {} // prevents instantiation
 

@@ -1,6 +1,7 @@
 package seedu.medibook.model.medicalnote;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
@@ -43,5 +44,28 @@ class MedicalNoteListTest {
         MedicalNoteList copiedList = testList.makeCopy();
         assertEquals(testList, copiedList);
         assertTrue(copiedList != testList);
+    }
+
+    @Test
+    void deleteMedicalNoteAtIndex_validIndex_success() {
+        MedicalNoteList medicalNoteList = new MedicalNoteList(
+                new LinkedList<>(Arrays.asList(medicalNote1, medicalNote2)));
+        MedicalNoteList expectedMedicalNoteList = new MedicalNoteList(
+                new LinkedList<>(Arrays.asList(medicalNote2)));
+
+        medicalNoteList.deleteMedicalNoteAtIndex(0);
+
+        assertEquals(expectedMedicalNoteList, medicalNoteList);
+    }
+
+    @Test
+    void getMedicalNoteAtIndex_validIndex_success() {
+        MedicalNoteList medicalNoteList = new MedicalNoteList(
+                new LinkedList<>(Arrays.asList(medicalNote1, medicalNote2)));
+        MedicalNote expectedMedicalNote = medicalNote2;
+
+        MedicalNote actualMedicalNote = medicalNoteList.getMedicalNoteAtIndex(1);
+
+        assertEquals(expectedMedicalNote, actualMedicalNote);
     }
 }

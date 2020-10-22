@@ -24,8 +24,8 @@ public class AddNoteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a medical note to the current patient "
             + "in MediBook. "
             + "Parameters: "
-            + PREFIX_DATE + "DATE OF BIRTH "
-            + PREFIX_NAME + "NAME "
+            + PREFIX_DATE + "DATE "
+            + PREFIX_NAME + "NAME OF DOCTOR "
             + PREFIX_CONTENT + "MEDICAL NOTE CONTENT "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DATE + "04-11-1991 "
@@ -37,7 +37,7 @@ public class AddNoteCommand extends Command {
     public static final String MESSAGE_ADD_NOTE_ON_LIST = "You can only add medical note to a patient when you are "
             + "viewing his/her patient profile. Access the patient profile before adding medical note.";
 
-    private final Logger logger = LogsCenter.getLogger(NoteCommand.class);
+    private final Logger logger = LogsCenter.getLogger(AddNoteCommand.class);
 
     private final MedicalNote newMedicalNote;
 
