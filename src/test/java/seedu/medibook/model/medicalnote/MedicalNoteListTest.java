@@ -19,7 +19,7 @@ class MedicalNoteListTest {
             new Doctor(new Name("John"), new Mcr("M52739B")), new Content("Patient is awesome."));
     private final MedicalNote medicalNote2 = new MedicalNote(new Date("25-10-2019", true),
             new Doctor(new Name("Gary"), new Mcr("M12009B")), new Content("Patient is bad."));
-    private final MedicalNote medicalNote3 = new MedicalNote(new Date("23-10-2020", true),
+    private final MedicalNote medicalNote3 = new MedicalNote(new Date("22-09-2020", true),
             new Doctor(new Name("Alonso"), new Mcr("M28060B")), new Content("Patient is bad."));
 
     @Test
