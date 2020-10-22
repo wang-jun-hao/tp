@@ -75,13 +75,13 @@ PatientProfile *--> "1" MedicalDetailsCard
 PatientProfile *--> "1" MedicalNotesPanel
 
 PersonalDetailsCard .right.> Model
-PersonalDetailsCard *--> "4..10" PersonalDetailsRow
+PersonalDetailsCard --> "4..10" PersonalDetailsRow
 
 MedicalDetailsCard .right.> Model
-MedicalDetailsCard *--> "1" MedicalDetailsRow
+MedicalDetailsCard --> "1" MedicalDetailsRow
 
 MedicalNotesPanel .right.> Model
-MedicalNotesPanel *--> "*" MedicalNoteCard
+MedicalNotesPanel --> "*" MedicalNoteCard
 MedicalNoteCard ..> Model
 
 PatientListPanel -[hidden]left- HelpWindow

@@ -18,8 +18,8 @@ PatientProfile *--> "1" PersonalDetailsCard
 PatientProfile *--> "1" MedicalDetailsCard
 PatientProfile *--> "1" MedicalNotesPanel
 
-PersonalDetailsCard *--> "4..10" PersonalDetailsRow
-MedicalDetailsCard *--> "1" MedicalDetailsRow
-MedicalNotesPanel *--> "*" MedicalNoteCard
+PersonalDetailsCard --> "4..10" PersonalDetailsRow
+MedicalDetailsCard --> "1" MedicalDetailsRow
+MedicalNotesPanel --> "*" MedicalNoteCard
 
 @enduml
