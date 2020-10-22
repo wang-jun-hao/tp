@@ -220,7 +220,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return mediBook.equals(other.mediBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPatients.equals(other.filteredPatients);
+                && filteredPatients.equals(other.filteredPatients)
+                && context.equals(other.context);
     }
 
 }
