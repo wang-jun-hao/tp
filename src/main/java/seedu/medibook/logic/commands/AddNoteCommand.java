@@ -15,9 +15,9 @@ import seedu.medibook.model.patient.Patient;
 /**
  * Adds a patient to the medi book.
  */
-public class NoteCommand extends Command {
+public class AddNoteCommand extends Command {
 
-    public static final String COMMAND_WORD = "note";
+    public static final String COMMAND_WORD = "addnote";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a medical note to the current patient "
             + "in MediBook. "
@@ -40,7 +40,7 @@ public class NoteCommand extends Command {
     /**
      * Creates an AddCommand to add the specified {@code Patient}
      */
-    public NoteCommand(MedicalNote newMedicalNote) {
+    public AddNoteCommand(MedicalNote newMedicalNote) {
         requireNonNull(newMedicalNote);
         this.newMedicalNote = newMedicalNote;
     }
@@ -66,7 +66,7 @@ public class NoteCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof NoteCommand // instanceof handles nulls
-                && newMedicalNote.equals(((NoteCommand) other).newMedicalNote));
+                || (other instanceof AddNoteCommand // instanceof handles nulls
+                && newMedicalNote.equals(((AddNoteCommand) other).newMedicalNote));
     }
 }

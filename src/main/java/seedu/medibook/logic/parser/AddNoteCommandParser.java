@@ -7,29 +7,29 @@ import static seedu.medibook.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.stream.Stream;
 
-import seedu.medibook.logic.commands.NoteCommand;
+import seedu.medibook.logic.commands.AddNoteCommand;
 import seedu.medibook.logic.parser.exceptions.ParseException;
 import seedu.medibook.model.Date;
 import seedu.medibook.model.medicalnote.MedicalNote;
 
 /**
- * Parses input arguments and creates a new NoteCommand object
+ * Parses input arguments and creates a new AddNoteCommand object
  */
-public class NoteCommandParser implements Parser<NoteCommand> {
+public class AddNoteCommandParser implements Parser<AddNoteCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the NoteCommand
-     * and returns a NoteCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddNoteCommand
+     * and returns a AddNoteCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public NoteCommand parse(String args) throws ParseException {
+    public AddNoteCommand parse(String args) throws ParseException {
         try {
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_NAME, PREFIX_CONTENT);
 
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_CONTENT)
                     || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddNoteCommand.MESSAGE_USAGE));
             }
 
             Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).orElse(Date.getTodayDate()));
@@ -38,7 +38,7 @@ public class NoteCommandParser implements Parser<NoteCommand> {
 
             MedicalNote medicalNote = new MedicalNote(date, name, content);
 
-            return new NoteCommand(medicalNote);
+            return new AddNoteCommand(medicalNote);
         } catch (IllegalArgumentException iae) {
             throw new ParseException(iae.getMessage());
         }

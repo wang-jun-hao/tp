@@ -16,7 +16,7 @@ import seedu.medibook.logic.commands.ExitCommand;
 import seedu.medibook.logic.commands.FindCommand;
 import seedu.medibook.logic.commands.HelpCommand;
 import seedu.medibook.logic.commands.ListCommand;
-import seedu.medibook.logic.commands.NoteCommand;
+import seedu.medibook.logic.commands.AddNoteCommand;
 import seedu.medibook.logic.parser.exceptions.ParseException;
 
 /**
@@ -70,8 +70,8 @@ public class MediBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case NoteCommand.COMMAND_WORD:
-            return new NoteCommandParser().parse(arguments);
+        case AddNoteCommand.COMMAND_WORD:
+            return new AddNoteCommandParser().parse(arguments);
 
         case AccessCommand.COMMAND_WORD:
             return new AccessCommandParser().parse(arguments);

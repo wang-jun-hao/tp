@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.medibook.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.medibook.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.medibook.logic.commands.NoteCommand.MESSAGE_SUCCESS;
+import static seedu.medibook.logic.commands.AddNoteCommand.MESSAGE_SUCCESS;
 import static seedu.medibook.testutil.TypicalPatients.getTypicalMediBook;
 
 import org.junit.jupiter.api.Test;
@@ -19,9 +19,9 @@ import seedu.medibook.model.patient.Patient;
 import seedu.medibook.testutil.PatientBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for NoteCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for AddNoteCommand.
  */
-public class NoteCommandTest {
+public class AddNoteCommandTest {
 
     private final Model model = new ModelManager(getTypicalMediBook(), new UserPrefs());
 
@@ -32,8 +32,8 @@ public class NoteCommandTest {
 
         MedicalNote medicalNote = new MedicalNote(new Date("20-10-2019", true), "John",
                 "Patient is having fever.");
-        NoteCommand noteCommand = new NoteCommand(medicalNote);
-        assertCommandFailure(noteCommand, model, NoteCommand.MESSAGE_NOTE_ON_LIST);
+        AddNoteCommand addNoteCommand = new AddNoteCommand(medicalNote);
+        assertCommandFailure(addNoteCommand, model, AddNoteCommand.MESSAGE_NOTE_ON_LIST);
     }
 
     @Test
@@ -45,7 +45,7 @@ public class NoteCommandTest {
 
         MedicalNote medicalNote = new MedicalNote(new Date("20-10-2019", true), "John",
                 "Patient is having fever.");
-        NoteCommand noteCommand = new NoteCommand(medicalNote);
+        AddNoteCommand addNoteCommand = new AddNoteCommand(medicalNote);
 
         Patient resultingPatient = new PatientBuilder(targetPatient).build();
         resultingPatient.addMedicalNote(medicalNote);
@@ -56,7 +56,7 @@ public class NoteCommandTest {
         expectedModel.setPatient(model.getFilteredPatientList().get(0), resultingPatient);
         expectedModel.accessPatient(targetPatient);
 
-        assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(addNoteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -64,18 +64,18 @@ public class NoteCommandTest {
         // same medical note -> returns true
         MedicalNote medicalNote = new MedicalNote(new Date("20-10-2019", true), "John",
                 "Patient is having fever.");
-        NoteCommand noteCommand1 = new NoteCommand(medicalNote);
-        NoteCommand noteCommand2 = new NoteCommand(medicalNote);
-        assertTrue(noteCommand1.equals(noteCommand2));
+        AddNoteCommand addNoteCommand1 = new AddNoteCommand(medicalNote);
+        AddNoteCommand addNoteCommand2 = new AddNoteCommand(medicalNote);
+        assertTrue(addNoteCommand1.equals(addNoteCommand2));
 
         // different medical note -> returns false
         MedicalNote differentMedicalNote = new MedicalNote(new Date("21-10-2019", true), "Gary",
                 "Patient is having chills.");
-        NoteCommand differentNoteCommand = new NoteCommand(differentMedicalNote);
-        assertFalse(noteCommand1.equals(differentNoteCommand));
+        AddNoteCommand differentAddNoteCommand = new AddNoteCommand(differentMedicalNote);
+        assertFalse(addNoteCommand1.equals(differentAddNoteCommand));
 
         // null -> returns false
-        assertFalse(noteCommand1.equals(null));
+        assertFalse(addNoteCommand1.equals(null));
     }
 
 }
