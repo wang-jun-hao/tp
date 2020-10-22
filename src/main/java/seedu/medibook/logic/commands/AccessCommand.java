@@ -41,7 +41,7 @@ public class AccessCommand extends Command {
         }
 
         Patient patientToAccess = lastShownList.get(targetIndex.getZeroBased());
-        Context context = model.getContext();
+        Context context = model;
         context.accessPatient(patientToAccess);
         context.setShouldLoadMedicalNotes(true);
 

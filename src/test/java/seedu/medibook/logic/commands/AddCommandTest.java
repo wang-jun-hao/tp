@@ -9,6 +9,7 @@ import static seedu.medibook.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -16,11 +17,11 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.medibook.commons.core.GuiSettings;
 import seedu.medibook.logic.commands.exceptions.CommandException;
-import seedu.medibook.model.Context;
 import seedu.medibook.model.MediBook;
 import seedu.medibook.model.Model;
 import seedu.medibook.model.ReadOnlyMediBook;
 import seedu.medibook.model.ReadOnlyUserPrefs;
+import seedu.medibook.model.patient.Ic;
 import seedu.medibook.model.patient.Patient;
 import seedu.medibook.testutil.PatientBuilder;
 
@@ -115,11 +116,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public Context getContext() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void setMediBook(ReadOnlyMediBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -151,6 +147,76 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPatientList(Predicate<Patient> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void accessPatient(Patient patient) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Optional<Patient> getPatientToAccess() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetAccessedPatient() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setDeletedPatient(Patient patient) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Optional<Patient> getDeletedPatient() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetDeletedPatient() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setEditedPatient(Patient patient, Ic prevIc) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Optional<Patient> getEditedPatient() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Optional<Ic> getEditedPatientPrevIc() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetEditedPatient() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean getShouldLoadMedicalNotes() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setShouldLoadMedicalNotes(boolean b) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean getShouldDeleteAllMedicalNotes() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setShouldDeleteAllMedicalNotes(boolean b) {
             throw new AssertionError("This method should not be called.");
         }
     }

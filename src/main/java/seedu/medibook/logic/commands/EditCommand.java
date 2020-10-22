@@ -101,7 +101,7 @@ public class EditCommand extends Command {
 
         boolean wasIcEdited = !patientToEdit.getIc().equals(editedPatient.getIc());
         if (wasIcEdited) {
-            model.getContext().setEditedPatient(editedPatient, patientToEdit.getIc());
+            model.setEditedPatient(editedPatient, patientToEdit.getIc());
         }
 
         model.setPatient(patientToEdit, editedPatient);

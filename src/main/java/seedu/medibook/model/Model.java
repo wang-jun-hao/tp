@@ -10,7 +10,7 @@ import seedu.medibook.model.patient.Patient;
 /**
  * The API of the Model component.
  */
-public interface Model {
+public interface Model extends Context {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Patient> PREDICATE_SHOW_ALL_PATIENTS = unused -> true;
 
@@ -85,6 +85,4 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPatientList(Predicate<Patient> predicate);
-
-    Context getContext();
 }

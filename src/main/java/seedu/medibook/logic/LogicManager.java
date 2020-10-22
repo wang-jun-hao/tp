@@ -14,7 +14,6 @@ import seedu.medibook.logic.commands.CommandResult;
 import seedu.medibook.logic.commands.exceptions.CommandException;
 import seedu.medibook.logic.parser.MediBookParser;
 import seedu.medibook.logic.parser.exceptions.ParseException;
-import seedu.medibook.model.Context;
 import seedu.medibook.model.Model;
 import seedu.medibook.model.ReadOnlyMediBook;
 import seedu.medibook.model.medicalnote.MedicalNoteList;
@@ -45,7 +44,7 @@ public class LogicManager implements Logic {
 
     @Override
     public Optional<Patient> getPatientToAccess() {
-        return model.getContext().getPatientToAccess();
+        return model.getPatientToAccess();
     }
 
     @Override
@@ -100,37 +99,36 @@ public class LogicManager implements Logic {
     }
 
     private void handleMedicalNoteListIo() throws IOException, DataConversionException {
-        Context context = model.getContext();
-        Optional<Patient> accessPatient = context.getPatientToAccess();
+        Optional<Patient> accessPatient = model.getPatientToAccess();
         if (accessPatient.isPresent()) {
             readOrSaveMedicalNoteList(accessPatient.get());
             return;
         }
 
-        Optional<Patient> deletedPatient = context.getDeletedPatient();
+        Optional<Patient> deletedPatient = model.getDeletedPatient();
         if (deletedPatient.isPresent()) {
             deleteMedicalNoteList(deletedPatient.get());
             return;
         }
 
-        Optional<Patient> editedPatient = context.getEditedPatient();
+        Optional<Patient> editedPatient = model.getEditedPatient();
         if (editedPatient.isPresent()) {
             renameMedicalNoteList(editedPatient.get());
             return;
         }
 
-        if (context.getShouldDeleteAllMedicalNotes()) {
+        if (model.getShouldDeleteAllMedicalNotes()) {
             deleteAllMedicalNotes();
         }
     }
 
     private void deleteAllMedicalNotes() throws IOException {
         storage.deleteAllMedicalNoteList();
-        model.getContext().setShouldDeleteAllMedicalNotes(false);
+        model.setShouldDeleteAllMedicalNotes(false);
     }
 
     private void readOrSaveMedicalNoteList(Patient patient) throws IOException, DataConversionException {
-        boolean shouldLoadMedicalNotes = model.getContext().getShouldLoadMedicalNotes();
+        boolean shouldLoadMedicalNotes = model.getShouldLoadMedicalNotes();
         if (shouldLoadMedicalNotes) {
             storage.readMedicalNoteList(patient.getIc())
                     .ifPresent(medicalNotes ->
@@ -142,14 +140,13 @@ public class LogicManager implements Logic {
 
     private void deleteMedicalNoteList(Patient patient) throws IOException {
         storage.deleteMedicalNoteList(patient.getIc());
-        model.getContext().resetDeletedPatient();
+        model.resetDeletedPatient();
     }
 
     private void renameMedicalNoteList(Patient patient) throws IOException {
-        Context context = model.getContext();
-        Ic oldIc = context.getEditedPatientPrevIc().get();
+        Ic oldIc = model.getEditedPatientPrevIc().get();
         Ic newIc = patient.getIc();
         storage.renameMedicalNoteList(oldIc, newIc);
-        context.resetEditedPatient();
+        model.resetEditedPatient();
     }
 }

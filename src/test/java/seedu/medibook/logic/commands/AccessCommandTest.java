@@ -33,7 +33,7 @@ public class AccessCommandTest {
                         false, false, true, false);
 
         ModelManager expectedModel = new ModelManager(model.getMediBook(), new UserPrefs());
-        expectedModel.getContext().accessPatient(patientToAccess);
+        expectedModel.accessPatient(patientToAccess);
 
         assertCommandSuccess(accessCommand, model, expectedCommandResult, expectedModel);
     }
@@ -57,7 +57,7 @@ public class AccessCommandTest {
                         false, false, true, false);
 
         Model expectedModel = new ModelManager(model.getMediBook(), new UserPrefs());
-        expectedModel.getContext().accessPatient(patientToAccess);
+        expectedModel.accessPatient(patientToAccess);
 
         assertCommandSuccess(accessCommand, model, expectedCommandResult, expectedModel);
     }

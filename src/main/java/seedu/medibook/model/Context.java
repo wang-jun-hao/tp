@@ -5,112 +5,75 @@ import java.util.Optional;
 import seedu.medibook.model.patient.Ic;
 import seedu.medibook.model.patient.Patient;
 
-/**
- * Wraps the data from the most recently executed command.
- */
-public class Context {
-    private Optional<Patient> accessedPatient = Optional.empty();
-    private boolean shouldLoadMedicalNotes = true;
-    private Optional<Patient> deletedPatient = Optional.empty();
-    private Optional<Patient> editedPatient = Optional.empty();
-    private Optional<Ic> editedPatientPrevIc = Optional.empty();
-    private boolean shouldDeleteAllMedicalNotes = false;
-
+public interface Context {
     /**
      * Accesses the given patient.
      * The patient must exist in the medi book.
      */
-    public void accessPatient(Patient patient) {
-        this.accessedPatient = Optional.of(patient);
-    }
+    void accessPatient(Patient patient);
 
-    public Optional<Patient> getPatientToAccess() {
-        return this.accessedPatient;
-    }
+    /**
+     * Returns an {@code Optional} of the current accessed {@code patient}.
+     */
+    Optional<Patient> getPatientToAccess();
 
     /**
      * Resets the accessed patient.
      */
-    public void resetAccessedPatient() {
-        this.accessedPatient = Optional.empty();
-    }
+    void resetAccessedPatient();
 
     /**
      * Sets the {@code patient} that has just been deleted.
      */
-    public void setDeletedPatient(Patient patient) {
-        this.deletedPatient = Optional.of(patient);
-    }
+    void setDeletedPatient(Patient patient);
 
     /**
      * Returns the {@code patient} that has just been deleted.
      */
-    public Optional<Patient> getDeletedPatient() {
-        return this.deletedPatient;
-    }
+    Optional<Patient> getDeletedPatient();
 
     /**
      * Resets the {@code patient} that has just been deleted.
      */
-    public void resetDeletedPatient() {
-        this.deletedPatient = Optional.empty();
-    }
+    void resetDeletedPatient();
 
     /**
      * Sets the {@code patient} that has just been edited.
      */
-    public void setEditedPatient(Patient patient, Ic prevIc) {
-        this.editedPatient = Optional.of(patient);
-        this.editedPatientPrevIc = Optional.of(prevIc);
-    }
+    void setEditedPatient(Patient patient, Ic prevIc);
 
     /**
      * Returns the {@code patient} that has just been edited.
      */
-    public Optional<Patient> getEditedPatient() {
-        return this.editedPatient;
-    }
+    Optional<Patient> getEditedPatient();
 
     /**
      * Returns the previous Ic of an edited patient assuming the Ic was edited.
      */
-    public Optional<Ic> getEditedPatientPrevIc() {
-        return this.editedPatientPrevIc;
-    }
+    Optional<Ic> getEditedPatientPrevIc();
 
     /**
      * Resets the {@code patient} that has just been edited.
      */
-    public void resetEditedPatient() {
-        this.editedPatient = Optional.empty();
-        this.editedPatientPrevIc = Optional.empty();
-    }
+    void resetEditedPatient();
 
     /**
      * Returns a boolean on whether the medical notes of a {@code patient} should be loaded.
      */
-    public boolean getShouldLoadMedicalNotes() {
-        return this.shouldLoadMedicalNotes;
-    }
+    boolean getShouldLoadMedicalNotes();
 
     /**
      * Sets the boolean on whether the medical notes of a {@code patient} should be loaded.
      */
-    public void setShouldLoadMedicalNotes(boolean b) {
-        this.shouldLoadMedicalNotes = b;
-    }
+    void setShouldLoadMedicalNotes(boolean b);
 
     /**
      * Returns a boolean on whether all medical notes should be cleared.
      */
-    public boolean getShouldDeleteAllMedicalNotes() {
-        return this.shouldDeleteAllMedicalNotes;
-    }
+    boolean getShouldDeleteAllMedicalNotes();
 
     /**
      * Sets the boolean on whether all medical notes should be cleared.
      */
-    public void setShouldDeleteAllMedicalNotes(boolean b) {
-        this.shouldDeleteAllMedicalNotes = b;
-    }
+    void setShouldDeleteAllMedicalNotes(boolean b);
 }
