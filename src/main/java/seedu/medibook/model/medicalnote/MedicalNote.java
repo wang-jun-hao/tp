@@ -69,7 +69,7 @@ public class MedicalNote {
     public String toString() {
         return "Date: " + date.outputValue
                 + "\nDoctor: " + doctorName
-                + "\n\nNotes: " + content;
+                + "\nNotes: " + content;
     }
 
     @Override
