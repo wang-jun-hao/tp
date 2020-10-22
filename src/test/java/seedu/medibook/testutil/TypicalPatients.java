@@ -70,7 +70,8 @@ public class TypicalPatients {
     public static final Patient BENSON = new PatientBuilder().withIc("S9234567A").withName("Benson Meier")
             .withDateOfBirth("01-03-1992").withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432").withHeight("170").withWeight("63.5")
-            .withBloodType("AB+").withTags("owesMoney", "friends").withMedicalNoteList(BENSON_MEDICAL_NOTE_LIST).build();
+            .withBloodType("AB+").withTags("owesMoney", "friends")
+            .withMedicalNoteList(BENSON_MEDICAL_NOTE_LIST).build();
 
     public static final MedicalNoteList CARL_MEDICAL_NOTE_LIST = new MedicalNoteList();
     public static final MedicalNote CARL_MEDICAL_NOTE_1 = new MedicalNote(new Date("02-05-2020", true),
