@@ -23,6 +23,7 @@ class JsonAdaptedMedicalNote {
     public final String date;
     @JsonProperty("doctor name")
     public final String doctorName;
+    @JsonProperty("doctor mcr")
     public final String doctorMcr;
     public final String content;
 
