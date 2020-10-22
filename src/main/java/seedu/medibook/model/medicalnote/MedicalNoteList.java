@@ -8,6 +8,7 @@ import java.util.List;
  * Represents a list of medical notes for a Patient in MediBook.
  */
 public class MedicalNoteList implements ReadOnlyMedicalNoteList {
+    private static final MedicalNoteComparator comparator = new MedicalNoteComparator();
     private final List<MedicalNote> innerList;
 
     /**
@@ -25,6 +26,7 @@ public class MedicalNoteList implements ReadOnlyMedicalNoteList {
      */
     public MedicalNoteList(List<MedicalNote> listOfMedicalNotes) {
         List<MedicalNote> copyOfList = new LinkedList<>(listOfMedicalNotes);
+        copyOfList.sort(comparator);
         this.innerList = copyOfList;
     }
 
@@ -34,6 +36,7 @@ public class MedicalNoteList implements ReadOnlyMedicalNoteList {
      */
     public void add(MedicalNote newMedicalNote) {
         innerList.add(newMedicalNote);
+        innerList.sort(comparator);
     }
 
     public boolean isEmpty() {
@@ -100,6 +103,5 @@ public class MedicalNoteList implements ReadOnlyMedicalNoteList {
         MedicalNoteList otherList = (MedicalNoteList) other;
         return otherList.innerList.equals(innerList);
     }
-
 
 }
