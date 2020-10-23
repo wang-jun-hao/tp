@@ -25,8 +25,9 @@ public class JsonSerializableMediBookTest {
         JsonSerializableMediBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_PATIENTS_FILE,
                 JsonSerializableMediBook.class).get();
         MediBook mediBookFromFile = dataFromFile.toModelType();
-        MediBook typicalPatientsMediBook = TypicalPatients.getTypicalMediBook();
-        assertEquals(mediBookFromFile, typicalPatientsMediBook);
+        MediBook typicalPatientsMediBookWithAllEmptyMedicalNoteList =
+                TypicalPatients.getTypicalMediBookWithAllEmptyMedicalNoteList();
+        assertEquals(mediBookFromFile, typicalPatientsMediBookWithAllEmptyMedicalNoteList);
     }
 
     @Test
