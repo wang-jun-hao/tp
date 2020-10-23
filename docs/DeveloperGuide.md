@@ -283,7 +283,29 @@ This feature allows the application to display a patient's details in a clean an
 The class diagram below is a simplified diagram derived from the [full UI diagram](#ui-component), showing only the classes used to display the patient profile, and the associations between these classes.
 ![PatientProfileClassDiagram](images/PatientProfileClassDiagram.png)
 
-Note: All classes in this diagram inherit from the abstract `UiPart` class.
+Notes: 
+* All classes used to display patient profile (shown in the above diagram) inherit from the abstract `UiPart` class. 
+Hence, they each represent a visible part of the UI.
+* As shown in the [full UI diagram](#ui-component), some of the classes are dependent on the `Model`. This is to retrieve the required information of a `patient`.
+
+Classes used in this implementation can be described as follows:
+* `PatientProfile` represents the whole component of the UI displaying the patient's profile. 
+Each `PatientProfile` object contains a `PersonalDetailsCard`, a `MedicalDetailsCard` and a `MedicalNotesPanel`.
+* `PersonalDetailsCard` represents a UI element displaying the personal details of a `patient`. 
+It contains a JavaFX `ListView` displaying `PersonalDetailsRow` instances. 
+The corresponding UI element is displayed on the top left of the `PatientProfile` UI element.
+* `MedicalDetailsCard` represents a UI element displaying the medical details of a `patient`. 
+It contains a JavaFX `ListView` displaying `MedicalDetailsRow` instances. 
+The corresponding UI element is displayed on the bottom left of the `PatientProfile` UI element.
+* `MedicalNotesPanel` represents a UI element displaying the `MedicalNote`s of a `patient`.
+It contains a JavaFX `ListView` displaying `MedicalNoteCard` instances.
+The corresponding UI element is displayed on the right of the `PatientProfile` UI element.
+* `PersonalDetailsRow` represents a single `patient` personal detail. It provides the graphics for a row in the `ListView` of `PersonalDetailsCard`.
+* `MedicalDetailsRow` represents a single `patient` personal detail. It provides the graphics for a row in the `ListView` of `MedicalDetailsCard`.
+* `MedicalNoteCard` represents a single `MedicalNote`. It provides the graphics for an element in the `ListView` of `MedicalNotesPanel`.
+
+`PatientProfile` is displayed on the `MainWindow` when the `AccessCommand` is invoked. The following sequence diagram shows how accessing and displaying a `PatientProfile` works:
+
 
 --------------------------------------------------------------------------------------------------------------------
 
