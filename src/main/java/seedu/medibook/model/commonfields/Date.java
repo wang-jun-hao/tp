@@ -1,4 +1,4 @@
-package seedu.medibook.model;
+package seedu.medibook.model.commonfields;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.medibook.commons.util.AppUtil.checkArgument;

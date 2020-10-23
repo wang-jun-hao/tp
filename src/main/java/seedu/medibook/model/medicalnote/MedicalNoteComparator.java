@@ -2,7 +2,7 @@ package seedu.medibook.model.medicalnote;
 
 import java.util.Comparator;
 
-import seedu.medibook.model.Date;
+import seedu.medibook.model.commonfields.Date;
 
 public class MedicalNoteComparator implements Comparator<MedicalNote> {
     @Override
