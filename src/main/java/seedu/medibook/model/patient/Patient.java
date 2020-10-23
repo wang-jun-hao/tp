@@ -314,6 +314,7 @@ public class Patient {
                 && otherPatient.getWeight().equals(getWeight())
                 && otherPatient.getBmi().equals(getBmi())
                 && otherPatient.getBloodType().equals(getBloodType())
+                && otherPatient.getMedicalNoteList().equals(getMedicalNoteList())
                 && otherPatient.getTags().equals(getTags());
     }
 
@@ -321,7 +322,7 @@ public class Patient {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(ic, name, dateOfBirth, phone, email, address, height, weight, bmi,
-                            bloodType, tags);
+                            bloodType, medicalNoteList, tags);
     }
 
     @Override
