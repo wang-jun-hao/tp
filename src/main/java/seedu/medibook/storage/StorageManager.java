@@ -108,8 +108,41 @@ public class StorageManager implements Storage {
 
     @Override
     public void saveMedicalNoteList(ReadOnlyMedicalNoteList medicalNoteList, Path filePath, Ic ic) throws IOException {
-        logger.fine("Attempting to write to data file: " + filePath);
+        logger.fine("Attempting to save to data file: " + filePath);
         medicalNoteListStorage.saveMedicalNoteList(medicalNoteList, filePath, ic);
+    }
+
+    @Override
+    public void deleteMedicalNoteList(Ic ic) throws IOException {
+        deleteMedicalNoteList(medicalNoteListStorage.getMedicalNotesDirPath(), ic);
+    }
+
+    @Override
+    public void deleteMedicalNoteList(Path filePath, Ic ic) throws IOException {
+        logger.fine("Attempting to delete data file: " + filePath);
+        medicalNoteListStorage.deleteMedicalNoteList(filePath, ic);
+    }
+
+    @Override
+    public void renameMedicalNoteList(Ic oldIc, Ic newIc) throws IOException {
+        renameMedicalNoteList(medicalNoteListStorage.getMedicalNotesDirPath(), oldIc, newIc);
+    }
+
+    @Override
+    public void renameMedicalNoteList(Path filePath, Ic oldIc, Ic newIc) throws IOException {
+        logger.fine("Attempting to rename data file: " + filePath);
+        medicalNoteListStorage.renameMedicalNoteList(filePath, oldIc, newIc);
+    }
+
+    @Override
+    public void deleteAllMedicalNoteList() throws IOException {
+        deleteAllMedicalNoteList(medicalNoteListStorage.getMedicalNotesDirPath());
+    }
+
+    @Override
+    public void deleteAllMedicalNoteList(Path filePath) throws IOException {
+        logger.fine("Attempting to clear all data files: " + filePath);
+        medicalNoteListStorage.deleteAllMedicalNoteList(filePath);
     }
 
     // ============================== UserAccount methods ==============================

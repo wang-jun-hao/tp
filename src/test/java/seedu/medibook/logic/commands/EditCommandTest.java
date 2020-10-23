@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
 import seedu.medibook.commons.core.Messages;
 import seedu.medibook.commons.core.index.Index;
 import seedu.medibook.logic.commands.EditCommand.EditPatientDescriptor;
+import seedu.medibook.logic.commands.exceptions.CommandException;
 import seedu.medibook.model.MediBook;
 import seedu.medibook.model.Model;
 import seedu.medibook.model.ModelManager;
@@ -41,15 +42,17 @@ public class EditCommandTest {
     private Model model = new ModelManager(getTypicalMediBook(), new UserPrefs());
 
     @Test
-    public void execute_allFieldsSpecifiedUnfilteredList_success() {
+    public void execute_allFieldsSpecifiedUnfilteredList_success() throws CommandException {
         Patient editedPatient = new PatientBuilder().build();
         EditCommand.EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(editedPatient).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PATIENT, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient);
 
+        Patient originalPatient = model.getFilteredPatientList().get(0);
         Model expectedModel = new ModelManager(new MediBook(model.getMediBook()), new UserPrefs());
-        expectedModel.setPatient(model.getFilteredPatientList().get(0), editedPatient);
+        expectedModel.setPatient(originalPatient, editedPatient);
+        expectedModel.setEditedPatient(editedPatient, originalPatient.getIc());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
