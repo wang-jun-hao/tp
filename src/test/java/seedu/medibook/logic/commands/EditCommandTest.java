@@ -22,7 +22,6 @@ import org.junit.jupiter.api.Test;
 import seedu.medibook.commons.core.Messages;
 import seedu.medibook.commons.core.index.Index;
 import seedu.medibook.logic.commands.EditCommand.EditPatientDescriptor;
-import seedu.medibook.logic.commands.exceptions.CommandException;
 import seedu.medibook.model.MediBook;
 import seedu.medibook.model.Model;
 import seedu.medibook.model.ModelManager;
