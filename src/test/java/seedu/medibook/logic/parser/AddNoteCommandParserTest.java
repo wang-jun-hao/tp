@@ -2,8 +2,8 @@ package seedu.medibook.logic.parser;
 
 
 import static seedu.medibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.medibook.logic.commands.CommandTestUtil.INVALID_DOCTOR_MCR_DESC;
-import static seedu.medibook.logic.commands.CommandTestUtil.INVALID_DOCTOR_NAME_DESC;
+import static seedu.medibook.logic.commands.CommandTestUtil.INVALID_NOTE_DOCTOR_MCR_DESC;
+import static seedu.medibook.logic.commands.CommandTestUtil.INVALID_NOTE_DOCTOR_NAME_DESC;
 import static seedu.medibook.logic.commands.CommandTestUtil.INVALID_NOTE_DATE_DESC;
 import static seedu.medibook.logic.commands.CommandTestUtil.NOTE_CONTENT_DESC;
 import static seedu.medibook.logic.commands.CommandTestUtil.NOTE_DOCTOR_MCR_DESC;
@@ -78,12 +78,12 @@ class AddNoteCommandParserTest {
 
         // invalid name
         assertParseFailure(parser,
-                NOTE_NON_FUTURE_DATE_DESC + INVALID_DOCTOR_NAME_DESC + NOTE_DOCTOR_MCR_DESC + NOTE_CONTENT_DESC,
+                NOTE_NON_FUTURE_DATE_DESC + INVALID_NOTE_DOCTOR_NAME_DESC + NOTE_DOCTOR_MCR_DESC + NOTE_CONTENT_DESC,
                 Name.MESSAGE_CONSTRAINTS);
 
         // invalid mcr
         assertParseFailure(parser,
-                NOTE_NON_FUTURE_DATE_DESC + NOTE_DOCTOR_NAME_DESC + INVALID_DOCTOR_MCR_DESC + NOTE_CONTENT_DESC,
+                NOTE_NON_FUTURE_DATE_DESC + NOTE_DOCTOR_NAME_DESC + INVALID_NOTE_DOCTOR_MCR_DESC + NOTE_CONTENT_DESC,
                 Mcr.MESSAGE_CONSTRAINTS);
     }
 }
