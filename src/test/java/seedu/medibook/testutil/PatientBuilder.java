@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.medibook.model.commonfields.Name;
+import seedu.medibook.model.medicalnote.MedicalNoteList;
 import seedu.medibook.model.patient.Address;
 import seedu.medibook.model.patient.BloodType;
 import seedu.medibook.model.patient.Bmi;
@@ -11,7 +13,6 @@ import seedu.medibook.model.patient.DateOfBirth;
 import seedu.medibook.model.patient.Email;
 import seedu.medibook.model.patient.Height;
 import seedu.medibook.model.patient.Ic;
-import seedu.medibook.model.patient.Name;
 import seedu.medibook.model.patient.Patient;
 import seedu.medibook.model.patient.Phone;
 import seedu.medibook.model.patient.Weight;
@@ -45,6 +46,7 @@ public class PatientBuilder {
     private Optional<Bmi> bmi;
     private Optional<BloodType> bloodType;
     private Set<Tag> tags;
+    private MedicalNoteList medicalNoteList;
 
     /**
      * Creates a {@code PatientBuilder} with the default details.
@@ -61,6 +63,7 @@ public class PatientBuilder {
         bmi = Optional.of(new Bmi(DEFAULT_BMI));
         bloodType = Optional.of(new BloodType(DEFAULT_BLOOD_TYPE));
         tags = new HashSet<>();
+        medicalNoteList = new MedicalNoteList();
     }
 
     /**
@@ -78,6 +81,7 @@ public class PatientBuilder {
         bmi = patientToCopy.getBmi();
         bloodType = patientToCopy.getBloodType();
         tags = new HashSet<>(patientToCopy.getTags());
+        medicalNoteList = patientToCopy.getMedicalNoteList().makeCopy();
     }
 
     /**
@@ -193,19 +197,31 @@ public class PatientBuilder {
     }
 
     /**
+     * Sets the {@code MedicalNoteList} of the {@code Patient} that we are building.
+     */
+    public PatientBuilder withMedicalNoteList(MedicalNoteList medicalNoteList) {
+        this.medicalNoteList = medicalNoteList;
+        return this;
+    }
+
+    /**
      * Creates Patient object based on the fields specified in this PatientBuilder object (bmi auto-generated).
      */
     public Patient build() {
-        return new Patient(ic, name, dateOfBirth, phone, email, address, height, weight,
+        Patient patient = new Patient(ic, name, dateOfBirth, phone, email, address, height, weight,
                 bloodType, tags);
+        patient.setMedicalNoteList(medicalNoteList);
+        return patient;
     }
 
     /**
      * Creates Patient object based on the fields specified in this PatientBuilder object (bmi explicitly specified).
      */
     public Patient buildWithSpecifiedBmi() {
-        return new Patient(ic, name, dateOfBirth, phone, email, address, height, weight, bmi,
+        Patient patient = new Patient(ic, name, dateOfBirth, phone, email, address, height, weight, bmi,
                 bloodType, tags);
+        patient.setMedicalNoteList(medicalNoteList);
+        return patient;
     }
 
 }

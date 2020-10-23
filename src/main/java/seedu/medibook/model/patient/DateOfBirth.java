@@ -3,7 +3,7 @@ package seedu.medibook.model.patient;
 import static java.util.Objects.requireNonNull;
 import static seedu.medibook.commons.util.AppUtil.checkArgument;
 
-import seedu.medibook.model.Date;
+import seedu.medibook.model.commonfields.Date;
 
 /**
  * Represents a Patient's date of birth (DOB) in the medi book.
