@@ -39,8 +39,27 @@ public class MedicalNoteList implements ReadOnlyMedicalNoteList {
         innerList.sort(comparator);
     }
 
+    /**
+     * Returns true if the specified medical note is already a medical note in the list.
+     * @param otherMedicalNote medical note to test against.
+     * @return true if the same medical note exists in the list.
+     */
+    public boolean alreadyHasMedicalNote(MedicalNote otherMedicalNote) {
+        return innerList.contains(otherMedicalNote);
+    }
+
+    public boolean isEmpty() {
+        return innerList.isEmpty();
+    }
+
+    /**
+     * Creates and return a copy of this medical note list that is not the same object.
+     * @return A copy of this medical note list.
+     */
+
     public MedicalNoteList makeCopy() {
-        return new MedicalNoteList(innerList);
+        List<MedicalNote> copyOfList = new LinkedList<>(innerList);
+        return new MedicalNoteList(copyOfList);
     }
 
     /**
