@@ -58,4 +58,19 @@ class DateTest {
         assertTrue(Date.isValidDate("01-07-1995"));
         assertTrue(Date.isValidDate("31-12-1995"));
     }
+
+    @Test
+    public void compareTo() {
+        // same date
+        Date date1 = new Date("19-02-2020", true);
+        Date date2 = new Date("19-02-2020", false);
+        assertTrue(date1.compareTo(date2) == 0);
+
+        // earlier date
+        Date date3 = new Date("30-12-2018", false);
+        assertTrue(date3.compareTo(date1) < 0);
+
+        // later date
+        assertTrue(date1.compareTo(date3) > 0);
+    }
 }
