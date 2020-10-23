@@ -12,7 +12,7 @@ import seedu.medibook.model.UserPrefs;
 /**
  * API of the Storage component
  */
-public interface Storage extends MediBookStorage, MedicalNoteListStorage, UserPrefsStorage {
+public interface Storage extends MediBookStorage, MedicalNoteListStorage, UserPrefsStorage, UserAccountStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -28,5 +28,8 @@ public interface Storage extends MediBookStorage, MedicalNoteListStorage, UserPr
 
     @Override
     void saveMediBook(ReadOnlyMediBook mediBook) throws IOException;
+
+    @Override
+    boolean isAccount(String username, String password);
 
 }

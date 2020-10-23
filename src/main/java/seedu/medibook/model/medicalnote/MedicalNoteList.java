@@ -39,10 +39,6 @@ public class MedicalNoteList implements ReadOnlyMedicalNoteList {
         innerList.sort(comparator);
     }
 
-    public boolean isEmpty() {
-        return innerList.isEmpty();
-    }
-
     public MedicalNoteList makeCopy() {
         return new MedicalNoteList(innerList);
     }
