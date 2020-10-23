@@ -210,7 +210,7 @@ public class PatientBuilder {
     public Patient build() {
         Patient patient = new Patient(ic, name, dateOfBirth, phone, email, address, height, weight,
                 bloodType, tags);
-        patient.setMedicalNoteList(medicalNoteList);
+        patient.setMedicalNoteList(medicalNoteList.makeCopy());
         return patient;
     }
 
@@ -220,7 +220,7 @@ public class PatientBuilder {
     public Patient buildWithSpecifiedBmi() {
         Patient patient = new Patient(ic, name, dateOfBirth, phone, email, address, height, weight, bmi,
                 bloodType, tags);
-        patient.setMedicalNoteList(medicalNoteList);
+        patient.setMedicalNoteList(medicalNoteList.makeCopy());
         return patient;
     }
 
