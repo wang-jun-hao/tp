@@ -55,6 +55,7 @@ public class NoteCommandTest {
         Model expectedModel = new ModelManager(new MediBook(model.getMediBook()), new UserPrefs());
         expectedModel.setPatient(model.getFilteredPatientList().get(0), resultingPatient);
         expectedModel.accessPatient(targetPatient);
+        expectedModel.setShouldLoadMedicalNotes(false);
 
         assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
     }

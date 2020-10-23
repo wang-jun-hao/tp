@@ -375,9 +375,9 @@ The goal is to write effective and efficient tests to ensure that `RemarkCommand
 The convention for test names is `methodName_testScenario_expectedResult`. An example would be
 `execute_filteredList_success`.
 
-Let’s create a test for `RemarkCommand#execute()` to test that adding a remark works. On `IntelliJ IDEA` you can bring up the context menu and choose to `Go To` \> `Test` or use the appropriate keyboard shortcut.
+Let’s create a test for `RemarkCommand#execute()` to test that adding a remark works. On `IntelliJ IDEA` you can bring up the modelContext menu and choose to `Go To` \> `Test` or use the appropriate keyboard shortcut.
 
-![Using the context menu to jump to tests](../images/add-remark/ContextMenu.png)
+![Using the modelContext menu to jump to tests](../images/add-remark/ContextMenu.png)
 
 Then, create a test for the `execute` method.
 

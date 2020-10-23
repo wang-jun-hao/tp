@@ -6,7 +6,9 @@ import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
+import seedu.medibook.commons.core.LogsCenter;
 import seedu.medibook.logic.commands.exceptions.CommandException;
 import seedu.medibook.model.Model;
 import seedu.medibook.model.medicalnote.MedicalNote;
@@ -35,6 +37,8 @@ public class NoteCommand extends Command {
     public static final String MESSAGE_NOTE_ON_LIST = "You can only add medical note to a patient when you are viewing "
             + "his/her patient profile. Access the patient profile before adding medical note.";
 
+    private final Logger logger = LogsCenter.getLogger(NoteCommand.class);
+
     private final MedicalNote newMedicalNote;
 
     /**
@@ -48,6 +52,7 @@ public class NoteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.setShouldLoadMedicalNotes(false);
         Optional<Patient> patientOptional = model.getPatientToAccess();
 
         if (!patientOptional.isPresent()) {
@@ -56,9 +61,12 @@ public class NoteCommand extends Command {
 
         Patient displayedPatient = patientOptional.get();
 
-        assert model.hasPatient(displayedPatient) : "Patient in context does not exist in model";
+        assert model.hasPatient(displayedPatient) : "Patient in Context does not exist in model";
 
         displayedPatient.addMedicalNote(newMedicalNote);
+
+        logger.info("----------------[PATIENT AND ORDER OF MEDICAL NOTES:][" + displayedPatient + "\n"
+                + displayedPatient.getMedicalNoteList() + "]");
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, newMedicalNote));
     }

@@ -35,6 +35,7 @@ public class DeleteCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getMediBook(), new UserPrefs());
         expectedModel.deletePatient(patientToDelete);
+        expectedModel.setDeletedPatient(patientToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -58,6 +59,7 @@ public class DeleteCommandTest {
 
         Model expectedModel = new ModelManager(model.getMediBook(), new UserPrefs());
         expectedModel.deletePatient(patientToDelete);
+        expectedModel.setDeletedPatient(patientToDelete);
         showNoPatient(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
