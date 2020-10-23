@@ -27,6 +27,7 @@ import seedu.medibook.model.MediBook;
 import seedu.medibook.model.Model;
 import seedu.medibook.model.ModelManager;
 import seedu.medibook.model.UserPrefs;
+import seedu.medibook.model.medicalnote.MedicalNoteList;
 import seedu.medibook.model.patient.Bmi;
 import seedu.medibook.model.patient.Height;
 import seedu.medibook.model.patient.Patient;
@@ -42,7 +43,7 @@ public class EditCommandTest {
     private Model model = new ModelManager(getTypicalMediBook(), new UserPrefs());
 
     @Test
-    public void execute_allFieldsSpecifiedUnfilteredList_success() throws CommandException {
+    public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Patient editedPatient = new PatientBuilder().build();
         EditCommand.EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(editedPatient).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PATIENT, descriptor);
@@ -51,6 +52,10 @@ public class EditCommandTest {
 
         Patient originalPatient = model.getFilteredPatientList().get(0);
         Model expectedModel = new ModelManager(new MediBook(model.getMediBook()), new UserPrefs());
+
+        MedicalNoteList medicalNoteList = originalPatient.getMedicalNoteList().makeCopy();
+        editedPatient.setMedicalNoteList(medicalNoteList);
+
         expectedModel.setPatient(originalPatient, editedPatient);
         expectedModel.setEditedPatient(editedPatient, originalPatient.getIc());
 
