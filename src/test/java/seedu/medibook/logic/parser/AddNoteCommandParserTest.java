@@ -2,9 +2,9 @@ package seedu.medibook.logic.parser;
 
 
 import static seedu.medibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.medibook.logic.commands.CommandTestUtil.INVALID_NOTE_DATE_DESC;
 import static seedu.medibook.logic.commands.CommandTestUtil.INVALID_NOTE_DOCTOR_MCR_DESC;
 import static seedu.medibook.logic.commands.CommandTestUtil.INVALID_NOTE_DOCTOR_NAME_DESC;
-import static seedu.medibook.logic.commands.CommandTestUtil.INVALID_NOTE_DATE_DESC;
 import static seedu.medibook.logic.commands.CommandTestUtil.NOTE_CONTENT_DESC;
 import static seedu.medibook.logic.commands.CommandTestUtil.NOTE_DOCTOR_MCR_DESC;
 import static seedu.medibook.logic.commands.CommandTestUtil.NOTE_DOCTOR_NAME_DESC;
