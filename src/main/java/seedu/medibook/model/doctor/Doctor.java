@@ -38,6 +38,14 @@ public class Doctor {
         return mcr.toString();
     }
 
+    public Name getName() {
+        return name;
+    }
+
+    public Mcr getMcr() {
+        return mcr;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
