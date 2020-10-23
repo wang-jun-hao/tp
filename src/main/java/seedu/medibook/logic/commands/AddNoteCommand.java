@@ -55,6 +55,7 @@ public class AddNoteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.setShouldLoadMedicalNotes(false);
         Optional<Patient> patientOptional = model.getPatientToAccess();
 
         if (!patientOptional.isPresent()) {
@@ -63,7 +64,7 @@ public class AddNoteCommand extends Command {
 
         Patient displayedPatient = patientOptional.get();
 
-        assert model.hasPatient(displayedPatient) : "Patient in context does not exist in model";
+        assert model.hasPatient(displayedPatient) : "Patient in Context does not exist in model";
 
         if (displayedPatient.alreadyHasMedicalNote(newMedicalNote)) {
             throw new CommandException(MESSAGE_DUPLICATE_NOTE);

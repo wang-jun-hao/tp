@@ -1,5 +1,6 @@
 package seedu.medibook.commons.util;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
@@ -12,6 +13,7 @@ import java.nio.file.Paths;
 public class FileUtil {
 
     private static final String CHARSET = "UTF-8";
+    private static final String RENAME_FAILED_MESSAGE_FORMAT = "MediBook was unable to rename the file from %s to %s";
 
     public static boolean isFileExists(Path file) {
         return Files.exists(file) && Files.isRegularFile(file);
@@ -66,10 +68,35 @@ public class FileUtil {
     }
 
     /**
+     * Deletes a file if it exists.
+     * @throws IOException if the file or directory cannot be deleted.
+     */
+    public static void deleteIfExists(Path file) throws IOException {
+        Files.deleteIfExists(file);
+    }
+
+    /**
      * Assumes file exists
      */
     public static String readFromFile(Path file) throws IOException {
         return new String(Files.readAllBytes(file), CHARSET);
+    }
+
+    /**
+     * Renames a file if it exists.
+     * @throws IOException if the file or directory cannot be renamed.
+     */
+    public static void renameIfExists(Path oldFile, Path newFile) throws IOException {
+        if (!isFileExists(oldFile)) {
+            return;
+        }
+
+        File fileToRename = new File(oldFile.toString());
+        boolean success = fileToRename.renameTo(new File(newFile.toString()));
+        if (!success) {
+            String errorMessage = String.format(RENAME_FAILED_MESSAGE_FORMAT, oldFile, newFile);
+            throw new IOException(errorMessage);
+        }
     }
 
     /**
