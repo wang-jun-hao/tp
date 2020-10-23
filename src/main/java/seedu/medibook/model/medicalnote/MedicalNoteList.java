@@ -82,7 +82,7 @@ public class MedicalNoteList implements ReadOnlyMedicalNoteList {
     /**
      * Retrieves the medical note at the specified index in the list.
      * @param index Zero-based index of medical note.
-     * @return
+     * @return medical note at index in list.
      */
     public MedicalNote getMedicalNoteAtIndex(int index) {
         assert index < size() : "Attempting to get medical note with out-of-range index";
