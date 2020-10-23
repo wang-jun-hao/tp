@@ -236,6 +236,23 @@ public class Patient {
     }
 
     /**
+     * Retrieves the medical note at the specified index in the list belonging to the patient.
+     * @param index Zero-based index of medical note.
+     * @return medical note at index in list belonging to the patient.
+     */
+    public MedicalNote getMedicalNoteAtIndex(int index) {
+        return medicalNoteList.getMedicalNoteAtIndex(index);
+    }
+
+    /**
+     * Deletes the medical note at the specified index from the list belonging to the patient.
+     * @param index Zero-based index of medical note.
+     */
+    public void deleteMedicalNoteAtIndex(int index) {
+        medicalNoteList.deleteMedicalNoteAtIndex(index);
+    }
+
+    /**
      * Returns true if both patients of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two patients.
      */
