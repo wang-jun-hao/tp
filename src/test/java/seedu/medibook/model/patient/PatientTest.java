@@ -16,6 +16,7 @@ import static seedu.medibook.testutil.Assert.assertThrows;
 import static seedu.medibook.testutil.TypicalPatients.ALICE;
 import static seedu.medibook.testutil.TypicalPatients.ALICE_MEDICAL_NOTE_1;
 import static seedu.medibook.testutil.TypicalPatients.ALICE_MEDICAL_NOTE_2;
+import static seedu.medibook.testutil.TypicalPatients.ALICE_NUM_OF_MEDICAL_NOTES;
 import static seedu.medibook.testutil.TypicalPatients.BENSON_MEDICAL_NOTE_1;
 import static seedu.medibook.testutil.TypicalPatients.BENSON_MEDICAL_NOTE_2;
 import static seedu.medibook.testutil.TypicalPatients.BOB;
@@ -130,6 +131,11 @@ public class PatientTest {
         // different tags -> returns false
         editedAlice = new PatientBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different medical note list -> returns false
+        editedAlice = new PatientBuilder(ALICE).build();
+        editedAlice.addMedicalNote(BENSON_MEDICAL_NOTE_1);
+        assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
@@ -144,5 +150,11 @@ public class PatientTest {
         Patient alice = new PatientBuilder(ALICE).build();
         assertFalse(alice.alreadyHasMedicalNote(BENSON_MEDICAL_NOTE_1));
         assertFalse(alice.alreadyHasMedicalNote(BENSON_MEDICAL_NOTE_2));
+    }
+
+    @Test
+    public void getNumOfMedicalNotes() {
+        Patient alice = new PatientBuilder(ALICE).build();
+        assertTrue(alice.getNumOfMedicalNotes() == ALICE_NUM_OF_MEDICAL_NOTES);
     }
 }
