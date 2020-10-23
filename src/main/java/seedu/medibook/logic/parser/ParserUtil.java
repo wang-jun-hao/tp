@@ -10,14 +10,16 @@ import java.util.Set;
 import seedu.medibook.commons.core.index.Index;
 import seedu.medibook.commons.util.StringUtil;
 import seedu.medibook.logic.parser.exceptions.ParseException;
-import seedu.medibook.model.Date;
+import seedu.medibook.model.commonfields.Date;
+import seedu.medibook.model.commonfields.Name;
+import seedu.medibook.model.doctor.Mcr;
+import seedu.medibook.model.medicalnote.Content;
 import seedu.medibook.model.patient.Address;
 import seedu.medibook.model.patient.BloodType;
 import seedu.medibook.model.patient.DateOfBirth;
 import seedu.medibook.model.patient.Email;
 import seedu.medibook.model.patient.Height;
 import seedu.medibook.model.patient.Ic;
-import seedu.medibook.model.patient.Name;
 import seedu.medibook.model.patient.Phone;
 import seedu.medibook.model.patient.Weight;
 import seedu.medibook.model.tag.Tag;
@@ -51,10 +53,11 @@ public class ParserUtil {
     public static Ic parseIc(String ic) throws ParseException {
         requireNonNull(ic);
         String trimmedIc = ic.trim();
-        if (!Ic.isValidIc(trimmedIc)) {
+        String capitalisedTrimmedIc = trimmedIc.toUpperCase();
+        if (!Ic.isValidIc(capitalisedTrimmedIc)) {
             throw new ParseException(Ic.MESSAGE_CONSTRAINTS);
         }
-        return new Ic(trimmedIc);
+        return new Ic(capitalisedTrimmedIc);
     }
 
     /**
@@ -211,6 +214,38 @@ public class ParserUtil {
             return Optional.empty();
         }
     }
+
+    /**
+     * Parses a {@code String content} into a {@code Content}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code content} is invalid.
+     */
+    public static Content parseContent(String content) throws ParseException {
+        requireNonNull(content);
+        String trimmedContent = content.trim();
+        if (!Content.isValidContent(trimmedContent)) {
+            throw new ParseException(Content.MESSAGE_CONSTRAINTS);
+        }
+        return new Content(trimmedContent);
+    }
+
+    /**
+     * Parses a {@code String mcr} into a {@code Mcr}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code mcr} is invalid.
+     */
+    public static Mcr parseMcr(String mcr) throws ParseException {
+        requireNonNull(mcr);
+        String trimmedMcr = mcr.trim();
+        String capitalisedTrimmedMcr = trimmedMcr.toUpperCase();
+        if (!Mcr.isValidMcr(capitalisedTrimmedMcr)) {
+            throw new ParseException(Mcr.MESSAGE_CONSTRAINTS);
+        }
+        return new Mcr(capitalisedTrimmedMcr);
+    }
+
 
     /**
      * Parses a {@code String tag} into a {@code Tag}.
