@@ -280,6 +280,14 @@ public class Patient {
         return getPhone().toString();
     }
 
+    /**
+     * Returns true if the specified medical note is already a medical note in the list belonging to this patient.
+     * @param otherMedicalNote medical note to test against.
+     * @return true if the same medical note exists in the list belonging to this patient.
+     */
+    public boolean alreadyHasMedicalNote(MedicalNote otherMedicalNote) {
+        return medicalNoteList.alreadyHasMedicalNote(otherMedicalNote);
+    }
 
     /**
      * Returns true if both patients have the same identity and data fields.

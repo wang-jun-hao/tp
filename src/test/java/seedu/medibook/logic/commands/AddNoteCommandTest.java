@@ -42,13 +42,27 @@ public class AddNoteCommandTest {
     }
 
     @Test
+    public void execute_duplicateNote_failure() {
+        Patient targetPatient = model.getFilteredPatientList().get(0);
+
+        model.accessPatient(targetPatient);
+
+        MedicalNote duplicateMedicalNote = new MedicalNote(new Date("19-02-2020", true),
+                new Doctor(new Name("John"), new Mcr("MP2819J")),
+                new Content("Patient is good."));
+
+        AddNoteCommand addNoteCommand = new AddNoteCommand(duplicateMedicalNote);
+        assertCommandFailure(addNoteCommand, model, AddNoteCommand.MESSAGE_DUPLICATE_NOTE);
+    }
+
+
+    @Test
     public void execute_accessFirstPatientThenNote_successWithCorrectNoteAdded() {
         Patient targetPatient = model.getFilteredPatientList().get(0);
 
-        //TODO: make sure medical note list is loaded first
         model.accessPatient(targetPatient);
 
-        MedicalNote medicalNote = new MedicalNote(new Date("20-10-2019", true),
+        MedicalNote medicalNote = new MedicalNote(new Date("21-10-2019", true),
                 new Doctor(new Name("John"), new Mcr("M02830P")),
                 new Content("Patient is having fever."));
         AddNoteCommand addNoteCommand = new AddNoteCommand(medicalNote);
@@ -59,7 +73,7 @@ public class AddNoteCommandTest {
         String expectedMessage = String.format(MESSAGE_SUCCESS, medicalNote);
 
         Model expectedModel = new ModelManager(new MediBook(model.getMediBook()), new UserPrefs());
-        expectedModel.setPatient(model.getFilteredPatientList().get(0), resultingPatient);
+        expectedModel.setPatient(targetPatient, resultingPatient);
         expectedModel.accessPatient(targetPatient);
         expectedModel.setShouldLoadMedicalNotes(false);
 
