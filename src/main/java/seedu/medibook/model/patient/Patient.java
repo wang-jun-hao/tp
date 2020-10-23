@@ -236,6 +236,23 @@ public class Patient {
     }
 
     /**
+     * Retrieves the medical note at the specified index in the list belonging to the patient.
+     * @param index Zero-based index of medical note.
+     * @return medical note at index in list belonging to the patient.
+     */
+    public MedicalNote getMedicalNoteAtIndex(int index) {
+        return medicalNoteList.getMedicalNoteAtIndex(index);
+    }
+
+    /**
+     * Deletes the medical note at the specified index from the list belonging to the patient.
+     * @param index Zero-based index of medical note.
+     */
+    public void deleteMedicalNoteAtIndex(int index) {
+        medicalNoteList.deleteMedicalNoteAtIndex(index);
+    }
+
+    /**
      * Returns true if both patients of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two patients.
      */
@@ -314,6 +331,7 @@ public class Patient {
                 && otherPatient.getWeight().equals(getWeight())
                 && otherPatient.getBmi().equals(getBmi())
                 && otherPatient.getBloodType().equals(getBloodType())
+                && otherPatient.getMedicalNoteList().equals(getMedicalNoteList())
                 && otherPatient.getTags().equals(getTags());
     }
 
@@ -321,7 +339,7 @@ public class Patient {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(ic, name, dateOfBirth, phone, email, address, height, weight, bmi,
-                            bloodType, tags);
+                            bloodType, medicalNoteList, tags);
     }
 
     @Override
