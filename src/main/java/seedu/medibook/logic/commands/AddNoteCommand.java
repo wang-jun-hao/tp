@@ -58,7 +58,7 @@ public class AddNoteCommand extends Command {
         model.setShouldLoadMedicalNotes(false);
         Optional<Patient> patientOptional = model.getPatientToAccess();
 
-        if (!patientOptional.isPresent()) {
+        if (patientOptional.isEmpty()) {
             throw new CommandException(MESSAGE_ADD_NOTE_ON_LIST);
         }
 
