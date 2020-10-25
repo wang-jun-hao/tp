@@ -4,7 +4,7 @@ import static seedu.medibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashMap;
 
-import seedu.medibook.model.Date;
+import seedu.medibook.model.commonfields.Date;
 
 public class Record {
     private HashMap<Date, Height> heightRecord;

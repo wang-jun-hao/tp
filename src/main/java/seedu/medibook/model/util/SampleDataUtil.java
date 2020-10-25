@@ -8,16 +8,16 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.medibook.model.Date;
 import seedu.medibook.model.MediBook;
 import seedu.medibook.model.ReadOnlyMediBook;
+import seedu.medibook.model.commonfields.Date;
+import seedu.medibook.model.commonfields.Name;
 import seedu.medibook.model.patient.Address;
 import seedu.medibook.model.patient.BloodType;
 import seedu.medibook.model.patient.DateOfBirth;
 import seedu.medibook.model.patient.Email;
 import seedu.medibook.model.patient.Height;
 import seedu.medibook.model.patient.Ic;
-import seedu.medibook.model.patient.Name;
 import seedu.medibook.model.patient.Patient;
 import seedu.medibook.model.patient.Phone;
 import seedu.medibook.model.patient.Record;

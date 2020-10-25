@@ -21,7 +21,8 @@ public interface MedicalNoteListStorage {
 
     /**
      * Returns MedicalNoteList data as a {@link ReadOnlyMedicalNoteList}.
-     *   Returns {@code Optional.empty()} if storage file is not found.
+     * Returns {@code Optional.empty()} if storage file is not found.
+     * @param ic cannot be null.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
@@ -35,6 +36,7 @@ public interface MedicalNoteListStorage {
 
     /**
      * Saves the given {@link ReadOnlyMedicalNoteList} to the storage.
+     * @param ic cannot be null.
      * @param medicalNoteList cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
@@ -44,5 +46,40 @@ public interface MedicalNoteListStorage {
      * @see #saveMedicalNoteList(ReadOnlyMedicalNoteList, Ic ic)
      */
     void saveMedicalNoteList(ReadOnlyMedicalNoteList medicalNoteList, Path filePath, Ic ic) throws IOException;
+
+    /**
+     * Deletes the data file containing the medical notes corresponding to the {@code ic}.
+     * @param ic cannot be null.
+     * @throws IOException if there was any problem deleting the file.
+     */
+    void deleteMedicalNoteList(Ic ic) throws IOException;
+
+    /**
+     * @see #deleteMedicalNoteList(Ic ic)
+     */
+    void deleteMedicalNoteList(Path filePath, Ic ic) throws IOException;
+
+    /**
+     * Renames the data file containing the medical notes from the old {@code ic} to the new {@code ic}.
+     * @param oldIc cannot be null.
+     * @param newIc cannot be null.
+     * @throws IOException if there was any problem renaming the file.
+     */
+    void renameMedicalNoteList(Ic oldIc, Ic newIc) throws IOException;
+
+    /**
+     * @see #renameMedicalNoteList(Ic ic, Ic ic)
+     */
+    void renameMedicalNoteList(Path filePath, Ic oldIc, Ic newIc) throws IOException;
+
+    /**
+     * Deletes all medical notes data file.
+     */
+    void deleteAllMedicalNoteList() throws IOException;
+
+    /**
+     * @see #deleteAllMedicalNoteList()
+     */
+    void deleteAllMedicalNoteList(Path filePath) throws IOException;
 
 }

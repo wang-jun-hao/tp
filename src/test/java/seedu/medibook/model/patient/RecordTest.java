@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.medibook.model.Date;
+import seedu.medibook.model.commonfields.Date;
 
 public class RecordTest {
     private static final HashMap<Date, Height> RECORD_HEIGHT = new HashMap<>();

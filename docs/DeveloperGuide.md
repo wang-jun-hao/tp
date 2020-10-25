@@ -23,11 +23,11 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 
 </div>
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](../src/main/java/seedu/medibook/Main.java) and [`MainApp`](../src/main/java/seedu/medibook/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -51,7 +51,7 @@ For example, the `Logic` component (see the class diagram given below) defines i
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete S9803517G`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -62,11 +62,17 @@ The sections below give more details of each component.
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 **API** :
-[`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+[`Ui.java`](../src/main/java/seedu/medibook/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PatientListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PatientListPanel`, `PatientProfile`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](../src/main/java/seedu/medibook/ui/MainWindow.java) is specified in [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml).
+
+The PatientListPanel and PatientProfile utilises the same space in the MainWindow. The `Logic` component indicates to MainWindow if there is a need to toggle between the two UI parts based on user commands.
+
+A JavaFx TableView is used for the PatientListPanel. Styling for the TableView is done using the `TableView.css` file which is also in the `src/main/resources/view` folder.
+
+A JavaFx ListView is used for the PersonalDetailsCard and MedicalDetailsCard. The graphics of each row in the ListView is determined by a PersonalDetailsRow or MedicalDetailsRow respetively.
 
 The `UI` component,
 
@@ -78,7 +84,7 @@ The `UI` component,
 ![Structure of the Logic Component](images/LogicClassDiagram.png)
 
 **API** :
-[`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+[`Logic.java`](../src/main/java/seedu/medibook/logic/Logic.java)
 
 1. `Logic` uses the `MediBookParser` class to parse the user command.
 1. This results in a `Command` object which is executed by the `LogicManager`.
@@ -86,7 +92,7 @@ The `UI` component,
 1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 1. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete S9460472B")` API call.
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
@@ -95,9 +101,9 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 ### Model component
 
-![Structure of the Model Component](images/ModelClassDiagram.png)
+![Structure of the Model Component](images/ModelClassDiagramUpdated.png)
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](../src/main/java/seedu/medibook/model/Model.java)
 
 The `Model`,
 
@@ -106,18 +112,19 @@ The `Model`,
 * exposes an unmodifiable `ObservableList<Patient>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
+**Patient**
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `MediBook`, which `Patient` references. This allows `MediBook` to only require one `Tag` object per unique `Tag`, instead of each `Patient` needing their own `Tag` object.<br>
-![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
-
-</div>
+The `Patient`,
+* stores `IC`, `Name`, `DateOfBirth` and `Phone` objects that represent the patient's IC number, name, date of birth and phone number respectively.
+* stores `Optionals` of `Address`, `Email`, `Height`, `Weight`, `Bmi` and `BloodType` objects.
+* `Bmi` is automatically computed and stored within Optional if both `Height` and `Weight` are present.
 
 
 ### Storage component
 
 ![Structure of the Storage Component](images/StorageClassDiagram.png)
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](../src/main/java/seedu/medibook/storage/Storage.java)
 
 The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
@@ -133,85 +140,136 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Adding medical notes to patients
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedMediBook`. It extends `MediBook` with an undo/redo history, stored internally as an `mediBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+* Each medical note is stored as a `MedicalNote` object.
+* Every `patient` has a `MedicalNoteList` object that represents the list of medical notes belonging to that `patient`.
+* `NoteCommandParser` parses user's string input into a `NoteCommand`
+* Target `patient` is retrieved from `ModelManager#getPatientToAccess()`
 
-* `VersionedMediBook#commit()` — Saves the current medi book state in its history.
-* `VersionedMediBook#undo()` — Restores the previous medi book state from its history.
-* `VersionedMediBook#redo()` — Restores a previously undone medi book state from its history.
+The following sequence diagram shows how note adding operation works:
 
-These operations are exposed in the `Model` interface as `Model#commitMediBook()`, `Model#undoMediBook()` and `Model#redoMediBook()` respectively.
+![NoteSequenceDiagramMain](images/NoteSequenceDiagramFocusLogic.png)
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+![NoteSequenceDiagramSD](images/NoteSequenceDiagramSDUpdatePatientInModel.png)
 
-Step 1. The user launches the application for the first time. The `VersionedMediBook` will be initialized with the initial medi book state, and the `currentStatePointer` pointing to that single medi book state.
+Step 1. The user launches the application and `find` the patient to access. 
 
-![UndoRedoState0](images/UndoRedoState0.png)
+Note: Every `patient` in the `model` has a `MedicalNoteList` that is initialised as an empty list at 
+program start-up to optimise start-up time.
 
-Step 2. The user executes `delete 5` command to delete the 5th patient in the medi book. The `delete` command calls `Model#commitMediBook()`, causing the modified state of the medi book after the `delete 5` command executes to be saved in the `mediBookStateList`, and the `currentStatePointer` is shifted to the newly inserted medi book state.
+Step 2. The user then `access`es the patient using the index of the patient in the filtered list. 
 
-![UndoRedoState1](images/UndoRedoState1.png)
+Note: `LogicManager` will load the list of medical notes of the `patient` from storage into program's memory via
+`LogicManager#handleMedicalNoteListIo`. `LogicManager` then calls `Patient#setMedicalNoteList()` on the `patient` object to load
+the list of medical notes onto the `patient` object in memory.
 
-Step 3. The user executes `add n/David …​` to add a new patient. The `add` command also calls `Model#commitMediBook()`, causing another modified medi book state to be saved into the `mediBookStateList`.
+Step 3. While on the patient's profile page, the user inputs `note n/Dr John c/Patient...`.
+The user input is handled by `LogicManager`, which then passes it to `MediBookParser` to be parsed.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+Step 4. `MediBookParser` creates an instance of `NoteCommandParser` to parse the user input as a `NoteCommand`. It returns 
+a `NoteCommand` object to `LogicManager`
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitMediBook()`, so the medi book state will not be saved into the `mediBookStateList`.
+Step 5. `LogicManager` then executes the `NoteCommand` via `NoteCommand#execute()`.
 
+Step 6. `NoteCommand#execute()` identifies the target `patient` object via `ModelManager#getPatientToAccess()`.
+It then updates the model with the new medical note added to the patient using `Patient#addMedicalNote()`.
+
+#### Design consideration
+
+`note` command can only be called when viewing a `patient`'s profile (after an `access` command)
+
+We have decided to implement `note` command this way for 2 reasons:
+1. When user starts MediBook, not all `patient`s' list of medical notes would have been loaded into the program's memory. 
+Only allowing `note` after `access` ensures that the patient's list of medical notes would have been loaded at the point of adding new medical notes.
+2. It allows for a shorter `note` command as the user does not need to specify a target `patient`.
+
+Elaboration on point 1:
+* A medical records software contains many `patients`, each with potentially many `medical note`s.
+* `MedicalNoteList` of every patient is properly loaded only when necessary (`access` on patient)
+* `access`-ing a `patient` loads the stored medical note list and sets the `MedicalNoteList` of the `patient` to the retrieved list
+* Hence, `note` command can only be called when viewing a `patient`'s profile as it ensures that the `MedicalNoteList` has already been properly loaded by executing `access` command beforehand
+
+### \[Proposed\] Account creation and login
+
+#### Proposed implementation
+
+The proposed account creation feature is facilitated by a new `CreateAccountCommand`. It extends `Command`, similar to how all the other commands currently work.
+
+![CreateAccountSequenceDiagram](images/CreateAccountSequenceDiagram.png)
+
+Step 1. The user launches the application and executes `create u/example_username p/example_password`.
+
+Step 2. `Logic#execute(String commandText)` creates a new `CreateAccountCommand` and calls `Storage#saveNewAccountDetails()`.
+
+Step 3. `Storage#saveNewAccountDetails()` converts the new account's username and password into json format and saves it a `AccountDetails.json` file.
+
+The following activity diagram summarises what happens when a user executes a new command to create account.
+
+![CreateAccountActivityDiagram](images/CreateAccountActivityDiagram.png)
+
+The proposed login feature is facilitated by a new `LoginWindow` class in the UI.
+
+![LoginSequenceDiagram](images/LoginSequenceDiagram.png)
+
+Step 1. The user inputs his/her login information.
+
+Step 2. The UI calls `Logic#login()` with the login information as input.
+
+Step 3. `Logic#login()` then calls `Storage#checkAccountDetails()` on the login information, to check if the information matches any of the account details saved.
+
+Step 4. If there is no match, an error is thrown. If there is a match, the UI then changes from `LoginWindow` to `MainWindow`, which signifies that the user has succesfully logged in.
+
+### Enhanced find command
+
+#### Implementation
+
+`FindCommand` supports searching by substring for multiple fields with multiple keywords.
+`FindCommand` is facilitated by `FindCommandParser` which creates one or more `FieldContainsKeywordsPredicate`
+(which implements the `Predicate<Patient>` interface) based on the user input.
+Through the `FieldContainsKeywordsPredicate` objects that were created, `FindCommand` then calls 
+`Model#updateFilteredPatientList(predicate)` to filter the list of patient in `Model` based on the user's input search query.
+
+The sequence diagram below illustrates how the `FindCommand` works.
+
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindCommandParser` 
+and `FindCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches
+the end of diagram.
 </div>
 
-Step 4. The user now decides that adding the patient was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoMediBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous medi book state, and restores the medi book to that state.
+Step 1. The user launches the application and inputs `find n/Steve Johnny i/S95 T00 d/2000 1995`.
+This causes the `LogicManager#execute(String input)` method to be called.
 
-![UndoRedoState3](images/UndoRedoState3.png)
+Step 2. `MediBookParser#parseCommand(String input)` is then called, creating a new `FindCommandParser`.
+`FindCommandParser#Parse(String arguments)` is then called and in the process, it creates one or more
+`FieldContainsKeywordsPredicate` instances(not shown in the sequence diagram). In this example, `FindCommandParser`
+creates three `FieldContainsKeywordsPredicate` instance, corresponding to the three fields to be searched for.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial MediBook state, then there are no previous MediBook states to restore. The `undo` command uses `Model#canUndoMediBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+Step 3. `FindCommand` is initialized with `List<Predicate<Patient>>` containing the `FieldContainsKeywordsPredicate`
+instances that were created in the previous step. This `FindCommand` instance in then finally returned as the result for
+the `MediBookParser#parseCommand(String input)` method call.
 
+Step 4. `FindCommand#execute(Model model)` is called and in turn, `FindCommand` calls the
+`Model#updateFilteredPatientList(Predicate<Patient> predicate)` method which filters the list of
+patient in `Model` based on user's input search query.
+
+The diagram below illustrates the class diagram of the relevant classes for the find feature.
+
+![FindClassDiagram](images/FindClassDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
+`FieldContainsKeywordsPredicate` implements the `Predicate<Patient>` interface.
 </div>
 
-The following sequence diagram shows how the undo operation works:
+`FieldContainsKeywordsPredicate` is initialized with a `List<String>` containing the keywords to search for and `Prefix`
+which determines which field of the patient to search for. When `FieldContainsKeywordsPredicate#test(Patient patient)`
+is called, it will check if each keyword is a substring of the specified field of the patient. So long as at least one
+of the keyword passes the check, `FieldContainsKeywordsPredicate#test(Patient patient)` will return true.
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoMediBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the medi book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `mediBookStateList.size() - 1`, pointing to the latest medi book state, then there are no undone MediBook states to restore. The `redo` command uses `Model#canRedoMediBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the medi book, such as `list`, will usually not call `Model#commitMediBook()`, `Model#undoMediBook()` or `Model#redoMediBook()`. Thus, the `mediBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitMediBook()`. Since the `currentStatePointer` is not pointing at the end of the `mediBookStateList`, all medi book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-![CommitActivityDiagram](images/CommitActivityDiagram.png)
-
-#### Design consideration:
-
-##### Aspect: How undo & redo executes
-
-* **Alternative 1 (current choice):** Saves the entire medi book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the patient being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
 
@@ -266,12 +324,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use cases
 
 (For all use cases below, the **System** is the `MediBook` and the **Actor** is the `user`, unless specified otherwise)
-
-  [3a. OBS detects an error in the entered data.
-    3a1. OBS requests for the correct data.
-    3a2. User enters new data
-    Steps 3a1-3a2 are repeated until the data entered are correct.
-    Use case resumes from step 4.] HI
 
 **UC00 Add a patient**
 
@@ -379,15 +431,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a patient while all patients are being shown
 
- 
+   1. Test case: `delete 1`<br>
+      Expected: Patient with index 1 in the list is deleted from the program. Details of the deleted patient shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete S9592739A`<br>
-      Expected: Patient with IC S9592739A is deleted from the program. Details of the deleted patient shown in the status message. Timestamp in the status bar is updated.
-
-   2. Test case: `delete A0123456B`<br>
+   2. Test case: `delete`<br>
       Expected: No patient is deleted. Error details shown in the status message. Status bar remains the same.
 
-   3. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is an IC that does not belong to any patient)<br>
+   3. Other incorrect delete commands to try: `delete <index outside of list range>`, `delete x` <br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_

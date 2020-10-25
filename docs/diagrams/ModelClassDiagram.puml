@@ -17,6 +17,12 @@ Class ReadOnlyUserPrefs
 
 Package Patient {
 Class Patient
+Class IC
+Class DateOfBirth
+Class Height
+Class Weight
+Class Bmi
+Class BloodType
 Class Address
 Class Email
 Class Name
@@ -42,15 +48,27 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 MediBook *--> "1" UniquePatientList
 UniquePatientList o--> "*" Patient
-Patient *--> Name
-Patient *--> Phone
-Patient *--> Email
-Patient *--> Address
+Patient *--> "1" IC
+Patient *--> "1" DateOfBirth
+Patient *--> "1" Name
+Patient *--> "1" Phone
+Patient *--> "0..1" Email
+Patient *--> "0..1" Address
+Patient *--> "0..1" Height
+Patient *--> "0..1" Weight
+Patient *--> "0..1" BloodType
+Patient *--> "0..1" Bmi
 Patient *--> "*" Tag
+Bmi --> Height
+Bmi --> Weight
 
-Name -[hidden]right-> Phone
+IC -[hidden]right-> Name
+Name -[hidden]right-> DateOfBirth
+DateOfBirth -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
+Bmi -[hidden]down-> Height
+Bmi -[hidden]down-> Weight
 
 ModelManager -->"1" Patient : filtered list
 @enduml

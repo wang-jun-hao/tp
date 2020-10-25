@@ -10,7 +10,7 @@ import java.util.HashMap;
 import org.junit.jupiter.api.Test;
 
 import seedu.medibook.commons.exceptions.IllegalValueException;
-import seedu.medibook.model.Date;
+import seedu.medibook.model.commonfields.Date;
 import seedu.medibook.model.patient.Height;
 import seedu.medibook.model.patient.Record;
 import seedu.medibook.model.patient.Weight;
