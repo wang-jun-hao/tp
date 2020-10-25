@@ -1,5 +1,6 @@
 package seedu.medibook.model.patient;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.medibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -38,6 +39,9 @@ public class Patient {
     // Default empty fields
     private MedicalNoteList medicalNoteList = new MedicalNoteList();
     private final Set<Tag> tags = new HashSet<>();
+
+    // Patient's past records
+    private Record record = new Record();
 
     /**
      * Every field must be present and not null.
@@ -278,6 +282,23 @@ public class Patient {
      */
     public String getStringPhone() {
         return getPhone().toString();
+    }
+
+    /**
+     * Returns the past records of the patient.
+     * @return Record object containing the patient's past records
+     */
+    public Record getRecord() {
+        assert this.record != null : "Record should not be null!";
+        return this.record;
+    }
+
+    /**
+     * Sets the past records of the patient.
+     */
+    public void setRecord(Record record) {
+        requireNonNull(record);
+        this.record = record;
     }
 
     /**
