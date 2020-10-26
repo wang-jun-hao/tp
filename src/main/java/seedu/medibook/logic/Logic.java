@@ -53,4 +53,9 @@ public interface Logic {
      * Returns the current patient accessed by medi book.
      */
     Optional<Patient> getPatientToAccess();
+
+    /**
+     * Checks if the input username and password match any of the accounts saved.
+     */
+    void processLoginInfo(String username, String password);
 }

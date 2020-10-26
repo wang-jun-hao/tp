@@ -6,6 +6,8 @@ import static seedu.medibook.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.medibook.model.commonfields.Name;
+
 public class NameTest {
 
     @Test

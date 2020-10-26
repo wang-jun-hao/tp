@@ -11,7 +11,11 @@
     "weight": "48.5",
     "bmi": "16.0",
     "bloodType": "A+",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "record" : {
+      "heightRecord": { },
+      "weightRecord": { }
+    }
   }, {
     "ic" : "S9234567A",
     "name" : "Benson Meier",
@@ -23,7 +27,11 @@
     "weight": "63.5",
     "bmi": "22.0",
     "bloodType": "AB+",
-    "tagged" : [ "owesMoney", "friends" ]
+    "tagged" : [ "owesMoney", "friends" ],
+    "record" : {
+      "heightRecord": { },
+      "weightRecord": { }
+    }
   }, {
     "ic" : "S9876543W",
     "name" : "Carl Kurz",
@@ -35,7 +43,11 @@
     "weight": "80.8",
     "bmi": "30.8",
     "bloodType": "B+",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "record" : {
+      "heightRecord": { },
+      "weightRecord": { }
+    }
   }, {
     "ic" : "T0054321P",
     "name" : "Daniel Meier",
@@ -47,7 +59,11 @@
     "weight": "70.3",
     "bmi": "21.0",
     "bloodType": "A-",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "record" : {
+      "heightRecord": { },
+      "weightRecord": { }
+    }
   }, {
     "ic" : "F7654321Q",
     "name" : "Elle Meyer",
@@ -59,7 +75,11 @@
     "weight": "43.5",
     "bmi": "13.9",
     "bloodType": "B-",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "record" : {
+      "heightRecord": { },
+      "weightRecord": { }
+    }
   }, {
     "ic" : "S7543210A",
     "name" : "Fiona Kunz",
@@ -71,7 +91,11 @@
     "weight": "50.5",
     "bmi": "17.9",
     "bloodType": "O+",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "record" : {
+      "heightRecord": { },
+      "weightRecord": { }
+    }
   }, {
     "ic" : "T0232323I",
     "name" : "George Best",
@@ -83,6 +107,10 @@
     "weight": "69.2",
     "bmi": "24.2",
     "bloodType": "A+",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "record" : {
+      "heightRecord": { },
+      "weightRecord": { }
+    }
   } ]
 }
