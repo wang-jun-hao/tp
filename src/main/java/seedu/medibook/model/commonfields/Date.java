@@ -19,6 +19,7 @@ public class Date implements Comparable<Date> {
                     + "where D, M and Y represent digits of the day, month and year of the date respectively.";
     public static final String MESSAGE_NON_FUTURE = "Date should not be in the future.";
     private static final String INPUT_STRING_PATTERN = "dd-MM-uuuu";
+    private static final String INPUT_STRING_PATTERN_SIMPLE = "dd-MM-yyyy";
     private static final String OUTPUT_STRING_PATTERN = "d MMM uuuu";
     private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern(INPUT_STRING_PATTERN)
             .withResolverStyle(ResolverStyle.STRICT);
@@ -48,7 +49,7 @@ public class Date implements Comparable<Date> {
      */
     public Date() {
         java.util.Date todayDate = new java.util.Date();
-        SimpleDateFormat formatter = new SimpleDateFormat(INPUT_STRING_PATTERN);
+        SimpleDateFormat formatter = new SimpleDateFormat(INPUT_STRING_PATTERN_SIMPLE);
         String todayDateInString = formatter.format(todayDate);
         localDate = LocalDate.parse(todayDateInString, INPUT_FORMATTER);
         inputValue = todayDateInString;
