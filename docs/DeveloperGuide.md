@@ -68,11 +68,11 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](../src/main/java/seedu/medibook/ui/MainWindow.java) is specified in [`MainWindow.fxml`](../src/main/resources/view/MainWindow.fxml).
 
-The PatientListPanel and PatientProfile utilises the same space in the MainWindow. The `Logic` component indicates to MainWindow if there is a need to toggle between the two UI parts based on user commands.
+The `PatientListPanel` and `PatientProfile` utilises the same space in the MainWindow. The `Logic` component indicates to MainWindow if there is a need to toggle between the two UI parts based on user commands.
 
-A JavaFx TableView is used for the PatientListPanel. Styling for the TableView is done using the `TableView.css` file which is also in the `src/main/resources/view` folder.
+The `PatientProfile` is made up of additional parts inheriting from the abstract `UiPart` class, not shown in this diagram. You may refer to [this section](#patient-profile-gui-feature) to learn more about the `PatientProfile`.
 
-A JavaFx ListView is used for the PersonalDetailsCard and MedicalDetailsCard. The graphics of each row in the ListView is determined by a PersonalDetailsRow or MedicalDetailsRow respetively.
+A JavaFx `TableView` is used for the `PatientListPanel`. Styling for the `TableView` is done using the `TableView.css` file which is also in the `src/main/resources/view` folder.
 
 The `UI` component,
 
@@ -270,7 +270,6 @@ which determines which field of the patient to search for. When `FieldContainsKe
 is called, it will check if each keyword is a substring of the specified field of the patient. So long as at least one
 of the keyword passes the check, `FieldContainsKeywordsPredicate#test(Patient patient)` will return true.
 
-
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
@@ -280,13 +279,16 @@ This feature allows the application to display a patient's details in a clean an
 
 #### Implementation
 
-The class diagram below is a simplified diagram derived from the [full UI diagram](#ui-component), showing only the classes used to display the patient profile, and the associations between these classes.
+The class diagram below details the full number of classes in the `PatientProfile` package, which is simplified in the [full UI diagram](#ui-component). 
+This diagram shows only the classes used to display the patient profile, and the associations between these classes.
 ![PatientProfileClassDiagram](images/PatientProfileClassDiagram.png)
 
 Notes: 
-* All classes used to display patient profile (shown in the above diagram) inherit from the abstract `UiPart` class. 
+* All classes used to display a patient profile (shown in the above diagram) inherit from the abstract `UiPart` class. 
 Hence, they each represent a visible part of the UI.
-* As shown in the [full UI diagram](#ui-component), some of the classes are dependent on the `Model`. This is to retrieve the required information of a `patient`.
+* Some of these classes are dependent on the `Model` package which is shown in the [full UI diagram](#ui-component). 
+Namely, `PatientProfile`, `PersonalDetailsCard`, `MedicalDetailsCard`, `MedicalNotesPanel` and `MedicalNoteCard`.
+This is to retrieve the required information of a `patient`.
 
 Classes used in this implementation can be described as follows:
 * `PatientProfile` represents the whole component of the UI displaying the patient's profile. 
@@ -304,7 +306,11 @@ The corresponding UI element is displayed on the right of the `PatientProfile` U
 * `MedicalDetailsRow` represents a single `patient` personal detail. It provides the graphics for a row in the `ListView` of `MedicalDetailsCard`.
 * `MedicalNoteCard` represents a single `MedicalNote`. It provides the graphics for an element in the `ListView` of `MedicalNotesPanel`.
 
-`PatientProfile` is displayed on the `MainWindow` when the `AccessCommand` is invoked. The following sequence diagram shows how accessing and displaying a `PatientProfile` works:
+`PatientProfile` is displayed on the `MainWindow` when the `AccessCommand` is invoked. The following sequence diagram shows how accessing a `PatientProfile` works:
+
+[//]: # (todo)
+
+Thereafter, this next sequence diagram shows how displaying the `PatientProfile` works:
 
 
 --------------------------------------------------------------------------------------------------------------------
