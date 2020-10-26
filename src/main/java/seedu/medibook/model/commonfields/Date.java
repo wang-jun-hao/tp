@@ -7,18 +7,21 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 /**
  * Represents a date in MediBook.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class Date implements Comparable<Date> {
-    public static final String MESSAGE_CONSTRAINTS = "Date should be of the format \"DD-MM-YYYY\" "
-            + "where D, M and Y represent digits of the day, month and year of the date respectively.";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Date should be a valid calendar date and of the format \"DD-MM-YYYY\" "
+                    + "where D, M and Y represent digits of the day, month and year of the date respectively.";
     public static final String MESSAGE_NON_FUTURE = "Date should not be in the future.";
-    private static final String INPUT_STRING_PATTERN = "dd-MM-yyyy";
-    private static final String OUTPUT_STRING_PATTERN = "d MMM yyyy";
-    private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern(INPUT_STRING_PATTERN);
+    private static final String INPUT_STRING_PATTERN = "dd-MM-uuuu";
+    private static final String OUTPUT_STRING_PATTERN = "d MMM uuuu";
+    private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern(INPUT_STRING_PATTERN)
+            .withResolverStyle(ResolverStyle.STRICT);
     private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern(OUTPUT_STRING_PATTERN);
     public final String inputValue;
     public final String outputValue;
