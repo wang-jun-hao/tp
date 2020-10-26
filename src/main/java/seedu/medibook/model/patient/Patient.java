@@ -1,5 +1,6 @@
 package seedu.medibook.model.patient;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.medibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -8,6 +9,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.medibook.model.commonfields.Name;
 import seedu.medibook.model.medicalnote.MedicalNote;
 import seedu.medibook.model.medicalnote.MedicalNoteList;
 import seedu.medibook.model.tag.Tag;
@@ -37,6 +39,9 @@ public class Patient {
     // Default empty fields
     private MedicalNoteList medicalNoteList = new MedicalNoteList();
     private final Set<Tag> tags = new HashSet<>();
+
+    // Patient's past records
+    private Record record = new Record();
 
     /**
      * Every field must be present and not null.
@@ -279,6 +284,31 @@ public class Patient {
         return getPhone().toString();
     }
 
+    /**
+     * Returns the past records of the patient.
+     * @return Record object containing the patient's past records
+     */
+    public Record getRecord() {
+        assert this.record != null : "Record should not be null!";
+        return this.record;
+    }
+
+    /**
+     * Sets the past records of the patient.
+     */
+    public void setRecord(Record record) {
+        requireNonNull(record);
+        this.record = record;
+    }
+
+    /**
+     * Returns true if the specified medical note is already a medical note in the list belonging to this patient.
+     * @param otherMedicalNote medical note to test against.
+     * @return true if the same medical note exists in the list belonging to this patient.
+     */
+    public boolean alreadyHasMedicalNote(MedicalNote otherMedicalNote) {
+        return medicalNoteList.alreadyHasMedicalNote(otherMedicalNote);
+    }
 
     /**
      * Returns true if both patients have the same identity and data fields.

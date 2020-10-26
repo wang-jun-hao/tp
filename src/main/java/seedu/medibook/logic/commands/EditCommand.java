@@ -24,6 +24,7 @@ import seedu.medibook.commons.core.index.Index;
 import seedu.medibook.commons.util.CollectionUtil;
 import seedu.medibook.logic.commands.exceptions.CommandException;
 import seedu.medibook.model.Model;
+import seedu.medibook.model.commonfields.Name;
 import seedu.medibook.model.medicalnote.MedicalNoteList;
 import seedu.medibook.model.patient.Address;
 import seedu.medibook.model.patient.BloodType;
@@ -31,7 +32,6 @@ import seedu.medibook.model.patient.DateOfBirth;
 import seedu.medibook.model.patient.Email;
 import seedu.medibook.model.patient.Height;
 import seedu.medibook.model.patient.Ic;
-import seedu.medibook.model.patient.Name;
 import seedu.medibook.model.patient.Patient;
 import seedu.medibook.model.patient.Phone;
 import seedu.medibook.model.patient.Weight;
@@ -99,6 +99,11 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PATIENT);
         }
 
+        boolean wasIcEdited = !patientToEdit.getIc().equals(editedPatient.getIc());
+        if (wasIcEdited) {
+            model.setEditedPatient(editedPatient, patientToEdit.getIc());
+        }
+
         model.setPatient(patientToEdit, editedPatient);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient));
@@ -123,8 +128,15 @@ public class EditCommand extends Command {
                 .or(patientToEdit::getBloodType);
         Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
 
-        return new Patient(updatedIc, updatedName, updatedDateOfBirth, updatedPhone, updatedEmail, updatedAddress,
-                          updatedHeight, updatedWeight, updatedBloodType, updatedTags);
+        Patient editedPatient = new Patient(updatedIc, updatedName, updatedDateOfBirth, updatedPhone, updatedEmail,
+                updatedAddress, updatedHeight, updatedWeight, updatedBloodType, updatedTags);
+
+        editedPatient.setRecord(patientToEdit.getRecord());
+
+        editPatientDescriptor.getHeight().ifPresent(h -> editedPatient.getRecord().addHeightRecord(h));
+        editPatientDescriptor.getWeight().ifPresent(w -> editedPatient.getRecord().addWeightRecord(w));
+
+        return editedPatient;
     }
 
     @Override

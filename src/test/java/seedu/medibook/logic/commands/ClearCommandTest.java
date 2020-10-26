@@ -16,6 +16,7 @@ public class ClearCommandTest {
     public void execute_emptyMediBook_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
+        expectedModel.setShouldDeleteAllMedicalNotes(true);
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
@@ -25,6 +26,7 @@ public class ClearCommandTest {
         Model model = new ModelManager(getTypicalMediBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalMediBook(), new UserPrefs());
         expectedModel.setMediBook(new MediBook());
+        expectedModel.setShouldDeleteAllMedicalNotes(true);
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }

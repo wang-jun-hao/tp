@@ -15,13 +15,13 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.medibook.logic.parser.exceptions.ParseException;
+import seedu.medibook.model.commonfields.Name;
 import seedu.medibook.model.patient.Address;
 import seedu.medibook.model.patient.BloodType;
 import seedu.medibook.model.patient.DateOfBirth;
 import seedu.medibook.model.patient.Email;
 import seedu.medibook.model.patient.Height;
 import seedu.medibook.model.patient.Ic;
-import seedu.medibook.model.patient.Name;
 import seedu.medibook.model.patient.Phone;
 import seedu.medibook.model.patient.Weight;
 import seedu.medibook.model.tag.Tag;

@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.medibook.commons.core.GuiSettings;
 import seedu.medibook.commons.core.LogsCenter;
+import seedu.medibook.model.patient.Ic;
 import seedu.medibook.model.patient.Patient;
 
 /**
@@ -23,7 +24,7 @@ public class ModelManager implements Model {
     private final MediBook mediBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Patient> filteredPatients;
-    private Optional<Patient> accessedPatient = Optional.empty();
+    private final Context context = new ModelContext();
 
     /**
      * Initializes a ModelManager with the given mediBook and userPrefs.
@@ -108,21 +109,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void accessPatient(Patient patient) {
-        this.accessedPatient = Optional.of(patient);
-    }
-
-    @Override
-    public Optional<Patient> getPatientToAccess() {
-        return this.accessedPatient;
-    }
-
-    @Override
-    public void resetAccessedPatient() {
-        this.accessedPatient = Optional.empty();
-    }
-
-    @Override
     public void setPatient(Patient target, Patient editedPatient) {
         requireAllNonNull(target, editedPatient);
 
@@ -146,6 +132,78 @@ public class ModelManager implements Model {
         filteredPatients.setPredicate(predicate);
     }
 
+    //=============================================Context Methods============================================
+
+    @Override
+    public void accessPatient(Patient patient) {
+        context.accessPatient(patient);
+    }
+
+    @Override
+    public Optional<Patient> getPatientToAccess() {
+        return context.getPatientToAccess();
+    }
+
+    @Override
+    public void resetAccessedPatient() {
+        context.resetAccessedPatient();
+    }
+
+    @Override
+    public void setDeletedPatient(Patient patient) {
+        context.setDeletedPatient(patient);
+    }
+
+    @Override
+    public Optional<Patient> getDeletedPatient() {
+        return context.getDeletedPatient();
+    }
+
+    @Override
+    public void resetDeletedPatient() {
+        context.resetDeletedPatient();
+    }
+
+    @Override
+    public void setEditedPatient(Patient patient, Ic prevIc) {
+        context.setEditedPatient(patient, prevIc);
+    }
+
+    @Override
+    public Optional<Patient> getEditedPatient() {
+        return context.getEditedPatient();
+    }
+
+    @Override
+    public Optional<Ic> getEditedPatientPrevIc() {
+        return context.getEditedPatientPrevIc();
+    }
+
+    @Override
+    public void resetEditedPatient() {
+        context.resetEditedPatient();
+    }
+
+    @Override
+    public boolean getShouldLoadMedicalNotes() {
+        return context.getShouldLoadMedicalNotes();
+    }
+
+    @Override
+    public void setShouldLoadMedicalNotes(boolean b) {
+        context.setShouldLoadMedicalNotes(b);
+    }
+
+    @Override
+    public boolean getShouldDeleteAllMedicalNotes() {
+        return context.getShouldDeleteAllMedicalNotes();
+    }
+
+    @Override
+    public void setShouldDeleteAllMedicalNotes(boolean b) {
+        context.setShouldDeleteAllMedicalNotes(b);
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -163,7 +221,7 @@ public class ModelManager implements Model {
         return mediBook.equals(other.mediBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPatients.equals(other.filteredPatients)
-                && accessedPatient.equals(other.accessedPatient);
+                && context.equals(other.context);
     }
 
 }

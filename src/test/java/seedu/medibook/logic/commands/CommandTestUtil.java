@@ -9,6 +9,7 @@ import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_IC;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_MCR;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_TAG;
@@ -57,6 +58,7 @@ public class CommandTestUtil {
     public static final String VALID_NON_FUTURE_DATE = "15-10-2020";
     public static final String VALID_FUTURE_DATE = "15-10-2030";
     public static final String VALID_DOCTOR_NAME = "John Doe";
+    public static final String VALID_DOCTOR_MCR = "M09192U";
     public static final String VALID_CONTENT = "Patient is sick.";
 
     public static final String IC_DESC_AMY = " " + PREFIX_IC + VALID_IC_AMY;
@@ -81,7 +83,8 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String NOTE_NON_FUTURE_DATE_DESC = " " + PREFIX_DATE + VALID_NON_FUTURE_DATE;
     public static final String NOTE_FUTURE_DATE_DESC = " " + PREFIX_DATE + VALID_FUTURE_DATE;
-    public static final String NOTE_DOCTOR_DESC = " " + PREFIX_NAME + VALID_DOCTOR_NAME;
+    public static final String NOTE_DOCTOR_NAME_DESC = " " + PREFIX_NAME + VALID_DOCTOR_NAME;
+    public static final String NOTE_DOCTOR_MCR_DESC = " " + PREFIX_MCR + VALID_DOCTOR_MCR;
     public static final String NOTE_CONTENT_DESC = " " + PREFIX_CONTENT + VALID_CONTENT;
 
     public static final String INVALID_IC_DESC = " " + PREFIX_IC + "A222223HH";
@@ -96,6 +99,8 @@ public class CommandTestUtil {
     public static final String INVALID_BLOOD_TYPE_DESC = " " + PREFIX_BLOOD_TYPE + "C+"; // 'C+' invalid blood type
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_NOTE_DATE_DESC = " " + PREFIX_DATE + "2-3-2020"; // incorrect date format
+    public static final String INVALID_DOCTOR_NAME_DESC = " " + PREFIX_NAME + "A* doctor"; // '* not allowed in name'
+    public static final String INVALID_DOCTOR_MCR_DESC = " " + PREFIX_MCR + "Z82730P"; // incorrect mcr format
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
