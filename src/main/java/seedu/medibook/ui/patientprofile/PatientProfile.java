@@ -1,17 +1,8 @@
 package seedu.medibook.ui.patientprofile;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import seedu.medibook.model.commonfields.Date;
-import seedu.medibook.model.commonfields.Name;
-import seedu.medibook.model.doctor.Doctor;
-import seedu.medibook.model.doctor.Mcr;
-import seedu.medibook.model.medicalnote.Content;
-import seedu.medibook.model.medicalnote.MedicalNote;
 import seedu.medibook.model.patient.Patient;
 import seedu.medibook.ui.UiPart;
 
