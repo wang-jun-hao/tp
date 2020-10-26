@@ -15,8 +15,8 @@ public class DateOfBirth {
             "Date of birth (DOB) should be a valid calendar date and of the format \"DD-MM-YYYY\" "
                     + "where D, M and Y represent digits of the day, month and year of the DOB respectively."
                     + "\nDOB should not be in the future.";
-    public final String inputValue;
-    public final String outputValue;
+    private final String inputValue;
+    private final String outputValue;
     private final Date date;
 
 
@@ -48,9 +48,17 @@ public class DateOfBirth {
         }
     }
 
+    public String getInputString() {
+        return inputValue;
+    }
+
+    public String getOutputString() {
+        return outputValue;
+    }
+
     @Override
     public String toString() {
-        return inputValue;
+        return outputValue;
     }
 
     @Override

@@ -103,6 +103,14 @@ public class Patient {
         return dateOfBirth;
     }
 
+    public String getDateOfBirthInputString() {
+        return dateOfBirth.getInputString();
+    }
+
+    public String getDateOfBirthOutputString() {
+        return dateOfBirth.getOutputString();
+    }
+
     public Phone getPhone() {
         return phone;
     }

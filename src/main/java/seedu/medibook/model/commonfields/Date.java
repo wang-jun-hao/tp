@@ -86,9 +86,13 @@ public class Date implements Comparable<Date> {
         return formatter.format(date);
     }
 
+    public String getInputString() {
+        return inputValue;
+    }
+
     @Override
     public String toString() {
-        return inputValue;
+        return outputValue;
     }
 
     @Override

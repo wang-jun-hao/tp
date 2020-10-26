@@ -46,7 +46,7 @@ public class JsonAdaptedPatientTest {
 
     private static final String VALID_IC = BENSON.getIc().toString();
     private static final String VALID_NAME = BENSON.getName().toString();
-    private static final String VALID_DOB = BENSON.getDateOfBirth().toString();
+    private static final String VALID_DOB = BENSON.getDateOfBirth().getInputString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_EMAIL = BENSON.getStringEmail();
     private static final String VALID_ADDRESS = BENSON.getStringAddress();
