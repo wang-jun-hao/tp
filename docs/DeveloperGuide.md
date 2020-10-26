@@ -311,7 +311,7 @@ The corresponding UI element is displayed on the right of the `PatientProfile` U
 [//]: # (todo)
 
 Thereafter, this next sequence diagram shows how displaying the `PatientProfile` works:
-
+![PatientProfileSequenceDiagram](images/PatientProfileSequenceDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
