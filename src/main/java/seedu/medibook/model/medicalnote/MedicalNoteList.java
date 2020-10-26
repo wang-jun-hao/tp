@@ -4,18 +4,21 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 /**
  * Represents a list of medical notes for a Patient in MediBook.
  */
 public class MedicalNoteList implements ReadOnlyMedicalNoteList {
     private static final MedicalNoteComparator comparator = new MedicalNoteComparator();
-    private final List<MedicalNote> innerList;
+    private final ObservableList<MedicalNote> innerList;
 
     /**
      * Constructs an empty medical note list object.
      */
     public MedicalNoteList() {
-        innerList = new LinkedList<>();
+        innerList = FXCollections.observableArrayList();
     }
 
     /**
@@ -25,7 +28,7 @@ public class MedicalNoteList implements ReadOnlyMedicalNoteList {
      * @param listOfMedicalNotes list of medical notes
      */
     public MedicalNoteList(List<MedicalNote> listOfMedicalNotes) {
-        List<MedicalNote> copyOfList = new LinkedList<>(listOfMedicalNotes);
+        ObservableList<MedicalNote> copyOfList = FXCollections.observableArrayList(listOfMedicalNotes);
         copyOfList.sort(comparator);
         this.innerList = copyOfList;
     }
@@ -88,6 +91,10 @@ public class MedicalNoteList implements ReadOnlyMedicalNoteList {
         assert index < size() : "Attempting to get medical note with out-of-range index";
 
         return innerList.get(index);
+    }
+
+    public ObservableList<MedicalNote> getObservableInnerList() {
+        return innerList;
     }
 
     @Override

@@ -44,11 +44,7 @@ public class PatientProfile extends UiPart<Region> {
         MedicalDetailsCard medicalDetailsCard = new MedicalDetailsCard(patient);
         this.medicalDetailsCard.getChildren().add(medicalDetailsCard.getRoot());
 
-        List<MedicalNote> medicalNotes = new ArrayList<>(); // TODO after implementation of MedicalNote as field
-        medicalNotes.add(new MedicalNote(new Date("15-10-2020", true),
-                new Doctor(new Name("Charlotte Liew"), new Mcr("M27493G")),
-                new Content("- Irregular hearbeat \n- Breathing problems")));
-        MedicalNotesPanel medicalNotesPanel = new MedicalNotesPanel(medicalNotes);
+        MedicalNotesPanel medicalNotesPanel = new MedicalNotesPanel(patient.getObservableMedicalNoteList());
         this.medicalNotesPanel.getChildren().add(medicalNotesPanel.getRoot());
     }
 

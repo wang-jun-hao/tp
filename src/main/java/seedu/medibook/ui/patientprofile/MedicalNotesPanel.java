@@ -27,11 +27,10 @@ public class MedicalNotesPanel extends UiPart<Region> {
     /**
      * Creates a {@code MedicalNotesPanel} with the given {@code List} of {@code MedicalNote} objects.
      */
-    public MedicalNotesPanel(List<MedicalNote> medicalNotes) {
+    public MedicalNotesPanel(ObservableList<MedicalNote> observableMedicalNotes) {
         super(FXML);
 
         panelHeader.setText("Medical Notes:");
-        ObservableList<MedicalNote> observableMedicalNotes = FXCollections.observableArrayList(medicalNotes);
         medicalNotesListView.setItems(observableMedicalNotes);
         medicalNotesListView.setCellFactory(listView -> new MedicalNotesPanel.MedicalNotesListViewCell());
     }

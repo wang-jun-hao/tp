@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.medibook.model.commonfields.Name;
 import seedu.medibook.model.medicalnote.MedicalNote;
 import seedu.medibook.model.medicalnote.MedicalNoteList;
@@ -237,6 +238,10 @@ public class Patient {
      */
     public MedicalNoteList getMedicalNoteList() {
         return medicalNoteList;
+    }
+
+    public ObservableList<MedicalNote> getObservableMedicalNoteList() {
+        return medicalNoteList.getObservableInnerList();
     }
 
     /**
