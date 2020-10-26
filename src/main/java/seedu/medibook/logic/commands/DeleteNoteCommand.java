@@ -3,7 +3,9 @@ package seedu.medibook.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
+import seedu.medibook.commons.core.LogsCenter;
 import seedu.medibook.commons.core.Messages;
 import seedu.medibook.commons.core.index.Index;
 import seedu.medibook.logic.commands.exceptions.CommandException;
@@ -30,6 +32,8 @@ public class DeleteNoteCommand extends Command {
             + "when you are viewing his/her patient profile. Access the patient profile before "
             + "deleting a medical note.";
 
+    private final Logger logger = LogsCenter.getLogger(DeleteNoteCommand.class);
+
     private final Index targetIndex;
 
     public DeleteNoteCommand(Index targetIndex) {
@@ -39,6 +43,7 @@ public class DeleteNoteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.setShouldLoadMedicalNotes(false);
         Optional<Patient> patientOptional = model.getPatientToAccess();
 
         if (patientOptional.isEmpty()) {
@@ -60,6 +65,9 @@ public class DeleteNoteCommand extends Command {
         MedicalNote noteToDelete = medicalNoteList.getMedicalNoteAtIndex(indexZeroBased);
 
         medicalNoteList.deleteMedicalNoteAtIndex(indexZeroBased);
+
+        logger.info("----------------[PATIENT AND ORDER OF MEDICAL NOTES:][" + displayedPatient + "\n"
+                + displayedPatient.getMedicalNoteList() + "]");
 
         return new CommandResult(String.format(MESSAGE_DELETE_NOTE_SUCCESS, noteToDelete));
     }

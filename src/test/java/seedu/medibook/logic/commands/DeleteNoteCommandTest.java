@@ -26,32 +26,34 @@ import seedu.medibook.testutil.PatientBuilder;
  */
 public class DeleteNoteCommandTest {
 
-    private Model model = new ModelManager(getTypicalMediBook(), new UserPrefs());
-
     @Test
     public void execute_validIndex_success() {
+        Model model = new ModelManager(getTypicalMediBook(), new UserPrefs());
         Index validIndex = Index.fromOneBased(VALID_NOTE_INDEX);
 
         Patient targetPatient = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
         DeleteNoteCommand deleteNoteCommand = new DeleteNoteCommand(validIndex);
         MedicalNote medicalNoteToDelete =
-                targetPatient.getMedicalNoteList().getMedicalNoteAtIndex(validIndex.getZeroBased());
+                targetPatient.getMedicalNoteAtIndex(validIndex.getZeroBased());
 
         model.accessPatient(targetPatient);
 
         String expectedMessage = String.format(DeleteNoteCommand.MESSAGE_DELETE_NOTE_SUCCESS, medicalNoteToDelete);
-
         ModelManager expectedModel = new ModelManager(model.getMediBook(), new UserPrefs());
+
         Patient targetPatientWithDeletedNote = new PatientBuilder(targetPatient).build();
-        targetPatientWithDeletedNote.getMedicalNoteList().deleteMedicalNoteAtIndex(validIndex.getZeroBased());
+
+        targetPatientWithDeletedNote.deleteMedicalNoteAtIndex(validIndex.getZeroBased());
         expectedModel.setPatient(targetPatient, targetPatientWithDeletedNote);
-        expectedModel.accessPatient(targetPatient);
+        expectedModel.accessPatient(targetPatientWithDeletedNote);
+        expectedModel.setShouldLoadMedicalNotes(false);
 
         assertCommandSuccess(deleteNoteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_outOfRangeIndex_exceptionThrown() {
+        Model model = new ModelManager(getTypicalMediBook(), new UserPrefs());
         Index outOfRangeIndex = Index.fromOneBased(OUT_OF_RANGE_NOTE_INDEX);
 
         Patient targetPatient = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());

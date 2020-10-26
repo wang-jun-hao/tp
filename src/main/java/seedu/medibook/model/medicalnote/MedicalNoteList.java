@@ -85,7 +85,7 @@ public class MedicalNoteList implements ReadOnlyMedicalNoteList {
     /**
      * Retrieves the medical note at the specified index in the list.
      * @param index Zero-based index of medical note.
-     * @return
+     * @return medical note at index in list.
      */
     public MedicalNote getMedicalNoteAtIndex(int index) {
         assert index < size() : "Attempting to get medical note with out-of-range index";
@@ -106,7 +106,7 @@ public class MedicalNoteList implements ReadOnlyMedicalNoteList {
     public String toString() {
         String result = "";
         for (MedicalNote medicalNote : innerList) {
-            result += medicalNote.toString() + "\n";
+            result += medicalNote.toString() + "\n\n";
         }
         return result;
     }
