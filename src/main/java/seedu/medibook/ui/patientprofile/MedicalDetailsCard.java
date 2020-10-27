@@ -10,8 +10,8 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import javafx.util.Pair;
-import seedu.medibook.model.patient.Patient;
 import seedu.medibook.model.medicaldetail.Tag;
+import seedu.medibook.model.patient.Patient;
 import seedu.medibook.ui.UiPart;
 
 /**
