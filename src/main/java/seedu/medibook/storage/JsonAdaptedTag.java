@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.medibook.commons.exceptions.IllegalValueException;
-import seedu.medibook.model.tag.Tag;
+import seedu.medibook.model.medicaldetail.Tag;
 
 /**
  * Jackson-friendly version of {@link Tag}.

@@ -12,7 +12,7 @@ import java.util.Set;
 import seedu.medibook.model.commonfields.Name;
 import seedu.medibook.model.medicalnote.MedicalNote;
 import seedu.medibook.model.medicalnote.MedicalNoteList;
-import seedu.medibook.model.tag.Tag;
+import seedu.medibook.model.medicaldetail.Tag;
 
 /**
  * Represents a Patient in the medi book.

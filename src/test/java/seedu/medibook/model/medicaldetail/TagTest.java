@@ -1,4 +1,4 @@
-package seedu.medibook.model.tag;
+package seedu.medibook.model.medicaldetail;
 
 import static seedu.medibook.testutil.Assert.assertThrows;
 

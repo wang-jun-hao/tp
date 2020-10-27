@@ -16,7 +16,7 @@ import seedu.medibook.model.patient.Ic;
 import seedu.medibook.model.patient.Patient;
 import seedu.medibook.model.patient.Phone;
 import seedu.medibook.model.patient.Weight;
-import seedu.medibook.model.tag.Tag;
+import seedu.medibook.model.medicaldetail.Tag;
 import seedu.medibook.model.util.SampleDataUtil;
 
 /**

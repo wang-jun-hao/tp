@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.medibook.model.tag.Tag;
+import seedu.medibook.model.medicaldetail.Tag;
 import seedu.medibook.ui.UiPart;
 
 /**

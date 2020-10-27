@@ -22,7 +22,7 @@ import seedu.medibook.commons.core.index.Index;
 import seedu.medibook.logic.commands.EditCommand;
 import seedu.medibook.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.medibook.logic.parser.exceptions.ParseException;
-import seedu.medibook.model.tag.Tag;
+import seedu.medibook.model.medicaldetail.Tag;
 
 /**
  * Parses input arguments and creates a new EditCommand object

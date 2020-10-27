@@ -16,7 +16,7 @@ import java.util.Set;
 import seedu.medibook.logic.commands.AddCommand;
 import seedu.medibook.logic.commands.EditCommand;
 import seedu.medibook.model.patient.Patient;
-import seedu.medibook.model.tag.Tag;
+import seedu.medibook.model.medicaldetail.Tag;
 
 /**
  * A utility class for Patient.

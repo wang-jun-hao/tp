@@ -22,7 +22,7 @@ import seedu.medibook.model.patient.Patient;
 import seedu.medibook.model.patient.Phone;
 import seedu.medibook.model.patient.Record;
 import seedu.medibook.model.patient.Weight;
-import seedu.medibook.model.tag.Tag;
+import seedu.medibook.model.medicaldetail.Tag;
 
 /**
  * Contains utility methods for populating {@code MediBook} with sample data.

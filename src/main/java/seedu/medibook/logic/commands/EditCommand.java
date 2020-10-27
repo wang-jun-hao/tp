@@ -35,7 +35,7 @@ import seedu.medibook.model.patient.Ic;
 import seedu.medibook.model.patient.Patient;
 import seedu.medibook.model.patient.Phone;
 import seedu.medibook.model.patient.Weight;
-import seedu.medibook.model.tag.Tag;
+import seedu.medibook.model.medicaldetail.Tag;
 
 /**
  * Edits the details of an existing patient in the medi book.

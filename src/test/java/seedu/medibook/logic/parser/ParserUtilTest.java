@@ -24,7 +24,7 @@ import seedu.medibook.model.patient.Height;
 import seedu.medibook.model.patient.Ic;
 import seedu.medibook.model.patient.Phone;
 import seedu.medibook.model.patient.Weight;
-import seedu.medibook.model.tag.Tag;
+import seedu.medibook.model.medicaldetail.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_IC = "S99999w9Q";

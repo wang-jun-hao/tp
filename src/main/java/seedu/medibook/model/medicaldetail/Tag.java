@@ -1,10 +1,12 @@
-package seedu.medibook.model.tag;
+package seedu.medibook.model.medicaldetail;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.medibook.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Tag in the medi book.
+ * Each medical detail of a {@code Patient} is described with medical tags,
+ * which are objects that inherit from this {@code Tag} class.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
