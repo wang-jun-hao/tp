@@ -257,6 +257,14 @@ public class Patient {
     }
 
     /**
+     * Get number of medical notes within the list belonging to this patient.
+     * @return Number of medical notes in the list.
+     */
+    public int getNumOfMedicalNotes() {
+        return medicalNoteList.size();
+    }
+
+    /**
      * Returns true if both patients of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two patients.
      */

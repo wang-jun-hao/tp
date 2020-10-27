@@ -99,7 +99,7 @@ public class MedicalNoteList implements ReadOnlyMedicalNoteList {
     public String toString() {
         String result = "";
         for (MedicalNote medicalNote : innerList) {
-            result += medicalNote.toString() + "\n";
+            result += medicalNote.toString() + "\n\n";
         }
         return result;
     }
