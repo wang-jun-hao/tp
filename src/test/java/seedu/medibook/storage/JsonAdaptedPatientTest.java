@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.medibook.commons.exceptions.IllegalValueException;
 import seedu.medibook.model.commonfields.Name;
+import seedu.medibook.model.medicalnote.MedicalNoteList;
 import seedu.medibook.model.patient.Address;
 import seedu.medibook.model.patient.BloodType;
 import seedu.medibook.model.patient.Bmi;
@@ -26,6 +27,7 @@ import seedu.medibook.model.patient.Patient;
 import seedu.medibook.model.patient.Phone;
 import seedu.medibook.model.patient.Record;
 import seedu.medibook.model.patient.Weight;
+import seedu.medibook.testutil.PatientBuilder;
 
 public class JsonAdaptedPatientTest {
     private static final String INVALID_IC = "A12345R7H";
@@ -56,11 +58,18 @@ public class JsonAdaptedPatientTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
+    /* Medical note list data of patient should not be loaded at point of program start-up, hence expected
+    behaviour is that all these patients have an empty medical note list instead of the one initialised and loaded
+    in TypicalPatients.java for other testing purposes.
+     */
+    private static final MedicalNoteList emptyMedicalNoteList = new MedicalNoteList();
 
     @Test
     public void toModelType_validPatientDetails_returnsPatient() throws Exception {
         JsonAdaptedPatient patient = new JsonAdaptedPatient(BENSON);
-        assertEquals(BENSON, patient.toModelType());
+        Patient expectedBensonWithEmptyMedicalNoteList = new PatientBuilder(BENSON).build();
+        expectedBensonWithEmptyMedicalNoteList.setMedicalNoteList(emptyMedicalNoteList);
+        assertEquals(expectedBensonWithEmptyMedicalNoteList, patient.toModelType());
     }
 
     @Test
