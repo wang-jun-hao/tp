@@ -46,6 +46,7 @@ class JsonAdaptedPatient {
     private final String bloodType;
     private final JsonAdaptedRecord record;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedAllergy> allergies = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPatient} with the given patient details.
@@ -57,7 +58,8 @@ class JsonAdaptedPatient {
                               @JsonProperty("height") String height, @JsonProperty("weight") String weight,
                               @JsonProperty("bmi") String bmi, @JsonProperty("blood type") String bloodType,
                               @JsonProperty("record") JsonAdaptedRecord record,
-                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                              @JsonProperty("tagged") List<JsonAdaptedAllergy> allergies) {
         this.ic = ic;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -71,6 +73,9 @@ class JsonAdaptedPatient {
         this.record = record;
         if (tagged != null) {
             this.tagged.addAll(tagged);
+        }
+        if (allergies != null) {
+            this.allergies.addAll(allergies);
         }
     }
 
@@ -130,6 +135,10 @@ class JsonAdaptedPatient {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+
+        allergies.addAll(source.getAllergies().stream()
+            .map(JsonAdaptedAllergy::new)
+            .collect(Collectors.toList()));
     }
 
     /**

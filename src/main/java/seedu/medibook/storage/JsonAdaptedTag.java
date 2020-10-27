@@ -11,7 +11,7 @@ import seedu.medibook.model.medicaldetail.Tag;
  */
 class JsonAdaptedTag {
 
-    private final String tagName;
+    protected final String tagName;
 
     /**
      * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
