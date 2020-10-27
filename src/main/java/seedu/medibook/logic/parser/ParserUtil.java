@@ -257,6 +257,7 @@ public class ParserUtil {
      */
     public static Allergy parseAllergy(String allergy) throws ParseException {
         String trimmedTagName = trimTagName(allergy);
+        assert Tag.isValidTagName(trimmedTagName);
         return new Allergy(trimmedTagName);
     }
 
@@ -268,6 +269,7 @@ public class ParserUtil {
      */
     public static Condition parseCondition(String condition) throws ParseException {
         String trimmedTagName = trimTagName(condition);
+        assert Tag.isValidTagName(trimmedTagName);
         return new Condition(trimmedTagName);
     }
 
@@ -279,6 +281,7 @@ public class ParserUtil {
      */
     public static Treatment parseTreatment(String treatment) throws ParseException {
         String trimmedTagName = trimTagName(treatment);
+        assert Tag.isValidTagName(trimmedTagName);
         return new Treatment(trimmedTagName);
     }
 
