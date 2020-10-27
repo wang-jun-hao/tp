@@ -3,14 +3,16 @@ package seedu.medibook.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.medibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_BLOOD_TYPE;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_CONDITION;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_IC;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_TREATMENT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
 import java.util.Collection;
@@ -22,7 +24,9 @@ import seedu.medibook.commons.core.index.Index;
 import seedu.medibook.logic.commands.EditCommand;
 import seedu.medibook.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.medibook.logic.parser.exceptions.ParseException;
-import seedu.medibook.model.medicaldetail.Tag;
+import seedu.medibook.model.medicaldetail.Allergy;
+import seedu.medibook.model.medicaldetail.Condition;
+import seedu.medibook.model.medicaldetail.Treatment;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -38,7 +42,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_IC, PREFIX_NAME, PREFIX_DATE, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_HEIGHT, PREFIX_WEIGHT, PREFIX_BLOOD_TYPE, PREFIX_TAG);
+                    PREFIX_ADDRESS, PREFIX_HEIGHT, PREFIX_WEIGHT, PREFIX_BLOOD_TYPE, PREFIX_ALLERGY,
+                    PREFIX_CONDITION, PREFIX_TREATMENT);
         Index index;
 
         try {
@@ -76,7 +81,11 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPatientDescriptor.setBloodType(ParserUtil
                     .parseBloodType(argMultimap.getValue(PREFIX_BLOOD_TYPE)).get());
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPatientDescriptor::setTags);
+        parseAllergiesForEdit(argMultimap.getAllValues(PREFIX_ALLERGY)).ifPresent(editPatientDescriptor::setAllergies);
+        parseConditionsForEdit(argMultimap.getAllValues(PREFIX_CONDITION))
+                .ifPresent(editPatientDescriptor::setConditions);
+        parseTreatmentsForEdit(argMultimap.getAllValues(PREFIX_TREATMENT))
+                .ifPresent(editPatientDescriptor::setTreatments);
 
         if (!editPatientDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -86,18 +95,51 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Tag>} containing zero tags.
+     * Parses {@code Collection<String> allergies} into a {@code Set<Allergy>} if {@code allergies} is non-empty.
+     * If {@code allergies} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Allergy>} containing zero allergy tags.
      */
-    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
-        assert tags != null;
+    private Optional<Set<Allergy>> parseAllergiesForEdit(Collection<String> allergies) throws ParseException {
+        assert allergies != null;
 
-        if (tags.isEmpty()) {
+        if (allergies.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
+        Collection<String> allergySet = allergies.size() == 1
+            && allergies.contains("") ? Collections.emptySet() : allergies;
+        return Optional.of(ParserUtil.parseAllergies(allergySet));
+    }
+
+    /**
+     * Parses {@code Collection<String> conditions} into a {@code Set<Condition>} if {@code conditions} is non-empty.
+     * If {@code conditions} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Condition>} containing zero condition tags.
+     */
+    private Optional<Set<Condition>> parseConditionsForEdit(Collection<String> conditions) throws ParseException {
+        assert conditions != null;
+
+        if (conditions.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> conditionSet = conditions.size() == 1
+            && conditions.contains("") ? Collections.emptySet() : conditions;
+        return Optional.of(ParserUtil.parseConditions(conditionSet));
+    }
+
+    /**
+     * Parses {@code Collection<String> treatments} into a {@code Set<Treatment>} if {@code treatments} is non-empty.
+     * If {@code treatments} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Treatment>} containing zero treatment tags.
+     */
+    private Optional<Set<Treatment>> parseTreatmentsForEdit(Collection<String> treatments) throws ParseException {
+        assert treatments != null;
+
+        if (treatments.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> treatmentSet = treatments.size() == 1
+                && treatments.contains("") ? Collections.emptySet() : treatments;
+        return Optional.of(ParserUtil.parseTreatments(treatmentSet));
     }
 
 }
