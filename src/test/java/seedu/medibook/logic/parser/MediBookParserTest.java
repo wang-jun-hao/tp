@@ -9,8 +9,7 @@ import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_MCR;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.medibook.testutil.Assert.assertThrows;
-import static seedu.medibook.testutil.TypicalIndexes.INDEX_FIRST_MEDICAL_NOTE;
-import static seedu.medibook.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
+import static seedu.medibook.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.util.Arrays;
 import java.util.List;
@@ -63,15 +62,15 @@ public class MediBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PATIENT.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PATIENT), command);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST), command);
     }
 
     @Test
     public void parseCommand_access() throws Exception {
         AccessCommand command = (AccessCommand) parser.parseCommand(
-                AccessCommand.COMMAND_WORD + " " + INDEX_FIRST_PATIENT.getOneBased());
-        assertEquals(new AccessCommand(INDEX_FIRST_PATIENT), command);
+                AccessCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new AccessCommand(INDEX_FIRST), command);
     }
 
     @Test
@@ -79,8 +78,8 @@ public class MediBookParserTest {
         Patient patient = new PatientBuilder().build();
         EditCommand.EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(patient).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PATIENT.getOneBased() + " " + PatientUtil.getEditPatientDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PATIENT, descriptor), command);
+                + INDEX_FIRST.getOneBased() + " " + PatientUtil.getEditPatientDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST, descriptor), command);
     }
 
     @Test
@@ -137,8 +136,8 @@ public class MediBookParserTest {
     @Test
     public void parseCommand_deletenote() throws Exception {
         DeleteNoteCommand command = (DeleteNoteCommand) parser.parseCommand(
-                DeleteNoteCommand.COMMAND_WORD + " " + INDEX_FIRST_MEDICAL_NOTE.getOneBased());
-        assertEquals(new DeleteNoteCommand(INDEX_FIRST_MEDICAL_NOTE), command);
+                DeleteNoteCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new DeleteNoteCommand(INDEX_FIRST), command);
     }
 
     @Test
@@ -151,9 +150,9 @@ public class MediBookParserTest {
         descriptor.setContent(new Content("Patient is good."));
 
         EditNoteCommand command = (EditNoteCommand) parser.parseCommand(
-                EditNoteCommand.COMMAND_WORD + " " + INDEX_FIRST_MEDICAL_NOTE.getOneBased() + " "
+                EditNoteCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased() + " "
                         + PREFIX_DATE + "19-02-2020 " + PREFIX_NAME + "Bethany " + PREFIX_MCR + "M62790L "
                         + PREFIX_CONTENT + "Patient is good.");
-        assertEquals(new EditNoteCommand(INDEX_FIRST_MEDICAL_NOTE, descriptor), command);
+        assertEquals(new EditNoteCommand(INDEX_FIRST, descriptor), command);
     }
 }
