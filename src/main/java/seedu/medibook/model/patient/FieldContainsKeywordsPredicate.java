@@ -54,7 +54,7 @@ public class FieldContainsKeywordsPredicate implements Predicate<Patient> {
             return patient.getName().fullName;
         }
         if (PREFIX_DATE.equals(prefix)) {
-            return patient.getDateOfBirth().inputValue;
+            return patient.getDateOfBirthInputString();
         }
         if (PREFIX_PHONE.equals(prefix)) {
             return patient.getPhone().value;
