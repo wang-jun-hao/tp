@@ -99,7 +99,7 @@ public class CommandTestUtil {
     public static final String INVALID_BLOOD_TYPE_DESC = " " + PREFIX_BLOOD_TYPE + "C+"; // 'C+' invalid blood type
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_NOTE_DATE_DESC = " " + PREFIX_DATE + "2-3-2020"; // incorrect date format
-    // '* not allowed in name'
+    // '*' not allowed in name
     public static final String INVALID_NOTE_DOCTOR_NAME_DESC = " " + PREFIX_NAME + "A* doctor";
     public static final String INVALID_NOTE_DOCTOR_MCR_DESC = " " + PREFIX_MCR + "Z82730P"; // incorrect mcr format
     public static final String INVALID_NOTE_CONTENT_DESC = " " + PREFIX_CONTENT + ""; // content cannot be empty

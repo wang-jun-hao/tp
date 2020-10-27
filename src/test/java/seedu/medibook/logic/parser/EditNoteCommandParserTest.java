@@ -15,8 +15,7 @@ import static seedu.medibook.logic.parser.CliSyntax.PREFIX_MCR;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.medibook.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.medibook.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.medibook.testutil.TypicalIndexes.INDEX_FIRST_MEDICAL_NOTE;
-import static seedu.medibook.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
+import static seedu.medibook.testutil.TypicalIndexes.INDEX_FIRST;
 
 import org.junit.jupiter.api.Test;
 
@@ -93,7 +92,7 @@ public class EditNoteCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_MEDICAL_NOTE;
+        Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + NOTE_NON_FUTURE_DATE_DESC + NOTE_DOCTOR_NAME_DESC
                 + NOTE_DOCTOR_MCR_DESC + NOTE_CONTENT_DESC;
 
@@ -111,7 +110,7 @@ public class EditNoteCommandParserTest {
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_PATIENT;
+        Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + NOTE_NON_FUTURE_DATE_DESC;
 
         EditNoteCommand.EditNoteDescriptor descriptor = new EditNoteCommand.EditNoteDescriptor();
@@ -126,7 +125,7 @@ public class EditNoteCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // date
-        Index targetIndex = INDEX_FIRST_MEDICAL_NOTE;
+        Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + NOTE_NON_FUTURE_DATE_DESC;
 
         EditNoteCommand.EditNoteDescriptor descriptor = new EditNoteCommand.EditNoteDescriptor();
@@ -165,7 +164,7 @@ public class EditNoteCommandParserTest {
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-        Index targetIndex = INDEX_FIRST_MEDICAL_NOTE;
+        Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + " "
                 + PREFIX_DATE + "20-10-2008" + NOTE_NON_FUTURE_DATE_DESC
                 + " " + PREFIX_NAME + "Gary Lin" + NOTE_DOCTOR_NAME_DESC
@@ -187,7 +186,7 @@ public class EditNoteCommandParserTest {
     @Test
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
-        Index targetIndex = INDEX_FIRST_MEDICAL_NOTE;
+        Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + INVALID_NOTE_DOCTOR_NAME_DESC + NOTE_DOCTOR_NAME_DESC;
 
         EditNoteCommand.EditNoteDescriptor descriptor = new EditNoteCommand.EditNoteDescriptor();

@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.medibook.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.medibook.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.medibook.testutil.TypicalIndexes.INDEX_FIRST_MEDICAL_NOTE;
-import static seedu.medibook.testutil.TypicalIndexes.INDEX_SECOND_MEDICAL_NOTE;
+import static seedu.medibook.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.medibook.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.medibook.testutil.TypicalPatients.ALICE_MEDICAL_NOTE_1;
 import static seedu.medibook.testutil.TypicalPatients.ALICE_MEDICAL_NOTE_2;
 import static seedu.medibook.testutil.TypicalPatients.ALICE_NUM_OF_MEDICAL_NOTES;
@@ -50,7 +50,7 @@ public class EditNoteCommandTest {
         descriptor.setMcr(new Mcr("M00000X"));
         descriptor.setContent(new Content("Patient has high fever."));
 
-        EditNoteCommand editNoteCommand = new EditNoteCommand(INDEX_FIRST_MEDICAL_NOTE, descriptor);
+        EditNoteCommand editNoteCommand = new EditNoteCommand(INDEX_FIRST, descriptor);
 
         MedicalNote editedNote = new MedicalNote(new Date("24-12-2018", true),
                 new Doctor(new Name("Ian Bob"), new Mcr("M00000X")),
@@ -79,7 +79,7 @@ public class EditNoteCommandTest {
         EditNoteCommand.EditNoteDescriptor descriptor = new EditNoteCommand.EditNoteDescriptor();
         descriptor.setContent(new Content("Patient has high fever."));
 
-        EditNoteCommand editNoteCommand = new EditNoteCommand(INDEX_FIRST_MEDICAL_NOTE, descriptor);
+        EditNoteCommand editNoteCommand = new EditNoteCommand(INDEX_FIRST, descriptor);
 
         MedicalNote editedNote = new MedicalNote(new Date("19-02-2020", true),
                 new Doctor(new Name("John"), new Mcr("MP2819J")),
@@ -107,7 +107,7 @@ public class EditNoteCommandTest {
 
         EditNoteCommand.EditNoteDescriptor descriptor = new EditNoteCommand.EditNoteDescriptor();
 
-        EditNoteCommand editNoteCommand = new EditNoteCommand(INDEX_FIRST_MEDICAL_NOTE, descriptor);
+        EditNoteCommand editNoteCommand = new EditNoteCommand(INDEX_FIRST, descriptor);
 
         MedicalNote editedNote = ALICE_MEDICAL_NOTE_1;
 
@@ -137,7 +137,7 @@ public class EditNoteCommandTest {
         descriptor.setMcr(new Mcr("MP2819J"));
         descriptor.setContent(new Content("Patient is bad."));
 
-        EditNoteCommand editNoteCommand = new EditNoteCommand(INDEX_FIRST_MEDICAL_NOTE, descriptor);
+        EditNoteCommand editNoteCommand = new EditNoteCommand(INDEX_FIRST, descriptor);
 
         assertCommandFailure(editNoteCommand, model, EditNoteCommand.MESSAGE_DUPLICATE_NOTE);
     }
@@ -161,12 +161,12 @@ public class EditNoteCommandTest {
         EditNoteCommand.EditNoteDescriptor descriptor = new EditNoteCommand.EditNoteDescriptor();
         descriptor.setName(new Name("Bob"));
 
-        final EditNoteCommand standardCommand = new EditNoteCommand(INDEX_FIRST_MEDICAL_NOTE, descriptor);
+        final EditNoteCommand standardCommand = new EditNoteCommand(INDEX_FIRST, descriptor);
 
         // same values -> returns true
         EditNoteCommand.EditNoteDescriptor descriptor2 = new EditNoteCommand.EditNoteDescriptor();
         descriptor2.setName(new Name("Bob"));
-        EditNoteCommand commandWithSameValues = new EditNoteCommand(INDEX_FIRST_MEDICAL_NOTE, descriptor2);
+        EditNoteCommand commandWithSameValues = new EditNoteCommand(INDEX_FIRST, descriptor2);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -179,12 +179,12 @@ public class EditNoteCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditNoteCommand(INDEX_SECOND_MEDICAL_NOTE, descriptor)));
+        assertFalse(standardCommand.equals(new EditNoteCommand(INDEX_SECOND, descriptor)));
 
         // different descriptor -> returns false
         EditNoteCommand.EditNoteDescriptor descriptor3 = new EditNoteCommand.EditNoteDescriptor();
         descriptor3.setMcr(new Mcr("M92638X"));
-        assertFalse(standardCommand.equals(new EditNoteCommand(INDEX_FIRST_MEDICAL_NOTE, descriptor3)));
+        assertFalse(standardCommand.equals(new EditNoteCommand(INDEX_FIRST, descriptor3)));
     }
 
 }

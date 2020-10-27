@@ -68,7 +68,7 @@ public class JsonMediBookStorageTest {
     public void readAndSaveMediBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempMediBook.json");
         MediBook original = getTypicalMediBook();
-        // this is the expected MediBook when program loads.
+        // This is the expected MediBook when program loads.
         MediBook originalWithAllEmptyMedicalNoteList = getTypicalMediBookWithAllEmptyMedicalNoteList();
         JsonMediBookStorage jsonMediBookStorage = new JsonMediBookStorage(filePath);
 
