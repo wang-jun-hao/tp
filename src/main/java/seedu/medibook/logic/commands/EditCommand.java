@@ -2,14 +2,16 @@ package seedu.medibook.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_BLOOD_TYPE;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_CONDITION;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_IC;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_TREATMENT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_WEIGHT;
 import static seedu.medibook.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 
@@ -25,6 +27,9 @@ import seedu.medibook.commons.util.CollectionUtil;
 import seedu.medibook.logic.commands.exceptions.CommandException;
 import seedu.medibook.model.Model;
 import seedu.medibook.model.commonfields.Name;
+import seedu.medibook.model.medicaldetail.Allergy;
+import seedu.medibook.model.medicaldetail.Condition;
+import seedu.medibook.model.medicaldetail.Treatment;
 import seedu.medibook.model.medicalnote.MedicalNoteList;
 import seedu.medibook.model.patient.Address;
 import seedu.medibook.model.patient.BloodType;
@@ -35,7 +40,6 @@ import seedu.medibook.model.patient.Ic;
 import seedu.medibook.model.patient.Patient;
 import seedu.medibook.model.patient.Phone;
 import seedu.medibook.model.patient.Weight;
-import seedu.medibook.model.medicaldetail.Tag;
 
 /**
  * Edits the details of an existing patient in the medi book.
@@ -57,7 +61,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_HEIGHT + "HEIGHT] "
             + "[" + PREFIX_WEIGHT + "WEIGHT] "
             + "[" + PREFIX_BLOOD_TYPE + "BLOOD TYPE]"
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_ALLERGY + "ALLERGY]... "
+            + "[" + PREFIX_CONDITION + "CONDITION]... "
+            + "[" + PREFIX_TREATMENT + "TREATMENT]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -126,10 +132,14 @@ public class EditCommand extends Command {
         Optional<Weight> updatedWeight = editPatientDescriptor.getWeight().or(patientToEdit::getWeight);
         Optional<BloodType> updatedBloodType = editPatientDescriptor.getBloodType()
                 .or(patientToEdit::getBloodType);
-        Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
+        Set<Allergy> updatedAllergies = editPatientDescriptor.getAllergies().orElse(patientToEdit.getAllergies());
+        Set<Condition> updatedConditions = editPatientDescriptor.getConditions().orElse(patientToEdit.getConditions());
+        Set<Treatment> updatedTreatments = editPatientDescriptor.getTreatments().orElse(patientToEdit.getTreatments());
+
 
         Patient editedPatient = new Patient(updatedIc, updatedName, updatedDateOfBirth, updatedPhone, updatedEmail,
-                updatedAddress, updatedHeight, updatedWeight, updatedBloodType, updatedTags);
+                updatedAddress, updatedHeight, updatedWeight, updatedBloodType, updatedAllergies, updatedConditions,
+            updatedTreatments);
 
         editedPatient.setRecord(patientToEdit.getRecord());
 
@@ -171,13 +181,15 @@ public class EditCommand extends Command {
         private Height height;
         private Weight weight;
         private BloodType bloodType;
-        private Set<Tag> tags;
+        private Set<Allergy> allergies;
+        private Set<Condition> conditions;
+        private Set<Treatment> treatments;
 
         public EditPatientDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * Defensive copies of medical tags are used internally.
          */
         public EditPatientDescriptor(EditPatientDescriptor toCopy) {
             setIc(toCopy.ic);
@@ -189,7 +201,9 @@ public class EditCommand extends Command {
             setHeight(toCopy.height);
             setWeight(toCopy.weight);
             setBloodType(toCopy.bloodType);
-            setTags(toCopy.tags);
+            setAllergies(toCopy.allergies);
+            setConditions(toCopy.conditions);
+            setTreatments(toCopy.treatments);
         }
 
         /**
@@ -197,7 +211,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(ic, name, dateOfBirth, phone, email, address, height, weight,
-                                               bloodType, tags);
+                                               bloodType, allergies, conditions, treatments);
         }
 
         public void setIc(Ic ic) {
@@ -273,20 +287,54 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code allergies} to this object's {@code allergies}.
+         * A defensive copy of {@code allergies} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setAllergies(Set<Allergy> allergies) {
+            this.allergies = (allergies != null) ? new HashSet<>(allergies) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable allergy set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code allergies} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<Allergy>> getAllergies() {
+            return (allergies != null) ? Optional.of(Collections.unmodifiableSet(allergies)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code conditions} to this object's {@code conditions}.
+         * A defensive copy of {@code conditions} is used internally.
+         */
+        public void setConditions(Set<Condition> conditions) {
+            this.conditions = (conditions != null) ? new HashSet<>(conditions) : null;
+        }
+
+        /**
+         * Returns an unmodifiable condition set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code conditions} is null.
+         */
+        public Optional<Set<Condition>> getConditions() {
+            return (conditions != null) ? Optional.of(Collections.unmodifiableSet(conditions)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code treatments} to this object's {@code treatments}.
+         * A defensive copy of {@code treatments} is used internally.
+         */
+        public void setTreatments(Set<Treatment> treatments) {
+            this.treatments = (treatments != null) ? new HashSet<>(treatments) : null;
+        }
+
+        /**
+         * Returns an unmodifiable treatment set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code treatments} is null.
+         */
+        public Optional<Set<Treatment>> getTreatments() {
+            return (treatments != null) ? Optional.of(Collections.unmodifiableSet(treatments)) : Optional.empty();
         }
 
         @Override
@@ -313,7 +361,9 @@ public class EditCommand extends Command {
                     && getHeight().equals(e.getHeight())
                     && getWeight().equals(e.getWeight())
                     && getBloodType().equals(e.getBloodType())
-                    && getTags().equals(e.getTags());
+                    && getAllergies().equals(e.getAllergies())
+                    && getConditions().equals(e.getConditions())
+                    && getTreatments().equals(e.getTreatments());
         }
     }
 }
