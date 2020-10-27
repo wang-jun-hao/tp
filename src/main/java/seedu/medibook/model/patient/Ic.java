@@ -13,9 +13,9 @@ public class Ic {
             + "and adhere to the following constraints:\n"
             + "1. The @ should be a letter S, T, F or G\n"
             + "2. The xxxxxxx should be a 7-digit number\n"
-            + "3. The # is should be a letter";
+            + "3. The # should be any letter";
 
-    public static final String FIRST_CHARACTER_REGEX = "[STFG]{1,1}";
+    public static final String FIRST_CHARACTER_REGEX = "[STFGstfg]{1,1}";
     public static final String DIGITS_REGEX = "\\d{7,7}";
     public static final String LAST_CHARACTER_REGEX = "\\w{1,1}";
     public static final String VALIDATION_REGEX = FIRST_CHARACTER_REGEX + DIGITS_REGEX + LAST_CHARACTER_REGEX;
@@ -29,7 +29,7 @@ public class Ic {
     public Ic(String ic) {
         requireNonNull(ic);
         checkArgument(isValidIc(ic), MESSAGE_CONSTRAINTS);
-        this.ic = ic;
+        this.ic = ic.toUpperCase();
     }
 
     /**
