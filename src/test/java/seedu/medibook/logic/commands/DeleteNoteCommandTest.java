@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.medibook.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.medibook.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.medibook.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
+import static seedu.medibook.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.medibook.testutil.TypicalPatients.OUT_OF_RANGE_NOTE_INDEX;
 import static seedu.medibook.testutil.TypicalPatients.VALID_NOTE_INDEX;
 import static seedu.medibook.testutil.TypicalPatients.getTypicalMediBook;
@@ -31,7 +31,7 @@ public class DeleteNoteCommandTest {
         Model model = new ModelManager(getTypicalMediBook(), new UserPrefs());
         Index validIndex = Index.fromOneBased(VALID_NOTE_INDEX);
 
-        Patient targetPatient = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
+        Patient targetPatient = model.getFilteredPatientList().get(INDEX_FIRST.getZeroBased());
         DeleteNoteCommand deleteNoteCommand = new DeleteNoteCommand(validIndex);
         MedicalNote medicalNoteToDelete =
                 targetPatient.getMedicalNoteAtIndex(validIndex.getZeroBased());
@@ -56,7 +56,7 @@ public class DeleteNoteCommandTest {
         Model model = new ModelManager(getTypicalMediBook(), new UserPrefs());
         Index outOfRangeIndex = Index.fromOneBased(OUT_OF_RANGE_NOTE_INDEX);
 
-        Patient targetPatient = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
+        Patient targetPatient = model.getFilteredPatientList().get(INDEX_FIRST.getZeroBased());
         DeleteNoteCommand deleteNoteCommand = new DeleteNoteCommand(outOfRangeIndex);
 
         model.accessPatient(targetPatient);

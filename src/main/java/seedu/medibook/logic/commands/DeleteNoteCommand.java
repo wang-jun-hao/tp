@@ -3,7 +3,9 @@ package seedu.medibook.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
+import seedu.medibook.commons.core.LogsCenter;
 import seedu.medibook.commons.core.Messages;
 import seedu.medibook.commons.core.index.Index;
 import seedu.medibook.logic.commands.exceptions.CommandException;
@@ -29,6 +31,8 @@ public class DeleteNoteCommand extends Command {
     public static final String MESSAGE_DELETE_NOTE_ON_LIST = "You can only delete a medical note from a patient "
             + "when you are viewing his/her patient profile. Access the patient profile before "
             + "deleting a medical note.";
+
+    private final Logger logger = LogsCenter.getLogger(DeleteNoteCommand.class);
 
     private final Index targetIndex;
 
@@ -61,6 +65,9 @@ public class DeleteNoteCommand extends Command {
         MedicalNote noteToDelete = medicalNoteList.getMedicalNoteAtIndex(zeroBasedIndex);
 
         medicalNoteList.deleteMedicalNoteAtIndex(zeroBasedIndex);
+
+        logger.info("----------------[PATIENT AND ORDER OF MEDICAL NOTES:][" + displayedPatient + "\n"
+                + displayedPatient.getMedicalNoteList() + "]");
 
         return new CommandResult(String.format(MESSAGE_DELETE_NOTE_SUCCESS, noteToDelete));
     }
