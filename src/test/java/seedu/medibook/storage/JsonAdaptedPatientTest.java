@@ -38,7 +38,7 @@ public class JsonAdaptedPatientTest {
     private static final String INVALID_WEIGHT = "10.12";
     private static final String INVALID_BMI = "10.12";
     private static final String INVALID_BLOOD_TYPE = "D+";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG = " *";
 
     private static final String EMPTY_OPTIONAL_FIELD = OPTIONAL_FIELD_EMPTY_MESSAGE;
 

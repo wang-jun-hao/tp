@@ -13,6 +13,7 @@ import seedu.medibook.logic.parser.exceptions.ParseException;
 import seedu.medibook.model.commonfields.Date;
 import seedu.medibook.model.commonfields.Name;
 import seedu.medibook.model.doctor.Mcr;
+import seedu.medibook.model.medicaldetail.Tag;
 import seedu.medibook.model.medicalnote.Content;
 import seedu.medibook.model.patient.Address;
 import seedu.medibook.model.patient.BloodType;
@@ -22,7 +23,6 @@ import seedu.medibook.model.patient.Height;
 import seedu.medibook.model.patient.Ic;
 import seedu.medibook.model.patient.Phone;
 import seedu.medibook.model.patient.Weight;
-import seedu.medibook.model.medicaldetail.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.

@@ -97,7 +97,8 @@ public class CommandTestUtil {
     // 2 decimal places is not allowed in weight
     public static final String INVALID_WEIGHT_DESC = " " + PREFIX_WEIGHT + "55.55";
     public static final String INVALID_BLOOD_TYPE_DESC = " " + PREFIX_BLOOD_TYPE + "C+"; // 'C+' invalid blood type
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    // tag not allowed to have only non-alphanumeric characters
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "[/*";
     public static final String INVALID_NOTE_DATE_DESC = " " + PREFIX_DATE + "2-3-2020"; // incorrect date format
     public static final String INVALID_DOCTOR_NAME_DESC = " " + PREFIX_NAME + "A* doctor"; // '* not allowed in name'
     public static final String INVALID_DOCTOR_MCR_DESC = " " + PREFIX_MCR + "Z82730P"; // incorrect mcr format

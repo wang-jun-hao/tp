@@ -36,7 +36,7 @@ public class ParserUtilTest {
     private static final String INVALID_HEIGHT = "18o";
     private static final String INVALID_WEIGHT = "20.15";
     private static final String INVALID_BLOOD_TYPE = "C+";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG = "/+=";
 
     private static final String VALID_IC = "S9999999R";
     private static final String VALID_NAME = "Rachel Walker";

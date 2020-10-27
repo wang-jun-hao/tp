@@ -19,6 +19,7 @@ import java.util.stream.Stream;
 import seedu.medibook.logic.commands.AddCommand;
 import seedu.medibook.logic.parser.exceptions.ParseException;
 import seedu.medibook.model.commonfields.Name;
+import seedu.medibook.model.medicaldetail.Tag;
 import seedu.medibook.model.patient.Address;
 import seedu.medibook.model.patient.BloodType;
 import seedu.medibook.model.patient.DateOfBirth;
@@ -28,7 +29,6 @@ import seedu.medibook.model.patient.Ic;
 import seedu.medibook.model.patient.Patient;
 import seedu.medibook.model.patient.Phone;
 import seedu.medibook.model.patient.Weight;
-import seedu.medibook.model.medicaldetail.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object
