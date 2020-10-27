@@ -1,5 +1,11 @@
 package seedu.medibook.model.medicaldetail;
 
+/**
+ * Represents a medical Condition in the medi book.
+ * This {@code Condition} class inherits from the {@code Tag} class.
+ * It is a tag describing one of the medical conditions that a patient is diagnosed with,
+ * where the set of conditions is a medical detail of that patient.
+ */
 public class Condition extends Tag {
 
     /**

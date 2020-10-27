@@ -1,5 +1,11 @@
 package seedu.medibook.model.medicaldetail;
 
+/**
+ * Represents an Allergy in the medi book.
+ * This {@code Allergy} class inherits from the {@code Tag} class.
+ * It is a tag describing one of the allergies that a patient has,
+ * where the set of allergies is a medical detail of that patient.
+ */
 public class Allergy extends Tag {
 
     /**
