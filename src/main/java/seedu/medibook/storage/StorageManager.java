@@ -98,7 +98,13 @@ public class StorageManager implements Storage {
     public Optional<ReadOnlyMedicalNoteList> readMedicalNoteList(Path filePath, Ic ic)
             throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return medicalNoteListStorage.readMedicalNoteList(filePath, ic);
+        try {
+            return medicalNoteListStorage.readMedicalNoteList(filePath, ic);
+        } catch (DataConversionException dce) {
+            logger.warning(
+                    "Medical notes data file not in the correct format. An empty medical notes list will be used.");
+            return Optional.empty();
+        }
     }
 
     @Override
