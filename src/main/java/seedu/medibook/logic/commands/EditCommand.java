@@ -128,8 +128,15 @@ public class EditCommand extends Command {
                 .or(patientToEdit::getBloodType);
         Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
 
-        return new Patient(updatedIc, updatedName, updatedDateOfBirth, updatedPhone, updatedEmail, updatedAddress,
-                          updatedHeight, updatedWeight, updatedBloodType, updatedTags);
+        Patient editedPatient = new Patient(updatedIc, updatedName, updatedDateOfBirth, updatedPhone, updatedEmail,
+                updatedAddress, updatedHeight, updatedWeight, updatedBloodType, updatedTags);
+
+        editedPatient.setRecord(patientToEdit.getRecord());
+
+        editPatientDescriptor.getHeight().ifPresent(h -> editedPatient.getRecord().addHeightRecord(h));
+        editPatientDescriptor.getWeight().ifPresent(w -> editedPatient.getRecord().addWeightRecord(w));
+
+        return editedPatient;
     }
 
     @Override

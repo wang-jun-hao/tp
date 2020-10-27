@@ -1,6 +1,8 @@
 package seedu.medibook.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.medibook.model.patient.Patient.OPTIONAL_FIELD_EMPTY_MESSAGE;
 import static seedu.medibook.storage.JsonAdaptedPatient.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.medibook.testutil.Assert.assertThrows;
 import static seedu.medibook.testutil.TypicalPatients.BENSON;
@@ -23,6 +25,7 @@ import seedu.medibook.model.patient.Height;
 import seedu.medibook.model.patient.Ic;
 import seedu.medibook.model.patient.Patient;
 import seedu.medibook.model.patient.Phone;
+import seedu.medibook.model.patient.Record;
 import seedu.medibook.model.patient.Weight;
 import seedu.medibook.testutil.PatientBuilder;
 
@@ -39,6 +42,8 @@ public class JsonAdaptedPatientTest {
     private static final String INVALID_BLOOD_TYPE = "D+";
     private static final String INVALID_TAG = "#friend";
 
+    private static final String EMPTY_OPTIONAL_FIELD = OPTIONAL_FIELD_EMPTY_MESSAGE;
+
     private static final String VALID_IC = BENSON.getIc().toString();
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_DOB = BENSON.getDateOfBirth().toString();
@@ -49,12 +54,14 @@ public class JsonAdaptedPatientTest {
     private static final String VALID_WEIGHT = BENSON.getStringWeight();
     private static final String VALID_BMI = BENSON.getStringBmi();
     private static final String VALID_BLOOD_TYPE = BENSON.getStringBloodType();
+    private static final JsonAdaptedRecord VALID_RECORD = new JsonAdaptedRecord(BENSON.getRecord());
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    // medical note list data of patient should not be loaded at point of program start-up, hence expected
-    // behaviour is that all these patients have an empty medical note list instead of the one initialised and loaded
-    // in TypicalPatients.java for other testing purposes
+    /* Medical note list data of patient should not be loaded at point of program start-up, hence expected
+    behaviour is that all these patients have an empty medical note list instead of the one initialised and loaded
+    in TypicalPatients.java for other testing purposes.
+     */
     private static final MedicalNoteList emptyMedicalNoteList = new MedicalNoteList();
 
     @Test
@@ -68,7 +75,7 @@ public class JsonAdaptedPatientTest {
     @Test
     public void toModelType_invalidIc_throwsIllegalValueException() {
         JsonAdaptedPatient patient = new JsonAdaptedPatient(INVALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE, VALID_EMAIL,
-                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_TAGS);
+                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_RECORD, VALID_TAGS);
         String expectedMessage = Ic.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
     }
@@ -76,7 +83,7 @@ public class JsonAdaptedPatientTest {
     @Test
     public void toModelType_nullIc_throwsIllegalValueException() {
         JsonAdaptedPatient patient = new JsonAdaptedPatient(null, VALID_NAME, VALID_DOB, VALID_PHONE, VALID_EMAIL,
-                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_TAGS);
+                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_RECORD, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Ic.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
     }
@@ -84,7 +91,7 @@ public class JsonAdaptedPatientTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedPatient patient = new JsonAdaptedPatient(VALID_IC, INVALID_NAME, VALID_DOB, VALID_PHONE, VALID_EMAIL,
-                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_TAGS);
+                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_RECORD, VALID_TAGS);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
     }
@@ -92,7 +99,7 @@ public class JsonAdaptedPatientTest {
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedPatient patient = new JsonAdaptedPatient(VALID_IC, null, VALID_DOB, VALID_PHONE, VALID_EMAIL,
-                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_TAGS);
+                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_RECORD, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
     }
@@ -100,7 +107,7 @@ public class JsonAdaptedPatientTest {
     @Test
     public void toModelType_invalidDateOfBirth_throwsIllegalValueException() {
         JsonAdaptedPatient patient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, INVALID_DOB, VALID_PHONE, VALID_EMAIL,
-                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_TAGS);
+                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_RECORD, VALID_TAGS);
         String expectedMessage = DateOfBirth.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
     }
@@ -108,7 +115,7 @@ public class JsonAdaptedPatientTest {
     @Test
     public void toModelType_nullDateOfBirth_throwsIllegalValueException() {
         JsonAdaptedPatient patient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, null, VALID_PHONE, VALID_EMAIL,
-                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_TAGS);
+                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_RECORD, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, DateOfBirth.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
     }
@@ -116,7 +123,7 @@ public class JsonAdaptedPatientTest {
     @Test
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         JsonAdaptedPatient patient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, INVALID_PHONE, VALID_EMAIL,
-                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_TAGS);
+                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_RECORD, VALID_TAGS);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
     }
@@ -124,56 +131,158 @@ public class JsonAdaptedPatientTest {
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
         JsonAdaptedPatient patient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, null, VALID_EMAIL,
-                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_TAGS);
+                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_RECORD, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
     }
 
     @Test
+    public void toModelType_emptyEmail_returnPatientWithEmptyEmailField() throws IllegalValueException {
+        JsonAdaptedPatient jsonAdaptedPatient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE,
+                EMPTY_OPTIONAL_FIELD, VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE,
+                VALID_RECORD, VALID_TAGS);
+        Patient patient = jsonAdaptedPatient.toModelType();
+        assertTrue(patient.getEmail().isEmpty());
+    }
+
+    @Test
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         JsonAdaptedPatient patient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE, INVALID_EMAIL,
-                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_TAGS);
+                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_RECORD, VALID_TAGS);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
     }
 
     @Test
+    public void toModelType_nullEmail_throwsIllegalValueException() {
+        JsonAdaptedPatient patient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE, null,
+                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_RECORD, VALID_TAGS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
+    }
+
+    @Test
+    public void toModelType_emptyAddress_returnPatientWithEmptyAddressField() throws IllegalValueException {
+        JsonAdaptedPatient jsonAdaptedPatient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE,
+                VALID_EMAIL, EMPTY_OPTIONAL_FIELD, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE,
+                VALID_RECORD, VALID_TAGS);
+        Patient patient = jsonAdaptedPatient.toModelType();
+        assertTrue(patient.getAddress().isEmpty());
+    }
+
+    @Test
     public void toModelType_invalidAddress_throwsIllegalValueException() {
         JsonAdaptedPatient patient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE, VALID_EMAIL,
-                INVALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_TAGS);
+                INVALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_RECORD, VALID_TAGS);
         String expectedMessage = Address.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
     }
 
     @Test
+    public void toModelType_nullAddress_throwsIllegalValueException() {
+        JsonAdaptedPatient patient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE, VALID_EMAIL,
+                null, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_RECORD, VALID_TAGS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
+    }
+
+    @Test
+    public void toModelType_emptyHeight_returnPatientWithEmptyHeightField() throws IllegalValueException {
+        JsonAdaptedPatient jsonAdaptedPatient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE,
+                VALID_EMAIL, VALID_ADDRESS, EMPTY_OPTIONAL_FIELD, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE,
+                VALID_RECORD, VALID_TAGS);
+        Patient patient = jsonAdaptedPatient.toModelType();
+        assertTrue(patient.getHeight().isEmpty());
+    }
+
+    @Test
     public void toModelType_invalidHeight_throwsIllegalValueException() {
         JsonAdaptedPatient patient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE, VALID_EMAIL,
-                VALID_ADDRESS, INVALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_TAGS);
+                VALID_ADDRESS, INVALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_RECORD, VALID_TAGS);
         String expectedMessage = Height.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
     }
 
     @Test
+    public void toModelType_nullHeight_throwsIllegalValueException() {
+        JsonAdaptedPatient patient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, null, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_RECORD, VALID_TAGS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Height.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
+    }
+
+    @Test
+    public void toModelType_emptyWeight_returnPatientWithEmptyWeightField() throws IllegalValueException {
+        JsonAdaptedPatient jsonAdaptedPatient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE,
+                VALID_EMAIL, VALID_ADDRESS, VALID_HEIGHT, EMPTY_OPTIONAL_FIELD, VALID_BMI, VALID_BLOOD_TYPE,
+                VALID_RECORD, VALID_TAGS);
+        Patient patient = jsonAdaptedPatient.toModelType();
+        assertTrue(patient.getWeight().isEmpty());
+    }
+
+    @Test
     public void toModelType_invalidWeight_throwsIllegalValueException() {
         JsonAdaptedPatient patient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE, VALID_EMAIL,
-                VALID_ADDRESS, VALID_HEIGHT, INVALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_TAGS);
+                VALID_ADDRESS, VALID_HEIGHT, INVALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_RECORD, VALID_TAGS);
         String expectedMessage = Weight.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
     }
 
     @Test
+    public void toModelType_nullWeight_throwsIllegalValueException() {
+        JsonAdaptedPatient patient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_HEIGHT, null, VALID_BMI, VALID_BLOOD_TYPE, VALID_RECORD, VALID_TAGS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Weight.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
+    }
+
+    @Test
+    public void toModelType_emptyBmi_returnPatientWithEmptyBmiField() throws IllegalValueException {
+        JsonAdaptedPatient jsonAdaptedPatient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE,
+                VALID_EMAIL, VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, EMPTY_OPTIONAL_FIELD, VALID_BLOOD_TYPE,
+                VALID_RECORD, VALID_TAGS);
+        Patient patient = jsonAdaptedPatient.toModelType();
+        assertTrue(patient.getBmi().isEmpty());
+    }
+
+    @Test
     public void toModelType_invalidBmi_throwsIllegalValueException() {
         JsonAdaptedPatient patient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE, VALID_EMAIL,
-                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, INVALID_BMI, VALID_BLOOD_TYPE, VALID_TAGS);
+                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, INVALID_BMI, VALID_BLOOD_TYPE, VALID_RECORD, VALID_TAGS);
         String expectedMessage = Bmi.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
     }
 
     @Test
+    public void toModelType_nullBmi_throwsIllegalValueException() {
+        JsonAdaptedPatient patient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, null, VALID_BLOOD_TYPE, VALID_RECORD, VALID_TAGS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Bmi.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
+    }
+
+    @Test
+    public void toModelType_emptyBloodType_returnPatientWithEmptyBloodTypeField() throws IllegalValueException {
+        JsonAdaptedPatient jsonAdaptedPatient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE,
+                VALID_EMAIL, VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, EMPTY_OPTIONAL_FIELD,
+                VALID_RECORD, VALID_TAGS);
+        Patient patient = jsonAdaptedPatient.toModelType();
+        assertTrue(patient.getBloodType().isEmpty());
+    }
+
+    @Test
     public void toModelType_invalidBloodType_throwsIllegalValueException() {
         JsonAdaptedPatient patient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE, VALID_EMAIL,
-                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, INVALID_BLOOD_TYPE, VALID_TAGS);
+                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, INVALID_BLOOD_TYPE, VALID_RECORD, VALID_TAGS);
         String expectedMessage = BloodType.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullBloodType_throwsIllegalValueException() {
+        JsonAdaptedPatient patient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, null, VALID_RECORD, VALID_TAGS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, BloodType.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
     }
 
@@ -182,8 +291,18 @@ public class JsonAdaptedPatientTest {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedPatient patient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE, VALID_EMAIL,
-                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, invalidTags);
+                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, VALID_RECORD, invalidTags);
         assertThrows(IllegalValueException.class, patient::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullRecord_throwsIllegalValueException() {
+        List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
+        invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
+        JsonAdaptedPatient patient = new JsonAdaptedPatient(VALID_IC, VALID_NAME, VALID_DOB, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_HEIGHT, VALID_WEIGHT, VALID_BMI, VALID_BLOOD_TYPE, null, VALID_TAGS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Record.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
     }
 
 }
