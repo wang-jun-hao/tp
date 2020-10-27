@@ -52,9 +52,10 @@ public class JsonAdaptedPatientTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    // medical note list data of patient should not be loaded at point of program start-up, hence expected
-    // behaviour is that all these patients have an empty medical note list instead of the one initialised and loaded
-    // in TypicalPatients.java for other testing purposes
+    /* Medical note list data of patient should not be loaded at point of program start-up, hence expected
+    behaviour is that all these patients have an empty medical note list instead of the one initialised and loaded
+    in TypicalPatients.java for other testing purposes.
+     */
     private static final MedicalNoteList emptyMedicalNoteList = new MedicalNoteList();
 
     @Test

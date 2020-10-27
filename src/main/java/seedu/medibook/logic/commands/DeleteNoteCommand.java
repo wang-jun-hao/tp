@@ -52,15 +52,15 @@ public class DeleteNoteCommand extends Command {
 
         MedicalNoteList medicalNoteList = displayedPatient.getMedicalNoteList();
 
-        int indexZeroBased = targetIndex.getZeroBased();
+        int zeroBasedIndex = targetIndex.getZeroBased();
 
-        if (indexZeroBased >= medicalNoteList.size()) {
+        if (zeroBasedIndex >= medicalNoteList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_NOTE_DISPLAYED_INDEX);
         }
 
-        MedicalNote noteToDelete = medicalNoteList.getMedicalNoteAtIndex(indexZeroBased);
+        MedicalNote noteToDelete = medicalNoteList.getMedicalNoteAtIndex(zeroBasedIndex);
 
-        medicalNoteList.deleteMedicalNoteAtIndex(indexZeroBased);
+        medicalNoteList.deleteMedicalNoteAtIndex(zeroBasedIndex);
 
         return new CommandResult(String.format(MESSAGE_DELETE_NOTE_SUCCESS, noteToDelete));
     }
