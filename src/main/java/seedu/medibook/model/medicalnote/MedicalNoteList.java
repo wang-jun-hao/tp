@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
  */
 public class MedicalNoteList implements ReadOnlyMedicalNoteList {
     private static final MedicalNoteComparator comparator = new MedicalNoteComparator();
+    /** An inner representation of list of medical notes within MedicalNoteList that works with GUI element */
     private final ObservableList<MedicalNote> innerList;
 
     /**
