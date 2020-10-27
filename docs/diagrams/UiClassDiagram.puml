@@ -12,18 +12,11 @@ Class MainWindow
 Class HelpWindow
 Class ResultDisplay
 Class PatientListPanel
-Class PatientCard
 Class StatusBarFooter
 Class CommandBox
 
 Package PatientProfile {
 Class PatientProfile
-Class PersonalDetailsCard
-Class PersonalDetailsRow
-Class MedicalDetailsCard
-Class MedicalDetailsRow
-Class MedicalNotesPanel
-Class MedicalNoteCard
 }
 }
 
@@ -43,54 +36,30 @@ UiManager -down-> MainWindow
 MainWindow --> HelpWindow
 MainWindow *-down-> CommandBox
 MainWindow *-down-> ResultDisplay
-MainWindow *-down-> PatientListPanel
-MainWindow *-down-> PatientProfile
+MainWindow *-down--> PatientListPanel
+MainWindow *--> PatientProfile
 MainWindow *-down-> StatusBarFooter
-
-PatientListPanel -down-> PatientCard
 
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
 PatientListPanel --|> UiPart
-PatientCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow -down-|> UiPart
 PatientProfile -up-|> UiPart
-PersonalDetailsCard -up-|> UiPart
-PersonalDetailsRow -up-|> UiPart
-MedicalDetailsCard -up-|> UiPart
-MedicalDetailsRow -up-|> UiPart
-MedicalNotesPanel -up-|> UiPart
-MedicalNoteCard -up-|> UiPart
 
-PatientCard ..> Model
+
+PatientListPanel .right.> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
 PatientProfile .right.> Model
-PatientProfile *--> "1" PersonalDetailsCard
-PatientProfile *--> "1" MedicalDetailsCard
-PatientProfile *--> "1" MedicalNotesPanel
-
-PersonalDetailsCard .right.> Model
-PersonalDetailsCard *--> "4..10" PersonalDetailsRow
-
-MedicalDetailsCard .right.> Model
-MedicalDetailsCard *--> "1" MedicalDetailsRow
-
-MedicalNotesPanel .right.> Model
-MedicalNotesPanel *--> "*" MedicalNoteCard
-MedicalNoteCard ..> Model
 
 PatientListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
-
-PersonalDetailsCard -[hidden]right- MedicalDetailsCard
-MedicalDetailsCard -[hidden]right- MedicalNotesPanel
 
 MainWindow -[hidden]-|> UiPart
 @enduml
