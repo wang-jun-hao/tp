@@ -66,7 +66,7 @@ public class PatientCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         ic.setText(patient.getIc().ic);
         name.setText(patient.getName().fullName);
-        dateOfBirth.setText(patient.getDateOfBirth().outputValue);
+        dateOfBirth.setText(patient.getDateOfBirthOutputString());
         phone.setText(patient.getPhone().value);
 
         // email
