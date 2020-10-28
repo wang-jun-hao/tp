@@ -30,6 +30,8 @@ public class PatientProfile extends UiPart<Region> {
     private AnchorPane medicalDetailsCard;
     @FXML
     private AnchorPane medicalNotesPanel;
+    @FXML
+    private AnchorPane patientChartCard;
 
     /**
      * Creates a {@code PatientProfile} for the given {@code Patient}.
@@ -50,6 +52,9 @@ public class PatientProfile extends UiPart<Region> {
                 new Content("- Irregular hearbeat \n- Breathing problems")));
         MedicalNotesPanel medicalNotesPanel = new MedicalNotesPanel(medicalNotes);
         this.medicalNotesPanel.getChildren().add(medicalNotesPanel.getRoot());
+
+        PatientChartCard patientChartCard = new PatientChartCard(patient);
+        this.patientChartCard.getChildren().add(patientChartCard.getRoot());
     }
 
     @Override

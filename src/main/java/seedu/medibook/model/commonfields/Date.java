@@ -82,6 +82,15 @@ public class Date implements Comparable<Date> {
         return formatter.format(date);
     }
 
+
+    /**
+     * Returns the localDate of the Date as a LocalDate object
+     * @return localDate of the Date object
+     */
+    public LocalDate getLocalDate() {
+        return localDate;
+    }
+
     @Override
     public String toString() {
         return inputValue;
