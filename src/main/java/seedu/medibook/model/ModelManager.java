@@ -214,7 +214,7 @@ public class ModelManager implements Model {
     public Doctor getActiveUser() {
         return context.getActiveUser();
     }
-    
+
 
     @Override
     public boolean equals(Object obj) {

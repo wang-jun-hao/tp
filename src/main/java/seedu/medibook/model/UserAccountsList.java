@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public class UserAccountsList {
 
-    private List<Account> accountsList = new ArrayList<>();
+    private final List<Account> accountsList = new ArrayList<>();
 
     public void addAccount(Account account) {
         this.accountsList.add(account);
@@ -23,5 +23,21 @@ public class UserAccountsList {
             }
         }
         return result;
+    }
+
+    /**
+     * Checks if two UserAccountsList are equals.
+     */
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof UserAccountsList)) {
+            return false;
+        }
+
+        UserAccountsList otherList = (UserAccountsList) other;
+        return otherList.accountsList.equals(this.accountsList);
     }
 }

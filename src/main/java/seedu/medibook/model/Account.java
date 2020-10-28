@@ -1,5 +1,7 @@
 package seedu.medibook.model;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.medibook.model.doctor.Doctor;
 
 public class Account {
@@ -12,6 +14,7 @@ public class Account {
      * Constructs an account with a username and a password.
      */
     public Account(String username, String password, Doctor doctor) {
+        requireNonNull(doctor);
         this.username = username;
         this.password = password;
         this.doctor = doctor;
@@ -32,16 +35,27 @@ public class Account {
     /**
      * Checks if two accounts are equal.
      */
-    public boolean equals(Account otherAccount) {
-        if (otherAccount == this) {
+    public boolean equals(Object other) {
+        if (other == this) {
             return true;
         }
-        
-        return otherAccount.getUsername().equals(getUsername())
-                && otherAccount.getPassword().equals(getPassword());
+
+        if (!(other instanceof Account)) {
+            return false;
+        }
+
+        Account otherAccount = (Account) other;
+        return otherAccount.username.equals(this.username)
+                && otherAccount.password.equals(this.password)
+                && otherAccount.doctor.equals(this.doctor);
     }
-    
+
     public boolean check(String username, String password) {
         return getUsername().equals(username) && getPassword().equals(password);
+    }
+
+    @Override
+    public String toString() {
+        return getUsername() + getPassword() + getDoctor().getName() + getDoctor().getMcr();
     }
 }

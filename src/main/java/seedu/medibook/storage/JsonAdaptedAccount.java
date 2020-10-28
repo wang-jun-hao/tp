@@ -29,11 +29,7 @@ class JsonAdaptedAccount {
     }
 
     public Account toModelType() throws IllegalValueException {
-        if (doctorName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT));
-        }
-
-        if (doctorMcr == null) {
+        if (doctorName == null || doctorMcr == null || !Name.isValidName(doctorName) || !Mcr.isValidMcr(doctorMcr)) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT));
         }
 

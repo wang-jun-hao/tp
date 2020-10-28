@@ -63,8 +63,10 @@ public class MainApp extends Application {
         MediBookStorage mediBookStorage = new JsonMediBookStorage(userPrefs.getMediBookFilePath());
         MedicalNoteListStorage medicalNoteListStorage =
                 new JsonMedicalNoteListStorage(userPrefs.getMedicalNotesDirPath());
-        UserAccountsListStorage userAccountsListStorage = new JsonUserAccountsListStorage(userPrefs.getUserAccountPath());
-        storage = new StorageManager(mediBookStorage, userPrefsStorage, medicalNoteListStorage, userAccountsListStorage);
+        UserAccountsListStorage userAccountsListStorage =
+                new JsonUserAccountsListStorage(userPrefs.getUserAccountPath());
+        storage =
+                new StorageManager(mediBookStorage, userPrefsStorage, medicalNoteListStorage, userAccountsListStorage);
 
         initLogging(config);
 

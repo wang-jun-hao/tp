@@ -60,5 +60,6 @@ public interface Logic {
     /**
      * Checks if the input username and password match any of the accounts saved.
      */
-    void processLoginInfo(String username, String password) throws DataConversionException, IllegalLoginException, IllegalValueException;
+    void processLoginInfo(String username, String password) throws DataConversionException, IllegalLoginException,
+            IllegalValueException;
 }

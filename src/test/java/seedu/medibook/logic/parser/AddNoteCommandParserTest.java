@@ -3,11 +3,7 @@ package seedu.medibook.logic.parser;
 
 import static seedu.medibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.medibook.logic.commands.CommandTestUtil.INVALID_NOTE_DATE_DESC;
-import static seedu.medibook.logic.commands.CommandTestUtil.INVALID_NOTE_DOCTOR_MCR_DESC;
-import static seedu.medibook.logic.commands.CommandTestUtil.INVALID_NOTE_DOCTOR_NAME_DESC;
 import static seedu.medibook.logic.commands.CommandTestUtil.NOTE_CONTENT_DESC;
-import static seedu.medibook.logic.commands.CommandTestUtil.NOTE_DOCTOR_MCR_DESC;
-import static seedu.medibook.logic.commands.CommandTestUtil.NOTE_DOCTOR_NAME_DESC;
 import static seedu.medibook.logic.commands.CommandTestUtil.NOTE_FUTURE_DATE_DESC;
 import static seedu.medibook.logic.commands.CommandTestUtil.NOTE_NON_FUTURE_DATE_DESC;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_CONTENT;
@@ -19,8 +15,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.medibook.logic.commands.AddNoteCommand;
 import seedu.medibook.model.commonfields.Date;
-import seedu.medibook.model.commonfields.Name;
-import seedu.medibook.model.doctor.Mcr;
 import seedu.medibook.model.medicalnote.Content;
 
 class AddNoteCommandParserTest {

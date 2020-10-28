@@ -31,7 +31,8 @@ public class StorageManager implements Storage {
      * Creates a {@code StorageManager} with the given {@code MediBookStorage} and {@code UserPrefStorage}.
      */
     public StorageManager(MediBookStorage mediBookStorage, UserPrefsStorage userPrefsStorage,
-                          MedicalNoteListStorage medicalNoteListStorage, UserAccountsListStorage userAccountsListStorage) {
+                          MedicalNoteListStorage medicalNoteListStorage,
+                          UserAccountsListStorage userAccountsListStorage) {
         super();
         this.mediBookStorage = mediBookStorage;
         this.userPrefsStorage = userPrefsStorage;

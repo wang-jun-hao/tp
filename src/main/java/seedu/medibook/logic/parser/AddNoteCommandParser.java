@@ -3,19 +3,13 @@ package seedu.medibook.logic.parser;
 import static seedu.medibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_CONTENT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_MCR;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.stream.Stream;
 
 import seedu.medibook.logic.commands.AddNoteCommand;
 import seedu.medibook.logic.parser.exceptions.ParseException;
 import seedu.medibook.model.commonfields.Date;
-import seedu.medibook.model.commonfields.Name;
-import seedu.medibook.model.doctor.Doctor;
-import seedu.medibook.model.doctor.Mcr;
 import seedu.medibook.model.medicalnote.Content;
-import seedu.medibook.model.medicalnote.MedicalNote;
 
 /**
  * Parses input arguments and creates a new AddNoteCommand object
