@@ -3,7 +3,9 @@ package seedu.medibook.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_BLOOD_TYPE;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_CONDITION;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_CONTENT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -12,7 +14,7 @@ import static seedu.medibook.logic.parser.CliSyntax.PREFIX_IC;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_MCR;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_TREATMENT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_WEIGHT;
 import static seedu.medibook.testutil.Assert.assertThrows;
 
@@ -53,8 +55,12 @@ public class CommandTestUtil {
     public static final String VALID_BMI_BOB = "23.6";
     public static final String VALID_BLOOD_TYPE_AMY = "A+";
     public static final String VALID_BLOOD_TYPE_BOB = "B+";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_ALLERGY_PENICILLIN = "Penicillin";
+    public static final String VALID_ALLERGY_SHELLFISH = "shellfish (mild)";
+    public static final String VALID_CONDITION_BACK = "back sprain";
+    public static final String VALID_CONDITION_DIABETES = "Type 1 Diabetes (T1D)";
+    public static final String VALID_TREATMENT_PHYSIOTHERAPY = "physiotherapy";
+    public static final String VALID_TREATMENT_PARACETAMOL = "Paracetamol (given 20-11-2019)";
     public static final String VALID_NON_FUTURE_DATE = "15-10-2020";
     public static final String VALID_FUTURE_DATE = "15-10-2030";
     public static final String VALID_DOCTOR_NAME = "John Doe";
@@ -79,8 +85,12 @@ public class CommandTestUtil {
     public static final String WEIGHT_DESC_BOB = " " + PREFIX_WEIGHT + VALID_WEIGHT_BOB;
     public static final String BLOOD_TYPE_DESC_AMY = " " + PREFIX_BLOOD_TYPE + VALID_BLOOD_TYPE_AMY;
     public static final String BLOOD_TYPE_DESC_BOB = " " + PREFIX_BLOOD_TYPE + VALID_BLOOD_TYPE_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String ALLERGY_DESC_PENICILLIN = " " + PREFIX_ALLERGY + VALID_ALLERGY_PENICILLIN;
+    public static final String ALLERGY_DESC_SHELLFISH = " " + PREFIX_ALLERGY + VALID_ALLERGY_SHELLFISH;
+    public static final String CONDITION_DESC_BACK = " " + PREFIX_CONDITION + VALID_CONDITION_BACK;
+    public static final String CONDITION_DESC_DIABETES = " " + PREFIX_CONDITION + VALID_CONDITION_DIABETES;
+    public static final String TREATMENT_DESC_PARACETAMOL = " " + PREFIX_TREATMENT + VALID_TREATMENT_PARACETAMOL;
+    public static final String TREATMENT_DESC_PHYSIOTHERAPY = " " + PREFIX_TREATMENT + VALID_TREATMENT_PHYSIOTHERAPY;
     public static final String NOTE_NON_FUTURE_DATE_DESC = " " + PREFIX_DATE + VALID_NON_FUTURE_DATE;
     public static final String NOTE_FUTURE_DATE_DESC = " " + PREFIX_DATE + VALID_FUTURE_DATE;
     public static final String NOTE_DOCTOR_NAME_DESC = " " + PREFIX_NAME + VALID_DOCTOR_NAME;
@@ -97,8 +107,10 @@ public class CommandTestUtil {
     // 2 decimal places is not allowed in weight
     public static final String INVALID_WEIGHT_DESC = " " + PREFIX_WEIGHT + "55.55";
     public static final String INVALID_BLOOD_TYPE_DESC = " " + PREFIX_BLOOD_TYPE + "C+"; // 'C+' invalid blood type
-    // tag not allowed to have only non-alphanumeric characters
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "[/*";
+    // medical tags not allowed to have only non-alphanumeric characters
+    public static final String INVALID_ALLERGY_DESC = " " + PREFIX_ALLERGY + "->.";
+    public static final String INVALID_CONDITION_DESC = " " + PREFIX_CONDITION + "/@!";
+    public static final String INVALID_TREATMENT_DESC = " " + PREFIX_TREATMENT + "[/*";
     public static final String INVALID_NOTE_DATE_DESC = " " + PREFIX_DATE + "2-3-2020"; // incorrect date format
     public static final String INVALID_DOCTOR_NAME_DESC = " " + PREFIX_NAME + "A* doctor"; // '* not allowed in name'
     public static final String INVALID_DOCTOR_MCR_DESC = " " + PREFIX_MCR + "Z82730P"; // incorrect mcr format
@@ -112,12 +124,15 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPatientDescriptorBuilder().withIc(VALID_IC_AMY).withName(VALID_NAME_AMY)
                 .withDateOfBirth(VALID_DOB_AMY).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
-                .withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).withHeight(VALID_HEIGHT_AMY)
-                .withWeight(VALID_WEIGHT_AMY).withBloodType(VALID_BLOOD_TYPE_AMY).build();
+                .withAddress(VALID_ADDRESS_AMY).withTreatments(VALID_TREATMENT_PARACETAMOL).withHeight(VALID_HEIGHT_AMY)
+                .withWeight(VALID_WEIGHT_AMY).withBloodType(VALID_BLOOD_TYPE_AMY)
+                .withAllergies(VALID_ALLERGY_PENICILLIN).withConditions(VALID_CONDITION_DIABETES).build();
         DESC_BOB = new EditPatientDescriptorBuilder().withIc(VALID_IC_BOB).withName(VALID_NAME_BOB)
                 .withDateOfBirth(VALID_DOB_BOB).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withHeight(VALID_HEIGHT_BOB).withWeight(VALID_WEIGHT_BOB)
-                .withBloodType(VALID_BLOOD_TYPE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withBloodType(VALID_BLOOD_TYPE_BOB).withAllergies(VALID_ALLERGY_PENICILLIN, VALID_ALLERGY_SHELLFISH)
+                .withConditions(VALID_CONDITION_BACK, VALID_CONDITION_DIABETES)
+                .withTreatments(VALID_TREATMENT_PHYSIOTHERAPY, VALID_TREATMENT_PARACETAMOL).build();
     }
 
     /**
