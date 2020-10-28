@@ -94,7 +94,7 @@ public class Date implements Comparable<Date> {
     public LocalDate getLocalDate() {
         return localDate;
     }
-  
+
     public String getInputString() {
         return inputValue;
     }
