@@ -43,22 +43,22 @@ public class EditNoteCommandTest {
     public void execute_allFieldsSpecified_success() {
         Patient targetPatient = model.getFilteredPatientList().get(0);
         model.accessPatient(targetPatient);
+        model.setActiveUser(new Doctor(new Name("John"), new Mcr("MP2819J")));
 
         EditNoteCommand.EditNoteDescriptor descriptor = new EditNoteCommand.EditNoteDescriptor();
         descriptor.setDate(new Date("24-12-2018", true));
-        descriptor.setName(new Name("Ian Bob"));
-        descriptor.setMcr(new Mcr("M00000X"));
         descriptor.setContent(new Content("Patient has high fever."));
 
         EditNoteCommand editNoteCommand = new EditNoteCommand(INDEX_FIRST, descriptor);
 
         MedicalNote editedNote = new MedicalNote(new Date("24-12-2018", true),
-                new Doctor(new Name("Ian Bob"), new Mcr("M00000X")),
+                model.getActiveUser(),
                 new Content("Patient has high fever."));
 
         String expectedMessage = String.format(EditNoteCommand.MESSAGE_EDIT_NOTE_SUCCESS, editedNote);
 
         Model expectedModel = new ModelManager(new MediBook(model.getMediBook()), new UserPrefs());
+        expectedModel.setActiveUser(new Doctor(new Name("John"), new Mcr("MP2819J")));
         Patient expectedTargetPatient = expectedModel.getFilteredPatientList().get(0);
         expectedTargetPatient = new PatientBuilder(expectedTargetPatient).build();
         LinkedList<MedicalNote> expectedMedicalNoteLinkedList =
@@ -75,6 +75,7 @@ public class EditNoteCommandTest {
     public void execute_someFieldsSpecified_success() {
         Patient targetPatient = model.getFilteredPatientList().get(0);
         model.accessPatient(targetPatient);
+        model.setActiveUser(new Doctor(new Name("John"), new Mcr("MP2819J")));
 
         EditNoteCommand.EditNoteDescriptor descriptor = new EditNoteCommand.EditNoteDescriptor();
         descriptor.setContent(new Content("Patient has high fever."));
@@ -88,6 +89,7 @@ public class EditNoteCommandTest {
         String expectedMessage = String.format(EditNoteCommand.MESSAGE_EDIT_NOTE_SUCCESS, editedNote);
 
         Model expectedModel = new ModelManager(new MediBook(model.getMediBook()), new UserPrefs());
+        expectedModel.setActiveUser(new Doctor(new Name("John"), new Mcr("MP2819J")));
         Patient expectedTargetPatient = expectedModel.getFilteredPatientList().get(0);
         expectedTargetPatient = new PatientBuilder(expectedTargetPatient).build();
         LinkedList<MedicalNote> expectedMedicalNoteLinkedList =
@@ -104,6 +106,7 @@ public class EditNoteCommandTest {
     public void execute_noFieldSpecified_success() {
         Patient targetPatient = model.getFilteredPatientList().get(0);
         model.accessPatient(targetPatient);
+        model.setActiveUser(new Doctor(new Name("John"), new Mcr("MP2819J")));
 
         EditNoteCommand.EditNoteDescriptor descriptor = new EditNoteCommand.EditNoteDescriptor();
 
@@ -114,6 +117,7 @@ public class EditNoteCommandTest {
         String expectedMessage = String.format(EditNoteCommand.MESSAGE_EDIT_NOTE_SUCCESS, editedNote);
 
         Model expectedModel = new ModelManager(new MediBook(model.getMediBook()), new UserPrefs());
+        expectedModel.setActiveUser(new Doctor(new Name("John"), new Mcr("MP2819J")));
         Patient expectedTargetPatient = expectedModel.getFilteredPatientList().get(0);
         expectedTargetPatient = new PatientBuilder(expectedTargetPatient).build();
         LinkedList<MedicalNote> expectedMedicalNoteLinkedList =
@@ -130,11 +134,10 @@ public class EditNoteCommandTest {
     public void execute_duplicateMedicalNote_failure() {
         Patient targetPatient = model.getFilteredPatientList().get(0);
         model.accessPatient(targetPatient);
+        model.setActiveUser(new Doctor(new Name("John"), new Mcr("MP2819J")));
 
         EditNoteCommand.EditNoteDescriptor descriptor = new EditNoteCommand.EditNoteDescriptor();
         descriptor.setDate(new Date("25-08-2020", true));
-        descriptor.setName(new Name("John"));
-        descriptor.setMcr(new Mcr("MP2819J"));
         descriptor.setContent(new Content("Patient is bad."));
 
         EditNoteCommand editNoteCommand = new EditNoteCommand(INDEX_FIRST, descriptor);
@@ -149,7 +152,7 @@ public class EditNoteCommandTest {
 
         Index outOfBoundIndex = Index.fromOneBased(ALICE_NUM_OF_MEDICAL_NOTES + 1);
         EditNoteCommand.EditNoteDescriptor descriptor = new EditNoteCommand.EditNoteDescriptor();
-        descriptor.setName(new Name("Berry"));
+        descriptor.setDate(new Date("25-08-2020", true));
 
         EditNoteCommand editNoteCommand = new EditNoteCommand(outOfBoundIndex, descriptor);
 
@@ -159,13 +162,13 @@ public class EditNoteCommandTest {
     @Test
     public void equals() {
         EditNoteCommand.EditNoteDescriptor descriptor = new EditNoteCommand.EditNoteDescriptor();
-        descriptor.setName(new Name("Bob"));
+        descriptor.setDate(new Date("25-08-2020", true));
 
         final EditNoteCommand standardCommand = new EditNoteCommand(INDEX_FIRST, descriptor);
 
         // same values -> returns true
         EditNoteCommand.EditNoteDescriptor descriptor2 = new EditNoteCommand.EditNoteDescriptor();
-        descriptor2.setName(new Name("Bob"));
+        descriptor2.setDate(new Date("25-08-2020", true));
         EditNoteCommand commandWithSameValues = new EditNoteCommand(INDEX_FIRST, descriptor2);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -183,7 +186,7 @@ public class EditNoteCommandTest {
 
         // different descriptor -> returns false
         EditNoteCommand.EditNoteDescriptor descriptor3 = new EditNoteCommand.EditNoteDescriptor();
-        descriptor3.setMcr(new Mcr("M92638X"));
+        descriptor.setDate(new Date("12-08-2020", true));
         assertFalse(standardCommand.equals(new EditNoteCommand(INDEX_FIRST, descriptor3)));
     }
 

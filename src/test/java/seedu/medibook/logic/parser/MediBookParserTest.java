@@ -6,7 +6,6 @@ import static seedu.medibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMA
 import static seedu.medibook.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_CONTENT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_MCR;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.medibook.testutil.Assert.assertThrows;
 import static seedu.medibook.testutil.TypicalIndexes.INDEX_FIRST;
@@ -31,8 +30,6 @@ import seedu.medibook.logic.commands.HelpCommand;
 import seedu.medibook.logic.commands.ListCommand;
 import seedu.medibook.logic.parser.exceptions.ParseException;
 import seedu.medibook.model.commonfields.Date;
-import seedu.medibook.model.commonfields.Name;
-import seedu.medibook.model.doctor.Mcr;
 import seedu.medibook.model.medicalnote.Content;
 import seedu.medibook.model.patient.FieldContainsKeywordsPredicate;
 import seedu.medibook.model.patient.Patient;
@@ -140,13 +137,11 @@ public class MediBookParserTest {
         EditNoteCommand.EditNoteDescriptor descriptor = new EditNoteCommand.EditNoteDescriptor();
 
         descriptor.setDate(new Date("19-02-2020", true));
-        descriptor.setName(new Name("Bethany"));
-        descriptor.setMcr(new Mcr("M62790L"));
         descriptor.setContent(new Content("Patient is good."));
 
         EditNoteCommand command = (EditNoteCommand) parser.parseCommand(
                 EditNoteCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased() + " "
-                        + PREFIX_DATE + "19-02-2020 " + PREFIX_NAME + "Bethany " + PREFIX_MCR + "M62790L "
+                        + PREFIX_DATE + "19-02-2020 "
                         + PREFIX_CONTENT + "Patient is good.");
         assertEquals(new EditNoteCommand(INDEX_FIRST, descriptor), command);
     }
