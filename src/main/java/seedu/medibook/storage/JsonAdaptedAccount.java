@@ -28,6 +28,13 @@ class JsonAdaptedAccount {
         this.doctorMcr = doctorMcr;
     }
 
+    public JsonAdaptedAccount(Account source) {
+        username = source.getUsername();
+        password = source.getPassword();
+        doctorName = source.getDoctor().getName().fullName;
+        doctorMcr = source.getDoctor().getMcr().value;
+    }
+
     public Account toModelType() throws IllegalValueException {
         if (doctorName == null || doctorMcr == null || !Name.isValidName(doctorName) || !Mcr.isValidMcr(doctorMcr)) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT));

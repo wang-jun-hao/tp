@@ -1,5 +1,6 @@
 package seedu.medibook.storage;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
@@ -14,5 +15,7 @@ public interface UserAccountsListStorage {
 
     Optional<Account> login(String username, String password) throws DataConversionException, IllegalLoginException,
             IllegalValueException;
+
+    void createAccount(Account newAccount) throws DataConversionException, IOException, IllegalValueException;
 
 }

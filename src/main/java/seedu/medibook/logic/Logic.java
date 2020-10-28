@@ -1,5 +1,6 @@
 package seedu.medibook.logic;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
@@ -62,4 +63,10 @@ public interface Logic {
      */
     void processLoginInfo(String username, String password) throws DataConversionException, IllegalLoginException,
             IllegalValueException;
+
+    /**
+     * Creates a new account with declared username, password, doctor's name and doctor's mcr.
+     */
+    void createAccount(String username, String password, String doctorName, String doctorMcr) throws
+            IllegalValueException, DataConversionException, IOException;
 }

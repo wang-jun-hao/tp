@@ -19,6 +19,9 @@ import seedu.medibook.logic.parser.exceptions.ParseException;
 import seedu.medibook.model.Account;
 import seedu.medibook.model.Model;
 import seedu.medibook.model.ReadOnlyMediBook;
+import seedu.medibook.model.commonfields.Name;
+import seedu.medibook.model.doctor.Doctor;
+import seedu.medibook.model.doctor.Mcr;
 import seedu.medibook.model.medicalnote.MedicalNoteList;
 import seedu.medibook.model.patient.Ic;
 import seedu.medibook.model.patient.Patient;
@@ -158,6 +161,16 @@ public class LogicManager implements Logic {
             IllegalLoginException, IllegalValueException {
         Optional<Account> loginAccount = storage.login(username, password);
         model.setActiveUser(loginAccount.get().getDoctor());
+    }
+
+    @Override
+    public void createAccount(String username, String password, String doctorName, String doctorMcr) throws
+            IllegalValueException, DataConversionException, IOException {
+        if (!Mcr.isValidMcr(doctorMcr) || !Name.isValidName(doctorName)) {
+            throw new IllegalValueException("Invalid data");
+        }
+        Account newAccount = new Account(username, password, new Doctor(new Name(doctorName), new Mcr(doctorMcr)));
+        storage.createAccount(newAccount);
     }
 
 }

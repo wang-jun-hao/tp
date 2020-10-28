@@ -167,4 +167,9 @@ public class StorageManager implements Storage {
             IllegalLoginException, IllegalValueException {
         return userAccountsListStorage.login(username, password);
     }
+
+    @Override
+    public void createAccount(Account newAccount) throws DataConversionException, IOException, IllegalValueException {
+        userAccountsListStorage.createAccount(newAccount);
+    }
 }

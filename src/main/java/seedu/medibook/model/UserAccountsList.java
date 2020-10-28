@@ -12,6 +12,10 @@ public class UserAccountsList {
         this.accountsList.add(account);
     }
 
+    public List<Account> getAccountsList() {
+        return this.accountsList;
+    }
+
     /**
      * Checks if a given username and password are representative of an account.
      */
