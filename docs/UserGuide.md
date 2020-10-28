@@ -16,7 +16,7 @@ MediBook is a **desktop app for managing patient details, optimized for use via 
 
 
 1. Ensure you have Java 11 or above installed in your Computer.
-2. Download the latest medibook.jar from https://github.com/AY2021S1-CS2103T-F13-3/tp/releases.
+2. Download the latest medibook.jar from [https://github.com/AY2021S1-CS2103T-F13-3/tp/releases](https://github.com/AY2021S1-CS2103T-F13-3/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your MediBook.
 4. Double-click the file to start the app.
 5. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.
