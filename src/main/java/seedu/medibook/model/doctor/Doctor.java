@@ -26,7 +26,7 @@ public class Doctor {
         this.mcr = mcr;
     }
 
-    public String getDisplayStringName() {
+    public String getStringNameWithTitle() {
         return TITLE + " " + name.toString();
     }
 
@@ -34,7 +34,7 @@ public class Doctor {
         return name.toString();
     }
 
-    public String getDisplayStringMcr() {
+    public String getStringMcr() {
         return mcr.toString();
     }
 

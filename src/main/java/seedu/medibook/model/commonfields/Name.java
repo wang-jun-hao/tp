@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.medibook.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Patient's name in the medi book.
+ * Represents a name in the medi book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {
@@ -32,7 +32,7 @@ public class Name {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if the given string is a valid name.
      */
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);

@@ -35,7 +35,7 @@ public class Mcr {
     }
 
     /**
-     * Returns if a given string is a valid IC number.
+     * Returns true if the given string is a valid IC number.
      */
     public static boolean isValidMcr(String test) {
         return test.matches(VALIDATION_REGEX);
