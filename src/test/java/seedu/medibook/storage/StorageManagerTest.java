@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.medibook.testutil.TypicalMedicalNotes.getTypicalMedicalNoteList;
 import static seedu.medibook.testutil.TypicalPatients.getTypicalMediBook;
+import static seedu.medibook.testutil.TypicalPatients.getTypicalMediBookWithAllEmptyMedicalNoteList;
 
 import java.nio.file.Path;
 
@@ -72,11 +73,16 @@ public class StorageManagerTest {
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link JsonMediBookStorage} class.
          * More extensive testing of MediBook saving/reading is done in {@link JsonMediBookStorageTest} class.
+         * Expected behaviour is that only patients' information are loaded and they are initialised with
+         * empty medical note list.
+         * Hence, the MediBook that we should check against after retrieving from storage is one where all patients
+         * hold empty medical note list.
          */
         MediBook original = getTypicalMediBook();
         storageManager.saveMediBook(original);
         ReadOnlyMediBook retrieved = storageManager.readMediBook().get();
-        assertEquals(original, new MediBook(retrieved));
+        MediBook originalWithAllEmptyMedicalNoteList = getTypicalMediBookWithAllEmptyMedicalNoteList();
+        assertEquals(originalWithAllEmptyMedicalNoteList, new MediBook(retrieved));
     }
 
     @Test

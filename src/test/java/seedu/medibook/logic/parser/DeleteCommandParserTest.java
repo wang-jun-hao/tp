@@ -3,7 +3,7 @@ package seedu.medibook.logic.parser;
 import static seedu.medibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.medibook.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.medibook.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.medibook.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
+import static seedu.medibook.testutil.TypicalIndexes.INDEX_FIRST;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +22,7 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PATIENT));
+        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST));
     }
 
     @Test

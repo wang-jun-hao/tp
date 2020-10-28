@@ -63,10 +63,11 @@ public class FindCommandTest {
     @Test
     public void execute_zeroKeywords_noPatientFound() {
         String expectedMessage = String.format(MESSAGE_PATIENT_LISTED_OVERVIEW, 0);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, false, true);
         FieldContainsKeywordsPredicate predicate = prepareNamePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPatientList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPatientList());
     }
 
@@ -74,18 +75,20 @@ public class FindCommandTest {
     public void execute_multipleKeywordsSingleField_multiplePatientsFound() {
         // name field
         String expectedMessage = String.format(MESSAGE_PATIENT_LISTED_OVERVIEW, 3);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, false, true);
         FieldContainsKeywordsPredicate predicate = prepareNamePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPatientList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPatientList());
 
         // ic field
         expectedMessage = String.format(MESSAGE_PATIENT_LISTED_OVERVIEW, 2);
+        expectedCommandResult = new CommandResult(expectedMessage, false, false, false, true);
         predicate = prepareIcPredicate("S9234567A F7654321Q");
         command = new FindCommand(predicate);
         expectedModel.updateFilteredPatientList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Arrays.asList(BENSON, ELLE), model.getFilteredPatientList());
     }
 
@@ -93,12 +96,13 @@ public class FindCommandTest {
     public void execute_multipleKeywordsMultipleFields_multiplePatientsFound() {
         // name field
         String expectedMessage = String.format(MESSAGE_PATIENT_LISTED_OVERVIEW, 2);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, false, true);
         FieldContainsKeywordsPredicate predicate1 = prepareNamePredicate("Kurz Elle Kunz Pauline");
         FieldContainsKeywordsPredicate predicate2 = prepareIcPredicate("S");
         FieldContainsKeywordsPredicate predicate3 = prepareHeightPredicate("162 174");
         FindCommand command = new FindCommand(Arrays.asList(predicate1, predicate2, predicate3));
         expectedModel.updateFilteredPatientList(predicate1.and(predicate2).and(predicate3));
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Arrays.asList(ALICE, CARL), model.getFilteredPatientList());
     }
 

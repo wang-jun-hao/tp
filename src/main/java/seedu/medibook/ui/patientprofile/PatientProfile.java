@@ -1,17 +1,8 @@
 package seedu.medibook.ui.patientprofile;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import seedu.medibook.model.commonfields.Date;
-import seedu.medibook.model.commonfields.Name;
-import seedu.medibook.model.doctor.Doctor;
-import seedu.medibook.model.doctor.Mcr;
-import seedu.medibook.model.medicalnote.Content;
-import seedu.medibook.model.medicalnote.MedicalNote;
 import seedu.medibook.model.patient.Patient;
 import seedu.medibook.ui.UiPart;
 
@@ -46,11 +37,7 @@ public class PatientProfile extends UiPart<Region> {
         MedicalDetailsCard medicalDetailsCard = new MedicalDetailsCard(patient);
         this.medicalDetailsCard.getChildren().add(medicalDetailsCard.getRoot());
 
-        List<MedicalNote> medicalNotes = new ArrayList<>(); // TODO after implementation of MedicalNote as field
-        medicalNotes.add(new MedicalNote(new Date("15-10-2020", true),
-                new Doctor(new Name("Charlotte Liew"), new Mcr("M27493G")),
-                new Content("- Irregular hearbeat \n- Breathing problems")));
-        MedicalNotesPanel medicalNotesPanel = new MedicalNotesPanel(medicalNotes);
+        MedicalNotesPanel medicalNotesPanel = new MedicalNotesPanel(patient.getObservableMedicalNoteList());
         this.medicalNotesPanel.getChildren().add(medicalNotesPanel.getRoot());
 
         PatientChartCard patientChartCard = new PatientChartCard(patient);

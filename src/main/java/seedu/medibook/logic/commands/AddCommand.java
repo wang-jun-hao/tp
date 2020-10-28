@@ -12,6 +12,7 @@ import static seedu.medibook.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
+import seedu.medibook.commons.core.Messages;
 import seedu.medibook.logic.commands.exceptions.CommandException;
 import seedu.medibook.model.Model;
 import seedu.medibook.model.patient.Patient;
@@ -64,6 +65,10 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (model.getPatientToAccess().isPresent()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_COMMAND_IN_PATIENT_PROFILE);
+        }
 
         if (model.hasPatient(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PATIENT);
