@@ -14,10 +14,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.medibook.commons.core.GuiSettings;
 import seedu.medibook.commons.core.LogsCenter;
-import seedu.medibook.commons.util.StringUtil;
+import seedu.medibook.commons.exceptions.DataConversionException;
+import seedu.medibook.commons.exceptions.IllegalLoginException;
+import seedu.medibook.commons.exceptions.IllegalValueException;
 import seedu.medibook.logic.Logic;
 
 public class LoginWindow extends UiPart<Stage> {
@@ -31,6 +34,7 @@ public class LoginWindow extends UiPart<Stage> {
 
     private HelpWindow helpWindow;
     private MainWindow mainWindow;
+    private ResultDisplay resultDisplay;
 
     @FXML
     private MenuItem helpMenuItem;
@@ -53,6 +57,9 @@ public class LoginWindow extends UiPart<Stage> {
     @FXML
     private Button loginButton;
 
+    @FXML
+    private StackPane resultDisplayPlaceholder;
+
     private Image logoImage = new Image(this.getClass().getResourceAsStream("/images/placeholder.png"));
     /**
      * Creates a {@code LoginWindow} with the given {@code Stage} and {@code Logic}.
@@ -70,6 +77,8 @@ public class LoginWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        resultDisplay = new ResultDisplay();
+        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         logo.setImage(logoImage);
 
@@ -161,13 +170,14 @@ public class LoginWindow extends UiPart<Stage> {
     private void processLoginInfo() {
         String username = this.usernameField.getText();
         String password = this.passwordField.getText();
-        logic.processLoginInfo(username, password);
         try {
+            logic.processLoginInfo(username, password);
             mainWindow = new MainWindow(primaryStage, logic);
             mainWindow.show();
             mainWindow.fillInnerParts();
-        } catch (Throwable e) {
-            logger.severe(StringUtil.getDetails(e));
+        } catch (IllegalLoginException | DataConversionException | IllegalValueException e) {
+            logger.info("Invalid login");
+            resultDisplay.setFeedbackToUser(e.getMessage());
         }
     }
 }

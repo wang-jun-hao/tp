@@ -7,6 +7,9 @@ import java.util.logging.Logger;
 
 import seedu.medibook.commons.core.LogsCenter;
 import seedu.medibook.commons.exceptions.DataConversionException;
+import seedu.medibook.commons.exceptions.IllegalLoginException;
+import seedu.medibook.commons.exceptions.IllegalValueException;
+import seedu.medibook.model.Account;
 import seedu.medibook.model.ReadOnlyMediBook;
 import seedu.medibook.model.ReadOnlyUserPrefs;
 import seedu.medibook.model.UserPrefs;
@@ -22,18 +25,18 @@ public class StorageManager implements Storage {
     private MediBookStorage mediBookStorage;
     private UserPrefsStorage userPrefsStorage;
     private MedicalNoteListStorage medicalNoteListStorage;
-    private UserAccountStorage userAccountStorage;
+    private UserAccountsListStorage userAccountsListStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code MediBookStorage} and {@code UserPrefStorage}.
      */
     public StorageManager(MediBookStorage mediBookStorage, UserPrefsStorage userPrefsStorage,
-                          MedicalNoteListStorage medicalNoteListStorage, UserAccountStorage userAccountStorage) {
+                          MedicalNoteListStorage medicalNoteListStorage, UserAccountsListStorage userAccountsListStorage) {
         super();
         this.mediBookStorage = mediBookStorage;
         this.userPrefsStorage = userPrefsStorage;
         this.medicalNoteListStorage = medicalNoteListStorage;
-        this.userAccountStorage = userAccountStorage;
+        this.userAccountsListStorage = userAccountsListStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -155,11 +158,12 @@ public class StorageManager implements Storage {
 
     @Override
     public Path getUserAccountFilepath() {
-        return userAccountStorage.getUserAccountFilepath();
+        return userAccountsListStorage.getUserAccountFilepath();
     }
 
     @Override
-    public boolean isAccount(String username, String password) {
-        return userAccountStorage.isAccount(username, password);
+    public Optional<Account> login(String username, String password) throws DataConversionException,
+            IllegalLoginException, IllegalValueException {
+        return userAccountsListStorage.login(username, password);
     }
 }

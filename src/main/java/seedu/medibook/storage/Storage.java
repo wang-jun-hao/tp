@@ -5,6 +5,9 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.medibook.commons.exceptions.DataConversionException;
+import seedu.medibook.commons.exceptions.IllegalLoginException;
+import seedu.medibook.commons.exceptions.IllegalValueException;
+import seedu.medibook.model.Account;
 import seedu.medibook.model.ReadOnlyMediBook;
 import seedu.medibook.model.ReadOnlyUserPrefs;
 import seedu.medibook.model.UserPrefs;
@@ -12,7 +15,7 @@ import seedu.medibook.model.UserPrefs;
 /**
  * API of the Storage component
  */
-public interface Storage extends MediBookStorage, MedicalNoteListStorage, UserPrefsStorage, UserAccountStorage {
+public interface Storage extends MediBookStorage, MedicalNoteListStorage, UserPrefsStorage, UserAccountsListStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -30,6 +33,7 @@ public interface Storage extends MediBookStorage, MedicalNoteListStorage, UserPr
     void saveMediBook(ReadOnlyMediBook mediBook) throws IOException;
 
     @Override
-    boolean isAccount(String username, String password);
+    Optional<Account> login(String username, String password) throws DataConversionException, IllegalLoginException,
+            IllegalValueException;
 
 }

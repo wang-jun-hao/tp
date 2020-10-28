@@ -76,4 +76,9 @@ public interface Context {
      * Sets the boolean on whether all medical notes should be cleared.
      */
     void setShouldDeleteAllMedicalNotes(boolean b);
+
+    /**
+     * Sets the current user using MediBook.
+     */
+    void setActiveUser(Optional<Account> account);
 }

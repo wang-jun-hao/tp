@@ -205,6 +205,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setActiveUser(Optional<Account> account) {
+        context.setActiveUser(account);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {

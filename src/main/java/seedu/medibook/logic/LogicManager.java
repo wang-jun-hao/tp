@@ -9,11 +9,14 @@ import javafx.collections.ObservableList;
 import seedu.medibook.commons.core.GuiSettings;
 import seedu.medibook.commons.core.LogsCenter;
 import seedu.medibook.commons.exceptions.DataConversionException;
+import seedu.medibook.commons.exceptions.IllegalLoginException;
+import seedu.medibook.commons.exceptions.IllegalValueException;
 import seedu.medibook.logic.commands.Command;
 import seedu.medibook.logic.commands.CommandResult;
 import seedu.medibook.logic.commands.exceptions.CommandException;
 import seedu.medibook.logic.parser.MediBookParser;
 import seedu.medibook.logic.parser.exceptions.ParseException;
+import seedu.medibook.model.Account;
 import seedu.medibook.model.Model;
 import seedu.medibook.model.ReadOnlyMediBook;
 import seedu.medibook.model.medicalnote.MedicalNoteList;
@@ -151,13 +154,10 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public void processLoginInfo(String username, String password) {
-        boolean isAccount = storage.isAccount(username, password);
-        if (isAccount) {
-            System.out.println("yes");
-        } else {
-            System.out.println("bye");
-        }
+    public void processLoginInfo(String username, String password) throws DataConversionException,
+            IllegalLoginException, IllegalValueException {
+        Optional<Account> loginAccount = storage.login(username, password);
+        model.setActiveUser(loginAccount);
     }
 
 }

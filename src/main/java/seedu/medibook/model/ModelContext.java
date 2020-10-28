@@ -2,6 +2,7 @@ package seedu.medibook.model;
 
 import java.util.Optional;
 
+import seedu.medibook.model.doctor.Doctor;
 import seedu.medibook.model.patient.Ic;
 import seedu.medibook.model.patient.Patient;
 
@@ -15,6 +16,7 @@ public class ModelContext implements Context {
     private Optional<Patient> editedPatient = Optional.empty();
     private Optional<Ic> editedPatientPrevIc = Optional.empty();
     private boolean shouldDeleteAllMedicalNotes = false;
+    private Optional<Doctor> currentDoctor = Optional.empty();
 
     @Override
     public void accessPatient(Patient patient) {
@@ -86,6 +88,11 @@ public class ModelContext implements Context {
     @Override
     public void setShouldDeleteAllMedicalNotes(boolean b) {
         this.shouldDeleteAllMedicalNotes = b;
+    }
+
+    @Override
+    public void setActiveUser(Optional<Account> account) {
+        this.currentDoctor = Optional.of(account.get().getDoctor());
     }
 
     @Override
