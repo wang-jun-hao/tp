@@ -38,6 +38,8 @@ public class DeleteNoteCommandTest {
 
         model.accessPatient(targetPatient);
 
+        model.setActiveUser(medicalNoteToDelete.doctor);
+
         String expectedMessage = String.format(DeleteNoteCommand.MESSAGE_DELETE_NOTE_SUCCESS, medicalNoteToDelete);
         ModelManager expectedModel = new ModelManager(model.getMediBook(), new UserPrefs());
 

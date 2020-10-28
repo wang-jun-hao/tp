@@ -64,7 +64,11 @@ public class DeleteNoteCommand extends Command {
 
         MedicalNote noteToDelete = medicalNoteList.getMedicalNoteAtIndex(zeroBasedIndex);
 
-        medicalNoteList.deleteMedicalNoteAtIndex(zeroBasedIndex);
+        if (noteToDelete.getDoctorMcr().equals(model.getActiveUser().getMcr())) {
+            medicalNoteList.deleteMedicalNoteAtIndex(zeroBasedIndex);
+        } else {
+            throw new CommandException("Can't delete other doctor's medical notes");
+        }
 
         logger.info("----------------[PATIENT AND ORDER OF MEDICAL NOTES:][" + displayedPatient + "\n"
                 + displayedPatient.getMedicalNoteList() + "]");
