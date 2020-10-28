@@ -33,11 +33,12 @@ public class AddNoteCommandTest {
     public void execute_noteOnListView_failure() {
         // set model to hold no optional patient
         model.resetAccessedPatient();
+        model.setActiveUser(new Doctor(new Name("John"), new Mcr("M02830P")));
 
-        MedicalNote medicalNote = new MedicalNote(new Date("20-10-2019", true),
-                new Doctor(new Name("John"), new Mcr("M02830P")),
-                new Content("Patient is having fever."));
-        AddNoteCommand addNoteCommand = new AddNoteCommand(medicalNote);
+        Date medicalNoteDate = new Date("20-10-2019", true);
+        Content medicalNoteContent = new Content("Patient is having fever.");
+        
+        AddNoteCommand addNoteCommand = new AddNoteCommand(medicalNoteDate, medicalNoteContent);
         assertCommandFailure(addNoteCommand, model, AddNoteCommand.MESSAGE_ADD_NOTE_ON_LIST);
     }
 
@@ -46,12 +47,12 @@ public class AddNoteCommandTest {
         Patient targetPatient = model.getFilteredPatientList().get(0);
 
         model.accessPatient(targetPatient);
+        model.setActiveUser(new Doctor(new Name("John"), new Mcr("MP2819J")));
 
-        MedicalNote duplicateMedicalNote = new MedicalNote(new Date("19-02-2020", true),
-                new Doctor(new Name("John"), new Mcr("MP2819J")),
-                new Content("Patient is good."));
+        Date duplicateDate = new Date("19-02-2020", true);
+        Content duplicateContent = new Content("Patient is good.");
 
-        AddNoteCommand addNoteCommand = new AddNoteCommand(duplicateMedicalNote);
+        AddNoteCommand addNoteCommand = new AddNoteCommand(duplicateDate, duplicateContent);
         assertCommandFailure(addNoteCommand, model, AddNoteCommand.MESSAGE_DUPLICATE_NOTE);
     }
 
@@ -61,11 +62,16 @@ public class AddNoteCommandTest {
         Patient targetPatient = model.getFilteredPatientList().get(0);
 
         model.accessPatient(targetPatient);
+        model.setActiveUser(new Doctor(new Name("John"), new Mcr("M02830P")));
+
+        Date date = new Date("21-10-2019", true);
+        Content content = new Content("Patient is having fever.");
 
         MedicalNote medicalNote = new MedicalNote(new Date("21-10-2019", true),
                 new Doctor(new Name("John"), new Mcr("M02830P")),
                 new Content("Patient is having fever."));
-        AddNoteCommand addNoteCommand = new AddNoteCommand(medicalNote);
+
+        AddNoteCommand addNoteCommand = new AddNoteCommand(date, content);
 
         Patient resultingPatient = new PatientBuilder(targetPatient).build();
         resultingPatient.addMedicalNote(medicalNote);
@@ -82,20 +88,24 @@ public class AddNoteCommandTest {
 
     @Test
     public void equals() {
-        // same medical note -> returns true
-        MedicalNote medicalNote = new MedicalNote(new Date("20-10-2019", true),
-                new Doctor(new Name("John"), new Mcr("M02830P")),
-                new Content("Patient is having fever."));
-        AddNoteCommand addNoteCommand1 = new AddNoteCommand(medicalNote);
-        AddNoteCommand addNoteCommand2 = new AddNoteCommand(medicalNote);
+        // same date and content -> returns true
+        Date date = new Date("20-10-2019", true);
+        Content content = new Content("Patient is having fever.");
+
+        AddNoteCommand addNoteCommand1 = new AddNoteCommand(date, content);
+        AddNoteCommand addNoteCommand2 = new AddNoteCommand(date, content);
         assertTrue(addNoteCommand1.equals(addNoteCommand2));
 
-        // different medical note -> returns false
-        MedicalNote differentMedicalNote = new MedicalNote(new Date("21-10-2019", true),
-                new Doctor(new Name("Gary"), new Mcr("M12838P")),
-                new Content("Patient is having chills."));
-        AddNoteCommand differentAddNoteCommand = new AddNoteCommand(differentMedicalNote);
+        // different date -> returns false
+        Date differentDate = new Date("21-10-2019", true);
+
+        AddNoteCommand differentAddNoteCommand = new AddNoteCommand(differentDate, content);
         assertFalse(addNoteCommand1.equals(differentAddNoteCommand));
+
+        //different content -> returns false
+        Content differentContent = new Content("Patient is having chills.");
+
+        differentAddNoteCommand = new AddNoteCommand(date, differentContent);
 
         // null -> returns false
         assertFalse(addNoteCommand1.equals(null));

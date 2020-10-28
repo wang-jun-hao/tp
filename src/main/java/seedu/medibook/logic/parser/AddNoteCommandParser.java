@@ -30,23 +30,17 @@ public class AddNoteCommandParser implements Parser<AddNoteCommand> {
     public AddNoteCommand parse(String args) throws ParseException {
         try {
             ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_NAME, PREFIX_MCR, PREFIX_CONTENT);
+                    ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_CONTENT);
 
-            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_MCR, PREFIX_CONTENT)
+            if (!arePrefixesPresent(argMultimap, PREFIX_CONTENT)
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddNoteCommand.MESSAGE_USAGE));
             }
 
             Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).orElse(Date.getTodayDate()));
-            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            Mcr mcr = ParserUtil.parseMcr(argMultimap.getValue(PREFIX_MCR).get());
             Content content = ParserUtil.parseContent(argMultimap.getValue(PREFIX_CONTENT).get());
 
-            Doctor doctor = new Doctor(name, mcr);
-
-            MedicalNote medicalNote = new MedicalNote(date, doctor, content);
-
-            return new AddNoteCommand(medicalNote);
+            return new AddNoteCommand(date, content);
         } catch (IllegalArgumentException iae) {
             throw new ParseException(iae.getMessage());
         }

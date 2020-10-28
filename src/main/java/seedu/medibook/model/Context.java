@@ -2,6 +2,7 @@ package seedu.medibook.model;
 
 import java.util.Optional;
 
+import seedu.medibook.model.doctor.Doctor;
 import seedu.medibook.model.patient.Ic;
 import seedu.medibook.model.patient.Patient;
 
@@ -80,5 +81,10 @@ public interface Context {
     /**
      * Sets the current user using MediBook.
      */
-    void setActiveUser(Optional<Account> account);
+    void setActiveUser(Doctor doctor);
+
+    /**
+     * Returns the doctor currently using the system.
+     */
+    Doctor getActiveUser();
 }

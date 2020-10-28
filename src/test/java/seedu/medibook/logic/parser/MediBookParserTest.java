@@ -32,10 +32,8 @@ import seedu.medibook.logic.commands.ListCommand;
 import seedu.medibook.logic.parser.exceptions.ParseException;
 import seedu.medibook.model.commonfields.Date;
 import seedu.medibook.model.commonfields.Name;
-import seedu.medibook.model.doctor.Doctor;
 import seedu.medibook.model.doctor.Mcr;
 import seedu.medibook.model.medicalnote.Content;
-import seedu.medibook.model.medicalnote.MedicalNote;
 import seedu.medibook.model.patient.FieldContainsKeywordsPredicate;
 import seedu.medibook.model.patient.Patient;
 import seedu.medibook.testutil.EditPatientDescriptorBuilder;
@@ -122,15 +120,12 @@ public class MediBookParserTest {
 
     @Test
     public void parseCommand_addnote() throws Exception {
-        MedicalNote medicalNote = new MedicalNote(
-                new Date("19-02-2020", true),
-                new Doctor(new Name("Bethany"), new Mcr("M62790L")),
-                new Content("Patient is good."));
+        Date date = new Date("19-02-2020", true);
+        Content content = new Content("Patient is good.");
         AddNoteCommand command = (AddNoteCommand) parser.parseCommand(AddNoteCommand.COMMAND_WORD + " "
-                + PREFIX_DATE + "19-02-2020 " + PREFIX_NAME + "Bethany " + PREFIX_MCR + "M62790L "
-                + PREFIX_CONTENT + "Patient is good.");
+                + PREFIX_DATE + "19-02-2020 " + PREFIX_CONTENT + "Patient is good.");
 
-        assertEquals(new AddNoteCommand(medicalNote), command);
+        assertEquals(new AddNoteCommand(date, content), command);
     }
 
     @Test

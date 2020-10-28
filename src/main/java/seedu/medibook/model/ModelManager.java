@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.medibook.commons.core.GuiSettings;
 import seedu.medibook.commons.core.LogsCenter;
+import seedu.medibook.model.doctor.Doctor;
 import seedu.medibook.model.patient.Ic;
 import seedu.medibook.model.patient.Patient;
 
@@ -205,9 +206,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setActiveUser(Optional<Account> account) {
-        context.setActiveUser(account);
+    public void setActiveUser(Doctor doctor) {
+        context.setActiveUser(doctor);
     }
+
+    @Override
+    public Doctor getActiveUser() {
+        return context.getActiveUser();
+    }
+    
 
     @Override
     public boolean equals(Object obj) {

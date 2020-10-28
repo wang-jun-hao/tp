@@ -157,7 +157,7 @@ public class LogicManager implements Logic {
     public void processLoginInfo(String username, String password) throws DataConversionException,
             IllegalLoginException, IllegalValueException {
         Optional<Account> loginAccount = storage.login(username, password);
-        model.setActiveUser(loginAccount);
+        model.setActiveUser(loginAccount.get().getDoctor());
     }
 
 }

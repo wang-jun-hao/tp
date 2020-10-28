@@ -91,8 +91,13 @@ public class ModelContext implements Context {
     }
 
     @Override
-    public void setActiveUser(Optional<Account> account) {
-        this.currentDoctor = Optional.of(account.get().getDoctor());
+    public void setActiveUser(Doctor doctor) {
+        this.currentDoctor = Optional.of(doctor);
+    }
+
+    @Override
+    public Doctor getActiveUser() {
+        return this.currentDoctor.get();
     }
 
     @Override
