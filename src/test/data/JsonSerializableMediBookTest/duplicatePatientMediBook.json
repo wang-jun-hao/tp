@@ -10,7 +10,7 @@
     "weight": "50.1",
     "bmi": "16.5",
     "bloodType": "B+",
-    "tagged": [ "friends" ],
+    "allergies": [ "peanuts" ],
     "record" : {
       "heightRecord": { },
       "weightRecord": { }

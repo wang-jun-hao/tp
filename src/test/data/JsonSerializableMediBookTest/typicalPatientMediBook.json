@@ -11,7 +11,9 @@
     "weight": "48.5",
     "bmi": "16.0",
     "bloodType": "A+",
-    "tagged" : [ "friends" ],
+    "allergies" : [ ],
+    "conditions" : [ "Migraine" ],
+    "treatments" : [ "Ibuprofen" ],
     "record" : {
       "heightRecord": { },
       "weightRecord": { }
@@ -27,7 +29,9 @@
     "weight": "63.5",
     "bmi": "22.0",
     "bloodType": "AB+",
-    "tagged" : [ "owesMoney", "friends" ],
+    "allergies" : [ "shellfish", "dust mites" ],
+    "conditions" : [ "Knee sprain" ],
+    "treatments" : [ "Physiotherapy" ],
     "record" : {
       "heightRecord": { },
       "weightRecord": { }
@@ -43,7 +47,9 @@
     "weight": "80.8",
     "bmi": "30.8",
     "bloodType": "B+",
-    "tagged" : [ ],
+    "allergies" : [ ],
+    "conditions" : [ ],
+    "treatments" : [ ],
     "record" : {
       "heightRecord": { },
       "weightRecord": { }
@@ -59,7 +65,9 @@
     "weight": "70.3",
     "bmi": "21.0",
     "bloodType": "A-",
-    "tagged" : [ "friends" ],
+    "allergies" : [ "potatoes" ],
+    "conditions" : [ "Type I diabetes" ],
+    "treatments" : [ "Insulin pump" ],
     "record" : {
       "heightRecord": { },
       "weightRecord": { }
@@ -75,7 +83,9 @@
     "weight": "43.5",
     "bmi": "13.9",
     "bloodType": "B-",
-    "tagged" : [ ],
+    "allergies" : [ ],
+    "conditions" : [ ],
+    "treatments" : [ ],
     "record" : {
       "heightRecord": { },
       "weightRecord": { }
@@ -91,7 +101,9 @@
     "weight": "50.5",
     "bmi": "17.9",
     "bloodType": "O+",
-    "tagged" : [ ],
+    "allergies" : [ "Penicillin" ],
+    "conditions" : [ ],
+    "treatments" : [ ],
     "record" : {
       "heightRecord": { },
       "weightRecord": { }
@@ -107,7 +119,9 @@
     "weight": "69.2",
     "bmi": "24.2",
     "bloodType": "A+",
-    "tagged" : [ ],
+    "allergies" : [ ],
+    "conditions" : [ "fever" ],
+    "treatments" : [ "Paracetemol" ],
     "record" : {
       "heightRecord": { },
       "weightRecord": { }
