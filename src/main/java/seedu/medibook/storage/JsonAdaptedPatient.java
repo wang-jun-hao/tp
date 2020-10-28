@@ -45,9 +45,9 @@ class JsonAdaptedPatient {
     private final String bmi;
     private final String bloodType;
     private final JsonAdaptedRecord record;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final List<JsonAdaptedAllergy> allergies = new ArrayList<>();
     private final List<JsonAdaptedCondition> conditions = new ArrayList<>();
+    private final List<JsonAdaptedTreatment> treatments = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPatient} with the given patient details.
@@ -59,9 +59,9 @@ class JsonAdaptedPatient {
                               @JsonProperty("height") String height, @JsonProperty("weight") String weight,
                               @JsonProperty("bmi") String bmi, @JsonProperty("blood type") String bloodType,
                               @JsonProperty("record") JsonAdaptedRecord record,
-                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
                               @JsonProperty("allergies") List<JsonAdaptedAllergy> allergies,
-                              @JsonProperty("conditions") List<JsonAdaptedCondition> conditions) {
+                              @JsonProperty("conditions") List<JsonAdaptedCondition> conditions,
+                              @JsonProperty("treatments") List<JsonAdaptedTreatment> treatments) {
         this.ic = ic;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -73,14 +73,15 @@ class JsonAdaptedPatient {
         this.bmi = bmi;
         this.bloodType = bloodType;
         this.record = record;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
-        }
+
         if (allergies != null) {
             this.allergies.addAll(allergies);
         }
         if (conditions != null) {
             this.conditions.addAll(conditions);
+        }
+        if (treatments != null) {
+            this.treatments.addAll(treatments);
         }
     }
 
@@ -137,16 +138,16 @@ class JsonAdaptedPatient {
 
         record = new JsonAdaptedRecord(source.getRecord());
 
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
-
         allergies.addAll(source.getAllergies().stream()
             .map(JsonAdaptedAllergy::new)
             .collect(Collectors.toList()));
 
         conditions.addAll(source.getConditions().stream()
             .map(JsonAdaptedCondition::new)
+            .collect(Collectors.toList()));
+
+        treatments.addAll(source.getTreatments().stream()
+            .map(JsonAdaptedTreatment::new)
             .collect(Collectors.toList()));
     }
 
@@ -157,7 +158,7 @@ class JsonAdaptedPatient {
      */
     public Patient toModelType() throws IllegalValueException {
         final List<Tag> patientTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
+        for (JsonAdaptedTag tag : treatments) {
             patientTags.add(tag.toModelType());
         }
 
