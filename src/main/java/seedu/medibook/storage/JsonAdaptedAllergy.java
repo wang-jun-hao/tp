@@ -6,6 +6,9 @@ import seedu.medibook.commons.exceptions.IllegalValueException;
 import seedu.medibook.model.medicaldetail.Allergy;
 import seedu.medibook.model.medicaldetail.Tag;
 
+/**
+ * Jackson-friendly version of {@link Allergy}.
+ */
 public class JsonAdaptedAllergy extends JsonAdaptedTag {
 
     /**
