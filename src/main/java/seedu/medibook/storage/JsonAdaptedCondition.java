@@ -1,7 +1,6 @@
 package seedu.medibook.storage;
 
 import seedu.medibook.commons.exceptions.IllegalValueException;
-import seedu.medibook.model.medicaldetail.Allergy;
 import seedu.medibook.model.medicaldetail.Condition;
 import seedu.medibook.model.medicaldetail.Tag;
 
