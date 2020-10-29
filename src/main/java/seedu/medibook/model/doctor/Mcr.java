@@ -31,7 +31,8 @@ public class Mcr {
     public Mcr(String mcr) {
         requireNonNull(mcr);
         checkArgument(isValidMcr(mcr), MESSAGE_CONSTRAINTS);
-        value = mcr;
+        String mcrInCaps = mcr.toUpperCase();
+        value = mcrInCaps;
     }
 
     /**
