@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.medibook.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.medibook.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.medibook.logic.commands.CommandTestUtil.showPatientAtIndex;
-import static seedu.medibook.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
-import static seedu.medibook.testutil.TypicalIndexes.INDEX_SECOND_PATIENT;
+import static seedu.medibook.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.medibook.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.medibook.testutil.TypicalPatients.getTypicalMediBook;
 
 import org.junit.jupiter.api.Test;
@@ -28,13 +28,14 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Patient patientToDelete = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PATIENT);
+        Patient patientToDelete = model.getFilteredPatientList().get(INDEX_FIRST.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PATIENT_SUCCESS, patientToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getMediBook(), new UserPrefs());
         expectedModel.deletePatient(patientToDelete);
+        expectedModel.setDeletedPatient(patientToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -49,15 +50,16 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPatientAtIndex(model, INDEX_FIRST_PATIENT);
+        showPatientAtIndex(model, INDEX_FIRST);
 
-        Patient patientToDelete = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PATIENT);
+        Patient patientToDelete = model.getFilteredPatientList().get(INDEX_FIRST.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PATIENT_SUCCESS, patientToDelete);
 
         Model expectedModel = new ModelManager(model.getMediBook(), new UserPrefs());
         expectedModel.deletePatient(patientToDelete);
+        expectedModel.setDeletedPatient(patientToDelete);
         showNoPatient(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -65,9 +67,9 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPatientAtIndex(model, INDEX_FIRST_PATIENT);
+        showPatientAtIndex(model, INDEX_FIRST);
 
-        Index outOfBoundIndex = INDEX_SECOND_PATIENT;
+        Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of medi book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getMediBook().getPatientList().size());
 
@@ -78,14 +80,14 @@ public class DeleteCommandTest {
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PATIENT);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PATIENT);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PATIENT);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false

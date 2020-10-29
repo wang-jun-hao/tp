@@ -17,6 +17,7 @@
             <padding>
                 <Insets top="5" right="5" bottom="5" left="15" />
             </padding>
+            <Label fx:id="noteIndex" styleClass="cell_small_label" text="\$noteIndex" />
             <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
             <Label fx:id="doctorName" styleClass="cell_small_label" text="\$doctorName" />
             <!-- TODO: set styleClass for content -->

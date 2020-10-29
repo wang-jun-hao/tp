@@ -3,42 +3,38 @@ package seedu.medibook.logic.parser;
 import static seedu.medibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_CONTENT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.stream.Stream;
 
-import seedu.medibook.logic.commands.NoteCommand;
+import seedu.medibook.logic.commands.AddNoteCommand;
 import seedu.medibook.logic.parser.exceptions.ParseException;
-import seedu.medibook.model.Date;
-import seedu.medibook.model.medicalnote.MedicalNote;
+import seedu.medibook.model.commonfields.Date;
+import seedu.medibook.model.medicalnote.Content;
 
 /**
- * Parses input arguments and creates a new NoteCommand object
+ * Parses input arguments and creates a new AddNoteCommand object
  */
-public class NoteCommandParser implements Parser<NoteCommand> {
+public class AddNoteCommandParser implements Parser<AddNoteCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the NoteCommand
-     * and returns a NoteCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddNoteCommand
+     * and returns a AddNoteCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public NoteCommand parse(String args) throws ParseException {
+    public AddNoteCommand parse(String args) throws ParseException {
         try {
             ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_NAME, PREFIX_CONTENT);
+                    ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_CONTENT);
 
-            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_CONTENT)
+            if (!arePrefixesPresent(argMultimap, PREFIX_CONTENT)
                     || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddNoteCommand.MESSAGE_USAGE));
             }
 
             Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).orElse(Date.getTodayDate()));
-            String name = argMultimap.getValue(PREFIX_NAME).get();
-            String content = argMultimap.getValue(PREFIX_CONTENT).get();
+            Content content = ParserUtil.parseContent(argMultimap.getValue(PREFIX_CONTENT).get());
 
-            MedicalNote medicalNote = new MedicalNote(date, name, content);
-
-            return new NoteCommand(medicalNote);
+            return new AddNoteCommand(date, content);
         } catch (IllegalArgumentException iae) {
             throw new ParseException(iae.getMessage());
         }

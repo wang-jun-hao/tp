@@ -1,5 +1,6 @@
 package seedu.medibook.model.patient;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.medibook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -8,9 +9,13 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
+import seedu.medibook.model.commonfields.Name;
+import seedu.medibook.model.medicaldetail.Allergy;
+import seedu.medibook.model.medicaldetail.Condition;
+import seedu.medibook.model.medicaldetail.Treatment;
 import seedu.medibook.model.medicalnote.MedicalNote;
 import seedu.medibook.model.medicalnote.MedicalNoteList;
-import seedu.medibook.model.tag.Tag;
 
 /**
  * Represents a Patient in the medi book.
@@ -36,15 +41,23 @@ public class Patient {
 
     // Default empty fields
     private MedicalNoteList medicalNoteList = new MedicalNoteList();
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Allergy> allergies = new HashSet<>();
+    private final Set<Condition> conditions = new HashSet<>();
+    private final Set<Treatment> treatments = new HashSet<>();
+
+
+    // Patient's past records
+    private Record record = new Record();
 
     /**
      * Every field must be present and not null.
      */
     public Patient(Ic ic, Name name, DateOfBirth dateOfBirth, Phone phone, Optional<Email> email,
                    Optional<Address> address, Optional<Height> height, Optional<Weight> weight,
-                   Optional<BloodType> bloodType, Set<Tag> tags) {
-        requireAllNonNull(ic, name, dateOfBirth, phone, email, address, height, weight, bloodType, tags);
+                   Optional<BloodType> bloodType, Set<Allergy> allergies, Set<Condition> conditions,
+                   Set<Treatment> treatments) {
+        requireAllNonNull(ic, name, dateOfBirth, phone, email, address, height, weight, bloodType, allergies,
+                conditions, treatments);
         this.ic = ic;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -54,7 +67,9 @@ public class Patient {
         this.height = height;
         this.weight = weight;
         this.bloodType = bloodType;
-        this.tags.addAll(tags);
+        this.allergies.addAll(allergies);
+        this.conditions.addAll(conditions);
+        this.treatments.addAll(treatments);
 
         if (height.isEmpty() || weight.isEmpty()) {
             this.bmi = Optional.empty();
@@ -70,8 +85,10 @@ public class Patient {
      */
     public Patient(Ic ic, Name name, DateOfBirth dateOfBirth, Phone phone, Optional<Email> email,
                    Optional<Address> address, Optional<Height> height, Optional<Weight> weight, Optional<Bmi> bmi,
-                   Optional<BloodType> bloodType, Set<Tag> tags) {
-        requireAllNonNull(ic, name, dateOfBirth, phone, email, address, height, weight, bloodType, tags);
+                   Optional<BloodType> bloodType, Set<Allergy> allergies, Set<Condition> conditions,
+                   Set<Treatment> treatments) {
+        requireAllNonNull(ic, name, dateOfBirth, phone, email, address, height, weight, bloodType, allergies,
+            conditions, treatments);
         this.ic = ic;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -82,7 +99,9 @@ public class Patient {
         this.weight = weight;
         this.bmi = bmi;
         this.bloodType = bloodType;
-        this.tags.addAll(tags);
+        this.allergies.addAll(allergies);
+        this.conditions.addAll(conditions);
+        this.treatments.addAll(treatments);
     }
 
     public Ic getIc() {
@@ -95,6 +114,14 @@ public class Patient {
 
     public DateOfBirth getDateOfBirth() {
         return dateOfBirth;
+    }
+
+    public String getDateOfBirthInputString() {
+        return dateOfBirth.getInputString();
+    }
+
+    public String getDateOfBirthOutputString() {
+        return dateOfBirth.getOutputString();
     }
 
     public Phone getPhone() {
@@ -204,11 +231,27 @@ public class Patient {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable allergy set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Allergy> getAllergies() {
+        return Collections.unmodifiableSet(allergies);
+    }
+
+    /**
+     * Returns an immutable condition set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Condition> getConditions() {
+        return Collections.unmodifiableSet(conditions);
+    }
+
+    /**
+     * Returns an immutable treatment set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Treatment> getTreatments() {
+        return Collections.unmodifiableSet(treatments);
     }
 
     /**
@@ -232,6 +275,35 @@ public class Patient {
      */
     public MedicalNoteList getMedicalNoteList() {
         return medicalNoteList;
+    }
+
+    public ObservableList<MedicalNote> getObservableMedicalNoteList() {
+        return medicalNoteList.getObservableInnerList();
+    }
+
+    /**
+     * Retrieves the medical note at the specified index in the list belonging to the patient.
+     * @param index Zero-based index of medical note.
+     * @return medical note at index in list belonging to the patient.
+     */
+    public MedicalNote getMedicalNoteAtIndex(int index) {
+        return medicalNoteList.getMedicalNoteAtIndex(index);
+    }
+
+    /**
+     * Deletes the medical note at the specified index from the list belonging to the patient.
+     * @param index Zero-based index of medical note.
+     */
+    public void deleteMedicalNoteAtIndex(int index) {
+        medicalNoteList.deleteMedicalNoteAtIndex(index);
+    }
+
+    /**
+     * Get number of medical notes within the list belonging to this patient.
+     * @return Number of medical notes in the list.
+     */
+    public int getNumOfMedicalNotes() {
+        return medicalNoteList.size();
     }
 
     /**
@@ -279,6 +351,31 @@ public class Patient {
         return getPhone().toString();
     }
 
+    /**
+     * Returns the past records of the patient.
+     * @return Record object containing the patient's past records
+     */
+    public Record getRecord() {
+        assert this.record != null : "Record should not be null!";
+        return this.record;
+    }
+
+    /**
+     * Sets the past records of the patient.
+     */
+    public void setRecord(Record record) {
+        requireNonNull(record);
+        this.record = record;
+    }
+
+    /**
+     * Returns true if the specified medical note is already a medical note in the list belonging to this patient.
+     * @param otherMedicalNote medical note to test against.
+     * @return true if the same medical note exists in the list belonging to this patient.
+     */
+    public boolean alreadyHasMedicalNote(MedicalNote otherMedicalNote) {
+        return medicalNoteList.alreadyHasMedicalNote(otherMedicalNote);
+    }
 
     /**
      * Returns true if both patients have the same identity and data fields.
@@ -305,14 +402,17 @@ public class Patient {
                 && otherPatient.getWeight().equals(getWeight())
                 && otherPatient.getBmi().equals(getBmi())
                 && otherPatient.getBloodType().equals(getBloodType())
-                && otherPatient.getTags().equals(getTags());
+                && otherPatient.getMedicalNoteList().equals(getMedicalNoteList())
+                && otherPatient.getAllergies().equals(getAllergies())
+                && otherPatient.getConditions().equals(getConditions())
+                && otherPatient.getTreatments().equals(getTreatments());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(ic, name, dateOfBirth, phone, email, address, height, weight, bmi,
-                            bloodType, tags);
+                            bloodType, medicalNoteList, allergies, conditions, treatments);
     }
 
     @Override
@@ -337,8 +437,13 @@ public class Patient {
                 .append(getStringBmi())
                 .append(" Blood type: ")
                 .append(getStringBloodType())
-                .append(" Tags: ");
-        getTags().forEach(builder::append);
+                .append(" Allergies: ");
+        getAllergies().forEach(builder::append);
+        builder.append(" Conditions: ");
+        getConditions().forEach(builder::append);
+        builder.append(" Treatments: ");
+        getTreatments().forEach(builder::append);
+
         return builder.toString();
     }
 

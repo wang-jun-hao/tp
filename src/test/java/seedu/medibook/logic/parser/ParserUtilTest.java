@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.medibook.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.medibook.testutil.Assert.assertThrows;
-import static seedu.medibook.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
+import static seedu.medibook.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,16 +15,18 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.medibook.logic.parser.exceptions.ParseException;
+import seedu.medibook.model.commonfields.Name;
+import seedu.medibook.model.medicaldetail.Allergy;
+import seedu.medibook.model.medicaldetail.Condition;
+import seedu.medibook.model.medicaldetail.Treatment;
 import seedu.medibook.model.patient.Address;
 import seedu.medibook.model.patient.BloodType;
 import seedu.medibook.model.patient.DateOfBirth;
 import seedu.medibook.model.patient.Email;
 import seedu.medibook.model.patient.Height;
 import seedu.medibook.model.patient.Ic;
-import seedu.medibook.model.patient.Name;
 import seedu.medibook.model.patient.Phone;
 import seedu.medibook.model.patient.Weight;
-import seedu.medibook.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_IC = "S99999w9Q";
@@ -36,7 +38,9 @@ public class ParserUtilTest {
     private static final String INVALID_HEIGHT = "18o";
     private static final String INVALID_WEIGHT = "20.15";
     private static final String INVALID_BLOOD_TYPE = "C+";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_ALLERGY = "[];";
+    private static final String INVALID_CONDITION = "*^£";
+    private static final String INVALID_TREATMENT = "/+=";
 
     private static final String VALID_IC = "S9999999R";
     private static final String VALID_NAME = "Rachel Walker";
@@ -47,8 +51,12 @@ public class ParserUtilTest {
     private static final String VALID_HEIGHT = "178";
     private static final String VALID_WEIGHT = "65.0";
     private static final String VALID_BLOOD_TYPE = "O+";
-    private static final String VALID_TAG_1 = "friend";
-    private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_ALLERGY_1 = "peanuts";
+    private static final String VALID_ALLERGY_2 = "pollen";
+    private static final String VALID_CONDITION_1 = "asthma";
+    private static final String VALID_CONDITION_2 = "ear infection";
+    private static final String VALID_TREATMENT_1 = "Ibuprofen";
+    private static final String VALID_TREATMENT_2 = "Cephalexin (capsule)";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -66,10 +74,10 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(INDEX_FIRST_PATIENT, ParserUtil.parseIndex("1"));
+        assertEquals(INDEX_FIRST, ParserUtil.parseIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_PATIENT, ParserUtil.parseIndex("  1  "));
+        assertEquals(INDEX_FIRST, ParserUtil.parseIndex("  1  "));
     }
 
     @Test
@@ -261,48 +269,149 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTag_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
+    public void parseAllergy_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAllergy(null));
     }
 
     @Test
-    public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG));
+    public void parseCondition_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCondition(null));
     }
 
     @Test
-    public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1));
+    public void parseTreatment_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTreatment(null));
     }
 
     @Test
-    public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
+    public void parseAllergy_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAllergy(INVALID_ALLERGY));
     }
 
     @Test
-    public void parseTags_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTags(null));
+    public void parseCondition_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCondition(INVALID_CONDITION));
     }
 
     @Test
-    public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
+    public void parseTreatment_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTreatment(INVALID_TREATMENT));
     }
 
     @Test
-    public void parseTags_emptyCollection_returnsEmptySet() throws Exception {
-        assertTrue(ParserUtil.parseTags(Collections.emptyList()).isEmpty());
+    public void parseAllergy_validValueWithoutWhitespace_returnsAllergy() throws Exception {
+        Allergy expectedAllergy = new Allergy(VALID_ALLERGY_1);
+        assertEquals(expectedAllergy, ParserUtil.parseAllergy(VALID_ALLERGY_1));
     }
 
     @Test
-    public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+    public void parseCondition_validValueWithoutWhitespace_returnsCondition() throws Exception {
+        Condition expectedCondition = new Condition(VALID_CONDITION_1);
+        assertEquals(expectedCondition, ParserUtil.parseCondition(VALID_CONDITION_1));
+    }
 
-        assertEquals(expectedTagSet, actualTagSet);
+    @Test
+    public void parseTreatment_validValueWithoutWhitespace_returnsTreatment() throws Exception {
+        Treatment expectedTreatment = new Treatment(VALID_TREATMENT_1);
+        assertEquals(expectedTreatment, ParserUtil.parseTreatment(VALID_TREATMENT_1));
+    }
+
+    @Test
+    public void parseAllergy_validValueWithWhitespace_returnsTrimmedAllergy() throws Exception {
+        String allergyWithWhitespace = WHITESPACE + VALID_ALLERGY_1 + WHITESPACE;
+        Allergy expectedTag = new Allergy(VALID_ALLERGY_1);
+        assertEquals(expectedTag, ParserUtil.parseAllergy(allergyWithWhitespace));
+    }
+
+    @Test
+    public void parseCondition_validValueWithWhitespace_returnsTrimmedCondition() throws Exception {
+        String conditionWithWhitespace = WHITESPACE + VALID_CONDITION_1 + WHITESPACE;
+        Condition expectedTag = new Condition(VALID_CONDITION_1);
+        assertEquals(expectedTag, ParserUtil.parseCondition(conditionWithWhitespace));
+    }
+
+    @Test
+    public void parseTreatment_validValueWithWhitespace_returnsTrimmedTreatment() throws Exception {
+        String treatmentWithWhitespace = WHITESPACE + VALID_TREATMENT_1 + WHITESPACE;
+        Treatment expectedTag = new Treatment(VALID_TREATMENT_1);
+        assertEquals(expectedTag, ParserUtil.parseTreatment(treatmentWithWhitespace));
+    }
+
+    @Test
+    public void parseAllergies_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAllergies(null));
+    }
+
+    @Test
+    public void parseConditions_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseConditions(null));
+    }
+
+    @Test
+    public void parseTreatments_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTreatments(null));
+    }
+
+    @Test
+    public void parseAllergies_collectionWithInvalidAllergies_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAllergies(
+            Arrays.asList(VALID_ALLERGY_1, INVALID_ALLERGY)));
+    }
+
+    @Test
+    public void parseConditions_collectionWithInvalidConditions_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseConditions(
+            Arrays.asList(VALID_CONDITION_1, INVALID_CONDITION)));
+    }
+
+    @Test
+    public void parseTreatments_collectionWithInvalidTreatments_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTreatments(
+                Arrays.asList(VALID_TREATMENT_1, INVALID_TREATMENT)));
+    }
+
+    @Test
+    public void parseAllergies_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseAllergies(Collections.emptyList()).isEmpty());
+    }
+
+    @Test
+    public void parseConditions_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseConditions(Collections.emptyList()).isEmpty());
+    }
+
+    @Test
+    public void parseTreatments_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseTreatments(Collections.emptyList()).isEmpty());
+    }
+
+    @Test
+    public void parseAllergies_collectionWithValidAllergies_returnsAllergySet() throws Exception {
+        Set<Allergy> actualAllergySet = ParserUtil.parseAllergies(
+            Arrays.asList(VALID_ALLERGY_1, VALID_ALLERGY_2));
+        Set<Allergy> expectedAllergySet = new HashSet<Allergy>(
+            Arrays.asList(new Allergy(VALID_ALLERGY_1), new Allergy(VALID_ALLERGY_2)));
+
+        assertEquals(expectedAllergySet, actualAllergySet);
+    }
+
+    @Test
+    public void parseConditions_collectionWithValidConditions_returnsConditionSet() throws Exception {
+        Set<Condition> actualConditionSet = ParserUtil.parseConditions(
+            Arrays.asList(VALID_CONDITION_1, VALID_CONDITION_2));
+        Set<Condition> expectedConditionSet = new HashSet<Condition>(
+            Arrays.asList(new Condition(VALID_CONDITION_1), new Condition(VALID_CONDITION_2)));
+
+        assertEquals(expectedConditionSet, actualConditionSet);
+    }
+
+    @Test
+    public void parseTreatments_collectionWithValidTreatments_returnsTreatmentSet() throws Exception {
+        Set<Treatment> actualTreatmentSet = ParserUtil.parseTreatments(
+                Arrays.asList(VALID_TREATMENT_1, VALID_TREATMENT_2));
+        Set<Treatment> expectedTreatmentSet = new HashSet<Treatment>(
+                Arrays.asList(new Treatment(VALID_TREATMENT_1), new Treatment(VALID_TREATMENT_2)));
+
+        assertEquals(expectedTreatmentSet, actualTreatmentSet);
     }
 }

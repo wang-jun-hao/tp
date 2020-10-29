@@ -16,6 +16,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_HEIGHT = new Prefix("h/");
     public static final Prefix PREFIX_WEIGHT = new Prefix("w/");
     public static final Prefix PREFIX_BLOOD_TYPE = new Prefix("b/");
-    public static final Prefix PREFIX_TAG = new Prefix("t/");
+    public static final Prefix PREFIX_ALLERGY = new Prefix("al/");
+    public static final Prefix PREFIX_CONDITION = new Prefix("con/");
+    public static final Prefix PREFIX_TREATMENT = new Prefix("t/");
+    public static final Prefix PREFIX_MCR = new Prefix("m/");
 
 }

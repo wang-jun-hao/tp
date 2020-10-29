@@ -6,7 +6,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.medibook.commons.exceptions.IllegalValueException;
 import seedu.medibook.logic.parser.ParserUtil;
 import seedu.medibook.logic.parser.exceptions.ParseException;
-import seedu.medibook.model.Date;
+import seedu.medibook.model.commonfields.Date;
+import seedu.medibook.model.commonfields.Name;
+import seedu.medibook.model.doctor.Doctor;
+import seedu.medibook.model.doctor.Mcr;
+import seedu.medibook.model.medicalnote.Content;
 import seedu.medibook.model.medicalnote.MedicalNote;
 
 /**
@@ -19,6 +23,8 @@ class JsonAdaptedMedicalNote {
     public final String date;
     @JsonProperty("doctor name")
     public final String doctorName;
+    @JsonProperty("doctor mcr")
+    public final String doctorMcr;
     public final String content;
 
     /**
@@ -26,9 +32,11 @@ class JsonAdaptedMedicalNote {
      */
     @JsonCreator
     public JsonAdaptedMedicalNote(@JsonProperty("date") String date, @JsonProperty("doctor name") String doctorName,
+                                  @JsonProperty("doctor mcr") String doctorMcr,
                                   @JsonProperty("content") String content) {
         this.date = date;
         this.doctorName = doctorName;
+        this.doctorMcr = doctorMcr;
         this.content = content;
     }
 
@@ -37,8 +45,9 @@ class JsonAdaptedMedicalNote {
      */
     public JsonAdaptedMedicalNote(MedicalNote medicalNote) {
         this.date = medicalNote.getInputDateString();
-        this.doctorName = medicalNote.getDoctorName();
-        this.content = medicalNote.getContent();
+        this.doctorName = medicalNote.getDoctorNameNoTitle();
+        this.doctorMcr = medicalNote.getDoctorStringMcr();
+        this.content = medicalNote.getContentString();
     }
 
     /**
@@ -49,7 +58,11 @@ class JsonAdaptedMedicalNote {
     public MedicalNote toModelType() throws IllegalValueException {
         try {
             final Date modelDate = ParserUtil.parseDate(date);
-            return new MedicalNote(modelDate, doctorName, content);
+            final Name modelName = ParserUtil.parseName(doctorName);
+            final Mcr modelMcr = ParserUtil.parseMcr(doctorMcr);
+            final Doctor modelDoctor = new Doctor(modelName, modelMcr);
+            final Content modelContent = ParserUtil.parseContent(content);
+            return new MedicalNote(modelDate, modelDoctor, modelContent);
         } catch (ParseException | IllegalArgumentException e) {
             throw new IllegalValueException(e.getMessage());
         } catch (NullPointerException npe) {

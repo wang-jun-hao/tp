@@ -3,7 +3,7 @@ package seedu.medibook.model.patient;
 import static java.util.Objects.requireNonNull;
 import static seedu.medibook.commons.util.AppUtil.checkArgument;
 
-import seedu.medibook.model.Date;
+import seedu.medibook.model.commonfields.Date;
 
 /**
  * Represents a Patient's date of birth (DOB) in the medi book.
@@ -11,11 +11,12 @@ import seedu.medibook.model.Date;
  */
 public class DateOfBirth {
 
-    public static final String MESSAGE_CONSTRAINTS = "Date of birth (DOB) should be of the format \"DD-MM-YYYY\""
-            + "where D, M and Y represent digits of the day, month and year of the DOB respectively."
-            + "\nDOB should not be in the future.";
-    public final String inputValue;
-    public final String outputValue;
+    public static final String MESSAGE_CONSTRAINTS =
+            "Date of birth (DOB) should be a valid calendar date and of the format \"DD-MM-YYYY\" "
+                    + "where D, M and Y represent digits of the day, month and year of the DOB respectively."
+                    + "\nDOB should not be in the future.";
+    private final String inputValue;
+    private final String outputValue;
     private final Date date;
 
 
@@ -47,9 +48,17 @@ public class DateOfBirth {
         }
     }
 
+    public String getInputString() {
+        return inputValue;
+    }
+
+    public String getOutputString() {
+        return outputValue;
+    }
+
     @Override
     public String toString() {
-        return inputValue;
+        return outputValue;
     }
 
     @Override

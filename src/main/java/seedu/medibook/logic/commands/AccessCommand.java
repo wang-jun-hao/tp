@@ -7,6 +7,7 @@ import java.util.List;
 import seedu.medibook.commons.core.Messages;
 import seedu.medibook.commons.core.index.Index;
 import seedu.medibook.logic.commands.exceptions.CommandException;
+import seedu.medibook.model.Context;
 import seedu.medibook.model.Model;
 import seedu.medibook.model.patient.Patient;
 
@@ -35,12 +36,18 @@ public class AccessCommand extends Command {
         requireNonNull(model);
         List<Patient> lastShownList = model.getFilteredPatientList();
 
+        if (model.getPatientToAccess().isPresent()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_COMMAND_IN_PATIENT_PROFILE);
+        }
+
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
         }
 
         Patient patientToAccess = lastShownList.get(targetIndex.getZeroBased());
-        model.accessPatient(patientToAccess);
+        Context context = model;
+        context.accessPatient(patientToAccess);
+        context.setShouldLoadMedicalNotes(true);
 
         return new CommandResult(String.format(MESSAGE_ACCESS_PATIENT_SUCCESS, patientToAccess), false,
                 false, true, false);

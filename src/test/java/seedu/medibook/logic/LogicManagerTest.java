@@ -34,6 +34,7 @@ import seedu.medibook.model.UserPrefs;
 import seedu.medibook.model.patient.Patient;
 import seedu.medibook.storage.JsonMediBookStorage;
 import seedu.medibook.storage.JsonMedicalNoteListStorage;
+import seedu.medibook.storage.JsonUserAccountsListStorage;
 import seedu.medibook.storage.JsonUserPrefsStorage;
 import seedu.medibook.storage.StorageManager;
 import seedu.medibook.testutil.PatientBuilder;
@@ -53,7 +54,9 @@ public class LogicManagerTest {
                 new JsonMediBookStorage(temporaryFolder.resolve("mediBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         JsonMedicalNoteListStorage medicalNoteListStorage = new JsonMedicalNoteListStorage(temporaryFolder);
-        StorageManager storage = new StorageManager(mediBookStorage, userPrefsStorage, medicalNoteListStorage);
+        JsonUserAccountsListStorage userAccountStorage = new JsonUserAccountsListStorage(temporaryFolder);
+        StorageManager storage = new StorageManager(mediBookStorage, userPrefsStorage, medicalNoteListStorage,
+                userAccountStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -83,13 +86,15 @@ public class LogicManagerTest {
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
         JsonMedicalNoteListStorage medicalNoteListStorage = new JsonMedicalNoteListStorage(temporaryFolder);
-        StorageManager storage = new StorageManager(mediBookStorage, userPrefsStorage, medicalNoteListStorage);
+        JsonUserAccountsListStorage userAccountStorage = new JsonUserAccountsListStorage(temporaryFolder);
+        StorageManager storage = new StorageManager(mediBookStorage, userPrefsStorage, medicalNoteListStorage,
+                userAccountStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + IC_DESC_AMY + NAME_DESC_AMY + DOB_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + HEIGHT_DESC_AMY + WEIGHT_DESC_AMY + BLOOD_TYPE_DESC_AMY;
-        Patient expectedPatient = new PatientBuilder(AMY).withTags().build();
+        Patient expectedPatient = new PatientBuilder(AMY).withAllergies().withConditions().withTreatments().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPatient(expectedPatient);
         String expectedMessage = LogicManager.FILE_SAVE_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;

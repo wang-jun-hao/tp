@@ -1,7 +1,6 @@
 package seedu.medibook.model;
 
 import java.nio.file.Path;
-import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -11,7 +10,7 @@ import seedu.medibook.model.patient.Patient;
 /**
  * The API of the Model component.
  */
-public interface Model {
+public interface Model extends Context {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Patient> PREDICATE_SHOW_ALL_PATIENTS = unused -> true;
 
@@ -69,19 +68,6 @@ public interface Model {
      * {@code patient} must not already exist in the medi book.
      */
     void addPatient(Patient patient);
-
-    /**
-     * Accesses the given patient.
-     * The patient must exist in the medi book.
-     */
-    void accessPatient(Patient patient);
-
-    /**
-     * Resets the accessed patient.
-     */
-    void resetAccessedPatient();
-
-    Optional<Patient> getPatientToAccess();
 
     /**
      * Replaces the given patient {@code target} with {@code editedPatient}.

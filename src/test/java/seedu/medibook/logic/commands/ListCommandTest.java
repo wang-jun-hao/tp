@@ -2,7 +2,7 @@ package seedu.medibook.logic.commands;
 
 import static seedu.medibook.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.medibook.logic.commands.CommandTestUtil.showPatientAtIndex;
-import static seedu.medibook.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
+import static seedu.medibook.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.medibook.testutil.TypicalPatients.getTypicalMediBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -36,7 +36,7 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showPatientAtIndex(model, INDEX_FIRST_PATIENT);
+        showPatientAtIndex(model, INDEX_FIRST);
         expectedModel.resetAccessedPatient();
         CommandResult expectedCommandResult = new CommandResult(String.format(ListCommand.MESSAGE_SUCCESS),
                 false, false, false, true);

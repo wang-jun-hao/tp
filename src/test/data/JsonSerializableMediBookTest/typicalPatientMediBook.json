@@ -11,7 +11,13 @@
     "weight": "48.5",
     "bmi": "16.0",
     "bloodType": "A+",
-    "tagged" : [ "friends" ]
+    "allergies" : [ "cat fur (Fel d 1)" ],
+    "conditions" : [ "Migraine" ],
+    "treatments" : [ "Ibuprofen" ],
+    "record" : {
+      "heightRecord": { },
+      "weightRecord": { }
+    }
   }, {
     "ic" : "S9234567A",
     "name" : "Benson Meier",
@@ -23,7 +29,13 @@
     "weight": "63.5",
     "bmi": "22.0",
     "bloodType": "AB+",
-    "tagged" : [ "owesMoney", "friends" ]
+    "allergies" : [ "shellfish", "dust mites" ],
+    "conditions" : [ "knee sprain" ],
+    "treatments" : [ "Physiotherapy" ],
+    "record" : {
+      "heightRecord": { },
+      "weightRecord": { }
+    }
   }, {
     "ic" : "S9876543W",
     "name" : "Carl Kurz",
@@ -35,7 +47,13 @@
     "weight": "80.8",
     "bmi": "30.8",
     "bloodType": "B+",
-    "tagged" : [ ]
+    "allergies" : [ "peanut" ],
+    "conditions" : [ "fever" ],
+    "treatments" : [ "epinephrine", "Paracetamol" ],
+    "record" : {
+      "heightRecord": { },
+      "weightRecord": { }
+    }
   }, {
     "ic" : "T0054321P",
     "name" : "Daniel Meier",
@@ -47,7 +65,13 @@
     "weight": "70.3",
     "bmi": "21.0",
     "bloodType": "A-",
-    "tagged" : [ "friends" ]
+    "allergies" : [ "potatoes" ],
+    "conditions" : [ "Type I diabetes" ],
+    "treatments" : [ "Insulin pump" ],
+    "record" : {
+      "heightRecord": { },
+      "weightRecord": { }
+    }
   }, {
     "ic" : "F7654321Q",
     "name" : "Elle Meyer",
@@ -59,7 +83,13 @@
     "weight": "43.5",
     "bmi": "13.9",
     "bloodType": "B-",
-    "tagged" : [ ]
+    "allergies" : [ ],
+    "conditions" : [ ],
+    "treatments" : [ ],
+    "record" : {
+      "heightRecord": { },
+      "weightRecord": { }
+    }
   }, {
     "ic" : "S7543210A",
     "name" : "Fiona Kunz",
@@ -71,7 +101,13 @@
     "weight": "50.5",
     "bmi": "17.9",
     "bloodType": "O+",
-    "tagged" : [ ]
+    "allergies" : [ "Penicillin" ],
+    "conditions" : [ ],
+    "treatments" : [ ],
+    "record" : {
+      "heightRecord": { },
+      "weightRecord": { }
+    }
   }, {
     "ic" : "T0232323I",
     "name" : "George Best",
@@ -83,6 +119,12 @@
     "weight": "69.2",
     "bmi": "24.2",
     "bloodType": "A+",
-    "tagged" : [ ]
+    "allergies" : [ ],
+    "conditions" : [ "fever" ],
+    "treatments" : [ "Paracetemol" ],
+    "record" : {
+      "heightRecord": { },
+      "weightRecord": { }
+    }
   } ]
 }

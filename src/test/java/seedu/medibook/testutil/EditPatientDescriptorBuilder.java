@@ -5,17 +5,19 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.medibook.logic.commands.EditCommand;
+import seedu.medibook.model.commonfields.Name;
+import seedu.medibook.model.medicaldetail.Allergy;
+import seedu.medibook.model.medicaldetail.Condition;
+import seedu.medibook.model.medicaldetail.Treatment;
 import seedu.medibook.model.patient.Address;
 import seedu.medibook.model.patient.BloodType;
 import seedu.medibook.model.patient.DateOfBirth;
 import seedu.medibook.model.patient.Email;
 import seedu.medibook.model.patient.Height;
 import seedu.medibook.model.patient.Ic;
-import seedu.medibook.model.patient.Name;
 import seedu.medibook.model.patient.Patient;
 import seedu.medibook.model.patient.Phone;
 import seedu.medibook.model.patient.Weight;
-import seedu.medibook.model.tag.Tag;
 
 /**
  * A utility class to help with building EditPatientDescriptor objects.
@@ -46,7 +48,9 @@ public class EditPatientDescriptorBuilder {
         descriptor.setHeight(patient.getHeight().get());
         descriptor.setWeight(patient.getWeight().get());
         descriptor.setBloodType(patient.getBloodType().get());
-        descriptor.setTags(patient.getTags());
+        descriptor.setAllergies(patient.getAllergies());
+        descriptor.setConditions(patient.getConditions());
+        descriptor.setTreatments(patient.getTreatments());
     }
 
     /**
@@ -122,12 +126,32 @@ public class EditPatientDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPatientDescriptor}
+     * Parses the {@code allergies} into a {@code Set<Allergy>} and set it to the {@code EditPatientDescriptor}
      * that we are building.
      */
-    public EditPatientDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+    public EditPatientDescriptorBuilder withAllergies(String... allergies) {
+        Set<Allergy> allergySet = Stream.of(allergies).map(Allergy::new).collect(Collectors.toSet());
+        descriptor.setAllergies(allergySet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code conditions} into a {@code Set<Condition>} and set it to the {@code EditPatientDescriptor}
+     * that we are building.
+     */
+    public EditPatientDescriptorBuilder withConditions(String... conditions) {
+        Set<Condition> conditionSet = Stream.of(conditions).map(Condition::new).collect(Collectors.toSet());
+        descriptor.setConditions(conditionSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code treatments} into a {@code Set<Treatment>} and set it to the {@code EditPatientDescriptor}
+     * that we are building.
+     */
+    public EditPatientDescriptorBuilder withTreatments(String... treatments) {
+        Set<Treatment> treatmentSet = Stream.of(treatments).map(Treatment::new).collect(Collectors.toSet());
+        descriptor.setTreatments(treatmentSet);
         return this;
     }
 

@@ -33,6 +33,10 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (model.getPatientToAccess().isPresent()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_COMMAND_IN_PATIENT_PROFILE);
+        }
         List<Patient> lastShownList = model.getFilteredPatientList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
@@ -40,6 +44,7 @@ public class DeleteCommand extends Command {
         }
 
         Patient patientToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.setDeletedPatient(patientToDelete);
         model.deletePatient(patientToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS, patientToDelete));
     }
