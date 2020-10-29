@@ -64,9 +64,9 @@ import static seedu.medibook.logic.parser.CliSyntax.PREFIX_CONDITION;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_TREATMENT;
 import static seedu.medibook.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.medibook.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.medibook.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
-import static seedu.medibook.testutil.TypicalIndexes.INDEX_SECOND_PATIENT;
-import static seedu.medibook.testutil.TypicalIndexes.INDEX_THIRD_PATIENT;
+import static seedu.medibook.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.medibook.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.medibook.testutil.TypicalIndexes.INDEX_THIRD;
 
 import org.junit.jupiter.api.Test;
 
@@ -183,7 +183,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_PATIENT;
+        Index targetIndex = INDEX_SECOND;
         String userInput = targetIndex.getOneBased() + IC_DESC_AMY + PHONE_DESC_BOB + TREATMENT_DESC_PHYSIOTHERAPY
                 + DOB_DESC_AMY + EMAIL_DESC_AMY + ALLERGY_DESC_SHELLFISH + ADDRESS_DESC_AMY + HEIGHT_DESC_AMY
                 + WEIGHT_DESC_AMY + CONDITION_DESC_BACK + BLOOD_TYPE_DESC_AMY + NAME_DESC_AMY + ALLERGY_DESC_PENICILLIN
@@ -203,7 +203,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_PATIENT;
+        Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY;
 
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withPhone(VALID_PHONE_BOB)
@@ -216,7 +216,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // ic
-        Index targetIndex = INDEX_THIRD_PATIENT;
+        Index targetIndex = INDEX_THIRD;
         String userInput = targetIndex.getOneBased() + IC_DESC_AMY;
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withIc(VALID_IC_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
@@ -291,7 +291,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-        Index targetIndex = INDEX_FIRST_PATIENT;
+        Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + IC_DESC_AMY + DOB_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY
                 + EMAIL_DESC_AMY + HEIGHT_DESC_AMY + WEIGHT_DESC_AMY + BLOOD_TYPE_DESC_AMY + TREATMENT_DESC_PARACETAMOL
                 + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TREATMENT_DESC_PARACETAMOL + IC_DESC_BOB
@@ -313,7 +313,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
-        Index targetIndex = INDEX_FIRST_PATIENT;
+        Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_BOB;
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withPhone(VALID_PHONE_BOB).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
@@ -331,7 +331,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_resetMedicalDetails_success() {
-        Index targetIndex = INDEX_THIRD_PATIENT;
+        Index targetIndex = INDEX_THIRD;
 
         // allergies
         String userInput = targetIndex.getOneBased() + ALLERGY_EMPTY;

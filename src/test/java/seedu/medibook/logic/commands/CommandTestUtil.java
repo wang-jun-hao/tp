@@ -112,8 +112,10 @@ public class CommandTestUtil {
     public static final String INVALID_CONDITION_DESC = " " + PREFIX_CONDITION + "/@!";
     public static final String INVALID_TREATMENT_DESC = " " + PREFIX_TREATMENT + "[/*";
     public static final String INVALID_NOTE_DATE_DESC = " " + PREFIX_DATE + "2-3-2020"; // incorrect date format
-    public static final String INVALID_DOCTOR_NAME_DESC = " " + PREFIX_NAME + "A* doctor"; // '* not allowed in name'
-    public static final String INVALID_DOCTOR_MCR_DESC = " " + PREFIX_MCR + "Z82730P"; // incorrect mcr format
+    // '*' not allowed in name
+    public static final String INVALID_NOTE_DOCTOR_NAME_DESC = " " + PREFIX_NAME + "A* doctor";
+    public static final String INVALID_NOTE_DOCTOR_MCR_DESC = " " + PREFIX_MCR + "Z82730P"; // incorrect mcr format
+    public static final String INVALID_NOTE_CONTENT_DESC = " " + PREFIX_CONTENT + ""; // content cannot be empty
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

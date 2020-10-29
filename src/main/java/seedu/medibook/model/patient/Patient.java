@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.medibook.model.commonfields.Name;
 import seedu.medibook.model.medicaldetail.Allergy;
 import seedu.medibook.model.medicaldetail.Condition;
@@ -113,6 +114,14 @@ public class Patient {
 
     public DateOfBirth getDateOfBirth() {
         return dateOfBirth;
+    }
+
+    public String getDateOfBirthInputString() {
+        return dateOfBirth.getInputString();
+    }
+
+    public String getDateOfBirthOutputString() {
+        return dateOfBirth.getOutputString();
     }
 
     public Phone getPhone() {
@@ -268,6 +277,35 @@ public class Patient {
         return medicalNoteList;
     }
 
+    public ObservableList<MedicalNote> getObservableMedicalNoteList() {
+        return medicalNoteList.getObservableInnerList();
+    }
+
+    /**
+     * Retrieves the medical note at the specified index in the list belonging to the patient.
+     * @param index Zero-based index of medical note.
+     * @return medical note at index in list belonging to the patient.
+     */
+    public MedicalNote getMedicalNoteAtIndex(int index) {
+        return medicalNoteList.getMedicalNoteAtIndex(index);
+    }
+
+    /**
+     * Deletes the medical note at the specified index from the list belonging to the patient.
+     * @param index Zero-based index of medical note.
+     */
+    public void deleteMedicalNoteAtIndex(int index) {
+        medicalNoteList.deleteMedicalNoteAtIndex(index);
+    }
+
+    /**
+     * Get number of medical notes within the list belonging to this patient.
+     * @return Number of medical notes in the list.
+     */
+    public int getNumOfMedicalNotes() {
+        return medicalNoteList.size();
+    }
+
     /**
      * Returns true if both patients of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two patients.
@@ -364,6 +402,7 @@ public class Patient {
                 && otherPatient.getWeight().equals(getWeight())
                 && otherPatient.getBmi().equals(getBmi())
                 && otherPatient.getBloodType().equals(getBloodType())
+                && otherPatient.getMedicalNoteList().equals(getMedicalNoteList())
                 && otherPatient.getAllergies().equals(getAllergies())
                 && otherPatient.getConditions().equals(getConditions())
                 && otherPatient.getTreatments().equals(getTreatments());
@@ -373,7 +412,7 @@ public class Patient {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(ic, name, dateOfBirth, phone, email, address, height, weight, bmi,
-                            bloodType, allergies, conditions, treatments);
+                            bloodType, medicalNoteList, allergies, conditions, treatments);
     }
 
     @Override

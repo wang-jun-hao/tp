@@ -54,7 +54,8 @@ public class FindCommand extends Command {
         model.updateFilteredPatientList(combinedPredicates);
 
         return new CommandResult(
-                String.format(Messages.MESSAGE_PATIENT_LISTED_OVERVIEW, model.getFilteredPatientList().size()));
+                String.format(Messages.MESSAGE_PATIENT_LISTED_OVERVIEW, model.getFilteredPatientList().size()),
+                false, false, false, true);
     }
 
     @Override

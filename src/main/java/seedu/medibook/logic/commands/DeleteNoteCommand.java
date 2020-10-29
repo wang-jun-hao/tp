@@ -3,7 +3,9 @@ package seedu.medibook.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
+import seedu.medibook.commons.core.LogsCenter;
 import seedu.medibook.commons.core.Messages;
 import seedu.medibook.commons.core.index.Index;
 import seedu.medibook.logic.commands.exceptions.CommandException;
@@ -30,6 +32,8 @@ public class DeleteNoteCommand extends Command {
             + "when you are viewing his/her patient profile. Access the patient profile before "
             + "deleting a medical note.";
 
+    private final Logger logger = LogsCenter.getLogger(DeleteNoteCommand.class);
+
     private final Index targetIndex;
 
     public DeleteNoteCommand(Index targetIndex) {
@@ -39,6 +43,7 @@ public class DeleteNoteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.setShouldLoadMedicalNotes(false);
         Optional<Patient> patientOptional = model.getPatientToAccess();
 
         if (patientOptional.isEmpty()) {
@@ -51,15 +56,18 @@ public class DeleteNoteCommand extends Command {
 
         MedicalNoteList medicalNoteList = displayedPatient.getMedicalNoteList();
 
-        int indexZeroBased = targetIndex.getZeroBased();
+        int zeroBasedIndex = targetIndex.getZeroBased();
 
-        if (indexZeroBased >= medicalNoteList.size()) {
+        if (zeroBasedIndex >= medicalNoteList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_NOTE_DISPLAYED_INDEX);
         }
 
-        MedicalNote noteToDelete = medicalNoteList.getMedicalNoteAtIndex(indexZeroBased);
+        MedicalNote noteToDelete = medicalNoteList.getMedicalNoteAtIndex(zeroBasedIndex);
 
-        medicalNoteList.deleteMedicalNoteAtIndex(indexZeroBased);
+        medicalNoteList.deleteMedicalNoteAtIndex(zeroBasedIndex);
+
+        logger.info("----------------[PATIENT AND ORDER OF MEDICAL NOTES:][" + displayedPatient + "\n"
+                + displayedPatient.getMedicalNoteList() + "]");
 
         return new CommandResult(String.format(MESSAGE_DELETE_NOTE_SUCCESS, noteToDelete));
     }

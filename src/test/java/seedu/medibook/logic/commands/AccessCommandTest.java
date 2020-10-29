@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.medibook.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.medibook.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.medibook.logic.commands.CommandTestUtil.showPatientAtIndex;
-import static seedu.medibook.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
-import static seedu.medibook.testutil.TypicalIndexes.INDEX_SECOND_PATIENT;
+import static seedu.medibook.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.medibook.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.medibook.testutil.TypicalPatients.getTypicalMediBook;
 
 import org.junit.jupiter.api.Test;
@@ -25,8 +25,8 @@ public class AccessCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Patient patientToAccess = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
-        AccessCommand accessCommand = new AccessCommand(INDEX_FIRST_PATIENT);
+        Patient patientToAccess = model.getFilteredPatientList().get(INDEX_FIRST.getZeroBased());
+        AccessCommand accessCommand = new AccessCommand(INDEX_FIRST);
 
         CommandResult expectedCommandResult =
                 new CommandResult(String.format(AccessCommand.MESSAGE_ACCESS_PATIENT_SUCCESS, patientToAccess),
@@ -49,8 +49,8 @@ public class AccessCommandTest {
     @Test
     public void execute_validIndexFilteredList_success() throws CommandException {
 
-        Patient patientToAccess = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
-        AccessCommand accessCommand = new AccessCommand(INDEX_FIRST_PATIENT);
+        Patient patientToAccess = model.getFilteredPatientList().get(INDEX_FIRST.getZeroBased());
+        AccessCommand accessCommand = new AccessCommand(INDEX_FIRST);
 
         CommandResult expectedCommandResult =
                 new CommandResult(String.format(AccessCommand.MESSAGE_ACCESS_PATIENT_SUCCESS, patientToAccess),
@@ -64,9 +64,9 @@ public class AccessCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPatientAtIndex(model, INDEX_FIRST_PATIENT);
+        showPatientAtIndex(model, INDEX_FIRST);
 
-        Index outOfBoundIndex = INDEX_SECOND_PATIENT;
+        Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of medi book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getMediBook().getPatientList().size());
 
@@ -78,7 +78,7 @@ public class AccessCommandTest {
     @Test
     public void execute_invalidOutOfBoundsIndexFilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPatientList().size() + 1);
-        showPatientAtIndex(model, INDEX_FIRST_PATIENT);
+        showPatientAtIndex(model, INDEX_FIRST);
 
         AccessCommand accessCommand = new AccessCommand(outOfBoundIndex);
 
@@ -87,14 +87,14 @@ public class AccessCommandTest {
 
     @Test
     public void equals() {
-        AccessCommand accessFirstCommand = new AccessCommand(INDEX_FIRST_PATIENT);
-        AccessCommand accessSecondCommand = new AccessCommand(INDEX_SECOND_PATIENT);
+        AccessCommand accessFirstCommand = new AccessCommand(INDEX_FIRST);
+        AccessCommand accessSecondCommand = new AccessCommand(INDEX_SECOND);
 
         // same object -> returns true
         assertTrue(accessFirstCommand.equals(accessFirstCommand));
 
         // same values -> returns true
-        AccessCommand accessFirstCommandCopy = new AccessCommand(INDEX_FIRST_PATIENT);
+        AccessCommand accessFirstCommandCopy = new AccessCommand(INDEX_FIRST);
         assertTrue(accessFirstCommand.equals(accessFirstCommandCopy));
 
         // different types -> returns false

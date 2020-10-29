@@ -193,7 +193,21 @@ public class TypicalPatients {
     public static MediBook getTypicalMediBook() {
         MediBook mediBook = new MediBook();
         for (Patient patient : getTypicalPatients()) {
-            mediBook.addPatient(patient);
+            Patient newCopyOfPatient = new PatientBuilder(patient).build();
+            mediBook.addPatient(newCopyOfPatient);
+        }
+        return mediBook;
+    }
+
+    /**
+     * Returns an {@code MediBook} with all the typical patients with empty medical note list.
+     */
+    public static MediBook getTypicalMediBookWithAllEmptyMedicalNoteList() {
+        MediBook mediBook = new MediBook();
+        for (Patient patient : getTypicalPatients()) {
+            Patient newCopyOfPatient = new PatientBuilder(patient).build();
+            newCopyOfPatient.setMedicalNoteList(new MedicalNoteList());
+            mediBook.addPatient(newCopyOfPatient);
         }
         return mediBook;
     }

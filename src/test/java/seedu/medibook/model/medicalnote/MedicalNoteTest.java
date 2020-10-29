@@ -69,24 +69,4 @@ class MedicalNoteTest {
                     new Content(invalidContent));
         });
     }
-    /*
-    @Test
-    void isValidDoctorName() {
-        // null doctor name
-        assertThrows(NullPointerException.class, () -> MedicalNote.isValidDoctorName(null));
-
-        // invalid doctor name
-        assertFalse(MedicalNote.isValidDoctorName("")); // empty string
-        assertFalse(MedicalNote.isValidDoctorName(" ")); // spaces only
-        assertFalse(MedicalNote.isValidDoctorName("^")); // only non-alphanumeric characters
-        assertFalse(MedicalNote.isValidDoctorName("peter*")); // contains non-alphanumeric characters
-
-        // valid doctor name
-        assertTrue(MedicalNote.isValidDoctorName("peter jack")); // alphabets only
-        assertTrue(MedicalNote.isValidDoctorName("12345")); // numbers only
-        assertTrue(MedicalNote.isValidDoctorName("peter the 2nd")); // alphanumeric characters
-        assertTrue(MedicalNote.isValidDoctorName("Capital Tan")); // with capital letters
-        assertTrue(MedicalNote.isValidDoctorName("David Roger Jackson Ray Jr 2nd")); // long names
-    }
-    */
 }
