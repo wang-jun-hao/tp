@@ -21,6 +21,7 @@ import seedu.medibook.model.MediBook;
 import seedu.medibook.model.Model;
 import seedu.medibook.model.ReadOnlyMediBook;
 import seedu.medibook.model.ReadOnlyUserPrefs;
+import seedu.medibook.model.doctor.Doctor;
 import seedu.medibook.model.patient.Ic;
 import seedu.medibook.model.patient.Patient;
 import seedu.medibook.testutil.PatientBuilder;
@@ -218,6 +219,16 @@ public class AddCommandTest {
         @Override
         public void setShouldDeleteAllMedicalNotes(boolean b) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setActiveUser(Optional<Doctor> doctor) {
+
+        }
+
+        @Override
+        public Optional<Doctor> getActiveUser() {
+            return Optional.empty();
         }
     }
 

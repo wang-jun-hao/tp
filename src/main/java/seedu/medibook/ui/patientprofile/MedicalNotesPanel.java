@@ -44,7 +44,7 @@ public class MedicalNotesPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new MedicalNoteCard(medicalNote).getRoot());
+                setGraphic(new MedicalNoteCard(medicalNote, getIndex() + 1).getRoot());
             }
         }
     }

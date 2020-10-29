@@ -4,11 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.medibook.logic.commands.CommandTestUtil.VALID_ALLERGY_SHELLFISH;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_BLOOD_TYPE_BOB;
+import static seedu.medibook.logic.commands.CommandTestUtil.VALID_CONDITION_DIABETES;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_HEIGHT_BOB;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.medibook.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.medibook.logic.commands.CommandTestUtil.VALID_TREATMENT_PHYSIOTHERAPY;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_WEIGHT_BOB;
 import static seedu.medibook.testutil.Assert.assertThrows;
 import static seedu.medibook.testutil.TypicalPatients.ALICE;
@@ -49,7 +51,8 @@ public class UniquePatientListTest {
         uniquePatientList.add(ALICE);
         Patient editedAlice = new PatientBuilder(ALICE).withName(VALID_NAME_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withHeight(VALID_HEIGHT_BOB).withWeight(VALID_WEIGHT_BOB)
-                .withBloodType(VALID_BLOOD_TYPE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withBloodType(VALID_BLOOD_TYPE_BOB).withAllergies(VALID_ALLERGY_SHELLFISH)
+                .withConditions(VALID_CONDITION_DIABETES).withTreatments(VALID_TREATMENT_PHYSIOTHERAPY).build();
         assertTrue(uniquePatientList.contains(editedAlice));
     }
 
@@ -93,7 +96,8 @@ public class UniquePatientListTest {
         uniquePatientList.add(ALICE);
         Patient editedAlice = new PatientBuilder(ALICE).withName(VALID_NAME_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withHeight(VALID_HEIGHT_BOB).withWeight(VALID_WEIGHT_BOB)
-                .withBloodType(VALID_BLOOD_TYPE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withBloodType(VALID_BLOOD_TYPE_BOB).withAllergies(VALID_ALLERGY_SHELLFISH)
+                .withConditions(VALID_CONDITION_DIABETES).withTreatments(VALID_TREATMENT_PHYSIOTHERAPY).build();
         uniquePatientList.setPatient(ALICE, editedAlice);
         UniquePatientList expectedUniquePatientList = new UniquePatientList();
         expectedUniquePatientList.add(editedAlice);

@@ -1,15 +1,17 @@
-package seedu.medibook.model.tag;
+package seedu.medibook.model.medicaldetail;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.medibook.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Tag in the medi book.
+ * Each medical detail of a {@code Patient} is described with medical tags,
+ * which are objects that inherit from this {@code Tag} class.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Medical tags should have a least one alphanumeric character.";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;
@@ -29,7 +31,14 @@ public class Tag {
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        boolean isValid = false;
+
+        for (int i = 0; i < test.length(); i++) {
+            // check every character
+            isValid = isValid || String.valueOf(test.charAt(i)).matches(VALIDATION_REGEX);
+        }
+
+        return isValid;
     }
 
     @Override

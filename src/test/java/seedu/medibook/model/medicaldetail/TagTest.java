@@ -1,5 +1,7 @@
-package seedu.medibook.model.tag;
+package seedu.medibook.model.medicaldetail;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.medibook.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -21,6 +23,15 @@ public class TagTest {
     public void isValidTagName() {
         // null tag name
         assertThrows(NullPointerException.class, () -> Tag.isValidTagName(null));
+
+        // invalid tag name
+        assertFalse(Tag.isValidTagName("")); // empty string
+        assertFalse(Tag.isValidTagName("[/- ")); // no alphanumeric characters
+
+        // valid tag name
+        assertTrue(Tag.isValidTagName("Diabetes (Type I)"));
+        assertTrue(Tag.isValidTagName("Peanuts/Nuts in general"));
+        assertTrue(Tag.isValidTagName("Paracetamol"));
     }
 
 }

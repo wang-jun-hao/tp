@@ -24,8 +24,9 @@ This user guide helps you get familiar with its features and get started with us
 2. Download the latest medibook.jar from [https://github.com/AY2021S1-CS2103T-F13-3/tp/releases](https://github.com/AY2021S1-CS2103T-F13-3/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your MediBook.
 4. Double-click the file to start the app.
-5. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.
-6. Refer to the Features below for details on each command.
+5. Login to the program or create an account if you do not already have one.
+6. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.
+7. Refer to the Features below for details on each command.
 
 ---------------------------------------------------------------------------------------------------------------
 
@@ -47,15 +48,27 @@ This user guide helps you get familiar with its features and get started with us
 
 </div>
 
-### 3.1 Viewing help : `help`
+### 3.1 Login and Create Account
 
-Shows a message explaning how to access the help page.
+Type in your `username` and `password` to login to the system. If you do not have a `username` and `password`, pick the
+`create account` option, which would let you create a new account.
+
+When creating your new account, fill in your desired `username`, `password`, your `name` and your `MCR`, then click create.
+
+*`username` and `password` need to be at least 5 characters long.
+* `MCR` has to be of the format 'M@####$', where @ is a letter/digit, # is a digit and $ is a letter.
+
+You can also login as an administrative staff using the username: `admin` and password: `admin`. As an administrative staff, you can only add, edit, delete and find patients. You are unable to add, edit or delete medical notes.
+
+### 3.2 Viewing help : `help`
+
+Shows a message explaining how to access the help page.
 
 ####Format: 
 
 `help`
 
-### 3.2 Listing all patients: `list`
+### 3.3 Listing all patients: `list`
 
 Shows a list of all patient's records in the system.
 
@@ -63,7 +76,7 @@ Shows a list of all patient's records in the system.
 
 `list`
 
-### 3.3 Adding a patient: `add`
+### 3.4 Adding a patient: `add`
 
 Adds a patient to the system.
 
@@ -82,7 +95,7 @@ IC, Name, Date of Birth and Phone Number are compulsory fields while the rest ar
 
 `add i/T0123456Q n/Divakar d/29-02-2000 p/91234567 e/divakarmal@medibook.com a/NUS, Kent Ridge Drive h/178 w/75.0 b/O+`
 
-### 3.4 Editing a patient: `edit`
+### 3.5 Editing a patient: `edit`
 
 Edits the specified patient's information from MediBook. 
 
@@ -101,7 +114,7 @@ The `edit` command is also used to fill in unspecified fields.
 
 `edit 3 n/Divakar p/91111111 h/201` edits the name, phone number and height of patient with index `3` in the displayed list to `Divakar`, `91111111` and `201`cm  respectively.
 
-### 3.5 Deleting a patient : `delete`
+### 3.6 Deleting a patient : `delete`
 
 Deletes the specified patient from MediBook.
 
@@ -112,7 +125,7 @@ Deletes the specified patient from MediBook.
 ####Example:
 * `delete 1` deletes the patient with index `1` in the displayed list
 
-### 3.6 Finding a patient by IC: `find`
+### 3.7 Finding a patient by IC: `find`
 
 Finds patient records by multiple fields and multiple keywords.
 
@@ -129,7 +142,7 @@ Finds patient records by multiple fields and multiple keywords.
 * `find i/S9123456A` returns the patient record with IC `S9123456A`
 * `find n/Billy Alice a/Clementi i/S99` returns the patient records with Name containing `Billy` or `Alice`, Address containing `Clementi` and IC containing `S99`
 
-### 3.7 Accessing a patient's profile : `access`
+### 3.8 Accessing a patient's profile : `access`
 
 Accesses a specified patient's profile in MediBook.
 
@@ -143,7 +156,8 @@ Accesses a specified patient's profile in MediBook.
     * Medical Details section (bottom left): Shows medical details as tags separated into 3 categories (to be implemented), namely: Allergies, (ongoing) Treatments and (preexisting) Conditions.
     * Medical Notes section (right): A scrollable panel showing the list of medical notes recorded for the specified patient.
 
-### 3.8 Adding a medical note: `addnote`
+
+### 3.9 Adding a medical note: `addnote`
 
 Adds a medical note to a patient.
 
@@ -220,6 +234,7 @@ the medical note at index 1 authored by you.
 * `deletenote 1`
 
 Deletes the medical note with index 1 in the displayed list of medical notes belonging to patient with IC 'S9123456A'.
+
 
 ### 3.11 Exiting the program : `exit`
 

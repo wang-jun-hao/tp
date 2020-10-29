@@ -13,7 +13,7 @@ public class Content {
 
     /**
      * Construct a content object containing the specified string.
-     * @param str content of medical note in string.
+     * @param str content of medical note in string, cannot be empty.
      */
     public Content(String str) {
         requireNonNull(str);
@@ -24,6 +24,11 @@ public class Content {
         innerString = str;
     }
 
+    /**
+     * Returns true if the given string is a valid content (non-empty).
+     * @param test string to be tested.
+     * @return true if string is valid as a content.
+     */
     public static boolean isValidContent(String test) {
         return test.length() > 0;
     }

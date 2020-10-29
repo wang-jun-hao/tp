@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.medibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_CONTENT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_MCR;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.medibook.commons.core.index.Index;
 import seedu.medibook.logic.commands.EditNoteCommand;
@@ -14,7 +12,7 @@ import seedu.medibook.logic.parser.exceptions.ParseException;
 
 
 /**
- * Parses input arguments and creates a new EditNoteCommand object
+ * Parses input arguments and creates a new EditNoteCommand object.
  */
 public class EditNoteCommandParser implements Parser<EditNoteCommand> {
 
@@ -26,7 +24,7 @@ public class EditNoteCommandParser implements Parser<EditNoteCommand> {
     public EditNoteCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_NAME, PREFIX_MCR, PREFIX_CONTENT);
+                ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_CONTENT);
         Index index;
 
         try {
@@ -39,12 +37,7 @@ public class EditNoteCommandParser implements Parser<EditNoteCommand> {
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             editNoteDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
         }
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editNoteDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-        }
-        if (argMultimap.getValue(PREFIX_MCR).isPresent()) {
-            editNoteDescriptor.setMcr(ParserUtil.parseMcr(argMultimap.getValue(PREFIX_MCR).get()));
-        }
+
         if (argMultimap.getValue(PREFIX_CONTENT).isPresent()) {
             editNoteDescriptor.setContent(ParserUtil.parseContent(argMultimap.getValue(PREFIX_CONTENT).get()));
         }

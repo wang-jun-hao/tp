@@ -14,6 +14,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.medibook.commons.exceptions.IllegalValueException;
 import seedu.medibook.model.commonfields.Name;
+import seedu.medibook.model.medicaldetail.Allergy;
+import seedu.medibook.model.medicaldetail.Condition;
+import seedu.medibook.model.medicaldetail.Treatment;
 import seedu.medibook.model.patient.Address;
 import seedu.medibook.model.patient.BloodType;
 import seedu.medibook.model.patient.Bmi;
@@ -25,7 +28,6 @@ import seedu.medibook.model.patient.Patient;
 import seedu.medibook.model.patient.Phone;
 import seedu.medibook.model.patient.Record;
 import seedu.medibook.model.patient.Weight;
-import seedu.medibook.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Patient}.
@@ -45,7 +47,9 @@ class JsonAdaptedPatient {
     private final String bmi;
     private final String bloodType;
     private final JsonAdaptedRecord record;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedAllergy> allergies = new ArrayList<>();
+    private final List<JsonAdaptedCondition> conditions = new ArrayList<>();
+    private final List<JsonAdaptedTreatment> treatments = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPatient} with the given patient details.
@@ -57,7 +61,9 @@ class JsonAdaptedPatient {
                               @JsonProperty("height") String height, @JsonProperty("weight") String weight,
                               @JsonProperty("bmi") String bmi, @JsonProperty("blood type") String bloodType,
                               @JsonProperty("record") JsonAdaptedRecord record,
-                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+                              @JsonProperty("allergies") List<JsonAdaptedAllergy> allergies,
+                              @JsonProperty("conditions") List<JsonAdaptedCondition> conditions,
+                              @JsonProperty("treatments") List<JsonAdaptedTreatment> treatments) {
         this.ic = ic;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -69,8 +75,15 @@ class JsonAdaptedPatient {
         this.bmi = bmi;
         this.bloodType = bloodType;
         this.record = record;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
+
+        if (allergies != null) {
+            this.allergies.addAll(allergies);
+        }
+        if (conditions != null) {
+            this.conditions.addAll(conditions);
+        }
+        if (treatments != null) {
+            this.treatments.addAll(treatments);
         }
     }
 
@@ -118,7 +131,7 @@ class JsonAdaptedPatient {
             bmi = OPTIONAL_FIELD_EMPTY_MESSAGE;
         }
 
-        // bloodtype
+        // blood type
         if (source.getBloodType().isPresent()) {
             bloodType = source.getStringBloodType();
         } else {
@@ -127,9 +140,17 @@ class JsonAdaptedPatient {
 
         record = new JsonAdaptedRecord(source.getRecord());
 
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+        allergies.addAll(source.getAllergies().stream()
+            .map(JsonAdaptedAllergy::new)
+            .collect(Collectors.toList()));
+
+        conditions.addAll(source.getConditions().stream()
+            .map(JsonAdaptedCondition::new)
+            .collect(Collectors.toList()));
+
+        treatments.addAll(source.getTreatments().stream()
+            .map(JsonAdaptedTreatment::new)
+            .collect(Collectors.toList()));
     }
 
     /**
@@ -138,9 +159,19 @@ class JsonAdaptedPatient {
      * @throws IllegalValueException if there were any data constraints violated in the adapted patient.
      */
     public Patient toModelType() throws IllegalValueException {
-        final List<Tag> patientTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            patientTags.add(tag.toModelType());
+        final List<Allergy> patientAllergies = new ArrayList<>();
+        for (JsonAdaptedAllergy allergy : allergies) {
+            patientAllergies.add(allergy.toModelType());
+        }
+
+        final List<Condition> patientConditions = new ArrayList<>();
+        for (JsonAdaptedCondition condition : conditions) {
+            patientConditions.add(condition.toModelType());
+        }
+
+        final List<Treatment> patientTreatments = new ArrayList<>();
+        for (JsonAdaptedTreatment tag : treatments) {
+            patientTreatments.add(tag.toModelType());
         }
 
         if (ic == null) {
@@ -261,10 +292,13 @@ class JsonAdaptedPatient {
             modelBloodType = Optional.of(new BloodType(bloodType));
         }
 
-        final Set<Tag> modelTags = new HashSet<>(patientTags);
+        final Set<Allergy> modelAllergies = new HashSet<>(patientAllergies);
+        final Set<Condition> modelConditions = new HashSet<>(patientConditions);
+        final Set<Treatment> modelTreatments = new HashSet<>(patientTreatments);
 
         final Patient modelPatient = new Patient(modelIc, modelName, modelDateOfBirth, modelPhone, modelEmail,
-                modelAddress, modelHeight, modelWeight, modelBmi, modelBloodType, modelTags);
+                modelAddress, modelHeight, modelWeight, modelBmi, modelBloodType,
+                modelAllergies, modelConditions, modelTreatments);
 
         if (record == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

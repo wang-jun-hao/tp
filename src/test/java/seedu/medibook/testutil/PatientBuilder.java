@@ -5,6 +5,9 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.medibook.model.commonfields.Name;
+import seedu.medibook.model.medicaldetail.Allergy;
+import seedu.medibook.model.medicaldetail.Condition;
+import seedu.medibook.model.medicaldetail.Treatment;
 import seedu.medibook.model.medicalnote.MedicalNoteList;
 import seedu.medibook.model.patient.Address;
 import seedu.medibook.model.patient.BloodType;
@@ -16,7 +19,6 @@ import seedu.medibook.model.patient.Ic;
 import seedu.medibook.model.patient.Patient;
 import seedu.medibook.model.patient.Phone;
 import seedu.medibook.model.patient.Weight;
-import seedu.medibook.model.tag.Tag;
 import seedu.medibook.model.util.SampleDataUtil;
 
 /**
@@ -45,7 +47,9 @@ public class PatientBuilder {
     private Optional<Weight> weight;
     private Optional<Bmi> bmi;
     private Optional<BloodType> bloodType;
-    private Set<Tag> tags;
+    private Set<Allergy> allergies;
+    private Set<Condition> conditions;
+    private Set<Treatment> treatments;
     private MedicalNoteList medicalNoteList;
 
     /**
@@ -62,7 +66,9 @@ public class PatientBuilder {
         weight = Optional.of(new Weight(DEFAULT_WEIGHT));
         bmi = Optional.of(new Bmi(DEFAULT_BMI));
         bloodType = Optional.of(new BloodType(DEFAULT_BLOOD_TYPE));
-        tags = new HashSet<>();
+        allergies = new HashSet<>();
+        conditions = new HashSet<>();
+        treatments = new HashSet<>();
         medicalNoteList = new MedicalNoteList();
     }
 
@@ -80,7 +86,9 @@ public class PatientBuilder {
         weight = patientToCopy.getWeight();
         bmi = patientToCopy.getBmi();
         bloodType = patientToCopy.getBloodType();
-        tags = new HashSet<>(patientToCopy.getTags());
+        allergies = new HashSet<>(patientToCopy.getAllergies());
+        conditions = new HashSet<>(patientToCopy.getConditions());
+        treatments = new HashSet<>(patientToCopy.getTreatments());
         medicalNoteList = patientToCopy.getMedicalNoteList().makeCopy();
     }
 
@@ -109,10 +117,26 @@ public class PatientBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Patient} that we are building.
+     * Parses {@code allergies} into a {@code Set<Allergy>} and set it to the {@code Patient} that we are building.
      */
-    public PatientBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public PatientBuilder withAllergies(String ... allergies) {
+        this.allergies = SampleDataUtil.getAllergySet(allergies);
+        return this;
+    }
+
+    /**
+     * Parses {@code conditions} into a {@code Set<Condition>} and set it to the {@code Patient} that we are building.
+     */
+    public PatientBuilder withConditions(String ... conditions) {
+        this.conditions = SampleDataUtil.getConditionSet(conditions);
+        return this;
+    }
+
+    /**
+     * Parses {@code treatments} into a {@code Set<Treatment>} and set it to the {@code Patient} that we are building.
+     */
+    public PatientBuilder withTreatments(String ... treatments) {
+        this.treatments = SampleDataUtil.getTreatmentSet(treatments);
         return this;
     }
 
@@ -209,7 +233,7 @@ public class PatientBuilder {
      */
     public Patient build() {
         Patient patient = new Patient(ic, name, dateOfBirth, phone, email, address, height, weight,
-                bloodType, tags);
+                bloodType, allergies, conditions, treatments);
         patient.setMedicalNoteList(medicalNoteList.makeCopy());
         return patient;
     }
@@ -219,7 +243,7 @@ public class PatientBuilder {
      */
     public Patient buildWithSpecifiedBmi() {
         Patient patient = new Patient(ic, name, dateOfBirth, phone, email, address, height, weight, bmi,
-                bloodType, tags);
+                bloodType, allergies, conditions, treatments);
         patient.setMedicalNoteList(medicalNoteList.makeCopy());
         return patient;
     }
