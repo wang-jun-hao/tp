@@ -166,11 +166,7 @@ public class LogicManager implements Logic {
     @Override
     public void createAccount(String username, String password, String doctorName, String doctorMcr) throws
             IllegalValueException, DataConversionException, IOException {
-        if (!Mcr.isValidMcr(doctorMcr) || !Name.isValidName(doctorName)) {
-            throw new IllegalValueException("Invalid data");
-        }
-        Account newAccount = new Account(username, password, new Doctor(new Name(doctorName), new Mcr(doctorMcr)));
-        storage.createAccount(newAccount);
+        storage.createAccount(username, password, doctorName, doctorMcr);
     }
 
 }

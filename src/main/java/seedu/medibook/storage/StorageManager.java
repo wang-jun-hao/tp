@@ -169,7 +169,8 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public void createAccount(Account newAccount) throws DataConversionException, IOException, IllegalValueException {
-        userAccountsListStorage.createAccount(newAccount);
+    public void createAccount(String username, String password, String doctorName, String doctorMcr) throws
+            DataConversionException, IOException, IllegalValueException {
+        userAccountsListStorage.createAccount(username, password, doctorName, doctorMcr);
     }
 }

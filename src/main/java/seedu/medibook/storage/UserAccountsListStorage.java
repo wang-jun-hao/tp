@@ -16,6 +16,7 @@ public interface UserAccountsListStorage {
     Optional<Account> login(String username, String password) throws DataConversionException, IllegalLoginException,
             IllegalValueException;
 
-    void createAccount(Account newAccount) throws DataConversionException, IOException, IllegalValueException;
+    void createAccount(String username, String password, String doctorName, String doctorMcr) throws
+            DataConversionException, IOException, IllegalValueException;
 
 }
