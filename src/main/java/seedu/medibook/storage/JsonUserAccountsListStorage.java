@@ -77,8 +77,6 @@ public class JsonUserAccountsListStorage implements UserAccountsListStorage {
 
         Account newAccount = new Account(username, password, new Doctor(new Name(doctorName), new Mcr(doctorMcr)));
 
-        System.out.println(filepath);
-
         if (FileUtil.isFileExists(filepath)) {
             JsonSerializableUserAccountsList jsonUserAccountList = JsonUtil.readJsonFile(
                     filepath, JsonSerializableUserAccountsList.class).get();
