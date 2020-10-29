@@ -1,7 +1,5 @@
 package seedu.medibook.model;
 
-import static java.util.Objects.requireNonNull;
-
 import seedu.medibook.model.doctor.Doctor;
 
 public class Account {
