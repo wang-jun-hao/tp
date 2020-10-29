@@ -3,14 +3,18 @@ package seedu.medibook.model.patient;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.medibook.logic.commands.CommandTestUtil.VALID_ALLERGY_PENICILLIN;
+import static seedu.medibook.logic.commands.CommandTestUtil.VALID_ALLERGY_SHELLFISH;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_BLOOD_TYPE_BOB;
+import static seedu.medibook.logic.commands.CommandTestUtil.VALID_CONDITION_BACK;
+import static seedu.medibook.logic.commands.CommandTestUtil.VALID_CONDITION_DIABETES;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_DOB_BOB;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_HEIGHT_BOB;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_IC_BOB;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.medibook.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.medibook.logic.commands.CommandTestUtil.VALID_TREATMENT_PHYSIOTHERAPY;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_WEIGHT_BOB;
 import static seedu.medibook.testutil.Assert.assertThrows;
 import static seedu.medibook.testutil.TypicalPatients.ALICE;
@@ -29,7 +33,9 @@ public class PatientTest {
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Patient patient = new PatientBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> patient.getTags().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> patient.getAllergies().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> patient.getConditions().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> patient.getTreatments().remove(0));
     }
 
     @Test
@@ -47,19 +53,22 @@ public class PatientTest {
         // same ic, same name, same phone, different attributes -> returns true
         editedAlice = new PatientBuilder(ALICE).withDateOfBirth(VALID_DOB_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withHeight(VALID_HEIGHT_BOB).withWeight(VALID_WEIGHT_BOB)
-                .withBloodType(VALID_BLOOD_TYPE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withBloodType(VALID_BLOOD_TYPE_BOB).withAllergies(VALID_ALLERGY_SHELLFISH)
+                .withConditions(VALID_CONDITION_BACK).withTreatments(VALID_TREATMENT_PHYSIOTHERAPY).build();
         assertTrue(ALICE.isSamePatient(editedAlice));
 
         // same ic, same name, same email, different attributes -> returns true
         editedAlice = new PatientBuilder(ALICE).withDateOfBirth(VALID_DOB_BOB).withPhone(VALID_PHONE_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withHeight(VALID_HEIGHT_BOB).withWeight(VALID_WEIGHT_BOB)
-                .withBloodType(VALID_BLOOD_TYPE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withBloodType(VALID_BLOOD_TYPE_BOB).withAllergies(VALID_ALLERGY_SHELLFISH)
+                .withConditions(VALID_CONDITION_BACK).withTreatments(VALID_TREATMENT_PHYSIOTHERAPY).build();
         assertTrue(ALICE.isSamePatient(editedAlice));
 
         // same ic, same name, same phone, same email, different attributes -> returns true
         editedAlice = new PatientBuilder(ALICE).withDateOfBirth(VALID_DOB_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withHeight(VALID_HEIGHT_BOB).withWeight(VALID_WEIGHT_BOB).withBloodType(VALID_BLOOD_TYPE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withAllergies(VALID_ALLERGY_SHELLFISH).withConditions(VALID_CONDITION_BACK)
+                .withTreatments(VALID_TREATMENT_PHYSIOTHERAPY).build();
         assertTrue(ALICE.isSamePatient(editedAlice));
 
         // same ic, same name, same date of birth, same height, same weight, same address, different phone,
@@ -127,8 +136,16 @@ public class PatientTest {
         editedAlice = new PatientBuilder(ALICE).withBloodType(VALID_BLOOD_TYPE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different tags -> returns false
-        editedAlice = new PatientBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        // different allergies -> returns false
+        editedAlice = new PatientBuilder(ALICE).withAllergies(VALID_ALLERGY_PENICILLIN).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different conditions -> returns false
+        editedAlice = new PatientBuilder(ALICE).withConditions(VALID_CONDITION_DIABETES).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different treatments -> returns false
+        editedAlice = new PatientBuilder(ALICE).withTreatments(VALID_TREATMENT_PHYSIOTHERAPY).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
