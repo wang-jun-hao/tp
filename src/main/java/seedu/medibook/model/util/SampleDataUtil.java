@@ -52,7 +52,7 @@ public class SampleDataUtil {
                     new Phone("91031282"), Optional.of(new Email("lidavid@example.com")),
                     Optional.of(new Address("Blk 436 Serangoon Gardens Street 26, #16-43")),
                     Optional.of(new Height("169")), Optional.of(new Weight("64.9")), Optional.of(new BloodType("O+")),
-                    getAllergySet("NSAID"), getConditionSet(), getTreatmentSet()),
+                    getAllergySet("NSAIDs"), getConditionSet(), getTreatmentSet()),
             new Patient(new Ic("G1928374R"), new Name("Irfan Ibrahim"), new DateOfBirth("11-04-2000"),
                     new Phone("92492021"), Optional.of(new Email("irfan@example.com")),
                     Optional.of(new Address("Blk 47 Tampines Street 20, #17-35")), Optional.of(new Height("180")),
