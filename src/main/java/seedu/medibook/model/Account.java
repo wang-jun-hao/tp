@@ -53,9 +53,4 @@ public class Account {
     public boolean check(String username, String password) {
         return getUsername().equals(username) && getPassword().equals(password);
     }
-
-    @Override
-    public String toString() {
-        return getUsername() + getPassword() + getDoctor().getName() + getDoctor().getMcr();
-    }
 }
