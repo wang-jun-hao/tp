@@ -76,6 +76,7 @@ Shows a list of all patient's records in the system.
 
 `list`
 
+<a id="adding-a-patient"></a>
 ### 3.4 Adding a patient: `add`
 
 Adds a patient to the system.
@@ -95,6 +96,7 @@ IC, Name, Date of Birth and Phone Number are compulsory fields while the rest ar
 
 `add i/T0123456Q n/Divakar d/29-02-2000 p/91234567 e/divakarmal@medibook.com a/NUS, Kent Ridge Drive h/178 w/75.0 b/O+`
 
+<a id="editing-a-patients-profile"></a>
 ### 3.5 Editing a patient: `edit`
 
 Edits the specified patient's information from MediBook. 
@@ -142,6 +144,7 @@ Finds patient records by multiple fields and multiple keywords.
 * `find i/S9123456A` returns the patient record with IC `S9123456A`
 * `find n/Billy Alice a/Clementi i/S99` returns the patient records with Name containing `Billy` or `Alice`, Address containing `Clementi` and IC containing `S99`
 
+<a id="accessing-a-patients-profile"></a>
 ### 3.8 Accessing a patient's profile : `access`
 
 Accesses a specified patient's profile in MediBook.
@@ -155,7 +158,6 @@ Accesses a specified patient's profile in MediBook.
     * Personal Details section (top left): Shows the personal details of the patient, including their Name, IC, Date of Birth, and Phone Number, as well as their Email, Address, Height, Weight, BMI and Blood Type if available.
     * Medical Details section (bottom left): Shows medical details as tags separated into 3 categories (to be implemented), namely: Allergies, (ongoing) Treatments and (preexisting) Conditions.
     * Medical Notes section (right): A scrollable panel showing the list of medical notes recorded for the specified patient.
-
 
 ### 3.9 Adding a medical note: `addnote`
 
@@ -184,7 +186,7 @@ Context: You are logged in as Dr John Doe (M06371K) and viewing the profile page
 Adds a medical note that is dated today, by Dr John Doe (M06371K) with content "Patient complains of stomach ache and headache. 
 No signs of fever. Prescribed painkillers and probiotics." to patient with IC 'S9123456A'.
 
-### 3.9 Editing a medical note: `editnote`
+### 3.10 Editing a medical note: `editnote`
 
 Edits the date and/or content of an existing medical note belonging to a patient, authored by you.
 
@@ -211,7 +213,7 @@ the medical note at index 1 authored by you.
 Updates the date of the medical note with index 1 in the displayed list of medical notes 
 to '20-02-2018' and content to 'Patient is having migraine.'.
 
-### 3.10 Deleting a medical note: `deletenote`
+### 3.11 Deleting a medical note: `deletenote`
 
 Deletes a medical note belonging to a patient, authored by you.
 
@@ -235,7 +237,7 @@ the medical note at index 1 authored by you.
 
 Deletes the medical note with index 1 in the displayed list of medical notes belonging to patient with IC 'S9123456A'.
 
-### 3.11 Exiting the program : `exit`
+### 3.12 Exiting the program : `exit`
 
 Exits the program.
 
@@ -243,9 +245,16 @@ Exits the program.
 
 `exit`
 
-### 3.12 Saving the data
+### 3.13 Updating a patient's height and weight records
 
-Patient records are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+MediBook keeps a record of a patient's height and weight. This record can be viewed in chart form when [accessing a patient's profile](#accessing-a-patients-profile).
+[Adding a patient](#adding-a-patient) or [Editing a patient's profile](#editing-a-patients-profile) will automatically update the patient's height and weight records (assuming the height/weight field is not empty).
+MediBook only stores the latest height/weight record of the day. This means that editing a patient's height or weight multiple times
+within a single day, only the last edit of the patient's height/weight would be recorded.
+
+### 3.14 Saving the data
+
+Patients' data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 
 --------------------------------------------------------------------------------------------------------------------
