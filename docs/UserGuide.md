@@ -64,7 +64,7 @@ You can also login as an administrative staff using the username: `admin` and pa
 
 Shows a message explaining how to access the help page.
 
-####Format: 
+#### Format: 
 
 `help`
 
@@ -72,7 +72,7 @@ Shows a message explaining how to access the help page.
 
 Shows a list of all patient's records in the system.
 
-####Format: 
+#### Format: 
 
 `list`
 
@@ -82,14 +82,14 @@ Adds a patient to the system.
 
 IC, Name, Date of Birth and Phone Number are compulsory fields while the rest are optional.
 
-####Format: 
+#### Format: 
 
 `add i/IC n/NAME d/DATE_OF_BIRTH p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE]`
 
 * `HEIGHT` has to be specified as a whole number in cms.
 * `WEIGHT` has to be specified as a number up to 1 decimal point in kgs.
 
-####Examples:
+#### Examples:
 
 `add i/S9123456A n/Divakar d/29-02-2000 p/91234567`
 
@@ -101,14 +101,14 @@ Edits the specified patient's information from MediBook.
 
 The `edit` command is also used to fill in unspecified fields.
 
-####Format: 
+#### Format: 
 
 `edit INDEX [i/IC] [n/NAME] [d/DATE OF BIRTH] [p/PHONE] [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD TYPE][t/TAG]`
 
 * `edit` on a field that already exists will update it from the previous value to the new value
 * `edit` on an optional field that was not specified at the point of adding patient will fill the field with the given value
 
-####Example:
+#### Example:
 
 `edit 1 n/Divakar` edits the name of patient with index `1` in the displayed list to `Divakar`
 
@@ -118,18 +118,18 @@ The `edit` command is also used to fill in unspecified fields.
 
 Deletes the specified patient from MediBook.
 
-####Format: 
+#### Format: 
 
 `delete INDEX`
 
-####Example:
+#### Example:
 * `delete 1` deletes the patient with index `1` in the displayed list
 
 ### 3.7 Finding a patient by IC: `find`
 
 Finds patient records by multiple fields and multiple keywords.
 
-####Format: 
+#### Format: 
 
 `find [i/IC] [n/NAME] [d/DATE_OF_BIRTH] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE]`
 
@@ -138,7 +138,7 @@ Finds patient records by multiple fields and multiple keywords.
 * The search will match substrings e.g `S912345` will match `S9123456A`
 * Search will return all records that matches any of the keywords for each field e.g `n/Alice Bob` will return the records of all patients with name containing `Alice` or `Bob`
 
-####Examples: 
+#### Examples: 
 * `find i/S9123456A` returns the patient record with IC `S9123456A`
 * `find n/Billy Alice a/Clementi i/S99` returns the patient records with Name containing `Billy` or `Alice`, Address containing `Clementi` and IC containing `S99`
 
@@ -146,7 +146,7 @@ Finds patient records by multiple fields and multiple keywords.
 
 Accesses a specified patient's profile in MediBook.
 
-####Format: 
+#### Format: 
 
 `access INDEX`
 
@@ -164,7 +164,7 @@ Adds a medical note to a patient.
 If you are a doctor, you can add a medical note to your patient when viewing his/her profile to keep track of consultations
 with your patients. MediBook will automatically add the medical note to the patient displayed on your screen.
 
-####Format: 
+#### Format: 
 
 `addnote [d/DATE] c/CONTENT_OF_MEDICAL_NOTE`
 
@@ -175,7 +175,7 @@ when on the main list and then `access`-ing the patient's index on the filtered 
 * For your convenience, the date field can be omitted. MediBook will automatically select today's date.
 * If you specify the date of the medical note, it cannot be in the future.
 
-####Example:
+#### Example:
 
 Context: You are logged in as Dr John Doe (M06371K) and viewing the profile page of patient with IC 'S9123456A'
 
@@ -191,7 +191,7 @@ Edits the date and/or content of an existing medical note belonging to a patient
 If you are a doctor, you can edit the medical note belonging to your patient when viewing his/her profile. You may want to use this
 feature to correct any typos or update incorrect dates.
 
-####Format: 
+#### Format: 
 
 `editnote INDEX [d/DATE] [c/CONTENT_OF_MEDICAL_NOTE]`
 
@@ -201,7 +201,7 @@ when on the main list and then `access`-ing the patient's index on the filtered 
 * `INDEX` refers to the index of the medical note displayed in the list of medical notes.
 * If you change the date of the medical note, the new date cannot be in the future.
 
-####Example:
+#### Example:
 
 Context: You are logged in as Dr John Doe (M06371K), viewing the profile page of patient with IC 'S9123456A' with 
 the medical note at index 1 authored by you.
@@ -217,7 +217,7 @@ Deletes a medical note belonging to a patient, authored by you.
 
 If you are a doctor, you can delete an existing medical note belonging to your patient when viewing his/her profile.
 
-####Format: 
+#### Format: 
 
 `deletenote INDEX`
 
@@ -226,7 +226,7 @@ when on the main list and then `access`-ing the patient's index on the filtered 
 * You can only delete notes that are authored by you.
 * `INDEX` refers to the index of the medical note displayed in the list of medical notes.
 
-####Example:
+#### Example:
 
 Context: You are logged in as Dr John Doe (M06371K), viewing the profile page of patient with IC 'S9123456A' with 
 the medical note at index 1 authored by you.
@@ -239,7 +239,7 @@ Deletes the medical note with index 1 in the displayed list of medical notes bel
 
 Exits the program.
 
-####Format: `exit`
+#### Format: `exit`
 
 ### 3.12 Saving the data
 
