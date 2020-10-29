@@ -22,12 +22,14 @@ import seedu.medibook.model.patient.Patient;
 import seedu.medibook.model.patient.Weight;
 import seedu.medibook.ui.UiPart;
 
+/**
+ * An UI component that displays charts representing a {@code Patient}'s height, weight and BMI records.
+ */
 public class PatientChartCard extends UiPart<Region> {
 
     private static final String FXML = "PatientChartCard.fxml";
 
     public final Patient patient;
-
 
     @FXML
     private Label cardHeader;
@@ -47,7 +49,7 @@ public class PatientChartCard extends UiPart<Region> {
     public PatientChartCard(Patient patient) {
         super(FXML);
         this.patient = patient;
-        cardHeader.setText("Chart: ");
+        cardHeader.setText("Charts: ");
         weightChart.setTitle("Weight Chart");
         heightChart.setTitle("Height Chart");
         bmiChart.setTitle("BMI Chart");

@@ -20,6 +20,8 @@ public class MedicalNoteCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private Label noteIndex;
+    @FXML
     private Label date;
     @FXML
     private Label doctorName;
@@ -29,11 +31,11 @@ public class MedicalNoteCard extends UiPart<Region> {
     /**
      * Creates a {@code MedicalNoteCard} with the given {@code MedicalNote} to be displayed.
      */
-    public MedicalNoteCard(MedicalNote medicalNote) {
+    public MedicalNoteCard(MedicalNote medicalNote, int displayedIndex) {
         super(FXML);
         this.medicalNote = medicalNote;
-        // TODO: change accordingly based on visibility
-        date.setText(medicalNote.date.toString()); // TODO: Make the formatter public or make a get date method
+        noteIndex.setText("Note #" + displayedIndex);
+        date.setText(medicalNote.date.toString());
         doctorName.setText(medicalNote.doctor.toString());
         content.setText(medicalNote.getContentString());
     }
