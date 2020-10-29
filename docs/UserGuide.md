@@ -50,6 +50,8 @@ Type in your `username` and `password` to login to the system. If you do not hav
 
 When creating your new account, fill in your desired `username`, `password`, your `name` and your `MCR`, then click create.
 
+Format: `username` and `password` need to be at least 5 characters long.
+
 ### 3.2 Viewing help : `help`
 
 Shows a message explaining how to access the help page.
