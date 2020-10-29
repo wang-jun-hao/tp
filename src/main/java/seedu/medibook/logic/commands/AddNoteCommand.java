@@ -36,6 +36,7 @@ public class AddNoteCommand extends Command {
     public static final String MESSAGE_DUPLICATE_NOTE = "This medical note entry already exists in the system.";
     public static final String MESSAGE_ADD_NOTE_ON_LIST = "You can only add medical note to a patient when you are "
             + "viewing his/her patient profile. Access the patient profile before adding medical note.";
+    public static final String MESSAGE_USER_CANNOT_ADD = "Current user cannot add medical notes";
 
     private final Logger logger = LogsCenter.getLogger(AddNoteCommand.class);
 
@@ -66,7 +67,7 @@ public class AddNoteCommand extends Command {
         assert model.hasPatient(displayedPatient) : "Patient in Context does not exist in model";
 
         if (model.getActiveUser().isEmpty()) {
-            throw new CommandException("Current user cannot add medical notes");
+            throw new CommandException(MESSAGE_USER_CANNOT_ADD);
         }
 
         MedicalNote newMedicalNote = new MedicalNote(medicalNoteDate, model.getActiveUser().get(), medicalNoteContent);

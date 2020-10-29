@@ -147,6 +147,35 @@ public class EditNoteCommandTest {
     }
 
     @Test
+    public void execute_notDoctorAccount_throwsCommandException() {
+        Patient targetPatient = model.getFilteredPatientList().get(0);
+        model.accessPatient(targetPatient);
+
+        EditNoteCommand.EditNoteDescriptor descriptor = new EditNoteCommand.EditNoteDescriptor();
+        descriptor.setDate(new Date("12-02-2020", true));
+        descriptor.setContent(new Content("Patient is good."));
+
+        EditNoteCommand editNoteCommand = new EditNoteCommand(INDEX_SECOND, descriptor);
+
+        assertCommandFailure(editNoteCommand, model, EditNoteCommand.MESSAGE_USER_CANNOT_EDIT);
+    }
+
+    @Test
+    public void execute_wrongDoctorAccount_throwsCommandException() {
+        Patient targetPatient = model.getFilteredPatientList().get(0);
+        model.accessPatient(targetPatient);
+        model.setActiveUser(Optional.of(new Doctor(new Name("Tom"), new Mcr("M41259K"))));
+
+        EditNoteCommand.EditNoteDescriptor descriptor = new EditNoteCommand.EditNoteDescriptor();
+        descriptor.setDate(new Date("12-02-2020", true));
+        descriptor.setContent(new Content("Patient is good."));
+
+        EditNoteCommand editNoteCommand = new EditNoteCommand(INDEX_SECOND, descriptor);
+
+        assertCommandFailure(editNoteCommand, model, EditNoteCommand.MESSAGE_CANNOT_EDIT_OTHER_DOCTOR_NOTES);
+    }
+
+    @Test
     public void execute_invalidMedicalNoteIndex_failure() {
         Patient targetPatient = model.getFilteredPatientList().get(0);
         model.accessPatient(targetPatient);

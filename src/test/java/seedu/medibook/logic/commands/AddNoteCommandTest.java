@@ -90,6 +90,20 @@ public class AddNoteCommandTest {
     }
 
     @Test
+    public void execute_notDoctorAccount_throwsCommandException() {
+        Patient targetPatient = model.getFilteredPatientList().get(0);
+
+        model.accessPatient(targetPatient);
+        model.setActiveUser(Optional.empty());
+
+        Date date = new Date("21-10-2019", true);
+        Content content = new Content("Patient is having fever.");
+
+        AddNoteCommand addNoteCommand = new AddNoteCommand(date, content);
+        assertCommandFailure(addNoteCommand, model, AddNoteCommand.MESSAGE_USER_CANNOT_ADD);
+    }
+
+    @Test
     public void equals() {
         // same date and content -> returns true
         Date date = new Date("20-10-2019", true);

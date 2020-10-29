@@ -31,6 +31,8 @@ public class DeleteNoteCommand extends Command {
     public static final String MESSAGE_DELETE_NOTE_ON_LIST = "You can only delete a medical note from a patient "
             + "when you are viewing his/her patient profile. Access the patient profile before "
             + "deleting a medical note.";
+    public static final String MESSAGE_USER_CANNOT_DELETE = "Current user cannot delete medical notes";
+    public static final String MESSAGE_CANNOT_DELETE_OTHER_DOCTOR_NOTES = "Can't delete other doctor's medical notes";
 
     private final Logger logger = LogsCenter.getLogger(DeleteNoteCommand.class);
 
@@ -67,7 +69,7 @@ public class DeleteNoteCommand extends Command {
         }
 
         if (model.getActiveUser().isEmpty()) {
-            throw new CommandException("Current user cannot delete medical notes");
+            throw new CommandException(MESSAGE_USER_CANNOT_DELETE);
         }
 
         MedicalNote noteToDelete = medicalNoteList.getMedicalNoteAtIndex(zeroBasedIndex);
@@ -75,7 +77,7 @@ public class DeleteNoteCommand extends Command {
         if (noteToDelete.getDoctorMcr().equals(model.getActiveUser().get().getMcr())) {
             medicalNoteList.deleteMedicalNoteAtIndex(zeroBasedIndex);
         } else {
-            throw new CommandException("Can't delete other doctor's medical notes");
+            throw new CommandException(MESSAGE_CANNOT_DELETE_OTHER_DOCTOR_NOTES);
         }
 
         logger.info("----------------[PATIENT AND ORDER OF MEDICAL NOTES:][" + displayedPatient + "\n"

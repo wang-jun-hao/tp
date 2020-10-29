@@ -44,6 +44,8 @@ public class EditNoteCommand extends Command {
     public static final String MESSAGE_DUPLICATE_NOTE = "This medical note already exists in this patient profile.";
     public static final String MESSAGE_EDIT_NOTE_ON_LIST = "You can only edit medical note of a patient when you are "
             + "viewing his/her patient profile. Access the patient profile before editing medical note.";
+    public static final String MESSAGE_USER_CANNOT_EDIT = "Current user cannot edit medical notes";
+    public static final String MESSAGE_CANNOT_EDIT_OTHER_DOCTOR_NOTES = "Can't edit other doctor's medical notes";
 
     private final Logger logger = LogsCenter.getLogger(EditNoteCommand.class);
     private final Index index;
@@ -86,11 +88,11 @@ public class EditNoteCommand extends Command {
         MedicalNote newMedicalNote = createEditedNote(noteToEdit, editNoteDescriptor);
 
         if (model.getActiveUser().isEmpty()) {
-            throw new CommandException("Current user cannot edit medical notes");
+            throw new CommandException(MESSAGE_USER_CANNOT_EDIT);
         }
 
         if (!model.getActiveUser().get().equals(noteToEdit.doctor)) {
-            throw new CommandException("Can't edit other doctor's medical notes");
+            throw new CommandException(MESSAGE_CANNOT_EDIT_OTHER_DOCTOR_NOTES);
         }
 
         try {

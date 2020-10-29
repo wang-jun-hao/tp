@@ -18,6 +18,9 @@ import seedu.medibook.commons.core.index.Index;
 import seedu.medibook.model.Model;
 import seedu.medibook.model.ModelManager;
 import seedu.medibook.model.UserPrefs;
+import seedu.medibook.model.commonfields.Name;
+import seedu.medibook.model.doctor.Doctor;
+import seedu.medibook.model.doctor.Mcr;
 import seedu.medibook.model.medicalnote.MedicalNote;
 import seedu.medibook.model.patient.Patient;
 import seedu.medibook.testutil.PatientBuilder;
@@ -66,6 +69,59 @@ public class DeleteNoteCommandTest {
         model.accessPatient(targetPatient);
 
         assertCommandFailure(deleteNoteCommand, model, Messages.MESSAGE_INVALID_NOTE_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_notDoctorAccount_throwsCommandException() {
+        Model model = new ModelManager(getTypicalMediBook(), new UserPrefs());
+        Index validIndex = Index.fromOneBased(VALID_NOTE_INDEX);
+
+        Patient targetPatient = model.getFilteredPatientList().get(INDEX_FIRST.getZeroBased());
+        DeleteNoteCommand deleteNoteCommand = new DeleteNoteCommand(validIndex);
+        MedicalNote medicalNoteToDelete =
+                targetPatient.getMedicalNoteAtIndex(validIndex.getZeroBased());
+
+        model.accessPatient(targetPatient);
+
+
+        String expectedMessage = String.format(DeleteNoteCommand.MESSAGE_DELETE_NOTE_SUCCESS, medicalNoteToDelete);
+        ModelManager expectedModel = new ModelManager(model.getMediBook(), new UserPrefs());
+
+        Patient targetPatientWithDeletedNote = new PatientBuilder(targetPatient).build();
+
+        targetPatientWithDeletedNote.deleteMedicalNoteAtIndex(validIndex.getZeroBased());
+        expectedModel.setPatient(targetPatient, targetPatientWithDeletedNote);
+        expectedModel.accessPatient(targetPatientWithDeletedNote);
+        expectedModel.setShouldLoadMedicalNotes(false);
+
+        assertCommandFailure(deleteNoteCommand, model, DeleteNoteCommand.MESSAGE_USER_CANNOT_DELETE);
+    }
+
+    @Test
+    public void execute_wrongDoctorAccount_throwsCommandException() {
+        Model model = new ModelManager(getTypicalMediBook(), new UserPrefs());
+        Index validIndex = Index.fromOneBased(VALID_NOTE_INDEX);
+
+        Patient targetPatient = model.getFilteredPatientList().get(INDEX_FIRST.getZeroBased());
+        DeleteNoteCommand deleteNoteCommand = new DeleteNoteCommand(validIndex);
+        MedicalNote medicalNoteToDelete =
+                targetPatient.getMedicalNoteAtIndex(validIndex.getZeroBased());
+
+        model.accessPatient(targetPatient);
+        model.setActiveUser(Optional.of(new Doctor(new Name("Tom"), new Mcr("M41259K"))));
+
+
+        String expectedMessage = String.format(DeleteNoteCommand.MESSAGE_DELETE_NOTE_SUCCESS, medicalNoteToDelete);
+        ModelManager expectedModel = new ModelManager(model.getMediBook(), new UserPrefs());
+
+        Patient targetPatientWithDeletedNote = new PatientBuilder(targetPatient).build();
+
+        targetPatientWithDeletedNote.deleteMedicalNoteAtIndex(validIndex.getZeroBased());
+        expectedModel.setPatient(targetPatient, targetPatientWithDeletedNote);
+        expectedModel.accessPatient(targetPatientWithDeletedNote);
+        expectedModel.setShouldLoadMedicalNotes(false);
+
+        assertCommandFailure(deleteNoteCommand, model, DeleteNoteCommand.MESSAGE_CANNOT_DELETE_OTHER_DOCTOR_NOTES);
     }
 
     @Test
