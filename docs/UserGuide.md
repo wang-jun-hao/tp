@@ -19,7 +19,7 @@ MediBook is a **desktop app for managing patient details, optimized for use via 
 2. Download the latest medibook.jar from https://github.com/AY2021S1-CS2103T-F13-3/tp/releases.
 3. Copy the file to the folder you want to use as the home folder for your MediBook.
 4. Double-click the file to start the app.
-5. Input login info if you have if not, click the create account button and create a new account.
+5. Login to the program or create an account if you do not already have one.
 6. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.
 7. Refer to the Features below for details on each command.
 
@@ -50,7 +50,8 @@ Type in your `username` and `password` to login to the system. If you do not hav
 
 When creating your new account, fill in your desired `username`, `password`, your `name` and your `MCR`, then click create.
 
-Format: `username` and `password` need to be at least 5 characters long.
+*`username` and `password` need to be at least 5 characters long.
+* `MCR` has to be of the format 'M@####$', where @ is a letter/digit, # is a digit and $ is a letter.
 
 ### 3.2 Viewing help : `help`
 
