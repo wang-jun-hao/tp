@@ -34,13 +34,13 @@ class MedicalNoteListTest {
     @Test
     void add_nonEmptyMedicalNoteList_successWithCorrectOrder() {
         MedicalNoteList partiallyFilledMedicalNoteList =
-                new MedicalNoteList(new LinkedList<>(Arrays.asList(medicalNote2)));
-        partiallyFilledMedicalNoteList.add(medicalNote1);
+                new MedicalNoteList(new LinkedList<>(Arrays.asList(medicalNote1)));
+        partiallyFilledMedicalNoteList.add(medicalNote2);
 
         MedicalNoteList expectedMedicalNoteList = new MedicalNoteList(
-                new LinkedList<>(Arrays.asList(medicalNote1, medicalNote2)));
+                new LinkedList<>(Arrays.asList(medicalNote2, medicalNote1)));
         assertEquals(expectedMedicalNoteList, partiallyFilledMedicalNoteList);
-        assertEquals(Arrays.asList(medicalNote1, medicalNote2), partiallyFilledMedicalNoteList.getMedicalNoteList());
+        assertEquals(Arrays.asList(medicalNote2, medicalNote1), partiallyFilledMedicalNoteList.getMedicalNoteList());
     }
 
     @Test
@@ -58,7 +58,7 @@ class MedicalNoteListTest {
         MedicalNoteList expectedMedicalNoteList = new MedicalNoteList(
                 new LinkedList<>(Arrays.asList(medicalNote2)));
 
-        medicalNoteList.deleteMedicalNoteAtIndex(0);
+        medicalNoteList.deleteMedicalNoteAtIndex(1);
 
         assertEquals(expectedMedicalNoteList, medicalNoteList);
     }
@@ -67,7 +67,7 @@ class MedicalNoteListTest {
     void getMedicalNoteAtIndex_validIndex_success() {
         MedicalNoteList medicalNoteList = new MedicalNoteList(
                 new LinkedList<>(Arrays.asList(medicalNote1, medicalNote2)));
-        MedicalNote expectedMedicalNote = medicalNote2;
+        MedicalNote expectedMedicalNote = medicalNote1;
 
         MedicalNote actualMedicalNote = medicalNoteList.getMedicalNoteAtIndex(1);
 

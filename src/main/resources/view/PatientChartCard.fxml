@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+
+<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="553.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+    <Label fx:id="cardHeader" />
+   <SplitPane dividerPositions="0.45871559633027525" prefHeight="160.0" prefWidth="200.0">
+     <items>
+         <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+           <items>
+               <LineChart fx:id="weightChart">
+                 <xAxis>
+                   <CategoryAxis side="BOTTOM" />
+                 </xAxis>
+                 <yAxis>
+                   <NumberAxis side="LEFT" />
+                 </yAxis>
+               </LineChart>
+               <LineChart fx:id="heightChart">
+                 <xAxis>
+                   <CategoryAxis side="BOTTOM" />
+                 </xAxis>
+                 <yAxis>
+                   <NumberAxis side="LEFT" />
+                 </yAxis>
+               </LineChart>
+           </items>
+         </SplitPane>
+         <LineChart fx:id="bmiChart" prefHeight="361.0" prefWidth="307.0">
+           <xAxis>
+             <CategoryAxis side="BOTTOM" />
+           </xAxis>
+           <yAxis>
+             <NumberAxis side="LEFT" />
+           </yAxis>
+         </LineChart>
+     </items>
+   </SplitPane>
+
+</SplitPane>
