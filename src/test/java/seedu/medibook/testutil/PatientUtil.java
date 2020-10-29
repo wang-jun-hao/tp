@@ -99,7 +99,7 @@ public class PatientUtil {
         if (descriptor.getAllergies().isPresent()) {
             Set<Allergy> allergies = descriptor.getAllergies().get();
             if (allergies.isEmpty()) {
-                sb.append(PREFIX_ALLERGY);
+                sb.append(PREFIX_ALLERGY).append(" ");
             } else {
                 allergies.forEach(s -> sb.append(PREFIX_ALLERGY).append(s.tagName).append(" "));
             }
@@ -108,7 +108,7 @@ public class PatientUtil {
         if (descriptor.getConditions().isPresent()) {
             Set<Condition> conditions = descriptor.getConditions().get();
             if (conditions.isEmpty()) {
-                sb.append(PREFIX_CONDITION);
+                sb.append(PREFIX_CONDITION).append(" ");
             } else {
                 conditions.forEach(s -> sb.append(PREFIX_CONDITION).append(s.tagName).append(" "));
             }
@@ -117,7 +117,7 @@ public class PatientUtil {
         if (descriptor.getTreatments().isPresent()) {
             Set<Treatment> treatments = descriptor.getTreatments().get();
             if (treatments.isEmpty()) {
-                sb.append(PREFIX_TREATMENT);
+                sb.append(PREFIX_TREATMENT).append(" ");
             } else {
                 treatments.forEach(s -> sb.append(PREFIX_TREATMENT).append(s.tagName).append(" "));
             }
