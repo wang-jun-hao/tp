@@ -69,7 +69,7 @@ public class PatientChartCard extends UiPart<Region> {
         List<Map.Entry<Date, Weight>> weightRecords = new ArrayList<>(weightRecord.entrySet());
         HashMap<Date, Height> heightRecord = patient.getRecord().getHeightRecord();
         List<Map.Entry<Date, Height>> heightRecords = new ArrayList<>(heightRecord.entrySet());
-        if(weightRecords.size() != 0 || heightRecords.size() != 0) {
+        if (weightRecords.size() != 0 || heightRecords.size() != 0) {
 
             //weight chart
             CategoryAxis xAxisWeight = (CategoryAxis) weightChart.getXAxis();
