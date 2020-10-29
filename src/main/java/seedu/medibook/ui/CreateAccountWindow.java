@@ -197,7 +197,6 @@ public class CreateAccountWindow extends UiPart<Stage> {
             mainWindow.show();
             mainWindow.fillInnerParts();
         } catch (IOException | DataConversionException | IllegalValueException | IllegalLoginException e) {
-            logger.info("Invalid data");
             resultDisplay.setFeedbackToUser(e.getMessage());
         }
     }
