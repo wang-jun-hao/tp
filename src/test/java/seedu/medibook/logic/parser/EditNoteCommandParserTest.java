@@ -59,6 +59,16 @@ public class EditNoteCommandParserTest {
 
         // invalid content
         assertParseFailure(parser, "1" + INVALID_NOTE_CONTENT_DESC, Content.MESSAGE_CONSTRAINTS);
+
+        // invalid date followed by valid content
+        assertParseFailure(parser, "1" + INVALID_NOTE_DATE_DESC + NOTE_CONTENT_DESC, Date.MESSAGE_CONSTRAINTS);
+
+        // valid date followed by invalid content
+        assertParseFailure(parser, "1" + NOTE_NON_FUTURE_DATE_DESC + INVALID_NOTE_CONTENT_DESC,
+                Content.MESSAGE_CONSTRAINTS);
+
+        // multiple invalid values but only the first is captured
+        assertParseFailure(parser, "1" + INVALID_NOTE_DATE_DESC + INVALID_NOTE_CONTENT_DESC, Date.MESSAGE_CONSTRAINTS);
     }
 
     @Test

@@ -24,7 +24,7 @@ public class UserAccountsListTest {
     }
 
     @Test
-    public void check_validInput_returnOptionalOf() {
+    public void check_validInput_successWithCorrectAccount() {
         Account testAccount = new Account("user", "pass",
                 new Doctor(new Name("Brandon"), new Mcr("MP2037X")));
         testUserAccountsList.addAccount(testAccount);

@@ -6,6 +6,9 @@ import seedu.medibook.model.doctor.Doctor;
 
 public class Account {
 
+    public static final String MESSAGE_USERNAME_CONSTRAINTS = "Username has to be at least 5 characters";
+    public static final String MESSAGE_PASSWORD_CONSTRAINTS = "Password has to be at least 5 characters";
+
     private String username;
     private String password;
     private Doctor doctor;
@@ -51,6 +54,6 @@ public class Account {
     }
 
     public boolean check(String username, String password) {
-        return getUsername().equals(username) && getPassword().equals(password);
+        return this.username.equals(username) && this.password.equals(password);
     }
 }

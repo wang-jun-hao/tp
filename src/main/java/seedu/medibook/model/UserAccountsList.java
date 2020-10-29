@@ -30,6 +30,31 @@ public class UserAccountsList {
     }
 
     /**
+     * Checks if a username already exists in the account database.
+     */
+    public boolean usernameExists(Account newAccount) {
+        boolean result = false;
+        for (Account account : accountsList) {
+            if (newAccount.getUsername().equals(account.getUsername())) {
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Checks if a doctor's MCR is already linked with an account in the database.
+     */
+    public boolean mcrExists(Account newAccount) {
+        boolean result = false;
+        for (Account account : accountsList) {
+            if (newAccount.getDoctor().getMcr().equals(newAccount.getDoctor().getMcr())) {
+                result = true;
+            }
+        }
+        return result;
+    }
+    /**
      * Checks if two UserAccountsList are equals.
      */
     public boolean equals(Object other) {
