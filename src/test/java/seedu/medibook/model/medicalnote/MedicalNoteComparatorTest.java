@@ -45,22 +45,22 @@ class MedicalNoteComparatorTest {
     }
 
     @Test
-    void compare_earlierDateSameFields_negative() {
-        assertTrue(comparator.compare(medicalNote4, medicalNote1) < 0);
+    void compare_earlierDateSameFields_positive() {
+        assertTrue(comparator.compare(medicalNote4, medicalNote1) > 0);
     }
 
     @Test
-    void compare_earlierDateDiffFields_negative() {
-        assertTrue(comparator.compare(medicalNote5, medicalNote1) < 0);
+    void compare_earlierDateDiffFields_positive() {
+        assertTrue(comparator.compare(medicalNote5, medicalNote1) > 0);
     }
 
     @Test
     void compare_laterDateSameFields_negative() {
-        assertTrue(comparator.compare(medicalNote1, medicalNote4) > 0);
+        assertTrue(comparator.compare(medicalNote1, medicalNote4) < 0);
     }
 
     @Test
     void compare_laterDateDiffFields_negative() {
-        assertTrue(comparator.compare(medicalNote1, medicalNote5) > 0);
+        assertTrue(comparator.compare(medicalNote1, medicalNote5) < 0);
     }
 }

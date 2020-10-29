@@ -2,19 +2,24 @@
 
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <SplitPane dividerPositions="0.5" prefHeight="400.0" prefWidth="600.0">
+<?import javafx.scene.layout.RowConstraints?>
+<GridPane xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+    <columnConstraints>
+        <ColumnConstraints hgrow="ALWAYS" minWidth="250" prefWidth="1000" />
+    </columnConstraints>
+    <SplitPane dividerPositions="0.3868520859671302" orientation="VERTICAL" GridPane.columnIndex="0" prefHeight="793.0" prefWidth="250.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-              <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="400.0" prefWidth="295.0">
-                  <items>
-                      <AnchorPane fx:id="personalDetailsCard" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0"/>
-                      <AnchorPane fx:id="medicalDetailsCard" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
-                  </items>
-              </SplitPane>
-            </AnchorPane>
-          <AnchorPane fx:id="medicalNotesPanel" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+            <AnchorPane fx:id="personalDetailsCard" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+            <AnchorPane fx:id="medicalDetailsCard" minHeight="0.0" minWidth="0.0" prefHeight="291.0" prefWidth="293.0" />
         </items>
     </SplitPane>
-</AnchorPane>
+    <SplitPane dividerPositions="0.4066599394550959" layoutX="291.0" GridPane.columnIndex="1" prefHeight="793.0" prefWidth="2296.0">
+        <items>
+            <AnchorPane fx:id="medicalNotesPanel" minHeight="0.0" minWidth="0.0" prefWidth="396.0" />
+            <AnchorPane fx:id="patientChartCard" minHeight="0.0" minWidth="0.0" prefWidth="317.0" />
+        </items>
+    </SplitPane>
+</GridPane>
