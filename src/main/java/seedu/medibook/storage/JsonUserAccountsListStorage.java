@@ -82,7 +82,7 @@ public class JsonUserAccountsListStorage implements UserAccountsListStorage {
                     filepath, JsonSerializableUserAccountsList.class).get();
             UserAccountsList accountsList = jsonUserAccountList.toModelType();
 
-            if (accountsList.usernameExists(newAccount)) {
+            if (accountsList.usernameExists(newAccount) || newAccount.getUsername().equals("admin")) {
                 throw new IllegalValueException("Username already exists");
             }
 
