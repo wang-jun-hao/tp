@@ -58,7 +58,7 @@ public class TypicalPatients {
     public static final Patient ALICE = new PatientBuilder().withIc("S9777777R").withName("Alice Pauline")
             .withDateOfBirth("15-09-1997").withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withHeight("174").withWeight("48.5").withBloodType("A+")
-            .withAllergies("cat fur (Fel d 1)").withConditions().withTreatments("antihistamines")
+            .withAllergies("cat fur (Fel d 1)").withConditions("Migraine").withTreatments("Ibuprofen")
             .withMedicalNoteList(ALICE_MEDICAL_NOTE_LIST).build();
 
     public static final MedicalNoteList BENSON_MEDICAL_NOTE_LIST = new MedicalNoteList();
@@ -75,8 +75,8 @@ public class TypicalPatients {
     public static final Patient BENSON = new PatientBuilder().withIc("S9234567A").withName("Benson Meier")
             .withDateOfBirth("01-03-1992").withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432").withHeight("170").withWeight("63.5")
-            .withBloodType("AB+").withAllergies("peanut").withConditions("back pain")
-            .withTreatments("epinephrine", "Paracetamol").withMedicalNoteList(BENSON_MEDICAL_NOTE_LIST).build();
+            .withBloodType("AB+").withAllergies("shellfish", "dust mites").withConditions("knee sprain")
+            .withTreatments("Physiotherapy").withMedicalNoteList(BENSON_MEDICAL_NOTE_LIST).build();
 
     public static final MedicalNoteList CARL_MEDICAL_NOTE_LIST = new MedicalNoteList();
     public static final MedicalNote CARL_MEDICAL_NOTE_1 = new MedicalNote(new Date("02-05-2020", true),
@@ -92,7 +92,8 @@ public class TypicalPatients {
     public static final Patient CARL = new PatientBuilder().withIc("S9876543W").withName("Carl Kurz")
             .withDateOfBirth("16-01-1998").withPhone("95352563").withEmail("heinz@example.com")
             .withAddress("wall street").withHeight("162").withWeight("80.8").withBloodType("B+")
-            .withMedicalNoteList(CARL_MEDICAL_NOTE_LIST).build();
+            .withAllergies("peanut").withConditions("fever")
+            .withTreatments("epinephrine", "Paracetamol").withMedicalNoteList(CARL_MEDICAL_NOTE_LIST).build();
 
     public static final MedicalNoteList DANIEL_MEDICAL_NOTE_LIST = new MedicalNoteList();
     public static final MedicalNote DANIEL_MEDICAL_NOTE_1 = new MedicalNote(new Date("19-02-2020", true),
@@ -107,8 +108,9 @@ public class TypicalPatients {
     }
     public static final Patient DANIEL = new PatientBuilder().withIc("T0054321P").withName("Daniel Meier")
             .withDateOfBirth("10-10-2000").withPhone("87652533").withEmail("cornelia@example.com")
-            .withAddress("10th street").withHeight("183").withWeight("70.3").withBloodType("A-").withConditions("fever")
-            .withTreatments("Ibuprofen").withMedicalNoteList(DANIEL_MEDICAL_NOTE_LIST).build();
+            .withAddress("10th street").withHeight("183").withWeight("70.3").withBloodType("A-")
+            .withAllergies("potatoes").withConditions("Type I diabetes").withTreatments("Insulin pump")
+            .withMedicalNoteList(DANIEL_MEDICAL_NOTE_LIST).build();
 
     public static final MedicalNoteList ELLE_MEDICAL_NOTE_LIST = new MedicalNoteList();
     public static final MedicalNote ELLE_MEDICAL_NOTE_1 = new MedicalNote(new Date("19-02-2020", true),
@@ -140,7 +142,7 @@ public class TypicalPatients {
     public static final Patient FIONA = new PatientBuilder().withIc("S7543210A").withName("Fiona Kunz")
             .withDateOfBirth("02-07-1975").withPhone("9482427").withEmail("lydia@example.com")
             .withAddress("little tokyo").withHeight("168").withWeight("50.5").withBloodType("O+")
-            .withMedicalNoteList(FIONA_MEDICAL_NOTE_LIST).build();
+            .withAllergies("Penicillin").withMedicalNoteList(FIONA_MEDICAL_NOTE_LIST).build();
 
     public static final MedicalNoteList GEORGE_MEDICAL_NOTE_LIST = new MedicalNoteList();
     public static final MedicalNote GEORGE_MEDICAL_NOTE_1 = new MedicalNote(new Date("19-02-2020", true),
@@ -155,8 +157,8 @@ public class TypicalPatients {
     }
     public static final Patient GEORGE = new PatientBuilder().withIc("T0232323I").withName("George Best")
             .withDateOfBirth("14-07-2002").withPhone("9482442").withEmail("anna@example.com").withAddress("4th street")
-            .withHeight("169").withWeight("69.2").withBloodType("A+").withMedicalNoteList(GEORGE_MEDICAL_NOTE_LIST)
-            .build();
+            .withHeight("169").withWeight("69.2").withBloodType("A+").withConditions("fever")
+            .withTreatments("Paracetemol").withMedicalNoteList(GEORGE_MEDICAL_NOTE_LIST).build();
 
     // Manually added
     public static final Patient HOON = new PatientBuilder().withIc("S8756432F").withName("Hoon Meier")

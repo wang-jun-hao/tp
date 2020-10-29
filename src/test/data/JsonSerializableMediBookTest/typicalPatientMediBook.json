@@ -11,7 +11,7 @@
     "weight": "48.5",
     "bmi": "16.0",
     "bloodType": "A+",
-    "allergies" : [ ],
+    "allergies" : [ "cat fur (Fel d 1)" ],
     "conditions" : [ "Migraine" ],
     "treatments" : [ "Ibuprofen" ],
     "record" : {
@@ -30,7 +30,7 @@
     "bmi": "22.0",
     "bloodType": "AB+",
     "allergies" : [ "shellfish", "dust mites" ],
-    "conditions" : [ "Knee sprain" ],
+    "conditions" : [ "knee sprain" ],
     "treatments" : [ "Physiotherapy" ],
     "record" : {
       "heightRecord": { },
@@ -47,9 +47,9 @@
     "weight": "80.8",
     "bmi": "30.8",
     "bloodType": "B+",
-    "allergies" : [ ],
-    "conditions" : [ ],
-    "treatments" : [ ],
+    "allergies" : [ "peanut" ],
+    "conditions" : [ "fever" ],
+    "treatments" : [ "epinephrine", "Paracetamol" ],
     "record" : {
       "heightRecord": { },
       "weightRecord": { }
