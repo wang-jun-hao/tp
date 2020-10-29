@@ -1,20 +1,25 @@
 package seedu.medibook.testutil;
 
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_BLOOD_TYPE;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_CONDITION;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_IC;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_TREATMENT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
 import java.util.Set;
 
 import seedu.medibook.logic.commands.AddCommand;
 import seedu.medibook.logic.commands.EditCommand;
+import seedu.medibook.model.medicaldetail.Allergy;
+import seedu.medibook.model.medicaldetail.Condition;
+import seedu.medibook.model.medicaldetail.Treatment;
 import seedu.medibook.model.patient.Patient;
 import seedu.medibook.model.medicaldetail.Tag;
 
@@ -60,8 +65,16 @@ public class PatientUtil {
             sb.append(PREFIX_BLOOD_TYPE + patient.getStringBloodType() + " ");
         }
 
-        patient.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
+        patient.getAllergies().stream().forEach(
+            s -> sb.append(PREFIX_ALLERGY + s.tagName + " ")
+        );
+
+        patient.getConditions().stream().forEach(
+            s -> sb.append(PREFIX_CONDITION + s.tagName + " ")
+        );
+
+        patient.getTreatments().stream().forEach(
+            s -> sb.append(PREFIX_TREATMENT + s.tagName + " ")
         );
         return sb.toString();
     }
@@ -84,12 +97,30 @@ public class PatientUtil {
         descriptor.getBloodType().ifPresent(bloodType -> sb.append(PREFIX_BLOOD_TYPE)
                 .append(bloodType.bloodType.label).append(" "));
 
-        if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
-            if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
+        if (descriptor.getAllergies().isPresent()) {
+            Set<Allergy> allergies = descriptor.getAllergies().get();
+            if (allergies.isEmpty()) {
+                sb.append(PREFIX_ALLERGY);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+                allergies.forEach(s -> sb.append(PREFIX_ALLERGY).append(s.tagName).append(" "));
+            }
+        }
+
+        if (descriptor.getConditions().isPresent()) {
+            Set<Condition> conditions = descriptor.getConditions().get();
+            if (conditions.isEmpty()) {
+                sb.append(PREFIX_CONDITION);
+            } else {
+                conditions.forEach(s -> sb.append(PREFIX_CONDITION).append(s.tagName).append(" "));
+            }
+        }
+
+        if (descriptor.getTreatments().isPresent()) {
+            Set<Treatment> treatments = descriptor.getTreatments().get();
+            if (treatments.isEmpty()) {
+                sb.append(PREFIX_TREATMENT);
+            } else {
+                treatments.forEach(s -> sb.append(PREFIX_TREATMENT).append(s.tagName).append(" "));
             }
         }
         return sb.toString();
