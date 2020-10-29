@@ -69,21 +69,22 @@ public class PatientChartCard extends UiPart<Region> {
         List<Map.Entry<Date, Weight>> weightRecords = new ArrayList<>(weightRecord.entrySet());
         HashMap<Date, Height> heightRecord = patient.getRecord().getHeightRecord();
         List<Map.Entry<Date, Height>> heightRecords = new ArrayList<>(heightRecord.entrySet());
-        if (weightRecords.size() != 0 || heightRecords.size() != 0) {
 
-            //weight chart
-            CategoryAxis xAxisWeight = (CategoryAxis) weightChart.getXAxis();
-            NumberAxis yAxisWeight = (NumberAxis) weightChart.getYAxis();
-            xAxisWeight.setLabel("Date");
-            yAxisWeight.setForceZeroInRange(false);
-            yAxisWeight.setLabel("Weight(kg)");
+        //weight chart
+        CategoryAxis xAxisWeight = (CategoryAxis) weightChart.getXAxis();
+        NumberAxis yAxisWeight = (NumberAxis) weightChart.getYAxis();
+        xAxisWeight.setLabel("Date");
+        yAxisWeight.setForceZeroInRange(false);
+        yAxisWeight.setLabel("Weight(kg)");
 
-            Weight[] weights = weightRecord.values().toArray(new Weight[0]);
-            List<Date> dateListWeight = new ArrayList<Date>();
-            for (int k = 0; k < weights.length; k++) {
-                dateListWeight.add(weightRecords.get(k).getKey());
-            }
-            Collections.sort(dateListWeight);
+        Weight[] weights = weightRecord.values().toArray(new Weight[0]);
+        List<Date> dateListWeight = new ArrayList<Date>();
+        for (int k = 0; k < weights.length; k++) {
+            dateListWeight.add(weightRecords.get(k).getKey());
+        }
+        Collections.sort(dateListWeight);
+
+        if (weightRecords.size() != 0) {
 
             LocalDate startWeightDate = dateListWeight.get(0).getLocalDate();
             LocalDate endWeightDate = dateListWeight.get(dateListWeight.size() - 1).getLocalDate();
@@ -101,22 +102,25 @@ public class PatientChartCard extends UiPart<Region> {
                 stringWeightMap.put(date, plot);
                 weightSeries.getData().add(new XYChart.Data(date, plot));
             }
+            weightChart.getData().add(weightSeries);
+        }
 
 
-            //height chart
-            CategoryAxis xAxisHeight = (CategoryAxis) heightChart.getXAxis();
-            NumberAxis yAxisHeight = (NumberAxis) heightChart.getYAxis();
-            xAxisHeight.setLabel("Date");
-            yAxisHeight.setForceZeroInRange(false);
-            yAxisHeight.setLabel("Height(cm)");
+        //height chart
+        CategoryAxis xAxisHeight = (CategoryAxis) heightChart.getXAxis();
+        NumberAxis yAxisHeight = (NumberAxis) heightChart.getYAxis();
+        xAxisHeight.setLabel("Date");
+        yAxisHeight.setForceZeroInRange(false);
+        yAxisHeight.setLabel("Height(cm)");
 
-            Height[] heights = heightRecord.values().toArray(new Height[0]);
-            List<Date> dateListHeight = new ArrayList<Date>();
-            for (int k = 0; k < heights.length; k++) {
-                dateListHeight.add(weightRecords.get(k).getKey());
-            }
-            Collections.sort(dateListHeight);
+        Height[] heights = heightRecord.values().toArray(new Height[0]);
+        List<Date> dateListHeight = new ArrayList<Date>();
+        for (int k = 0; k < heights.length; k++) {
+            dateListHeight.add(heightRecords.get(k).getKey());
+        }
+        Collections.sort(dateListHeight);
 
+        if (heightRecords.size() != 0) {
             LocalDate startHeightDate = dateListHeight.get(0).getLocalDate();
             LocalDate endHeightDate = dateListHeight.get(dateListHeight.size() - 1).getLocalDate();
             ObservableList<String> allDatesHeight = FXCollections.observableArrayList();
@@ -133,15 +137,18 @@ public class PatientChartCard extends UiPart<Region> {
                 stringHeightMap.put(date, plot);
                 heightSeries.getData().add(new XYChart.Data(date, plot));
             }
+            heightChart.getData().add(heightSeries);
+        }
 
-            //bmi chart
-            CategoryAxis xAxisBmi = (CategoryAxis) bmiChart.getXAxis();
-            NumberAxis yAxisBmi = (NumberAxis) bmiChart.getYAxis();
-            xAxisBmi.setLabel("Date");
-            yAxisBmi.setForceZeroInRange(false);
-            yAxisBmi.setLabel("BMI");
+        //bmi chart
+        CategoryAxis xAxisBmi = (CategoryAxis) bmiChart.getXAxis();
+        NumberAxis yAxisBmi = (NumberAxis) bmiChart.getYAxis();
+        xAxisBmi.setLabel("Date");
+        yAxisBmi.setForceZeroInRange(false);
+        yAxisBmi.setLabel("BMI");
 
 
+        if (weightRecords.size() != 0 && heightRecords.size() != 0) {
             LocalDate startBmiDate;
             LocalDate endBmiDate;
             if (dateListHeight.get(0).getLocalDate().isBefore(dateListWeight.get(0).getLocalDate())) {
@@ -163,7 +170,7 @@ public class PatientChartCard extends UiPart<Region> {
                 startBmiDate = startBmiDate.plusDays(1);
             }
 
-            xAxisBmi.setCategories(allDatesHeight);
+            xAxisBmi.setCategories(allDatesBmi);
 
             for (int i = 0; i < allDatesBmi.size(); i++) {
                 String date = allDatesBmi.get(i);
@@ -175,9 +182,6 @@ public class PatientChartCard extends UiPart<Region> {
                     bmiSeries.getData().add(new XYChart.Data(date, bmi));
                 }
             }
-
-            weightChart.getData().add(weightSeries);
-            heightChart.getData().add(heightSeries);
             bmiChart.getData().add(bmiSeries);
         }
 
