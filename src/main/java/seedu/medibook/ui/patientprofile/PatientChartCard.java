@@ -73,14 +73,14 @@ public class PatientChartCard extends UiPart<Region> {
         HashMap<Date, Weight> weightRecord = patient.getRecord().getWeightRecord();
         List<Map.Entry<Date, Weight>> weightRecords = new ArrayList<>(weightRecord.entrySet());
         Weight[] weights = weightRecord.values().toArray(new Weight[0]);
-        List dateListWeight = new ArrayList<Date>();
+        List<Date> dateListWeight = new ArrayList<Date>();
         for (int k = 0; k < weights.length; k++) {
             dateListWeight.add(weightRecords.get(k).getKey());
         }
         Collections.sort(dateListWeight);
 
-        LocalDate startWeightDate = ((Date) dateListWeight.get(0)).getLocalDate();
-        LocalDate endWeightDate = ((Date) dateListWeight.get(dateListWeight.size() - 1)).getLocalDate();
+        LocalDate startWeightDate = dateListWeight.get(0).getLocalDate();
+        LocalDate endWeightDate = dateListWeight.get(dateListWeight.size() - 1).getLocalDate();
         ObservableList<String> allDatesWeight = FXCollections.observableArrayList();
         while (!startWeightDate.isAfter(endWeightDate)) {
             allDatesWeight.add(startWeightDate.toString());
@@ -90,7 +90,7 @@ public class PatientChartCard extends UiPart<Region> {
         xAxisWeight.setCategories(allDatesWeight);
 
         for (int i = 0; i < weights.length; i++) {
-            String date = ((Date) dateListWeight.get(i)).getLocalDate().toString();
+            String date = dateListWeight.get(i).getLocalDate().toString();
             Double plot = weightRecord.get(dateListWeight.get(i)).getNumericValue();
             stringWeightMap.put(date, plot);
             weightSeries.getData().add(new XYChart.Data(date, plot));
@@ -109,14 +109,14 @@ public class PatientChartCard extends UiPart<Region> {
         HashMap<Date, Height> heightRecord = patient.getRecord().getHeightRecord();
         List<Map.Entry<Date, Height>> heightRecords = new ArrayList<>(heightRecord.entrySet());
         Height[] heights = heightRecord.values().toArray(new Height[0]);
-        List dateListHeight = new ArrayList<Date>();
+        List<Date> dateListHeight = new ArrayList<Date>();
         for (int k = 0; k < heights.length; k++) {
             dateListHeight.add(weightRecords.get(k).getKey());
         }
         Collections.sort(dateListHeight);
 
-        LocalDate startHeightDate = ((Date) dateListHeight.get(0)).getLocalDate();
-        LocalDate endHeightDate = ((Date) dateListHeight.get(dateListHeight.size() - 1)).getLocalDate();
+        LocalDate startHeightDate = dateListHeight.get(0).getLocalDate();
+        LocalDate endHeightDate = dateListHeight.get(dateListHeight.size() - 1).getLocalDate();
         ObservableList<String> allDatesHeight = FXCollections.observableArrayList();
         while (!startHeightDate.isAfter(endHeightDate)) {
             allDatesHeight.add(startHeightDate.toString());
@@ -126,7 +126,7 @@ public class PatientChartCard extends UiPart<Region> {
         xAxisHeight.setCategories(allDatesHeight);
 
         for (int i = 0; i < heights.length; i++) {
-            String date = ((Date) dateListHeight.get(i)).getLocalDate().toString();
+            String date = dateListHeight.get(i).getLocalDate().toString();
             int plot = heightRecord.get(dateListHeight.get(i)).getNumericValue();
             stringHeightMap.put(date, plot);
             heightSeries.getData().add(new XYChart.Data(date, plot));
@@ -142,17 +142,17 @@ public class PatientChartCard extends UiPart<Region> {
 
         LocalDate startBmiDate;
         LocalDate endBmiDate;
-        if (((Date) dateListHeight.get(0)).getLocalDate().isBefore(((Date) dateListWeight.get(0)).getLocalDate())) {
-            startBmiDate = ((Date) dateListHeight.get(0)).getLocalDate();
+        if (dateListHeight.get(0).getLocalDate().isBefore(dateListWeight.get(0).getLocalDate())) {
+            startBmiDate = dateListHeight.get(0).getLocalDate();
         } else {
-            startBmiDate = ((Date) dateListWeight.get(0)).getLocalDate();
+            startBmiDate = dateListWeight.get(0).getLocalDate();
         }
 
-        if (((Date) dateListHeight.get(dateListHeight.size() - 1)).getLocalDate()
-                .isBefore(((Date) dateListWeight.get(dateListWeight.size() - 1)).getLocalDate())) {
-            endBmiDate = ((Date) dateListWeight.get(dateListWeight.size() - 1)).getLocalDate();
+        if (dateListHeight.get(dateListHeight.size() - 1).getLocalDate()
+                .isBefore(dateListWeight.get(dateListWeight.size() - 1).getLocalDate())) {
+            endBmiDate = dateListWeight.get(dateListWeight.size() - 1).getLocalDate();
         } else {
-            endBmiDate = ((Date) dateListHeight.get(dateListHeight.size() - 1)).getLocalDate();
+            endBmiDate = dateListHeight.get(dateListHeight.size() - 1).getLocalDate();
         }
 
         ObservableList<String> allDatesBmi = FXCollections.observableArrayList();
@@ -173,8 +173,6 @@ public class PatientChartCard extends UiPart<Region> {
                 bmiSeries.getData().add(new XYChart.Data(date, bmi));
             }
         }
-
-
 
         weightChart.getData().add(weightSeries);
         heightChart.getData().add(heightSeries);
