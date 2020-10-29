@@ -102,7 +102,7 @@ public class PatientChartCard extends UiPart<Region> {
                 String date = formatter.format(dateListWeight.get(i).getLocalDate());
                 Double plot = weightRecord.get(dateListWeight.get(i)).getNumericValue();
                 stringWeightMap.put(date, plot);
-                weightSeries.getData().add(new XYChart.Data(date, plot));
+                weightSeries.getData().add(new XYChart.Data<>(date, plot));
             }
             weightChart.getData().add(weightSeries);
         }
@@ -137,7 +137,7 @@ public class PatientChartCard extends UiPart<Region> {
                 String date = formatter.format(dateListHeight.get(i).getLocalDate());
                 int plot = heightRecord.get(dateListHeight.get(i)).getNumericValue();
                 stringHeightMap.put(date, plot);
-                heightSeries.getData().add(new XYChart.Data(date, plot));
+                heightSeries.getData().add(new XYChart.Data<>(date, plot));
             }
             heightChart.getData().add(heightSeries);
         }
@@ -181,7 +181,7 @@ public class PatientChartCard extends UiPart<Region> {
                     double weight = stringWeightMap.get(date);
                     double numericBmi = weight / Math.pow(height, 2);
                     double bmi = ((double) Math.round(numericBmi * 10)) / 10;
-                    bmiSeries.getData().add(new XYChart.Data(date, bmi));
+                    bmiSeries.getData().add(new XYChart.Data<>(date, bmi));
                 }
             }
             bmiChart.getData().add(bmiSeries);
