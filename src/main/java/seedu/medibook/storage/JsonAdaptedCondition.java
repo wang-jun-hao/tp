@@ -1,5 +1,7 @@
 package seedu.medibook.storage;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 import seedu.medibook.commons.exceptions.IllegalValueException;
 import seedu.medibook.model.medicaldetail.Condition;
 import seedu.medibook.model.medicaldetail.Tag;
@@ -12,6 +14,7 @@ public class JsonAdaptedCondition extends JsonAdaptedTag {
     /**
      * Constructs a {@code JsonAdaptedCondition} with the given {@code tagName}.
      */
+    @JsonCreator
     public JsonAdaptedCondition(String tagName) {
         super(tagName);
     }
