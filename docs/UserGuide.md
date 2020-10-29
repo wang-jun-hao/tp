@@ -235,7 +235,6 @@ the medical note at index 1 authored by you.
 
 Deletes the medical note with index 1 in the displayed list of medical notes belonging to patient with IC 'S9123456A'.
 
-
 ### 3.11 Exiting the program : `exit`
 
 Exits the program.
