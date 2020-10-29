@@ -87,6 +87,14 @@ public class Date implements Comparable<Date> {
     }
 
     /**
+     * Returns the localDate of the Date as a LocalDate object
+     * @return localDate of the Date object
+     */
+    public LocalDate getLocalDate() {
+        return localDate;
+    }
+
+    /**
      * Returns the string that was the input by user when defining a date.
      * @return string input by user.
      */
