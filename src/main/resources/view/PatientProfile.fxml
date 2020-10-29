@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="1785.0" prefWidth="2590.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
     <SplitPane prefHeight="1785.0" prefWidth="2590.0">
@@ -13,7 +13,7 @@
                       <AnchorPane fx:id="medicalDetailsCard" minHeight="0.0" minWidth="0.0" prefHeight="291.0" prefWidth="293.0" />
                   </items>
               </SplitPane>
-            <SplitPane dividerPositions="0.4066599394550959" layoutX="291.0" prefHeight="1783.0" prefWidth="2296.0">
+            <SplitPane dividerPositions="0.4066599394550959" layoutX="291.0" prefHeight="1189.0" prefWidth="2296.0">
               <items>
                 <AnchorPane fx:id="medicalNotesPanel" minHeight="0.0" minWidth="0.0" prefHeight="793.0" prefWidth="396.0" />
                 <AnchorPane fx:id="patientChartCard" minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="317.0" />
