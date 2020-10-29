@@ -8,7 +8,7 @@ import static seedu.medibook.logic.commands.CommandTestUtil.VALID_BMI_BOB;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_HEIGHT_BOB;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.medibook.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.medibook.logic.commands.CommandTestUtil.VALID_TREATMENT_PHYSIOTHERAPY;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_WEIGHT_BOB;
 import static seedu.medibook.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.medibook.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -64,10 +64,10 @@ public class EditCommandTest {
 
         PatientBuilder patientInList = new PatientBuilder(lastPatient);
         Patient editedPatient = patientInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withTreatments(VALID_TREATMENT_PHYSIOTHERAPY).build();
 
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).withTreatments(VALID_TREATMENT_PHYSIOTHERAPY).build();
         EditCommand editCommand = new EditCommand(indexLastPatient, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient);
