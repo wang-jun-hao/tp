@@ -192,33 +192,33 @@ Elaboration on point 1:
 * `access`-ing a `patient` loads the stored medical note list and sets the `MedicalNoteList` of the `patient` to the retrieved list
 * Hence, `note` command can only be called when viewing a `patient`'s profile as it ensures that the `MedicalNoteList` has already been properly loaded by executing `access` command beforehand
 
-### \[Proposed\] Account creation and login
+### Account creation and login
 
-#### Proposed implementation
+#### Implementation
 
-The proposed account creation feature is facilitated by a new `CreateAccountCommand`. It extends `Command`, similar to how all the other commands currently work.
+The account creation feature is facilitated by a new `CreateAccountWindow` class in the UI.
 
 ![CreateAccountSequenceDiagram](images/CreateAccountSequenceDiagram.png)
 
-Step 1. The user launches the application and executes `create u/example_username p/example_password`.
+Step 1. The user launches the application and chooses the `Create Account` option. Then, the user inputs all of the required details.
 
-Step 2. `Logic#execute(String commandText)` creates a new `CreateAccountCommand` and calls `Storage#saveNewAccountDetails()`.
+Step 2. The UI calls `Logic#createAccount()` with the details input by the user.
 
-Step 3. `Storage#saveNewAccountDetails()` converts the new account's username and password into json format and saves it a `AccountDetails.json` file.
+Step 3. `Storage#createAccount()` converts the new account's username and password into json format and saves it in a `accounts.json` file.
 
-The following activity diagram summarises what happens when a user executes a new command to create account.
+The following activity diagram summarises what happens when a user attempts to create an account.
 
 ![CreateAccountActivityDiagram](images/CreateAccountActivityDiagram.png)
 
-The proposed login feature is facilitated by a new `LoginWindow` class in the UI.
+The login feature is facilitated by a new `LoginWindow` class in the UI.
 
 ![LoginSequenceDiagram](images/LoginSequenceDiagram.png)
 
 Step 1. The user inputs his/her login information.
 
-Step 2. The UI calls `Logic#login()` with the login information as input.
+Step 2. The UI calls `Logic#processLoginInfo()` with the login information as input.
 
-Step 3. `Logic#login()` then calls `Storage#checkAccountDetails()` on the login information, to check if the information matches any of the account details saved.
+Step 3. `Logic#processLoginInfo()` then calls `Storage#login()` on the login information, to check if the information matches any of the account details saved.
 
 Step 4. If there is no match, an error is thrown. If there is a match, the UI then changes from `LoginWindow` to `MainWindow`, which signifies that the user has succesfully logged in.
 
@@ -453,7 +453,11 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the Login GUI. The window size may not be optimum.
+   
+   1. User can login using a username or password if they already have one or pick the `create account` option instead.
+   
+   1. After users login/create account, the GUI will show a set of sample contacts.
 
 1. Saving window preferences
 

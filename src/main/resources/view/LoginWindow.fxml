@@ -13,6 +13,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
@@ -55,6 +56,12 @@
                      <right>
                         <Button fx:id="loginButton" defaultButton="true" mnemonicParsing="false" prefHeight="50.0" prefWidth="121.0" style="-fx-border-radius: 5;" styleClass="cell_big_label" text="Login" textFill="WHITE" BorderPane.alignment="CENTER" />
                      </right>
+                     <center>
+                        <StackPane fx:id="resultDisplayPlaceholder" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                     </center>
+                     <left>
+                         <Button fx:id="createButton" defaultButton="false" mnemonicParsing="false" prefHeight="50.0" prefWidth="121.0" style="-fx-border-radius: 5;" styleClass="cell_big_label" text="Create Account" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER" />
+                     </left>
                   </BorderPane>
                </children>
         </VBox>

@@ -2,6 +2,7 @@ package seedu.medibook.model;
 
 import java.util.Optional;
 
+import seedu.medibook.model.doctor.Doctor;
 import seedu.medibook.model.patient.Ic;
 import seedu.medibook.model.patient.Patient;
 
@@ -76,4 +77,14 @@ public interface Context {
      * Sets the boolean on whether all medical notes should be cleared.
      */
     void setShouldDeleteAllMedicalNotes(boolean b);
+
+    /**
+     * Sets the current user using MediBook.
+     */
+    void setActiveUser(Optional<Doctor> doctor);
+
+    /**
+     * Returns the doctor currently using the system.
+     */
+    Optional<Doctor> getActiveUser();
 }

@@ -16,9 +16,6 @@ import seedu.medibook.commons.util.CollectionUtil;
 import seedu.medibook.logic.commands.exceptions.CommandException;
 import seedu.medibook.model.Model;
 import seedu.medibook.model.commonfields.Date;
-import seedu.medibook.model.commonfields.Name;
-import seedu.medibook.model.doctor.Doctor;
-import seedu.medibook.model.doctor.Mcr;
 import seedu.medibook.model.medicalnote.Content;
 import seedu.medibook.model.medicalnote.MedicalNote;
 import seedu.medibook.model.patient.Patient;
@@ -47,6 +44,8 @@ public class EditNoteCommand extends Command {
     public static final String MESSAGE_DUPLICATE_NOTE = "This medical note already exists in this patient profile.";
     public static final String MESSAGE_EDIT_NOTE_ON_LIST = "You can only edit medical note of a patient when you are "
             + "viewing his/her patient profile. Access the patient profile before editing medical note.";
+    public static final String MESSAGE_USER_CANNOT_EDIT = "Current user cannot edit medical notes";
+    public static final String MESSAGE_CANNOT_EDIT_OTHER_DOCTOR_NOTES = "Can't edit other doctor's medical notes";
 
     private final Logger logger = LogsCenter.getLogger(EditNoteCommand.class);
     private final Index index;
@@ -88,6 +87,14 @@ public class EditNoteCommand extends Command {
         MedicalNote noteToEdit = displayedPatient.getMedicalNoteAtIndex(indexZeroBased);
         MedicalNote newMedicalNote = createEditedNote(noteToEdit, editNoteDescriptor);
 
+        if (model.getActiveUser().isEmpty()) {
+            throw new CommandException(MESSAGE_USER_CANNOT_EDIT);
+        }
+
+        if (!model.getActiveUser().get().equals(noteToEdit.doctor)) {
+            throw new CommandException(MESSAGE_CANNOT_EDIT_OTHER_DOCTOR_NOTES);
+        }
+
         try {
             displayedPatient.deleteMedicalNoteAtIndex(indexZeroBased);
 
@@ -118,13 +125,9 @@ public class EditNoteCommand extends Command {
         assert noteToEdit != null : "Note to edit in EditNoteCommand#createEditedNote() is null";
 
         Date updatedDate = editNoteDescriptor.getDate().orElse(noteToEdit.getDate());
-        Name updatedNameOfDoctor = editNoteDescriptor.getName().orElse(noteToEdit.getDoctorName());
-        Mcr updatedMcrOfDoctor = editNoteDescriptor.getMcr().orElse(noteToEdit.getDoctorMcr());
         Content updatedContent = editNoteDescriptor.getContent().orElse(noteToEdit.getContent());
 
-        Doctor updatedDoctor = new Doctor(updatedNameOfDoctor, updatedMcrOfDoctor);
-
-        return new MedicalNote(updatedDate, updatedDoctor, updatedContent);
+        return new MedicalNote(updatedDate, noteToEdit.doctor, updatedContent);
     }
 
     @Override
@@ -151,8 +154,6 @@ public class EditNoteCommand extends Command {
      */
     public static class EditNoteDescriptor {
         private Date date;
-        private Name name;
-        private Mcr mcr;
         private Content content;
 
         public EditNoteDescriptor() {}
@@ -162,8 +163,6 @@ public class EditNoteCommand extends Command {
          */
         public EditNoteDescriptor(EditNoteDescriptor toCopy) {
             setDate(toCopy.date);
-            setName(toCopy.name);
-            setMcr(toCopy.mcr);
             setContent(toCopy.content);
         }
 
@@ -171,7 +170,7 @@ public class EditNoteCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(date, name, mcr, content);
+            return CollectionUtil.isAnyNonNull(date, content);
         }
 
         public void setDate(Date date) {
@@ -180,22 +179,6 @@ public class EditNoteCommand extends Command {
 
         public Optional<Date> getDate() {
             return Optional.ofNullable(date);
-        }
-
-        public void setName(Name name) {
-            this.name = name;
-        }
-
-        public Optional<Name> getName() {
-            return Optional.ofNullable(name);
-        }
-
-        public void setMcr(Mcr mcr) {
-            this.mcr = mcr;
-        }
-
-        public Optional<Mcr> getMcr() {
-            return Optional.ofNullable(mcr);
         }
 
         public void setContent(Content content) {
@@ -222,8 +205,6 @@ public class EditNoteCommand extends Command {
             EditNoteDescriptor e = (EditNoteDescriptor) other;
 
             return getDate().equals(e.getDate())
-                    && getName().equals(e.getName())
-                    && getMcr().equals(e.getMcr())
                     && getContent().equals(e.getContent());
         }
     }

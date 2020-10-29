@@ -1,5 +1,6 @@
 package seedu.medibook.ui;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -23,9 +24,9 @@ import seedu.medibook.commons.exceptions.IllegalLoginException;
 import seedu.medibook.commons.exceptions.IllegalValueException;
 import seedu.medibook.logic.Logic;
 
-public class LoginWindow extends UiPart<Stage> {
+public class CreateAccountWindow extends UiPart<Stage> {
 
-    private static final String FXML = "LoginWindow.fxml";
+    private static final String FXML = "CreateAccountWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -34,8 +35,8 @@ public class LoginWindow extends UiPart<Stage> {
 
     private HelpWindow helpWindow;
     private MainWindow mainWindow;
-    private CreateAccountWindow createAccountWindow;
     private ResultDisplay resultDisplay;
+    private LoginWindow loginWindow;
 
     @FXML
     private MenuItem helpMenuItem;
@@ -56,10 +57,22 @@ public class LoginWindow extends UiPart<Stage> {
     private PasswordField passwordField;
 
     @FXML
-    private Button loginButton;
+    private Label doctorName;
+
+    @FXML
+    private TextField doctorNameField;
+
+    @FXML
+    private Label doctorMcr;
+
+    @FXML
+    private TextField doctorMcrField;
 
     @FXML
     private Button createButton;
+
+    @FXML
+    private Button backButton;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -68,7 +81,7 @@ public class LoginWindow extends UiPart<Stage> {
     /**
      * Creates a {@code LoginWindow} with the given {@code Stage} and {@code Logic}.
      */
-    public LoginWindow(Stage primaryStage, Logic logic) {
+    public CreateAccountWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
 
         // Set dependencies
@@ -168,25 +181,29 @@ public class LoginWindow extends UiPart<Stage> {
     }
 
     private void setButtonOnAction() {
-        loginButton.setOnAction(event -> processLoginInfo());
-        createButton.setOnAction(event -> createAccountStage());
+        createButton.setOnAction(event -> createAccount());
+        backButton.setOnAction(event -> back());
     }
 
-    private void processLoginInfo() {
+    private void createAccount() {
         String username = this.usernameField.getText();
         String password = this.passwordField.getText();
+        String doctorName = this.doctorNameField.getText();
+        String doctorMcr = this.doctorMcrField.getText();
         try {
+            logic.createAccount(username, password, doctorName, doctorMcr);
             logic.processLoginInfo(username, password);
             mainWindow = new MainWindow(primaryStage, logic);
             mainWindow.show();
             mainWindow.fillInnerParts();
-        } catch (IllegalLoginException | DataConversionException | IllegalValueException e) {
-            logger.info("Invalid login");
+        } catch (IOException | DataConversionException | IllegalValueException | IllegalLoginException e) {
+            logger.info("Invalid data");
             resultDisplay.setFeedbackToUser(e.getMessage());
         }
     }
 
-    private void createAccountStage() {
-        createAccountWindow = new CreateAccountWindow(primaryStage, logic);
+    private void back() {
+        loginWindow = new LoginWindow(primaryStage, logic);
+        loginWindow.show();
     }
 }
