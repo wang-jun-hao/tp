@@ -2,14 +2,16 @@ package seedu.medibook.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_BLOOD_TYPE;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_CONDITION;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_IC;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_TREATMENT;
 import static seedu.medibook.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
 import seedu.medibook.commons.core.Messages;
@@ -35,7 +37,9 @@ public class AddCommand extends Command {
             + PREFIX_HEIGHT + "HEIGHT "
             + PREFIX_WEIGHT + "WEIGHT "
             + PREFIX_BLOOD_TYPE + "BLOOD TYPE "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_ALLERGY + "ALLERGY]... "
+            + "[" + PREFIX_CONDITION + "CONDITION]... "
+            + "[" + PREFIX_TREATMENT + "TREATMENT]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_IC + "S9123456A "
             + PREFIX_NAME + "John Doe "
@@ -46,8 +50,11 @@ public class AddCommand extends Command {
             + PREFIX_HEIGHT + "180 "
             + PREFIX_WEIGHT + "70.5 "
             + PREFIX_BLOOD_TYPE + "A+ "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_ALLERGY + "shellfish "
+            + PREFIX_ALLERGY + "dust "
+            + PREFIX_CONDITION + "fever "
+            + PREFIX_TREATMENT + "Paracetamol "
+            + PREFIX_TREATMENT + "Ibuprofen (for high fever only)";
 
     public static final String MESSAGE_SUCCESS = "New patient added: %1$s";
     public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the medi book";

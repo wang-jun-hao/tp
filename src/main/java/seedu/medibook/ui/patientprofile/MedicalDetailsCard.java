@@ -1,5 +1,6 @@
 package seedu.medibook.ui.patientprofile;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javafx.collections.FXCollections;
@@ -10,8 +11,8 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import javafx.util.Pair;
+import seedu.medibook.model.medicaldetail.Tag;
 import seedu.medibook.model.patient.Patient;
-import seedu.medibook.model.tag.Tag;
 import seedu.medibook.ui.UiPart;
 
 /**
@@ -37,7 +38,13 @@ public class MedicalDetailsCard extends UiPart<Region> {
 
         cardHeader.setText("Medical Details: ");
         ObservableList<Pair<String, Set<Tag>>> fields = FXCollections.observableArrayList();
-        fields.add(new Pair<String, Set<Tag>>("Tags: ", patient.getTags()));
+        Set<Tag> allergies = new HashSet<>(patient.getAllergies());
+        Set<Tag> conditions = new HashSet<>(patient.getConditions());
+        Set<Tag> treatments = new HashSet<>(patient.getTreatments());
+        fields.add(new Pair<String, Set<Tag>>("Allergies: ", allergies));
+        fields.add(new Pair<String, Set<Tag>>("Conditions: ", conditions));
+        fields.add(new Pair<String, Set<Tag>>("Treatments: ", treatments));
+
 
         detailsListView.setItems(fields);
         detailsListView.setCellFactory(listView -> new MedicalDetailsListViewCell());

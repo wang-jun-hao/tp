@@ -5,14 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.medibook.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.medibook.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.medibook.logic.commands.CommandTestUtil.VALID_ALLERGY_SHELLFISH;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_BLOOD_TYPE_BOB;
+import static seedu.medibook.logic.commands.CommandTestUtil.VALID_CONDITION_BACK;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_DOB_BOB;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_HEIGHT_BOB;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_IC_BOB;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.medibook.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.medibook.logic.commands.CommandTestUtil.VALID_TREATMENT_PHYSIOTHERAPY;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_WEIGHT_BOB;
 
 import org.junit.jupiter.api.Test;
@@ -77,8 +79,16 @@ public class EditPatientDescriptorTest {
         editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withBloodType(VALID_BLOOD_TYPE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different tags -> returns false
-        editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        // different allergies -> returns false
+        editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withAllergies(VALID_ALLERGY_SHELLFISH).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different conditions -> returns false
+        editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withConditions(VALID_CONDITION_BACK).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different treatments -> returns false
+        editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withTreatments(VALID_TREATMENT_PHYSIOTHERAPY).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 }
