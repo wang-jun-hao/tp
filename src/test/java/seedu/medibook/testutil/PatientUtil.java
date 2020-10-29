@@ -21,7 +21,6 @@ import seedu.medibook.model.medicaldetail.Allergy;
 import seedu.medibook.model.medicaldetail.Condition;
 import seedu.medibook.model.medicaldetail.Treatment;
 import seedu.medibook.model.patient.Patient;
-import seedu.medibook.model.medicaldetail.Tag;
 
 /**
  * A utility class for Patient.
