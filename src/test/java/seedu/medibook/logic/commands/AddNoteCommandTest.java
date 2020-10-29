@@ -7,6 +7,8 @@ import static seedu.medibook.logic.commands.CommandTestUtil.assertCommandFailure
 import static seedu.medibook.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.medibook.testutil.TypicalPatients.getTypicalMediBook;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.medibook.model.MediBook;
@@ -33,7 +35,7 @@ public class AddNoteCommandTest {
     public void execute_noteOnListView_failure() {
         // set model to hold no optional patient
         model.resetAccessedPatient();
-        model.setActiveUser(new Doctor(new Name("John"), new Mcr("M02830P")));
+        model.setActiveUser(Optional.of(new Doctor(new Name("John"), new Mcr("M02830P"))));
 
         Date medicalNoteDate = new Date("20-10-2019", true);
         Content medicalNoteContent = new Content("Patient is having fever.");
@@ -47,7 +49,7 @@ public class AddNoteCommandTest {
         Patient targetPatient = model.getFilteredPatientList().get(0);
 
         model.accessPatient(targetPatient);
-        model.setActiveUser(new Doctor(new Name("John"), new Mcr("MP2819J")));
+        model.setActiveUser(Optional.of(new Doctor(new Name("John"), new Mcr("MP2819J"))));
 
         Date duplicateDate = new Date("19-02-2020", true);
         Content duplicateContent = new Content("Patient is good.");
@@ -62,7 +64,7 @@ public class AddNoteCommandTest {
         Patient targetPatient = model.getFilteredPatientList().get(0);
 
         model.accessPatient(targetPatient);
-        model.setActiveUser(new Doctor(new Name("John"), new Mcr("M02830P")));
+        model.setActiveUser(Optional.of(new Doctor(new Name("John"), new Mcr("M02830P"))));
 
         Date date = new Date("21-10-2019", true);
         Content content = new Content("Patient is having fever.");
@@ -79,6 +81,7 @@ public class AddNoteCommandTest {
         String expectedMessage = String.format(MESSAGE_SUCCESS, medicalNote);
 
         Model expectedModel = new ModelManager(new MediBook(model.getMediBook()), new UserPrefs());
+        expectedModel.setActiveUser(Optional.of(new Doctor(new Name("John"), new Mcr("M02830P"))));
         expectedModel.setPatient(targetPatient, resultingPatient);
         expectedModel.accessPatient(targetPatient);
         expectedModel.setShouldLoadMedicalNotes(false);

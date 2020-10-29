@@ -17,7 +17,6 @@ public class Account {
      * Constructs an account with a username and a password.
      */
     public Account(String username, String password, Doctor doctor) {
-        requireNonNull(doctor);
         this.username = username;
         this.password = password;
         this.doctor = doctor;

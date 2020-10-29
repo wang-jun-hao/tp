@@ -62,9 +62,13 @@ public class DeleteNoteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_NOTE_DISPLAYED_INDEX);
         }
 
+        if (model.getActiveUser().isEmpty()) {
+            throw new CommandException("Current user cannot delete medical notes");
+        }
+
         MedicalNote noteToDelete = medicalNoteList.getMedicalNoteAtIndex(zeroBasedIndex);
 
-        if (noteToDelete.getDoctorMcr().equals(model.getActiveUser().getMcr())) {
+        if (noteToDelete.getDoctorMcr().equals(model.getActiveUser().get().getMcr())) {
             medicalNoteList.deleteMedicalNoteAtIndex(zeroBasedIndex);
         } else {
             throw new CommandException("Can't delete other doctor's medical notes");

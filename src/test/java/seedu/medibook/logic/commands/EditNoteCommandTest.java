@@ -13,6 +13,7 @@ import static seedu.medibook.testutil.TypicalPatients.getTypicalMediBook;
 
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -43,7 +44,7 @@ public class EditNoteCommandTest {
     public void execute_allFieldsSpecified_success() {
         Patient targetPatient = model.getFilteredPatientList().get(0);
         model.accessPatient(targetPatient);
-        model.setActiveUser(new Doctor(new Name("John"), new Mcr("MP2819J")));
+        model.setActiveUser(Optional.of(new Doctor(new Name("John"), new Mcr("MP2819J"))));
 
         EditNoteCommand.EditNoteDescriptor descriptor = new EditNoteCommand.EditNoteDescriptor();
         descriptor.setDate(new Date("24-12-2018", true));
@@ -52,13 +53,13 @@ public class EditNoteCommandTest {
         EditNoteCommand editNoteCommand = new EditNoteCommand(INDEX_FIRST, descriptor);
 
         MedicalNote editedNote = new MedicalNote(new Date("24-12-2018", true),
-                model.getActiveUser(),
+                model.getActiveUser().get(),
                 new Content("Patient has high fever."));
 
         String expectedMessage = String.format(EditNoteCommand.MESSAGE_EDIT_NOTE_SUCCESS, editedNote);
 
         Model expectedModel = new ModelManager(new MediBook(model.getMediBook()), new UserPrefs());
-        expectedModel.setActiveUser(new Doctor(new Name("John"), new Mcr("MP2819J")));
+        expectedModel.setActiveUser(Optional.of(new Doctor(new Name("John"), new Mcr("MP2819J"))));
         Patient expectedTargetPatient = expectedModel.getFilteredPatientList().get(0);
         expectedTargetPatient = new PatientBuilder(expectedTargetPatient).build();
         LinkedList<MedicalNote> expectedMedicalNoteLinkedList =
@@ -75,7 +76,7 @@ public class EditNoteCommandTest {
     public void execute_someFieldsSpecified_success() {
         Patient targetPatient = model.getFilteredPatientList().get(0);
         model.accessPatient(targetPatient);
-        model.setActiveUser(new Doctor(new Name("John"), new Mcr("MP2819J")));
+        model.setActiveUser(Optional.of(new Doctor(new Name("John"), new Mcr("MP2819J"))));
 
         EditNoteCommand.EditNoteDescriptor descriptor = new EditNoteCommand.EditNoteDescriptor();
         descriptor.setContent(new Content("Patient has high fever."));
@@ -89,7 +90,7 @@ public class EditNoteCommandTest {
         String expectedMessage = String.format(EditNoteCommand.MESSAGE_EDIT_NOTE_SUCCESS, editedNote);
 
         Model expectedModel = new ModelManager(new MediBook(model.getMediBook()), new UserPrefs());
-        expectedModel.setActiveUser(new Doctor(new Name("John"), new Mcr("MP2819J")));
+        expectedModel.setActiveUser(Optional.of(new Doctor(new Name("John"), new Mcr("MP2819J"))));
         Patient expectedTargetPatient = expectedModel.getFilteredPatientList().get(0);
         expectedTargetPatient = new PatientBuilder(expectedTargetPatient).build();
         LinkedList<MedicalNote> expectedMedicalNoteLinkedList =
@@ -106,7 +107,7 @@ public class EditNoteCommandTest {
     public void execute_noFieldSpecified_success() {
         Patient targetPatient = model.getFilteredPatientList().get(0);
         model.accessPatient(targetPatient);
-        model.setActiveUser(new Doctor(new Name("John"), new Mcr("MP2819J")));
+        model.setActiveUser(Optional.of(new Doctor(new Name("John"), new Mcr("MP2819J"))));
 
         EditNoteCommand.EditNoteDescriptor descriptor = new EditNoteCommand.EditNoteDescriptor();
 
@@ -117,7 +118,7 @@ public class EditNoteCommandTest {
         String expectedMessage = String.format(EditNoteCommand.MESSAGE_EDIT_NOTE_SUCCESS, editedNote);
 
         Model expectedModel = new ModelManager(new MediBook(model.getMediBook()), new UserPrefs());
-        expectedModel.setActiveUser(new Doctor(new Name("John"), new Mcr("MP2819J")));
+        expectedModel.setActiveUser(Optional.of(new Doctor(new Name("John"), new Mcr("MP2819J"))));
         Patient expectedTargetPatient = expectedModel.getFilteredPatientList().get(0);
         expectedTargetPatient = new PatientBuilder(expectedTargetPatient).build();
         LinkedList<MedicalNote> expectedMedicalNoteLinkedList =
@@ -134,7 +135,7 @@ public class EditNoteCommandTest {
     public void execute_duplicateMedicalNote_failure() {
         Patient targetPatient = model.getFilteredPatientList().get(0);
         model.accessPatient(targetPatient);
-        model.setActiveUser(new Doctor(new Name("John"), new Mcr("MP2819J")));
+        model.setActiveUser(Optional.of(new Doctor(new Name("John"), new Mcr("MP2819J"))));
 
         EditNoteCommand.EditNoteDescriptor descriptor = new EditNoteCommand.EditNoteDescriptor();
         descriptor.setDate(new Date("25-08-2020", true));

@@ -85,7 +85,11 @@ public class EditNoteCommand extends Command {
         MedicalNote noteToEdit = displayedPatient.getMedicalNoteAtIndex(indexZeroBased);
         MedicalNote newMedicalNote = createEditedNote(noteToEdit, editNoteDescriptor);
 
-        if (!model.getActiveUser().equals(noteToEdit.doctor)) {
+        if (model.getActiveUser().isEmpty()) {
+            throw new CommandException("Current user cannot edit medical notes");
+        }
+
+        if (!model.getActiveUser().get().equals(noteToEdit.doctor)) {
             throw new CommandException("Can't edit other doctor's medical notes");
         }
 

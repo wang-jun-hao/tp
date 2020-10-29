@@ -81,10 +81,10 @@ public interface Context {
     /**
      * Sets the current user using MediBook.
      */
-    void setActiveUser(Doctor doctor);
+    void setActiveUser(Optional<Doctor> doctor);
 
     /**
      * Returns the doctor currently using the system.
      */
-    Doctor getActiveUser();
+    Optional<Doctor> getActiveUser();
 }

@@ -9,6 +9,8 @@ import static seedu.medibook.testutil.TypicalPatients.OUT_OF_RANGE_NOTE_INDEX;
 import static seedu.medibook.testutil.TypicalPatients.VALID_NOTE_INDEX;
 import static seedu.medibook.testutil.TypicalPatients.getTypicalMediBook;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.medibook.commons.core.Messages;
@@ -38,7 +40,7 @@ public class DeleteNoteCommandTest {
 
         model.accessPatient(targetPatient);
 
-        model.setActiveUser(medicalNoteToDelete.doctor);
+        model.setActiveUser(Optional.of(medicalNoteToDelete.doctor));
 
         String expectedMessage = String.format(DeleteNoteCommand.MESSAGE_DELETE_NOTE_SUCCESS, medicalNoteToDelete);
         ModelManager expectedModel = new ModelManager(model.getMediBook(), new UserPrefs());

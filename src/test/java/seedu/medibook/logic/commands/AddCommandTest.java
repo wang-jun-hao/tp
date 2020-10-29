@@ -222,13 +222,13 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setActiveUser(Doctor doctor) {
+        public void setActiveUser(Optional<Doctor> doctor) {
 
         }
 
         @Override
-        public Doctor getActiveUser() {
-            return null;
+        public Optional<Doctor> getActiveUser() {
+            return Optional.empty();
         }
     }
 

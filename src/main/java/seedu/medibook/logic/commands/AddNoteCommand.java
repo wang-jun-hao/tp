@@ -65,7 +65,11 @@ public class AddNoteCommand extends Command {
 
         assert model.hasPatient(displayedPatient) : "Patient in Context does not exist in model";
 
-        MedicalNote newMedicalNote = new MedicalNote(medicalNoteDate, model.getActiveUser(), medicalNoteContent);
+        if (model.getActiveUser().isEmpty()) {
+            throw new CommandException("Current user cannot add medical notes");
+        }
+
+        MedicalNote newMedicalNote = new MedicalNote(medicalNoteDate, model.getActiveUser().get(), medicalNoteContent);
 
         if (displayedPatient.alreadyHasMedicalNote(newMedicalNote)) {
             throw new CommandException(MESSAGE_DUPLICATE_NOTE);

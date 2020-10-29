@@ -206,12 +206,12 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setActiveUser(Doctor doctor) {
+    public void setActiveUser(Optional<Doctor> doctor) {
         context.setActiveUser(doctor);
     }
 
     @Override
-    public Doctor getActiveUser() {
+    public Optional<Doctor> getActiveUser() {
         return context.getActiveUser();
     }
 

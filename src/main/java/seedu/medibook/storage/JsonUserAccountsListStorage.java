@@ -12,6 +12,7 @@ import seedu.medibook.commons.exceptions.IllegalValueException;
 import seedu.medibook.commons.util.FileUtil;
 import seedu.medibook.commons.util.JsonUtil;
 import seedu.medibook.model.Account;
+import seedu.medibook.model.AdminAccount;
 import seedu.medibook.model.UserAccountsList;
 import seedu.medibook.model.commonfields.Name;
 import seedu.medibook.model.doctor.Doctor;
@@ -33,6 +34,9 @@ public class JsonUserAccountsListStorage implements UserAccountsListStorage {
     @Override
     public Optional<Account> login(String username, String password) throws DataConversionException,
             IllegalLoginException, IllegalValueException {
+        if (username.equals("admin") && password.equals("admin")) {
+            return Optional.of(new AdminAccount());
+        }
         Optional<JsonSerializableUserAccountsList> jsonUserAccountList = JsonUtil.readJsonFile(
                 filepath, JsonSerializableUserAccountsList.class);
         UserAccountsList accountsList;

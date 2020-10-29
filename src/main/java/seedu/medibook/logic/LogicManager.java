@@ -17,6 +17,7 @@ import seedu.medibook.logic.commands.exceptions.CommandException;
 import seedu.medibook.logic.parser.MediBookParser;
 import seedu.medibook.logic.parser.exceptions.ParseException;
 import seedu.medibook.model.Account;
+import seedu.medibook.model.AdminAccount;
 import seedu.medibook.model.Model;
 import seedu.medibook.model.ReadOnlyMediBook;
 import seedu.medibook.model.medicalnote.MedicalNoteList;
@@ -157,7 +158,11 @@ public class LogicManager implements Logic {
     public void processLoginInfo(String username, String password) throws DataConversionException,
             IllegalLoginException, IllegalValueException {
         Optional<Account> loginAccount = storage.login(username, password);
-        model.setActiveUser(loginAccount.get().getDoctor());
+        if (loginAccount.get() instanceof AdminAccount) {
+            model.setActiveUser(Optional.empty());
+        } else {
+            model.setActiveUser(Optional.of(loginAccount.get().getDoctor()));
+        }
     }
 
     @Override
