@@ -139,60 +139,61 @@ Accesses a specified patient's profile in MediBook.
 
 Adds a medical note to a patient.
 
-As a doctor, you can add a medical note to your patient when viewing his/her profile to keep track of consultations
+If you are a doctor, you can add a medical note to your patient when viewing his/her profile to keep track of consultations
 with your patients. MediBook will automatically add the medical note to the patient displayed on your screen.
 
 ####Format: 
 
-`addnote [d/DATE] n/YOUR_NAME m/YOUR_MCR c/CONTENT_OF_MEDICAL_NOTE`
+`addnote [d/DATE] c/CONTENT_OF_MEDICAL_NOTE`
 
 * You have to be on a patient's profile page to add a medical note. You can do this by first `find`-ing the patient by IC
 when on the main list and then `access`-ing the patient's index on the filtered list.
-* `MCR` refers to your medical registration number. It is in the format 'M@####$', where @ is a letter/digit, # is a digit and $ is a letter.
-* You do not need to include your title (Dr) in your name.
+* You have to be logged in as a Doctor.
+* MediBook will automatically set you as the author of the medical note.
 * For your convenience, the date field can be omitted. MediBook will automatically select today's date.
 * If you specify the date of the medical note, it cannot be in the future.
 
 ####Example:
 
-Context: while viewing the profile page of patient with IC 'S9123456A'
+Context: You are logged in as Dr John Doe (M06371K) and viewing the profile page of patient with IC 'S9123456A'
 
-* `addnote n/John Doe m/M06371K c/Patient complains of stomach ache and headache. No signs of fever. Prescribed painkillers and probiotics.`
+* `addnote c/Patient complains of stomach ache and headache. No signs of fever. Prescribed painkillers and probiotics.`
 
 Adds a medical note that is dated today, by Dr John Doe (M06371K) with content "Patient complains of stomach ache and headache. 
 No signs of fever. Prescribed painkillers and probiotics." to patient with IC 'S9123456A'.
 
 ### 3.9 Editing a medical note: `editnote`
 
-Edits the fields (Date, Name of Doctor, MCR of doctor or Content) of an existing medical note belonging to a patient.
+Edits the date and/or content of an existing medical note belonging to a patient, authored by you.
 
-As a doctor, you can edit the medical note belonging to your patient when viewing his/her profile. You may want to use this
-feature to correct any typos or update incorrect entries.
+If you are a doctor, you can edit the medical note belonging to your patient when viewing his/her profile. You may want to use this
+feature to correct any typos or update incorrect dates.
 
 ####Format: 
 
-`editnote INDEX [d/DATE] [n/YOUR_NAME] [m/YOUR_MCR] [c/CONTENT_OF_MEDICAL_NOTE]`
+`editnote INDEX [d/DATE] [c/CONTENT_OF_MEDICAL_NOTE]`
 
 * You have to be on a patient's profile page to edit a medical note. You can do this by first `find`-ing the patient by IC
 when on the main list and then `access`-ing the patient's index on the filtered list.
+* You can only edit notes that are authored by you.
 * `INDEX` refers to the index of the medical note displayed in the list of medical notes.
-* `MCR` refers to your medical registration number. It is in the format "M@####$", where @ is a letter/digit, # is a digit and $ is a letter.
 * If you change the date of the medical note, the new date cannot be in the future.
 
 ####Example:
 
-Context: while viewing the profile page of patient with IC 'S9123456A'
+Context: You are logged in as Dr John Doe (M06371K), viewing the profile page of patient with IC 'S9123456A' with 
+the medical note at index 1 authored by you.
 
 * `editnote 1 d/20-02-2018 c/Patient is having migraine.`
 
-Edits the medical note with index 1 in the displayed list of medical notes. The date of the medical note 
-is updated to `20-02-2018` and the content is updated to `Patient is having migraine.`
+Updates the date of the medical note with index 1 in the displayed list of medical notes 
+to '20-02-2018' and content to 'Patient is having migraine.'.
 
 ### 3.10 Deleting a medical note: `deletenote`
 
-Deletes a medical note belonging to a patient.
+Deletes a medical note belonging to a patient, authored by you.
 
-As a doctor, you can delete an existing medical note belong to your patient when viewing his/her profile.
+If you are a doctor, you can delete an existing medical note belonging to your patient when viewing his/her profile.
 
 ####Format: 
 
@@ -200,15 +201,17 @@ As a doctor, you can delete an existing medical note belong to your patient when
 
 * You have to be on a patient's profile page to delete a medical note. You can do this by first `find`-ing the patient by IC
 when on the main list and then `access`-ing the patient's index on the filtered list.
+* You can only delete notes that are authored by you.
 * `INDEX` refers to the index of the medical note displayed in the list of medical notes.
 
 ####Example:
 
-Context: while viewing the profile page of patient with IC `S9123456A`
+Context: You are logged in as Dr John Doe (M06371K), viewing the profile page of patient with IC 'S9123456A' with 
+the medical note at index 1 authored by you.
 
 * `deletenote 1`
 
-Deletes the medical note with index 1 in the displayed list of medical notes.
+Deletes the medical note with index 1 in the displayed list of medical notes belonging to patient with IC 'S9123456A'.
 
 ### 3.11 Exiting the program : `exit`
 
@@ -241,7 +244,7 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 1`
 **Find** | `find [i/IC] [n/NAME] [d/DATE_OF_BIRTH] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE]`<br> e.g., <br> `find i/G1234567S`<br>`find n/Jack i/T00 dob/2000 h/17 a/Changi`
 **Access** | `access INDEX` <br> e.g., `access 1`
-**Add Note** | `addnote [d/DATE] n/YOUR_NAME m/YOUR_MCR c/CONTENT_OF_MEDICAL_NOTE` <br> e.g. `addnote n/John Doe m/M06371K c/Patient is having fever. Prescribed panadol.`
-**Edit Note** | `editnote INDEX [d/DATE] [n/YOUR_NAME] [m/YOUR_MCR] [c/CONTENT_OF_MEDICAL_NOTE]` <br> e.g. `editnote 1 d/20-02-2018 c/Patient is having migraine.`
+**Add Note** | `addnote [d/DATE] c/CONTENT_OF_MEDICAL_NOTE` <br> e.g. `addnote c/Patient is having fever. Prescribed panadol.`
+**Edit Note** | `editnote INDEX [d/DATE] [c/CONTENT_OF_MEDICAL_NOTE]` <br> e.g. `editnote 1 d/20-02-2018 c/Patient is having migraine.`
 **Delete Note** | `deletenote INDEX` <br> e.g. `deletenote 1`
 **Exit** | `exit`
