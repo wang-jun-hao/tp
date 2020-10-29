@@ -7,7 +7,12 @@ title: User Guide
 {:toc}
 
 ## 1. Introduction
-MediBook is a **desktop app for managing patient details, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MediBook can get your patient management tasks done faster than traditional methods.
+MediBook is a **desktop medical records software targeting doctors and administrative staffs in clinics or hospitals to 
+help manage patient details.** It is **optimized for use via a Command Line Interface** (CLI) while 
+still having the benefits of a Graphical User Interface (GUI). If you can type fast, MediBook can get your patient 
+details management tasks done faster than traditional methods.
+
+This user guide helps you get familiar with its features and get started with using MediBook.
 
 --------------------------------------------------------------------------------------------------------------------
 
