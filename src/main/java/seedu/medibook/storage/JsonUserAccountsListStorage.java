@@ -56,7 +56,7 @@ public class JsonUserAccountsListStorage implements UserAccountsListStorage {
     @Override
     public void createAccount(String username, String password, String doctorName, String doctorMcr) throws
             DataConversionException, IOException, IllegalValueException {
-        FileUtil.createIfMissing(filepath);
+
         requireNonNull(doctorName);
         requireNonNull(doctorMcr);
         if (!Name.isValidName(doctorName)) {
@@ -76,20 +76,30 @@ public class JsonUserAccountsListStorage implements UserAccountsListStorage {
         }
 
         Account newAccount = new Account(username, password, new Doctor(new Name(doctorName), new Mcr(doctorMcr)));
-        JsonSerializableUserAccountsList jsonUserAccountList = JsonUtil.readJsonFile(
-                filepath, JsonSerializableUserAccountsList.class).get();
-        UserAccountsList accountsList = jsonUserAccountList.toModelType();
 
-        if (accountsList.usernameExists(newAccount)) {
-            throw new IllegalValueException("Username already exists");
+        if (FileUtil.isFileExists(filepath)) {
+            JsonSerializableUserAccountsList jsonUserAccountList = JsonUtil.readJsonFile(
+                    filepath, JsonSerializableUserAccountsList.class).get();
+            UserAccountsList accountsList = jsonUserAccountList.toModelType();
+
+            if (accountsList.usernameExists(newAccount)) {
+                throw new IllegalValueException("Username already exists");
+            }
+
+            if (accountsList.mcrExists(newAccount)) {
+                throw new IllegalValueException("This MCR already has an account");
+            }
+            accountsList.addAccount(newAccount);
+            jsonUserAccountList = new JsonSerializableUserAccountsList(accountsList);
+            JsonUtil.saveJsonFile(jsonUserAccountList, filepath);
+
+        } else {
+            FileUtil.createFile(filepath);
+            UserAccountsList newAccountsList = new UserAccountsList();
+            newAccountsList.addAccount(newAccount);
+            JsonSerializableUserAccountsList newJsonUserAccountList =
+                    new JsonSerializableUserAccountsList(newAccountsList);
+            JsonUtil.saveJsonFile(newJsonUserAccountList, filepath);
         }
-
-        if (accountsList.mcrExists(newAccount)) {
-            throw new IllegalValueException("This MCR already has an account");
-        }
-        accountsList.addAccount(newAccount);
-        jsonUserAccountList = new JsonSerializableUserAccountsList(accountsList);
-        JsonUtil.saveJsonFile(jsonUserAccountList, filepath);
-
     }
 }

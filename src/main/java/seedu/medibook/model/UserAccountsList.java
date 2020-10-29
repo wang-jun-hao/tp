@@ -48,7 +48,7 @@ public class UserAccountsList {
     public boolean mcrExists(Account newAccount) {
         boolean result = false;
         for (Account account : accountsList) {
-            if (newAccount.getDoctor().getMcr().equals(newAccount.getDoctor().getMcr())) {
+            if (newAccount.getDoctor().getMcr().equals(account.getDoctor().getMcr())) {
                 result = true;
             }
         }
