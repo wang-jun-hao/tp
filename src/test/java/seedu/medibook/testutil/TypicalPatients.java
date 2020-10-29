@@ -2,8 +2,12 @@ package seedu.medibook.testutil;
 
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.medibook.logic.commands.CommandTestUtil.VALID_ALLERGY_PENICILLIN;
+import static seedu.medibook.logic.commands.CommandTestUtil.VALID_ALLERGY_SHELLFISH;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_BLOOD_TYPE_AMY;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_BLOOD_TYPE_BOB;
+import static seedu.medibook.logic.commands.CommandTestUtil.VALID_CONDITION_BACK;
+import static seedu.medibook.logic.commands.CommandTestUtil.VALID_CONDITION_DIABETES;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_DOB_AMY;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_DOB_BOB;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
@@ -16,8 +20,8 @@ import static seedu.medibook.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.medibook.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.medibook.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.medibook.logic.commands.CommandTestUtil.VALID_TREATMENT_PARACETAMOL;
+import static seedu.medibook.logic.commands.CommandTestUtil.VALID_TREATMENT_PHYSIOTHERAPY;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_WEIGHT_AMY;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_WEIGHT_BOB;
 
@@ -54,7 +58,8 @@ public class TypicalPatients {
     public static final Patient ALICE = new PatientBuilder().withIc("S9777777R").withName("Alice Pauline")
             .withDateOfBirth("15-09-1997").withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withHeight("174").withWeight("48.5").withBloodType("A+")
-            .withTags("friends").withMedicalNoteList(ALICE_MEDICAL_NOTE_LIST).build();
+            .withAllergies("cat fur (Fel d 1)").withConditions().withTreatments("antihistamines")
+            .withMedicalNoteList(ALICE_MEDICAL_NOTE_LIST).build();
 
     public static final MedicalNoteList BENSON_MEDICAL_NOTE_LIST = new MedicalNoteList();
     public static final MedicalNote BENSON_MEDICAL_NOTE_1 = new MedicalNote(new Date("14-04-2020", true),
@@ -70,8 +75,8 @@ public class TypicalPatients {
     public static final Patient BENSON = new PatientBuilder().withIc("S9234567A").withName("Benson Meier")
             .withDateOfBirth("01-03-1992").withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432").withHeight("170").withWeight("63.5")
-            .withBloodType("AB+").withTags("owesMoney", "friends")
-            .withMedicalNoteList(BENSON_MEDICAL_NOTE_LIST).build();
+            .withBloodType("AB+").withAllergies("peanut").withConditions("back pain")
+            .withTreatments("epinephrine", "Paracetamol").withMedicalNoteList(BENSON_MEDICAL_NOTE_LIST).build();
 
     public static final MedicalNoteList CARL_MEDICAL_NOTE_LIST = new MedicalNoteList();
     public static final MedicalNote CARL_MEDICAL_NOTE_1 = new MedicalNote(new Date("02-05-2020", true),
@@ -102,8 +107,8 @@ public class TypicalPatients {
     }
     public static final Patient DANIEL = new PatientBuilder().withIc("T0054321P").withName("Daniel Meier")
             .withDateOfBirth("10-10-2000").withPhone("87652533").withEmail("cornelia@example.com")
-            .withAddress("10th street").withHeight("183").withWeight("70.3").withBloodType("A-")
-            .withTags("friends").withMedicalNoteList(DANIEL_MEDICAL_NOTE_LIST).build();
+            .withAddress("10th street").withHeight("183").withWeight("70.3").withBloodType("A-").withConditions("fever")
+            .withTreatments("Ibuprofen").withMedicalNoteList(DANIEL_MEDICAL_NOTE_LIST).build();
 
     public static final MedicalNoteList ELLE_MEDICAL_NOTE_LIST = new MedicalNoteList();
     public static final MedicalNote ELLE_MEDICAL_NOTE_1 = new MedicalNote(new Date("19-02-2020", true),
@@ -165,11 +170,14 @@ public class TypicalPatients {
     public static final Patient AMY = new PatientBuilder().withIc(VALID_IC_AMY).withName(VALID_NAME_AMY)
             .withDateOfBirth(VALID_DOB_AMY).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
             .withAddress(VALID_ADDRESS_AMY).withHeight(VALID_HEIGHT_AMY).withWeight(VALID_WEIGHT_AMY)
-            .withBloodType(VALID_BLOOD_TYPE_AMY).withTags(VALID_TAG_FRIEND).build();
+            .withBloodType(VALID_BLOOD_TYPE_AMY).withTreatments(VALID_TREATMENT_PARACETAMOL)
+            .withAllergies(VALID_ALLERGY_PENICILLIN).withConditions(VALID_CONDITION_DIABETES).build();
     public static final Patient BOB = new PatientBuilder().withIc(VALID_IC_BOB).withName(VALID_NAME_BOB)
             .withDateOfBirth(VALID_DOB_BOB).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
             .withAddress(VALID_ADDRESS_BOB).withHeight(VALID_HEIGHT_BOB).withWeight(VALID_WEIGHT_BOB)
-            .withBloodType(VALID_BLOOD_TYPE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            .withBloodType(VALID_BLOOD_TYPE_BOB).withAllergies(VALID_ALLERGY_PENICILLIN, VALID_ALLERGY_SHELLFISH)
+            .withConditions(VALID_CONDITION_BACK, VALID_CONDITION_DIABETES)
+            .withTreatments(VALID_TREATMENT_PHYSIOTHERAPY, VALID_TREATMENT_PARACETAMOL).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
     public static final int VALID_NOTE_INDEX = 2;
