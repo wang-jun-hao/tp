@@ -77,7 +77,7 @@ public class CreateAccountWindow extends UiPart<Stage> {
     @FXML
     private StackPane resultDisplayPlaceholder;
 
-    private Image logoImage = new Image(this.getClass().getResourceAsStream("/images/placeholder.png"));
+    private Image logoImage = new Image(this.getClass().getResourceAsStream("/images/logo.png"));
     /**
      * Creates a {@code LoginWindow} with the given {@code Stage} and {@code Logic}.
      */

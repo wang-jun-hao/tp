@@ -45,7 +45,7 @@
                <children>
                   <BorderPane>
                      <center>
-                        <ImageView fx:id="logo" fitHeight="150.0" fitWidth="195.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="logo" fitHeight="200.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" />
                      </center>
                   </BorderPane>
                   <Label fx:id="username" styleClass="label-header" text="Username" />
