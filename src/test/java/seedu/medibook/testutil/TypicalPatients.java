@@ -60,6 +60,7 @@ public class TypicalPatients {
             .withPhone("94351253").withHeight("174").withWeight("48.5").withBloodType("A+")
             .withAllergies("cat fur (Fel d 1)").withConditions("Migraine").withTreatments("Ibuprofen")
             .withMedicalNoteList(ALICE_MEDICAL_NOTE_LIST).build();
+    public static final int ALICE_NUM_OF_MEDICAL_NOTES = 2;
 
     public static final MedicalNoteList BENSON_MEDICAL_NOTE_LIST = new MedicalNoteList();
     public static final MedicalNote BENSON_MEDICAL_NOTE_1 = new MedicalNote(new Date("14-04-2020", true),
