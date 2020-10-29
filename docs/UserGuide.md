@@ -53,6 +53,8 @@ When creating your new account, fill in your desired `username`, `password`, you
 *`username` and `password` need to be at least 5 characters long.
 * `MCR` has to be of the format 'M@####$', where @ is a letter/digit, # is a digit and $ is a letter.
 
+You can also login as an administrative staff using the username: `admin` and password: `admin`. As an administrative staff, you can only add, edit, delete and find patients. You are unable to add, edit or delete medical notes.
+
 ### 3.2 Viewing help : `help`
 
 Shows a message explaining how to access the help page.
