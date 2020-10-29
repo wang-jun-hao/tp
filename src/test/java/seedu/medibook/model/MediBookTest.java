@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_HEIGHT_BOB;
-import static seedu.medibook.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.medibook.logic.commands.CommandTestUtil.VALID_TREATMENT_PHYSIOTHERAPY;
 import static seedu.medibook.testutil.Assert.assertThrows;
 import static seedu.medibook.testutil.TypicalPatients.ALICE;
 import static seedu.medibook.testutil.TypicalPatients.getTypicalMediBook;
@@ -47,8 +47,8 @@ public class MediBookTest {
     @Test
     public void resetData_withDuplicatePatients_throwsDuplicatePatientException() {
         // Two patients with the same identity fields
-        Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .withHeight(VALID_HEIGHT_BOB).build();
+        Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+                .withTreatments(VALID_TREATMENT_PHYSIOTHERAPY).withHeight(VALID_HEIGHT_BOB).build();
         List<Patient> newPatients = Arrays.asList(ALICE, editedAlice);
         MediBookStub newData = new MediBookStub(newPatients);
 
@@ -74,8 +74,8 @@ public class MediBookTest {
     @Test
     public void hasPatient_patientWithSameIdentityFieldsInMediBook_returnsTrue() {
         mediBook.addPatient(ALICE);
-        Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+                .withTreatments(VALID_TREATMENT_PHYSIOTHERAPY).build();
         assertTrue(mediBook.hasPatient(editedAlice));
     }
 

@@ -3,8 +3,12 @@ package seedu.medibook.logic.parser;
 import static seedu.medibook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.medibook.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.medibook.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.medibook.logic.commands.CommandTestUtil.ALLERGY_DESC_PENICILLIN;
+import static seedu.medibook.logic.commands.CommandTestUtil.ALLERGY_DESC_SHELLFISH;
 import static seedu.medibook.logic.commands.CommandTestUtil.BLOOD_TYPE_DESC_AMY;
 import static seedu.medibook.logic.commands.CommandTestUtil.BLOOD_TYPE_DESC_BOB;
+import static seedu.medibook.logic.commands.CommandTestUtil.CONDITION_DESC_BACK;
+import static seedu.medibook.logic.commands.CommandTestUtil.CONDITION_DESC_DIABETES;
 import static seedu.medibook.logic.commands.CommandTestUtil.DOB_DESC_AMY;
 import static seedu.medibook.logic.commands.CommandTestUtil.DOB_DESC_BOB;
 import static seedu.medibook.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -14,24 +18,30 @@ import static seedu.medibook.logic.commands.CommandTestUtil.HEIGHT_DESC_BOB;
 import static seedu.medibook.logic.commands.CommandTestUtil.IC_DESC_AMY;
 import static seedu.medibook.logic.commands.CommandTestUtil.IC_DESC_BOB;
 import static seedu.medibook.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.medibook.logic.commands.CommandTestUtil.INVALID_ALLERGY_DESC;
 import static seedu.medibook.logic.commands.CommandTestUtil.INVALID_BLOOD_TYPE_DESC;
+import static seedu.medibook.logic.commands.CommandTestUtil.INVALID_CONDITION_DESC;
 import static seedu.medibook.logic.commands.CommandTestUtil.INVALID_DOB_DESC;
 import static seedu.medibook.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.medibook.logic.commands.CommandTestUtil.INVALID_HEIGHT_DESC;
 import static seedu.medibook.logic.commands.CommandTestUtil.INVALID_IC_DESC;
 import static seedu.medibook.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.medibook.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.medibook.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.medibook.logic.commands.CommandTestUtil.INVALID_TREATMENT_DESC;
 import static seedu.medibook.logic.commands.CommandTestUtil.INVALID_WEIGHT_DESC;
 import static seedu.medibook.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.medibook.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.medibook.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.medibook.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.medibook.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.medibook.logic.commands.CommandTestUtil.TREATMENT_DESC_PARACETAMOL;
+import static seedu.medibook.logic.commands.CommandTestUtil.TREATMENT_DESC_PHYSIOTHERAPY;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.medibook.logic.commands.CommandTestUtil.VALID_ALLERGY_PENICILLIN;
+import static seedu.medibook.logic.commands.CommandTestUtil.VALID_ALLERGY_SHELLFISH;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_BLOOD_TYPE_AMY;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_BLOOD_TYPE_BOB;
+import static seedu.medibook.logic.commands.CommandTestUtil.VALID_CONDITION_BACK;
+import static seedu.medibook.logic.commands.CommandTestUtil.VALID_CONDITION_DIABETES;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_DOB_AMY;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_DOB_BOB;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
@@ -43,13 +53,15 @@ import static seedu.medibook.logic.commands.CommandTestUtil.VALID_IC_BOB;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.medibook.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.medibook.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.medibook.logic.commands.CommandTestUtil.VALID_TREATMENT_PARACETAMOL;
+import static seedu.medibook.logic.commands.CommandTestUtil.VALID_TREATMENT_PHYSIOTHERAPY;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_WEIGHT_AMY;
 import static seedu.medibook.logic.commands.CommandTestUtil.VALID_WEIGHT_BOB;
 import static seedu.medibook.logic.commands.CommandTestUtil.WEIGHT_DESC_AMY;
 import static seedu.medibook.logic.commands.CommandTestUtil.WEIGHT_DESC_BOB;
-import static seedu.medibook.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_ALLERGY;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_CONDITION;
+import static seedu.medibook.logic.parser.CliSyntax.PREFIX_TREATMENT;
 import static seedu.medibook.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.medibook.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.medibook.testutil.TypicalIndexes.INDEX_FIRST;
@@ -62,6 +74,7 @@ import seedu.medibook.commons.core.index.Index;
 import seedu.medibook.logic.commands.EditCommand;
 import seedu.medibook.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.medibook.model.commonfields.Name;
+import seedu.medibook.model.medicaldetail.Tag;
 import seedu.medibook.model.patient.Address;
 import seedu.medibook.model.patient.BloodType;
 import seedu.medibook.model.patient.DateOfBirth;
@@ -70,12 +83,13 @@ import seedu.medibook.model.patient.Height;
 import seedu.medibook.model.patient.Ic;
 import seedu.medibook.model.patient.Phone;
 import seedu.medibook.model.patient.Weight;
-import seedu.medibook.model.tag.Tag;
 import seedu.medibook.testutil.EditPatientDescriptorBuilder;
 
 public class EditCommandParserTest {
 
-    private static final String TAG_EMPTY = " " + PREFIX_TAG;
+    private static final String ALLERGY_EMPTY = " " + PREFIX_ALLERGY;
+    private static final String CONDITION_EMPTY = " " + PREFIX_CONDITION;
+    private static final String TREATMENT_EMPTY = " " + PREFIX_TREATMENT;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
@@ -122,7 +136,9 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_WEIGHT_DESC, Weight.MESSAGE_CONSTRAINTS); // invalid weight
         // invalid blood type
         assertParseFailure(parser, "1" + INVALID_BLOOD_TYPE_DESC, BloodType.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
+        assertParseFailure(parser, "1" + INVALID_ALLERGY_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid allergy
+        assertParseFailure(parser, "1" + INVALID_CONDITION_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid condition
+        assertParseFailure(parser, "1" + INVALID_TREATMENT_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid treatment
 
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
@@ -131,11 +147,32 @@ public class EditCommandParserTest {
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
         assertParseFailure(parser, "1" + PHONE_DESC_BOB + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
 
-        // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Patient} being edited,
-        // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
+        // while parsing {@code PREFIX_ALLERGY} alone will reset the allergies of the {@code Patient} being edited,
+        // parsing it together with a valid allergy results in error
+        assertParseFailure(parser, "1" + ALLERGY_DESC_PENICILLIN + ALLERGY_DESC_SHELLFISH
+                + ALLERGY_EMPTY, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + ALLERGY_DESC_PENICILLIN + ALLERGY_EMPTY
+                + ALLERGY_DESC_SHELLFISH, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + ALLERGY_EMPTY + ALLERGY_DESC_PENICILLIN
+                + ALLERGY_DESC_SHELLFISH, Tag.MESSAGE_CONSTRAINTS);
+
+        // while parsing {@code PREFIX_CONDITION} alone will reset the conditions of the {@code Patient} being edited,
+        // parsing it together with a valid condition results in error
+        assertParseFailure(parser, "1" + CONDITION_DESC_BACK + CONDITION_DESC_DIABETES
+                + CONDITION_EMPTY, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + CONDITION_DESC_BACK + CONDITION_EMPTY
+                + CONDITION_DESC_DIABETES, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + CONDITION_EMPTY + CONDITION_DESC_BACK
+                + CONDITION_DESC_DIABETES, Tag.MESSAGE_CONSTRAINTS);
+
+        // while parsing {@code PREFIX_TREATMENT} alone will reset the treatments of the {@code Patient} being edited,
+        // parsing it together with a valid treatment results in error
+        assertParseFailure(parser, "1" + TREATMENT_DESC_PARACETAMOL + TREATMENT_DESC_PHYSIOTHERAPY
+                + TREATMENT_EMPTY, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TREATMENT_DESC_PARACETAMOL + TREATMENT_EMPTY
+                + TREATMENT_DESC_PHYSIOTHERAPY, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TREATMENT_EMPTY + TREATMENT_DESC_PARACETAMOL
+                + TREATMENT_DESC_PHYSIOTHERAPY, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser,
@@ -147,15 +184,18 @@ public class EditCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND;
-        String userInput = targetIndex.getOneBased() + IC_DESC_AMY + PHONE_DESC_BOB + TAG_DESC_HUSBAND
-                + DOB_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + HEIGHT_DESC_AMY + WEIGHT_DESC_AMY
-                + BLOOD_TYPE_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
+        String userInput = targetIndex.getOneBased() + IC_DESC_AMY + PHONE_DESC_BOB + TREATMENT_DESC_PHYSIOTHERAPY
+                + DOB_DESC_AMY + EMAIL_DESC_AMY + ALLERGY_DESC_SHELLFISH + ADDRESS_DESC_AMY + HEIGHT_DESC_AMY
+                + WEIGHT_DESC_AMY + CONDITION_DESC_BACK + BLOOD_TYPE_DESC_AMY + NAME_DESC_AMY + ALLERGY_DESC_PENICILLIN
+                + CONDITION_DESC_DIABETES + TREATMENT_DESC_PARACETAMOL;
 
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withIc(VALID_IC_AMY)
                 .withName(VALID_NAME_AMY).withDateOfBirth(VALID_DOB_AMY).withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withHeight(VALID_HEIGHT_AMY)
                 .withWeight(VALID_WEIGHT_AMY).withBloodType(VALID_BLOOD_TYPE_AMY)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withAllergies(VALID_ALLERGY_SHELLFISH, VALID_ALLERGY_PENICILLIN)
+                .withConditions(VALID_CONDITION_BACK, VALID_CONDITION_DIABETES)
+                .withTreatments(VALID_TREATMENT_PHYSIOTHERAPY, VALID_TREATMENT_PARACETAMOL).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -230,9 +270,21 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // tags
-        userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
-        descriptor = new EditPatientDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
+        // allergies
+        userInput = targetIndex.getOneBased() + ALLERGY_DESC_PENICILLIN;
+        descriptor = new EditPatientDescriptorBuilder().withAllergies(VALID_ALLERGY_PENICILLIN).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // conditions
+        userInput = targetIndex.getOneBased() + CONDITION_DESC_BACK;
+        descriptor = new EditPatientDescriptorBuilder().withConditions(VALID_CONDITION_BACK).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // treatments
+        userInput = targetIndex.getOneBased() + TREATMENT_DESC_PARACETAMOL;
+        descriptor = new EditPatientDescriptorBuilder().withTreatments(VALID_TREATMENT_PARACETAMOL).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -241,15 +293,18 @@ public class EditCommandParserTest {
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + IC_DESC_AMY + DOB_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY
-                + EMAIL_DESC_AMY + HEIGHT_DESC_AMY + WEIGHT_DESC_AMY + BLOOD_TYPE_DESC_AMY + TAG_DESC_FRIEND
-                + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND + IC_DESC_BOB + PHONE_DESC_BOB
+                + EMAIL_DESC_AMY + HEIGHT_DESC_AMY + WEIGHT_DESC_AMY + BLOOD_TYPE_DESC_AMY + TREATMENT_DESC_PARACETAMOL
+                + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TREATMENT_DESC_PARACETAMOL + IC_DESC_BOB
+                + PHONE_DESC_BOB + CONDITION_DESC_BACK + ALLERGY_DESC_SHELLFISH + CONDITION_DESC_DIABETES
                 + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + DOB_DESC_BOB + HEIGHT_DESC_BOB + WEIGHT_DESC_BOB
-                + BLOOD_TYPE_DESC_BOB + TAG_DESC_HUSBAND;
+                + BLOOD_TYPE_DESC_BOB + ALLERGY_DESC_SHELLFISH + TREATMENT_DESC_PHYSIOTHERAPY + ALLERGY_DESC_PENICILLIN;
 
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withIc(VALID_IC_BOB)
                 .withDateOfBirth(VALID_DOB_BOB).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withHeight(VALID_HEIGHT_BOB).withWeight(VALID_WEIGHT_BOB)
-                .withBloodType(VALID_BLOOD_TYPE_BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
+                .withBloodType(VALID_BLOOD_TYPE_BOB).withAllergies(VALID_ALLERGY_PENICILLIN, VALID_ALLERGY_SHELLFISH)
+                .withConditions(VALID_CONDITION_BACK, VALID_CONDITION_DIABETES)
+                .withTreatments(VALID_TREATMENT_PARACETAMOL, VALID_TREATMENT_PHYSIOTHERAPY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -275,13 +330,25 @@ public class EditCommandParserTest {
     }
 
     @Test
-    public void parse_resetTags_success() {
+    public void parse_resetMedicalDetails_success() {
         Index targetIndex = INDEX_THIRD;
-        String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
-        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withTags().build();
+        // allergies
+        String userInput = targetIndex.getOneBased() + ALLERGY_EMPTY;
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withAllergies().build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
 
+        // conditions
+        userInput = targetIndex.getOneBased() + CONDITION_EMPTY;
+        descriptor = new EditPatientDescriptorBuilder().withConditions().build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // treatments
+        userInput = targetIndex.getOneBased() + TREATMENT_EMPTY;
+        descriptor = new EditPatientDescriptorBuilder().withTreatments().build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 }

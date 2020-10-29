@@ -1,10 +1,14 @@
 package seedu.medibook.logic;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.medibook.commons.core.GuiSettings;
+import seedu.medibook.commons.exceptions.DataConversionException;
+import seedu.medibook.commons.exceptions.IllegalLoginException;
+import seedu.medibook.commons.exceptions.IllegalValueException;
 import seedu.medibook.logic.commands.CommandResult;
 import seedu.medibook.logic.commands.exceptions.CommandException;
 import seedu.medibook.logic.parser.exceptions.ParseException;
@@ -57,5 +61,12 @@ public interface Logic {
     /**
      * Checks if the input username and password match any of the accounts saved.
      */
-    void processLoginInfo(String username, String password);
+    void processLoginInfo(String username, String password) throws DataConversionException, IllegalLoginException,
+            IllegalValueException;
+
+    /**
+     * Creates a new account with declared username, password, doctor's name and doctor's mcr.
+     */
+    void createAccount(String username, String password, String doctorName, String doctorMcr) throws
+            IllegalValueException, DataConversionException, IOException;
 }
