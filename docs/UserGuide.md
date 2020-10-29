@@ -19,8 +19,9 @@ MediBook is a **desktop app for managing patient details, optimized for use via 
 2. Download the latest medibook.jar from https://github.com/AY2021S1-CS2103T-F13-3/tp/releases.
 3. Copy the file to the folder you want to use as the home folder for your MediBook.
 4. Double-click the file to start the app.
-5. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.
-6. Refer to the Features below for details on each command.
+5. Input login info if you have if not, click the create account button and create a new account.
+6. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.
+7. Refer to the Features below for details on each command.
 
 ---------------------------------------------------------------------------------------------------------------
 
@@ -42,19 +43,26 @@ MediBook is a **desktop app for managing patient details, optimized for use via 
 
 </div>
 
-### 3.1 Viewing help : `help`
+### 3.1 Login and Create Account
 
-Shows a message explaning how to access the help page.
+Type in your `username` and `password` to login to the system. If you do not have a `username` and `password`, pick the
+`create account` option, which would let you create a new account.
+
+When creating your new account, fill in your desired `username`, `password`, your `name` and your `MCR`, then click create.
+
+### 3.2 Viewing help : `help`
+
+Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### 3.2 Listing all patients: `list`
+### 3.3 Listing all patients: `list`
 
 Shows a list of all patient's records in the system.
 
 Format: `list`
 
-### 3.3 Adding a patient: `add`
+### 3.4 Adding a patient: `add`
 
 Adds a patient to the system.
 
@@ -70,7 +78,7 @@ Example:
 
 `add i/T0123456Q n/Divakar d/29-02-2000 p/91234567 e/divakarmal@medibook.com a/NUS, Kent Ridge Drive h/178 w/75 b/O+`
 
-### 3.4 Editing a patient: `edit`
+### 3.5 Editing a patient: `edit`
 
 Edits the specified patient's information from MediBook.
 
@@ -89,7 +97,7 @@ Example:
 
 `edit 3 n/Divakar p/91111111 h/201` edits the name, phone number and height of patient with index `3` in the displayed list to `Divakar`, `91111111` and `201`cm  respectively.
 
-### 3.5 Deleting a patient : `delete`
+### 3.6 Deleting a patient : `delete`
 
 Deletes the specified patient from MediBook.
 
@@ -98,7 +106,7 @@ Format: `delete <index>`
 Examples:
 * `delete 1` deletes the patient with index `1` in the displayed list
 
-### 3.6 Finding a patient by IC: `find`
+### 3.7 Finding a patient by IC: `find`
 
 Finds patient records by multiple fields and multiple keywords.
 
@@ -114,7 +122,7 @@ Examples:
 * `find i/S9123456A` returns the patient record with IC `S9123456A`
 * `find n/Billy Alice a/Clementi i/S99` returns the patient records with Name containing `Billy` or `Alice`, Address containing `Clementi` and IC containing `S99`
 
-### 3.7 Accessing a patient's profile : `access`
+### 3.8 Accessing a patient's profile : `access`
 
 Accesses a specified patient's profile in MediBook.
 
@@ -126,7 +134,7 @@ Format: `access <index>`
     * Medical Details section (bottom left): Shows medical details as tags separated into 3 categories (to be implemented), namely: Allergies, (ongoing) Treatments and (preexisting) Conditions.
     * Medical Notes section (right): A scrollable panel showing the list of medical notes recorded for the specified patient.
 
-### 3.8 Adding a medical note: `note`
+### 3.9 Adding a medical note: `note`
 
 Adds a medical note to a patient.
 
@@ -149,13 +157,13 @@ Context: while viewing the profile page of patient with IC `S9123456A`
 Adds a medical note that is dated today, by Dr John Doe with content "Patient complains of stomach ache and headache. 
 No signs of fever. Prescribed painkillers and probiotics." to patient with IC S9123456A
 
-### 3.9 Exiting the program : `exit`
+### 3.10 Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### 3.10 Saving the data
+### 3.11 Saving the data
 
 Patient records are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
