@@ -1,6 +1,7 @@
 package seedu.medibook.ui.patientprofile;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -53,6 +54,7 @@ public class PatientChartCard extends UiPart<Region> {
         weightChart.setTitle("Weight Chart");
         heightChart.setTitle("Height Chart");
         bmiChart.setTitle("BMI Chart");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy");
 
         XYChart.Series<String, Number> weightSeries = new XYChart.Series<>();
         weightSeries.setName("weight records");
@@ -90,14 +92,14 @@ public class PatientChartCard extends UiPart<Region> {
             LocalDate endWeightDate = dateListWeight.get(dateListWeight.size() - 1).getLocalDate();
             ObservableList<String> allDatesWeight = FXCollections.observableArrayList();
             while (!startWeightDate.isAfter(endWeightDate)) {
-                allDatesWeight.add(startWeightDate.toString());
+                allDatesWeight.add(formatter.format(startWeightDate));
                 startWeightDate = startWeightDate.plusDays(1);
             }
 
             xAxisWeight.setCategories(allDatesWeight);
 
             for (int i = 0; i < weights.length; i++) {
-                String date = dateListWeight.get(i).getLocalDate().toString();
+                String date = formatter.format(dateListWeight.get(i).getLocalDate());
                 Double plot = weightRecord.get(dateListWeight.get(i)).getNumericValue();
                 stringWeightMap.put(date, plot);
                 weightSeries.getData().add(new XYChart.Data(date, plot));
@@ -125,14 +127,14 @@ public class PatientChartCard extends UiPart<Region> {
             LocalDate endHeightDate = dateListHeight.get(dateListHeight.size() - 1).getLocalDate();
             ObservableList<String> allDatesHeight = FXCollections.observableArrayList();
             while (!startHeightDate.isAfter(endHeightDate)) {
-                allDatesHeight.add(startHeightDate.toString());
+                allDatesHeight.add(formatter.format(startHeightDate));
                 startHeightDate = startHeightDate.plusDays(1);
             }
 
             xAxisHeight.setCategories(allDatesHeight);
 
             for (int i = 0; i < heights.length; i++) {
-                String date = dateListHeight.get(i).getLocalDate().toString();
+                String date = formatter.format(dateListHeight.get(i).getLocalDate());
                 int plot = heightRecord.get(dateListHeight.get(i)).getNumericValue();
                 stringHeightMap.put(date, plot);
                 heightSeries.getData().add(new XYChart.Data(date, plot));
@@ -166,7 +168,7 @@ public class PatientChartCard extends UiPart<Region> {
 
             ObservableList<String> allDatesBmi = FXCollections.observableArrayList();
             while (!startBmiDate.isAfter(endBmiDate)) {
-                allDatesBmi.add(startBmiDate.toString());
+                allDatesBmi.add(formatter.format(startBmiDate));
                 startBmiDate = startBmiDate.plusDays(1);
             }
 
