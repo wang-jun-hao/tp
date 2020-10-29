@@ -42,6 +42,8 @@ public class PatientProfile extends UiPart<Region> {
 
         PatientChartCard patientChartCard = new PatientChartCard(patient);
         this.patientChartCard.getChildren().add(patientChartCard.getRoot());
+        patientChartCard.getRoot().prefHeightProperty().bind(this.patientChartCard.heightProperty());
+        patientChartCard.getRoot().prefWidthProperty().bind(this.patientChartCard.widthProperty());
     }
 
     @Override
