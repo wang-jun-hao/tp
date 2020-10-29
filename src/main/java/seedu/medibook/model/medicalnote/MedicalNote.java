@@ -55,8 +55,8 @@ public class MedicalNote {
         return date.inputValue;
     }
 
-    public String getDisplayDoctorName() {
-        return doctor.getDisplayStringName();
+    public String getDoctorNameWithTitle() {
+        return doctor.getStringNameWithTitle();
     }
 
     public String getDoctorNameNoTitle() {
@@ -64,7 +64,7 @@ public class MedicalNote {
     }
 
     public String getDoctorStringMcr() {
-        return doctor.getDisplayStringMcr();
+        return doctor.getStringMcr();
     }
 
     public String getContentString() {

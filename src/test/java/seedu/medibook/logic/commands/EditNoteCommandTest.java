@@ -50,7 +50,7 @@ public class EditNoteCommandTest {
         descriptor.setDate(new Date("24-12-2018", true));
         descriptor.setContent(new Content("Patient has high fever."));
 
-        EditNoteCommand editNoteCommand = new EditNoteCommand(INDEX_FIRST, descriptor);
+        EditNoteCommand editNoteCommand = new EditNoteCommand(INDEX_SECOND, descriptor);
 
         MedicalNote editedNote = new MedicalNote(new Date("24-12-2018", true),
                 model.getActiveUser().get(),
@@ -81,7 +81,7 @@ public class EditNoteCommandTest {
         EditNoteCommand.EditNoteDescriptor descriptor = new EditNoteCommand.EditNoteDescriptor();
         descriptor.setContent(new Content("Patient has high fever."));
 
-        EditNoteCommand editNoteCommand = new EditNoteCommand(INDEX_FIRST, descriptor);
+        EditNoteCommand editNoteCommand = new EditNoteCommand(INDEX_SECOND, descriptor);
 
         MedicalNote editedNote = new MedicalNote(new Date("19-02-2020", true),
                 new Doctor(new Name("John"), new Mcr("MP2819J")),
@@ -113,7 +113,7 @@ public class EditNoteCommandTest {
 
         EditNoteCommand editNoteCommand = new EditNoteCommand(INDEX_FIRST, descriptor);
 
-        MedicalNote editedNote = ALICE_MEDICAL_NOTE_1;
+        MedicalNote editedNote = ALICE_MEDICAL_NOTE_2;
 
         String expectedMessage = String.format(EditNoteCommand.MESSAGE_EDIT_NOTE_SUCCESS, editedNote);
 
@@ -122,7 +122,7 @@ public class EditNoteCommandTest {
         Patient expectedTargetPatient = expectedModel.getFilteredPatientList().get(0);
         expectedTargetPatient = new PatientBuilder(expectedTargetPatient).build();
         LinkedList<MedicalNote> expectedMedicalNoteLinkedList =
-                new LinkedList<>(Arrays.asList(editedNote, ALICE_MEDICAL_NOTE_2));
+                new LinkedList<>(Arrays.asList(editedNote, ALICE_MEDICAL_NOTE_1));
         expectedTargetPatient.setMedicalNoteList(new MedicalNoteList(expectedMedicalNoteLinkedList));
 
         expectedModel.accessPatient(expectedTargetPatient);
@@ -141,7 +141,7 @@ public class EditNoteCommandTest {
         descriptor.setDate(new Date("25-08-2020", true));
         descriptor.setContent(new Content("Patient is bad."));
 
-        EditNoteCommand editNoteCommand = new EditNoteCommand(INDEX_FIRST, descriptor);
+        EditNoteCommand editNoteCommand = new EditNoteCommand(INDEX_SECOND, descriptor);
 
         assertCommandFailure(editNoteCommand, model, EditNoteCommand.MESSAGE_DUPLICATE_NOTE);
     }

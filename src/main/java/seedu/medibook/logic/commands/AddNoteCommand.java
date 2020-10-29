@@ -17,7 +17,7 @@ import seedu.medibook.model.medicalnote.MedicalNote;
 import seedu.medibook.model.patient.Patient;
 
 /**
- * Adds a patient to the medi book.
+ * Adds a medical note to a patient in MediBook.
  */
 public class AddNoteCommand extends Command {
 
@@ -43,7 +43,7 @@ public class AddNoteCommand extends Command {
     private final Content medicalNoteContent;
 
     /**
-     * Creates an AddCommand to add the specified {@code Patient}
+     * Creates an AddNoteCommand to add the specified {@code MedicalNote}
      */
     public AddNoteCommand(Date date, Content content) {
         requireAllNonNull(date, content);

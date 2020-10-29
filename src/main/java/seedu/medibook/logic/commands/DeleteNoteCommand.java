@@ -36,6 +36,10 @@ public class DeleteNoteCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Creates an DeleteNoteCommand to delete the specified {@code MedicalNote}
+     * @param targetIndex index of the medical note to be deleted.
+     */
     public DeleteNoteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }

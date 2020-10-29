@@ -12,7 +12,7 @@ import seedu.medibook.logic.parser.exceptions.ParseException;
 
 
 /**
- * Parses input arguments and creates a new EditNoteCommand object
+ * Parses input arguments and creates a new EditNoteCommand object.
  */
 public class EditNoteCommandParser implements Parser<EditNoteCommand> {
 

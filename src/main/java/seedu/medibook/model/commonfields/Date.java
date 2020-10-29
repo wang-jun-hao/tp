@@ -57,7 +57,7 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     * Returns true if a given string is a valid date.
+     * Returns true if the given string is a valid date.
      */
     public static boolean isValidDate(String test) {
         try {
@@ -86,6 +86,18 @@ public class Date implements Comparable<Date> {
         return formatter.format(date);
     }
 
+    /**
+     * Returns the localDate of the Date as a LocalDate object
+     * @return localDate of the Date object
+     */
+    public LocalDate getLocalDate() {
+        return localDate;
+    }
+
+    /**
+     * Returns the string that was the input by user when defining a date.
+     * @return string input by user.
+     */
     public String getInputString() {
         return inputValue;
     }

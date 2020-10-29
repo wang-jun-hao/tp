@@ -158,7 +158,7 @@ public class AddCommandTest {
 
         @Override
         public Optional<Patient> getPatientToAccess() {
-            throw new AssertionError("This method should not be called.");
+            return Optional.empty();
         }
 
         @Override
