@@ -5,7 +5,9 @@ import static seedu.medibook.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.medibook.model.commonfields.Date;
+import seedu.medibook.model.commonfields.Name;
 import seedu.medibook.model.doctor.Doctor;
+import seedu.medibook.model.doctor.Mcr;
 
 /**
  * Represents a medical note entry for a Patient in MediBook, on a particular date by a particular doctor.
@@ -33,6 +35,22 @@ public class MedicalNote {
         this.content = content;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public Name getDoctorName() {
+        return doctor.getName();
+    }
+
+    public Mcr getDoctorMcr() {
+        return doctor.getMcr();
+    }
+
+    public Content getContent() {
+        return content;
+    }
+
     public String getInputDateString() {
         return date.inputValue;
     }
@@ -45,7 +63,7 @@ public class MedicalNote {
         return doctor.getStringNameNoTitle();
     }
 
-    public String getDoctorMcr() {
+    public String getDoctorStringMcr() {
         return doctor.getDisplayStringMcr();
     }
 

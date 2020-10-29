@@ -84,7 +84,7 @@ class JsonAdaptedRecord {
         HashMap<String, String> result = new HashMap<>();
         record.keySet().forEach(key -> {
             String value = record.get(key).toString();
-            result.put(key.toString(), value);
+            result.put(key.getInputString(), value);
         });
 
         return result;

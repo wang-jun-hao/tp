@@ -55,6 +55,7 @@ public class TypicalPatients {
             .withDateOfBirth("15-09-1997").withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withHeight("174").withWeight("48.5").withBloodType("A+")
             .withTags("friends").withMedicalNoteList(ALICE_MEDICAL_NOTE_LIST).build();
+    public static final int ALICE_NUM_OF_MEDICAL_NOTES = 2;
 
     public static final MedicalNoteList BENSON_MEDICAL_NOTE_LIST = new MedicalNoteList();
     public static final MedicalNote BENSON_MEDICAL_NOTE_1 = new MedicalNote(new Date("14-04-2020", true),
@@ -183,7 +184,21 @@ public class TypicalPatients {
     public static MediBook getTypicalMediBook() {
         MediBook mediBook = new MediBook();
         for (Patient patient : getTypicalPatients()) {
-            mediBook.addPatient(patient);
+            Patient newCopyOfPatient = new PatientBuilder(patient).build();
+            mediBook.addPatient(newCopyOfPatient);
+        }
+        return mediBook;
+    }
+
+    /**
+     * Returns an {@code MediBook} with all the typical patients with empty medical note list.
+     */
+    public static MediBook getTypicalMediBookWithAllEmptyMedicalNoteList() {
+        MediBook mediBook = new MediBook();
+        for (Patient patient : getTypicalPatients()) {
+            Patient newCopyOfPatient = new PatientBuilder(patient).build();
+            newCopyOfPatient.setMedicalNoteList(new MedicalNoteList());
+            mediBook.addPatient(newCopyOfPatient);
         }
         return mediBook;
     }

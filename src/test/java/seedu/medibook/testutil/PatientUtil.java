@@ -37,7 +37,7 @@ public class PatientUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_IC + patient.getIc().ic + " ");
         sb.append(PREFIX_NAME + patient.getName().fullName + " ");
-        sb.append(PREFIX_DATE + patient.getDateOfBirth().inputValue + " ");
+        sb.append(PREFIX_DATE + patient.getDateOfBirthInputString() + " ");
         sb.append(PREFIX_PHONE + patient.getPhone().value + " ");
 
         if (patient.getEmail().isPresent()) {
@@ -74,7 +74,7 @@ public class PatientUtil {
         descriptor.getIc().ifPresent(ic -> sb.append(PREFIX_IC).append(ic.ic).append(" "));
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getDateOfBirth()
-            .ifPresent(dateOfBirth -> sb.append(PREFIX_DATE).append(dateOfBirth.inputValue).append(" "));
+            .ifPresent(dateOfBirth -> sb.append(PREFIX_DATE).append(dateOfBirth.getInputString()).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
 
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
