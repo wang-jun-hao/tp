@@ -31,7 +31,6 @@ public class PatientChartCard extends UiPart<Region> {
 
     public final Patient patient;
 
-
     @FXML
     private Label cardHeader;
 
@@ -50,7 +49,7 @@ public class PatientChartCard extends UiPart<Region> {
     public PatientChartCard(Patient patient) {
         super(FXML);
         this.patient = patient;
-        cardHeader.setText("Chart: ");
+        cardHeader.setText("Charts: ");
         weightChart.setTitle("Weight Chart");
         heightChart.setTitle("Height Chart");
         bmiChart.setTitle("BMI Chart");
