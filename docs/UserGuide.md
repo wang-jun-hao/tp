@@ -85,16 +85,20 @@ IC, Name, Date of Birth and Phone Number are compulsory fields while the rest ar
 
 **Format:**
 
-`add i/IC n/NAME d/DATE_OF_BIRTH p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE]`
+`add i/IC n/NAME d/DATE_OF_BIRTH p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE] 
+[al/ALLERGY]... [con/CONDITION]... [t/TREATMENT]...`
 
 * `HEIGHT` has to be specified as a whole number in cms.
 * `WEIGHT` has to be specified as a number up to 1 decimal point in kgs.
+* For `ALLERGY`, `CONDITION` and `TREATMENT`, any number of entries can be specified, following the given format for each entry.
+All entries will be added.
 
 **Examples:**
 
 `add i/S9123456A n/Divakar d/29-02-2000 p/91234567`
 
-`add i/T0123456Q n/Divakar d/29-02-2000 p/91234567 e/divakarmal@medibook.com a/NUS, Kent Ridge Drive h/178 w/75.0 b/O+`
+`add i/T0123456Q n/Divakar d/29-02-2000 p/91234567 e/divakarmal@medibook.com a/NUS, Kent Ridge Drive h/178 w/75.0 b/O+
+al/Peanut con/Mitral valve prolapse con/asthma t/EpiPen t/metered-dose inhaler`
 
 <a id="editing-a-patients-profile"></a>
 ### 3.5 Editing a patient: `edit`
@@ -105,7 +109,8 @@ The `edit` command is also used to fill in unspecified fields.
 
 **Format:**
 
-`edit INDEX [i/IC] [n/NAME] [d/DATE OF BIRTH] [p/PHONE] [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD TYPE][t/TAG]`
+`edit INDEX [i/IC] [n/NAME] [d/DATE OF BIRTH] [p/PHONE] [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD TYPE] 
+[al/ALLERGY]... [con/CONDITION]... [t/TREATMENT]...`
 
 * `edit` on a field that already exists will update it from the previous value to the new value
 * `edit` on an optional field that was not specified at the point of adding patient will fill the field with the given value
@@ -156,7 +161,7 @@ Accesses a specified patient's profile in MediBook.
 * Use the `list` command to return to the main list page
 * Each patient's profile consists of 3 sections: Personal Details, Medical Details and Medical Notes.
     * Personal Details section (top left): Shows the personal details of the patient, including their Name, IC, Date of Birth, and Phone Number, as well as their Email, Address, Height, Weight, BMI and Blood Type if available.
-    * Medical Details section (bottom left): Shows medical details as tags separated into 3 categories (to be implemented), namely: Allergies, (ongoing) Treatments and (preexisting) Conditions.
+    * Medical Details section (bottom left): Shows medical details as tags separated into 3 categories, namely: Allergies, (preexisting) Conditions and (ongoing) Treatments.
     * Medical Notes section (right): A scrollable panel showing the list of medical notes recorded for the specified patient.
 
 ### 3.9 Adding a medical note: `addnote`
