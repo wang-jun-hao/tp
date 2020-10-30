@@ -30,6 +30,7 @@ public class Ic {
         requireNonNull(ic);
         checkArgument(isValidIc(ic), MESSAGE_CONSTRAINTS);
         this.ic = ic.toUpperCase();
+        assert ic.length() == 9;
     }
 
     /**
