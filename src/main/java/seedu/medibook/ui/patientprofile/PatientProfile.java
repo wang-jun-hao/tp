@@ -33,12 +33,18 @@ public class PatientProfile extends UiPart<Region> {
 
         PersonalDetailsCard personalDetailsCard = new PersonalDetailsCard(patient);
         this.personalDetailsCard.getChildren().add(personalDetailsCard.getRoot());
+        personalDetailsCard.getRoot().prefHeightProperty().bind(this.personalDetailsCard.heightProperty());
+        personalDetailsCard.getRoot().prefWidthProperty().bind(this.personalDetailsCard.widthProperty());
 
         MedicalDetailsCard medicalDetailsCard = new MedicalDetailsCard(patient);
         this.medicalDetailsCard.getChildren().add(medicalDetailsCard.getRoot());
+        medicalDetailsCard.getRoot().prefHeightProperty().bind(this.medicalDetailsCard.heightProperty());
+        medicalDetailsCard.getRoot().prefWidthProperty().bind(this.medicalDetailsCard.widthProperty());
 
         MedicalNotesPanel medicalNotesPanel = new MedicalNotesPanel(patient.getObservableMedicalNoteList());
         this.medicalNotesPanel.getChildren().add(medicalNotesPanel.getRoot());
+        medicalNotesPanel.getRoot().prefHeightProperty().bind(this.medicalNotesPanel.heightProperty());
+        medicalNotesPanel.getRoot().prefWidthProperty().bind(this.medicalNotesPanel.widthProperty());
 
         PatientChartCard patientChartCard = new PatientChartCard(patient);
         this.patientChartCard.getChildren().add(patientChartCard.getRoot());
