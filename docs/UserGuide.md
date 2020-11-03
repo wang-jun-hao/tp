@@ -50,15 +50,21 @@ This user guide helps you get familiar with its features and get started with us
 
 ### 3.1 Login and Create Account
 
-Type in your `username` and `password` to login to the system. If you do not have a `username` and `password`, pick the
-`create account` option, which would let you create a new account.
+Type in your `username` and `password` to login as to the system. If you do not have a `username` and `password`, pick the
+`create account` option, which would let you create a new **doctor** account.
 
 When creating your new account, fill in your desired `username`, `password`, your `name` and your `MCR`, then click create.
 
-*`username` and `password` need to be at least 5 characters long.
+* `username` and `password` need to be at least 5 characters long.
+* `MCR` is your medical registration number as given by the Singapore Medical Council, e.g. 'M35477G'.
 * `MCR` has to be of the format 'M@####$', where @ is a letter/digit, # is a digit and $ is a letter.
 
-You can also login as an administrative staff using the username: `admin` and password: `admin`. As an administrative staff, you can only add, edit, delete and find patients. You are unable to add, edit or delete medical notes.
+As a **doctor**, you can use all features of MediBook.
+
+Alternatively, you can also login as an **administrative staff** using the username: `admin` and password: `admin`. 
+As an **administrative staff**, you can only add, edit, delete and find patients. 
+You are unable to add, edit or delete medical notes.
+
 
 ### 3.2 Viewing help : `help`
 
@@ -85,16 +91,20 @@ IC, Name, Date of Birth and Phone Number are compulsory fields while the rest ar
 
 **Format:**
 
-`add i/IC n/NAME d/DATE_OF_BIRTH p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE]`
+`add i/IC n/NAME d/DATE_OF_BIRTH p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE] 
+[al/ALLERGY]... [con/CONDITION]... [t/TREATMENT]...`
 
 * `HEIGHT` has to be specified as a whole number in cms.
 * `WEIGHT` has to be specified as a number up to 1 decimal point in kgs.
+* For `ALLERGY`, `CONDITION` and `TREATMENT`, any number of entries can be specified, following the given format for each entry.
+All entries will be added.
 
 **Examples:**
 
 `add i/S9123456A n/Divakar d/29-02-2000 p/91234567`
 
-`add i/T0123456Q n/Divakar d/29-02-2000 p/91234567 e/divakarmal@medibook.com a/NUS, Kent Ridge Drive h/178 w/75.0 b/O+`
+`add i/T0123456Q n/Divakar d/29-02-2000 p/91234567 e/divakarmal@medibook.com a/NUS, Kent Ridge Drive h/178 w/75.0 b/O+
+al/Peanut con/Mitral valve prolapse con/asthma t/EpiPen t/metered-dose inhaler`
 
 <a id="editing-a-patients-profile"></a>
 ### 3.5 Editing a patient: `edit`
@@ -105,7 +115,8 @@ The `edit` command is also used to fill in unspecified fields.
 
 **Format:**
 
-`edit INDEX [i/IC] [n/NAME] [d/DATE OF BIRTH] [p/PHONE] [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD TYPE][t/TAG]`
+`edit INDEX [i/IC] [n/NAME] [d/DATE OF BIRTH] [p/PHONE] [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD TYPE] 
+[al/ALLERGY]... [con/CONDITION]... [t/TREATMENT]...`
 
 * `edit` on a field that already exists will update it from the previous value to the new value
 * `edit` on an optional field that was not specified at the point of adding patient will fill the field with the given value
@@ -156,7 +167,7 @@ Accesses a specified patient's profile in MediBook.
 * Use the `list` command to return to the main list page
 * Each patient's profile consists of 3 sections: Personal Details, Medical Details and Medical Notes.
     * Personal Details section (top left): Shows the personal details of the patient, including their Name, IC, Date of Birth, and Phone Number, as well as their Email, Address, Height, Weight, BMI and Blood Type if available.
-    * Medical Details section (bottom left): Shows medical details as tags separated into 3 categories (to be implemented), namely: Allergies, (ongoing) Treatments and (preexisting) Conditions.
+    * Medical Details section (bottom left): Shows medical details as tags separated into 3 categories, namely: Allergies, (preexisting) Conditions and (ongoing) Treatments.
     * Medical Notes section (right): A scrollable panel showing the list of medical notes recorded for the specified patient.
 
 ### 3.9 Adding a medical note: `addnote`
