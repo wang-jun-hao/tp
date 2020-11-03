@@ -171,4 +171,9 @@ public class LogicManager implements Logic {
         storage.createAccount(username, password, doctorName, doctorMcr);
     }
 
+    @Override
+    public void logout() {
+        model.setActiveUser(Optional.empty());
+    }
+
 }
