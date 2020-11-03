@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="Create Account Window" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="650" minWidth="550" onCloseRequest="#handleExit" title="MediBook" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/address_book_32.png" />
     </icons>
@@ -45,7 +45,7 @@
                     <children>
                         <BorderPane>
                             <center>
-                                <ImageView fx:id="logo" fitHeight="200.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fx:id="logo" fitHeight="200.0" fitWidth="443.0" pickOnBounds="true" preserveRatio="true" />
                             </center>
                         </BorderPane>
                         <Label fx:id="username" styleClass="label-header-small" text="Username" />
@@ -60,12 +60,12 @@
                             <right>
                                 <Button fx:id="createButton" defaultButton="true" mnemonicParsing="false" prefHeight="50.0" prefWidth="121.0" style="-fx-border-radius: 5;" styleClass="cell_big_label" text="Create" textFill="WHITE" BorderPane.alignment="CENTER" />
                             </right>
-                            <center>
-                                <StackPane fx:id="resultDisplayPlaceholder" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-                            </center>
                      <left>
                          <Button fx:id="backButton" defaultButton="false" mnemonicParsing="false" prefHeight="50.0" prefWidth="121.0" style="-fx-border-radius: 5;" styleClass="cell_big_label" text="Back" textFill="WHITE" BorderPane.alignment="CENTER" />
                      </left>
+                     <top>
+                                <StackPane fx:id="resultDisplayPlaceholder" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                     </top>
                         </BorderPane>
                     </children>
                 </VBox>
