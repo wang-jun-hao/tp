@@ -138,7 +138,7 @@ Deletes the specified patient from MediBook.
 **Example:**
 * `delete 1` deletes the patient with index `1` in the displayed list
 
-### 3.7 Finding a patient by IC: `find`
+### 3.7 Finding a patient: `find`
 
 Finds patient records by multiple fields and multiple keywords.
 
