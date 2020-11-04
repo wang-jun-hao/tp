@@ -38,6 +38,8 @@ public class MedicalNoteCard extends UiPart<Region> {
         date.setText(medicalNote.date.toString());
         doctorName.setText(medicalNote.doctor.toString());
         content.setText(medicalNote.getContentString());
+        content.prefWidthProperty().bind(this.getRoot().prefWidthProperty());
+        content.setWrapText(true);
     }
 
     @Override

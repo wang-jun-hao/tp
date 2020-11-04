@@ -10,16 +10,19 @@
     <columnConstraints>
         <ColumnConstraints hgrow="ALWAYS" minWidth="250" prefWidth="1000" />
     </columnConstraints>
-    <SplitPane dividerPositions="0.3868520859671302" orientation="VERTICAL" GridPane.columnIndex="0" prefHeight="793.0" prefWidth="250.0">
+    <rowConstraints>
+        <RowConstraints vgrow="ALWAYS" />
+    </rowConstraints>
+    <SplitPane dividerPositions="0.5" orientation="VERTICAL" GridPane.columnIndex="0">
         <items>
-            <AnchorPane fx:id="personalDetailsCard" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
-            <AnchorPane fx:id="medicalDetailsCard" minHeight="0.0" minWidth="0.0" prefHeight="291.0" prefWidth="293.0" />
+            <AnchorPane fx:id="personalDetailsCard" minHeight="0.0" minWidth="0.0" />
+            <AnchorPane fx:id="medicalDetailsCard" minHeight="0.0" minWidth="0.0" />
         </items>
     </SplitPane>
-    <SplitPane dividerPositions="0.4066599394550959" layoutX="291.0" GridPane.columnIndex="1" prefHeight="793.0" prefWidth="2296.0">
+    <SplitPane dividerPositions="0.5" GridPane.columnIndex="1" prefWidth="2300.0">
         <items>
-            <AnchorPane fx:id="medicalNotesPanel" minHeight="0.0" minWidth="0.0" prefWidth="396.0" />
-            <AnchorPane fx:id="patientChartCard" minHeight="0.0" minWidth="0.0" prefWidth="317.0" />
+            <AnchorPane fx:id="medicalNotesPanel" minHeight="0.0" minWidth="0.0" />
+            <AnchorPane fx:id="patientChartCard" minHeight="0.0" minWidth="0.0" />
         </items>
     </SplitPane>
 </GridPane>
