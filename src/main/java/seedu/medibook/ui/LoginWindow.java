@@ -177,8 +177,10 @@ public class LoginWindow extends UiPart<Stage> {
         String password = this.passwordField.getText();
         try {
             logic.processLoginInfo(username, password);
+            GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
+                    (int) primaryStage.getX(), (int) primaryStage.getY());
+            logic.setGuiSettings(guiSettings);
             mainWindow = new MainWindow(primaryStage, logic);
-            mainWindow.show();
             mainWindow.fillInnerParts();
         } catch (IllegalLoginException | DataConversionException | IllegalValueException e) {
             logger.info("Invalid login");
@@ -187,6 +189,9 @@ public class LoginWindow extends UiPart<Stage> {
     }
 
     private void createAccountStage() {
+        GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
+                (int) primaryStage.getX(), (int) primaryStage.getY());
+        logic.setGuiSettings(guiSettings);
         createAccountWindow = new CreateAccountWindow(primaryStage, logic);
     }
 }

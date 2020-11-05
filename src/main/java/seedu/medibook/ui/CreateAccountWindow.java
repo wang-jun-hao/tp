@@ -78,6 +78,7 @@ public class CreateAccountWindow extends UiPart<Stage> {
     private StackPane resultDisplayPlaceholder;
 
     private Image logoImage = new Image(this.getClass().getResourceAsStream("/images/logo.png"));
+
     /**
      * Creates a {@code LoginWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -193,8 +194,10 @@ public class CreateAccountWindow extends UiPart<Stage> {
         try {
             logic.createAccount(username, password, doctorName, doctorMcr);
             logic.processLoginInfo(username, password);
+            GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
+                    (int) primaryStage.getX(), (int) primaryStage.getY());
+            logic.setGuiSettings(guiSettings);
             mainWindow = new MainWindow(primaryStage, logic);
-            mainWindow.show();
             mainWindow.fillInnerParts();
         } catch (IOException | DataConversionException | IllegalValueException | IllegalLoginException e) {
             resultDisplay.setFeedbackToUser(e.getMessage());
@@ -202,7 +205,9 @@ public class CreateAccountWindow extends UiPart<Stage> {
     }
 
     private void back() {
+        GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
+                (int) primaryStage.getX(), (int) primaryStage.getY());
+        logic.setGuiSettings(guiSettings);
         loginWindow = new LoginWindow(primaryStage, logic);
-        loginWindow.show();
     }
 }

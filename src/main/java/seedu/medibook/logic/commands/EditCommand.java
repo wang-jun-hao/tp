@@ -147,10 +147,22 @@ public class EditCommand extends Command {
 
         editedPatient.setRecord(patientToEdit.getRecord());
 
-        editPatientDescriptor.getHeight().ifPresent(h -> editedPatient.getRecord().addHeightRecord(h));
-        editPatientDescriptor.getWeight().ifPresent(w -> editedPatient.getRecord().addWeightRecord(w));
+        boolean wasHeightUpdated = editPatientDescriptor.getHeight().isPresent();
+        boolean wasWeightUpdated = editPatientDescriptor.getWeight().isPresent();
+        if (wasHeightUpdated || wasWeightUpdated) {
+            updateRecords(editedPatient, editPatientDescriptor);
+        }
 
         return editedPatient;
+    }
+
+    private static void updateRecords(Patient editedPatient, EditPatientDescriptor editPatientDescriptor) {
+        editPatientDescriptor.getHeight()
+                .or(editedPatient::getHeight)
+                .ifPresent(h -> editedPatient.getRecord().addHeightRecord(h));
+        editPatientDescriptor.getWeight()
+                .or(editedPatient::getWeight)
+                .ifPresent(w -> editedPatient.getRecord().addWeightRecord(w));
     }
 
     @Override
