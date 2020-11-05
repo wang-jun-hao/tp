@@ -82,8 +82,7 @@ Shows a list of all patient's records in the system.
 
 `list`
 
-<a id="adding-a-patient"></a>
-### 3.4 Adding a patient: `add`
+### 3.4 Adding a patient: `add` <a id="adding-a-patient"></a>
 
 Adds a patient to the system.
 
@@ -96,8 +95,8 @@ IC, Name, Date of Birth and Phone Number are compulsory fields while the rest ar
 
 * `PHONE_NUMBER` has to be within 7 to 15 digits long (support for international numbers).
 * `IC` should be of the format @xxxxxxx#, where @ is a letter S, T, F or G, xxxxxxx is a 7 digit number and # is any letter.
-* `HEIGHT` has to be specified as a whole number in cms.
-* `WEIGHT` has to be specified as a number up to 1 decimal point in kgs.
+* `HEIGHT` must be a whole number between 1 - 299 inclusive and is measured in cms.
+* `WEIGHT` must be a positive number correct to 1 decimal place and is measured in kgs.
 * For `ALLERGY`, `CONDITION` and `TREATMENT`, any number of entries can be specified, following the given format for each entry.
 All entries will be added.
 
@@ -108,8 +107,7 @@ All entries will be added.
 `add i/T0123456Q n/Divakar d/29-02-2000 p/91234567 e/divakarmal@medibook.com a/NUS, Kent Ridge Drive h/178 w/75.0 b/O+
 al/Peanut con/Mitral valve prolapse con/asthma t/EpiPen t/metered-dose inhaler`
 
-<a id="editing-a-patients-profile"></a>
-### 3.5 Editing a patient: `edit`
+### 3.5 Editing a patient: `edit` <a id="editing-a-patients-profile"></a>
 
 Edits the specified patient's information from MediBook. 
 
@@ -157,8 +155,7 @@ Finds patient records by multiple fields and multiple keywords.
 * `find i/S9123456A` returns the patient record with IC `S9123456A`
 * `find n/Billy Alice a/Clementi i/S99` returns the patient records with Name containing `Billy` or `Alice`, Address containing `Clementi` and IC containing `S99`
 
-<a id="accessing-a-patients-profile"></a>
-### 3.8 Accessing a patient's profile : `access`
+### 3.8 Accessing a patient's profile : `access` <a id="accessing-a-patients-profile"></a>
 
 Accesses a specified patient's profile in MediBook.
 
