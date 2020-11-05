@@ -20,6 +20,11 @@ import seedu.medibook.model.doctor.Mcr;
 
 public class JsonUserAccountsListStorage implements UserAccountsListStorage {
 
+    private static final String ADMIN_INPUT = "admin";
+    private static final String INVALID_LOGIN = "Invalid username/password";
+    private static final String EXISTING_USERNAME = "Username already exists";
+    private static final String EXISTING_MCR = "This MCR already has an account";
+
     private final Path filepath;
 
     public JsonUserAccountsListStorage(Path filepath) {
@@ -34,7 +39,7 @@ public class JsonUserAccountsListStorage implements UserAccountsListStorage {
     @Override
     public Optional<Account> login(String username, String password) throws DataConversionException,
             IllegalLoginException, IllegalValueException {
-        if (username.equals("admin") && password.equals("admin")) {
+        if (username.equals(ADMIN_INPUT) && password.equals(ADMIN_INPUT)) {
             return Optional.of(new AdminAccount());
         }
         Optional<JsonSerializableUserAccountsList> jsonUserAccountList = JsonUtil.readJsonFile(
@@ -46,10 +51,10 @@ public class JsonUserAccountsListStorage implements UserAccountsListStorage {
             if (result.isPresent()) {
                 return result;
             } else {
-                throw new IllegalLoginException("Invalid username/password");
+                throw new IllegalLoginException(INVALID_LOGIN);
             }
         } else {
-            throw new IllegalLoginException("Invalid username/password");
+            throw new IllegalLoginException(INVALID_LOGIN);
         }
     }
 
@@ -78,8 +83,8 @@ public class JsonUserAccountsListStorage implements UserAccountsListStorage {
 
         Account newAccount = new Account(username, password, new Doctor(new Name(doctorName), new Mcr(doctorMcr)));
 
-        if (newAccount.getUsername().equals("admin")) {
-            throw new IllegalValueException("Username already exists");
+        if (newAccount.getUsername().equals(ADMIN_INPUT)) {
+            throw new IllegalValueException(EXISTING_USERNAME);
         }
 
         if (FileUtil.isFileExists(filepath)) {
@@ -88,11 +93,11 @@ public class JsonUserAccountsListStorage implements UserAccountsListStorage {
             UserAccountsList accountsList = jsonUserAccountList.toModelType();
 
             if (accountsList.usernameExists(newAccount)) {
-                throw new IllegalValueException("Username already exists");
+                throw new IllegalValueException(EXISTING_USERNAME);
             }
 
             if (accountsList.mcrExists(newAccount)) {
-                throw new IllegalValueException("This MCR already has an account");
+                throw new IllegalValueException(EXISTING_MCR);
             }
             accountsList.addAccount(newAccount);
             jsonUserAccountList = new JsonSerializableUserAccountsList(accountsList);
