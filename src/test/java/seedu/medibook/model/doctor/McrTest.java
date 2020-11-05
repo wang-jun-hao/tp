@@ -27,6 +27,11 @@ public class McrTest {
         assertFalse(Mcr.isValidMcr("A08273X")); // first character is not 'm' or 'M'
         assertFalse(Mcr.isValidMcr("M8F927P")); // letter where digit should be
         assertFalse(Mcr.isValidMcr("M928631")); // last character is not a letter
+        assertFalse(Mcr.isValidMcr("M_1111a")); // second character is not a letter or digit
+        assertFalse(Mcr.isValidMcr("M$1111a")); // second character is not a letter or digit
+        assertFalse(Mcr.isValidMcr("M#1111a")); // second character is not a letter or digit
+        assertFalse(Mcr.isValidMcr("M 1111a")); // second character is not a letter or digit
+        assertFalse(Mcr.isValidMcr("M-1111a")); // second character is not a letter or digit
 
         // valid mcr
         assertTrue(Mcr.isValidMcr("m28370p"));

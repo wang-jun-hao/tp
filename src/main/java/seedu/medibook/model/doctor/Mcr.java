@@ -16,7 +16,7 @@ public class Mcr {
             + "3. The # should be a letter";
 
     public static final String FIRST_CHARACTER_REGEX = "[Mm]";
-    public static final String SECOND_CHARACTER_REGEX = "\\w";
+    public static final String SECOND_CHARACTER_REGEX = "[a-zA-Z0-9]";
     public static final String DIGITS_REGEX = "\\d{4}";
     public static final String LAST_CHARACTER_REGEX = "[a-zA-Z]";
     public static final String VALIDATION_REGEX = FIRST_CHARACTER_REGEX + SECOND_CHARACTER_REGEX + DIGITS_REGEX

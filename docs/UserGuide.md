@@ -94,6 +94,8 @@ IC, Name, Date of Birth and Phone Number are compulsory fields while the rest ar
 `add i/IC n/NAME d/DATE_OF_BIRTH p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE] 
 [al/ALLERGY]... [con/CONDITION]... [t/TREATMENT]...`
 
+* `PHONE_NUMBER` has to be within 7 to 15 digits long (support for international numbers).
+* `IC` should be of the format @xxxxxxx#, where @ is a letter S, T, F or G, xxxxxxx is a 7 digit number and # is any letter.
 * `HEIGHT` has to be specified as a whole number in cms.
 * `WEIGHT` has to be specified as a number up to 1 decimal point in kgs.
 * For `ALLERGY`, `CONDITION` and `TREATMENT`, any number of entries can be specified, following the given format for each entry.
