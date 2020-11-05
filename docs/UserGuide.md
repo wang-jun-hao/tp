@@ -82,6 +82,8 @@ Shows a list of all patient's records in the system.
 
 `list`
 
+Anything typed after list will be ignored and the list of all patient records will be displayed.
+
 <a id="addcommand"></a>
 ### 3.4 Adding a patient: `add` 
 
