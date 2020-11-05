@@ -60,7 +60,7 @@
                          <Button fx:id="createButton" defaultButton="false" mnemonicParsing="false" prefHeight="50.0" prefWidth="121.0" style="-fx-border-radius: 5;" styleClass="cell_big_label" text="Create Account" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER" />
                      </left>
                      <top>
-                        <StackPane fx:id="resultDisplayPlaceholder" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                        <StackPane fx:id="resultDisplayPlaceholder" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
                      </top>
                   </BorderPane>
                </children>
