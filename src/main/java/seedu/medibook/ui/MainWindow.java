@@ -161,8 +161,10 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleLogout() {
         logic.logout();
+        GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
+                (int) primaryStage.getX(), (int) primaryStage.getY());
+        logic.setGuiSettings(guiSettings);
         loginWindow = new LoginWindow(primaryStage, logic);
-        loginWindow.show();
     }
 
     void show() {
