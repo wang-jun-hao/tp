@@ -69,4 +69,9 @@ public interface Logic {
      */
     void createAccount(String username, String password, String doctorName, String doctorMcr) throws
             IllegalValueException, DataConversionException, IOException;
+
+    /**
+     * Removes the active user in the model.
+     */
+    void logout();
 }
