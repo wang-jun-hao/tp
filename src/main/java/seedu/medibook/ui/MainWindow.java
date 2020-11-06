@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private PatientListPanel patientListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private LoginWindow loginWindow;
     private PatientProfile patientProfile;
 
     @FXML
@@ -43,6 +44,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private MenuItem logoutMenuItem;
 
     @FXML
     private StackPane patientListPanelPlaceholder;
@@ -77,6 +81,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(logoutMenuItem, KeyCombination.valueOf("F2"));
     }
 
     /**
@@ -148,6 +153,18 @@ public class MainWindow extends UiPart<Stage> {
         } else {
             helpWindow.focus();
         }
+    }
+
+    /**
+     * Returns to the login window.
+     */
+    @FXML
+    public void handleLogout() {
+        logic.logout();
+        GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
+                (int) primaryStage.getX(), (int) primaryStage.getY());
+        logic.setGuiSettings(guiSettings);
+        loginWindow = new LoginWindow(primaryStage, logic);
     }
 
     void show() {
