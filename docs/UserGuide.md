@@ -82,6 +82,8 @@ Shows a list of all patient's records in the system.
 
 `list`
 
+Anything typed after list will be ignored and the list of all patient records will be displayed.
+
 <a id="addcommand"></a>
 ### 3.4 Adding a patient: `add` 
 
@@ -100,6 +102,7 @@ IC, Name, Date of Birth and Phone Number are compulsory fields while the rest ar
 * `WEIGHT` must be a positive number correct to 1 decimal place and is measured in kgs.
 * For `ALLERGY`, `CONDITION` and `TREATMENT`, any number of entries can be specified, following the given format for each entry.
 All entries will be added.
+* If multiple values for the same personal detail field are given, the later one is accepted. For eg. if you type `add i/S9123456A n/Divakar d/29-02-2000 p/91234567 b/A+ b/O+`, O+ will be accepted as the actual blood type.
 
 **Examples:**
 
