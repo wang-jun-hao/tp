@@ -112,7 +112,7 @@ All entries will be added.
 `add i/T0123456Q n/Divakar d/29-02-2000 p/91234567 e/divakarmal@medibook.com a/NUS, Kent Ridge Drive h/178 w/75.0 b/O+
 al/Peanut con/Mitral valve prolapse con/asthma t/EpiPen t/metered-dose inhaler`
 
-<img src="images/screenshots/addcmd.png">
+<img src="images/screenshots/addcmd.PNG">
 
 <a id="editcommand"></a>
 ### 3.5 Editing a patient: `edit` 
