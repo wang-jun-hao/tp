@@ -84,6 +84,8 @@ Shows a list of all patient's records in the system.
 
 Anything typed after list will be ignored and the list of all patient records will be displayed.
 
+<img src="images/screenshots/list.PNG">
+
 <a id="addcommand"></a>
 ### 3.4 Adding a patient: `add` 
 
@@ -112,7 +114,7 @@ All entries will be added.
 `add i/T0123456Q n/Divakar d/29-02-2000 p/91234567 e/divakarmal@medibook.com a/NUS, Kent Ridge Drive h/178 w/75.0 b/O+
 al/Peanut con/Mitral valve prolapse con/asthma t/EpiPen t/metered-dose inhaler`
 
-<img src="images/screenshots/addcmd.png">
+<img src="images/screenshots/addcmd.PNG">
 
 <a id="editcommand"></a>
 ### 3.5 Editing a patient: `edit` 
@@ -134,6 +136,7 @@ The `edit` command is also used to fill in unspecified fields.
 `edit 1 n/Divakar` edits the name of patient with index `1` in the displayed list to `Divakar`
 
 `edit 3 n/Divakar p/91111111 h/201` edits the name, phone number and height of patient with index `3` in the displayed list to `Divakar`, `91111111` and `201`cm  respectively.
+<img src="images/screenshots/editresult.PNG">
 
 ### 3.6 Deleting a patient : `delete`
 
@@ -163,6 +166,8 @@ Finds patient records by multiple fields and multiple keywords.
 * `find i/S9123456A` returns the patient record with IC `S9123456A`
 * `find n/Billy Alice a/Clementi i/S99` returns the patient records with Name containing `Billy` or `Alice`, Address containing `Clementi` and IC containing `S99`
 
+<img src="images/screenshots/enhancedFind.PNG">
+
 <a id="accesscommand"></a>
 ### 3.8 Accessing a patient's profile : `access` 
 
@@ -177,6 +182,8 @@ Accesses a specified patient's profile in MediBook.
     * Personal Details section (top left): Shows the personal details of the patient, including their Name, IC, Date of Birth, and Phone Number, as well as their Email, Address, Height, Weight, BMI and Blood Type if available.
     * Medical Details section (bottom left): Shows medical details as tags separated into 3 categories, namely: Allergies, (preexisting) Conditions and (ongoing) Treatments.
     * Medical Notes section (right): A scrollable panel showing the list of medical notes recorded for the specified patient.
+    
+<img src="images/screenshots/access.PNG">
 
 ### 3.9 Adding a medical note: `addnote`
 
