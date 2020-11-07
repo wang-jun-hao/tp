@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Preston Toh's Project Portfolio Page
+title: Divakar Malhotra's Project Portfolio Page
 ---
 
 ## Project: MediBook
@@ -51,6 +51,7 @@ New test cases for testing this additional field were added and existing test ca
 **Documentation:**
 * User Guide:
     * Added documentation for charts feature.
+    * Added instruction for valid input formats.
     * Added screenshots in User Guide.
     * Added documentation for UI segment in Developer Guide.
 
