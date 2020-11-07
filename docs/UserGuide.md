@@ -100,6 +100,7 @@ IC, Name, Date of Birth and Phone Number are compulsory fields while the rest ar
 * `IC` should be of the format @xxxxxxx#, where @ is a letter S, T, F or G, xxxxxxx is a 7 digit number and # is any letter.
 * `HEIGHT` must be a whole number between 1 - 299 inclusive and is measured in cms.
 * `WEIGHT` must be a positive number correct to 1 decimal place and is measured in kgs.
+* `BLOOD_TYPE` must be a valid blood type i.e. one of A, B, O or AB followed by '+' or '-". For example A+, AB- etc.
 * For `ALLERGY`, `CONDITION` and `TREATMENT`, any number of entries can be specified, following the given format for each entry.
 All entries will be added.
 * If multiple values for the same personal detail field are given, the later one is accepted. For eg. if you type `add i/S9123456A n/Divakar d/29-02-2000 p/91234567 b/A+ b/O+`, O+ will be accepted as the actual blood type.
