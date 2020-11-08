@@ -161,7 +161,7 @@ The `edit` command is also used to fill in unspecified fields.
 
 `edit 1 n/Divakar` edits the name of patient with index `1` in the displayed list to `Divakar`
 
-`edit 3 n/Divakar p/91111111 h/201` edits the name, phone number and height of patient with index `3` in the displayed list to `Divakar`, `91111111` and `201`cm  respectively.
+`edit 3 n/Divakar p/91111111 h/201` edits the name, phone number and height of patient with index `3` in the displayed list to `Divakar`, `91111111` and `201`cm  respectively
 <img src="images/screenshots/editresult.PNG">
 
 #### 3.2.5 Deleting a patient : `delete`
@@ -186,10 +186,10 @@ Finds patient records by multiple fields and multiple keywords.
 `find [i/IC] [n/NAME] [d/DATE_OF_BIRTH] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE]`
 
 * You have to be on the main list page to access a patient's profile. Use the `list` command to return to the main list page if you are viewing a patient's profile.
-* At least one field must be specified for the command to be valid
-* The search is case-insensitive. e.g `S9123456A` will match `s9123456a`
-* The search will match substrings e.g `S912345` will match `S9123456A`
-* Search will return all records that matches any of the keywords for each field e.g `n/Alice Bob` will return the records of all patients with name containing `Alice` or `Bob`
+* At least one field must be specified for the command to be valid.
+* The search is case-insensitive. e.g `S9123456A` will match `s9123456a`.
+* The search will match substrings e.g `S912345` will match `S9123456A`.
+* Search will return all records that matches any of the keywords for each field e.g `n/Alice Bob` will return the records of all patients with name containing `Alice` or `Bob`.
 
 **Examples:**
 * `find i/S9123456A` returns the patient record with IC `S9123456A`
