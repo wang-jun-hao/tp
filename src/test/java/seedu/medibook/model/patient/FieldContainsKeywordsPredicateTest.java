@@ -311,25 +311,25 @@ public class FieldContainsKeywordsPredicateTest {
     public void test_keywordMatchesOtherFields_returnsFalse() {
         // keywords match all fields except name
         FieldContainsKeywordsPredicate predicate =
-            new FieldContainsKeywordsPredicate(Arrays.asList("S9999999R", "12345", "alice@email.com", "Main",
+            new FieldContainsKeywordsPredicate(Arrays.asList("S9999999R", "1234567", "alice@email.com", "Main",
                     "Street", "171", "61.2", "A+", "12-08-1999"), PREFIX_NAME);
-        assertFalse(predicate.test(new PatientBuilder().withIc("S9999999R").withName("Alice").withPhone("12345")
+        assertFalse(predicate.test(new PatientBuilder().withIc("S9999999R").withName("Alice").withPhone("1234567")
                 .withEmail("alice@email.com").withAddress("Main Street").withHeight("171").withWeight("61.2")
                 .withBloodType("A+").withDateOfBirth("12-08-1999").build()));
 
         // keywords match all fields except ic
         predicate =
-                new FieldContainsKeywordsPredicate(Arrays.asList("Alice", "12345", "alice@email.com", "Main",
+                new FieldContainsKeywordsPredicate(Arrays.asList("Alice", "1234567", "alice@email.com", "Main",
                         "Street", "171", "61.2", "A+", "12-08-1999"), PREFIX_IC);
-        assertFalse(predicate.test(new PatientBuilder().withIc("S9999999R").withName("Alice").withPhone("12345")
+        assertFalse(predicate.test(new PatientBuilder().withIc("S9999999R").withName("Alice").withPhone("1234567")
                 .withEmail("alice@email.com").withAddress("Main Street").withHeight("171").withWeight("61.2")
                 .withBloodType("A+").withDateOfBirth("12-08-1999").build()));
 
         // keywords match all fields except date of birth
         predicate =
-                new FieldContainsKeywordsPredicate(Arrays.asList("Alice", "S9999999R", "12345", "alice@email.com",
+                new FieldContainsKeywordsPredicate(Arrays.asList("Alice", "S9999999R", "1234567", "alice@email.com",
                         "Main", "Street", "171", "61.2", "A+"), PREFIX_DATE);
-        assertFalse(predicate.test(new PatientBuilder().withIc("S9999999R").withName("Alice").withPhone("12345")
+        assertFalse(predicate.test(new PatientBuilder().withIc("S9999999R").withName("Alice").withPhone("1234567")
                 .withEmail("alice@email.com").withAddress("Main Street").withHeight("171").withWeight("61.2")
                 .withBloodType("A+").withDateOfBirth("12-08-1999").build()));
 
@@ -337,47 +337,47 @@ public class FieldContainsKeywordsPredicateTest {
         predicate =
                 new FieldContainsKeywordsPredicate(Arrays.asList("Alice", "S9999999R", "alice@email.com", "Main",
                         "Street", "171", "61.2", "A+", "12-08-1999"), PREFIX_PHONE);
-        assertFalse(predicate.test(new PatientBuilder().withIc("S9999999R").withName("Alice").withPhone("12345")
+        assertFalse(predicate.test(new PatientBuilder().withIc("S9999999R").withName("Alice").withPhone("1234567")
                 .withEmail("alice@email.com").withAddress("Main Street").withHeight("171").withWeight("61.2")
                 .withBloodType("A+").withDateOfBirth("12-08-1999").build()));
 
         // keywords match all fields except address
         predicate =
-                new FieldContainsKeywordsPredicate(Arrays.asList("Alice", "S9999999R", "12345", "alice@email.com",
+                new FieldContainsKeywordsPredicate(Arrays.asList("Alice", "S9999999R", "1234567", "alice@email.com",
                         "171", "61.2", "A+", "12-08-1999"), PREFIX_ADDRESS);
-        assertFalse(predicate.test(new PatientBuilder().withIc("S9999999R").withName("Alice").withPhone("12345")
+        assertFalse(predicate.test(new PatientBuilder().withIc("S9999999R").withName("Alice").withPhone("1234567")
                 .withEmail("alice@email.com").withAddress("Main Street").withHeight("171").withWeight("61.2")
                 .withBloodType("A+").withDateOfBirth("12-08-1999").build()));
 
         // keywords match all fields except email
         predicate =
-                new FieldContainsKeywordsPredicate(Arrays.asList("Alicia", "S9999999R", "12345",
+                new FieldContainsKeywordsPredicate(Arrays.asList("Alicia", "S9999999R", "1234567",
                         "Main", "Street", "171", "61.2", "A+", "12-08-1999"), PREFIX_EMAIL);
-        assertFalse(predicate.test(new PatientBuilder().withIc("S9999999R").withName("Alicia").withPhone("12345")
+        assertFalse(predicate.test(new PatientBuilder().withIc("S9999999R").withName("Alicia").withPhone("1234567")
                 .withEmail("alice@email.com").withAddress("Main Street").withHeight("171").withWeight("61.2")
                 .withBloodType("A+").withDateOfBirth("12-08-1999").build()));
 
         // keywords match all fields except height
         predicate =
-                new FieldContainsKeywordsPredicate(Arrays.asList("Alice", "S9999999R", "12345", "alice@email.com",
+                new FieldContainsKeywordsPredicate(Arrays.asList("Alice", "S9999999R", "1234567", "alice@email.com",
                         "Main", "Street", "61.2", "A+", "12-08-1999"), PREFIX_HEIGHT);
-        assertFalse(predicate.test(new PatientBuilder().withIc("S9999999R").withName("Alice").withPhone("12345")
+        assertFalse(predicate.test(new PatientBuilder().withIc("S9999999R").withName("Alice").withPhone("1234567")
                 .withEmail("alice@email.com").withAddress("Main Street").withHeight("171").withWeight("61.2")
                 .withBloodType("A+").withDateOfBirth("12-08-1999").build()));
 
         // keywords match all fields except weight
         predicate =
-                new FieldContainsKeywordsPredicate(Arrays.asList("Alice", "S9999999R", "12345", "alice@email.com",
+                new FieldContainsKeywordsPredicate(Arrays.asList("Alice", "S9999999R", "1234567", "alice@email.com",
                         "Main", "Street", "171", "A+", "12-08-1999"), PREFIX_WEIGHT);
-        assertFalse(predicate.test(new PatientBuilder().withIc("S9999999R").withName("Alice").withPhone("12345")
+        assertFalse(predicate.test(new PatientBuilder().withIc("S9999999R").withName("Alice").withPhone("1234567")
                 .withEmail("alice@email.com").withAddress("Main Street").withHeight("171").withWeight("61.2")
                 .withBloodType("A+").withDateOfBirth("12-08-1999").build()));
 
         // keywords match all fields except blood type
         predicate =
-                new FieldContainsKeywordsPredicate(Arrays.asList("Alice", "S9999999R", "12345", "alice@email.com",
+                new FieldContainsKeywordsPredicate(Arrays.asList("Alice", "S9999999R", "1234567", "alice@email.com",
                         "Main", "Street", "171", "61.2", "12-08-1999"), PREFIX_BLOOD_TYPE);
-        assertFalse(predicate.test(new PatientBuilder().withIc("S9999999R").withName("Alice").withPhone("12345")
+        assertFalse(predicate.test(new PatientBuilder().withIc("S9999999R").withName("Alice").withPhone("1234567")
                 .withEmail("alice@email.com").withAddress("Main Street").withHeight("171").withWeight("61.2")
                 .withBloodType("A+").withDateOfBirth("12-08-1999").build()));
     }

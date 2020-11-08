@@ -26,7 +26,7 @@ You can reach us at wangjunhao@u.nus.edu, foojingyi@u.nus.edu, E0415577@u.nus.ed
 <img src="images/divakarmal.png" width="200px">
 
 [[github](http://github.com/divakarmal)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/divakarmal.md)]
 
 * Role: **Developer**
 * Responsibilities:

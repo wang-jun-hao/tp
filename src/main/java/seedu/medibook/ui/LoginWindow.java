@@ -119,7 +119,7 @@ public class LoginWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), false);
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
@@ -159,8 +159,12 @@ public class LoginWindow extends UiPart<Stage> {
      * Sets the default size based on {@code guiSettings}.
      */
     private void setWindowDefaultSize(GuiSettings guiSettings) {
-        primaryStage.setHeight(guiSettings.getWindowHeight());
-        primaryStage.setWidth(guiSettings.getWindowWidth());
+        if (guiSettings.isFirstStartup()) {
+            primaryStage.setMaximized(true);
+        } else {
+            primaryStage.setHeight(guiSettings.getWindowHeight());
+            primaryStage.setWidth(guiSettings.getWindowWidth());
+        }
         if (guiSettings.getWindowCoordinates() != null) {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
@@ -177,8 +181,10 @@ public class LoginWindow extends UiPart<Stage> {
         String password = this.passwordField.getText();
         try {
             logic.processLoginInfo(username, password);
+            GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
+                    (int) primaryStage.getX(), (int) primaryStage.getY(), false);
+            logic.setGuiSettings(guiSettings);
             mainWindow = new MainWindow(primaryStage, logic);
-            mainWindow.show();
             mainWindow.fillInnerParts();
         } catch (IllegalLoginException | DataConversionException | IllegalValueException e) {
             logger.info("Invalid login");
@@ -187,6 +193,9 @@ public class LoginWindow extends UiPart<Stage> {
     }
 
     private void createAccountStage() {
+        GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
+                (int) primaryStage.getX(), (int) primaryStage.getY(), false);
+        logic.setGuiSettings(guiSettings);
         createAccountWindow = new CreateAccountWindow(primaryStage, logic);
     }
 }
