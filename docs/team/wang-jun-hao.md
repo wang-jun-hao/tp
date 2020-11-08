@@ -30,8 +30,7 @@ Main highlights of MediBook include:
   are automatically retrieved.
   * Highlights: This enhancement took significant effort and required the implementation of many underlying classes, such as `Doctor` and
   `MedicalNoteList`, and established a connection between these classes and `Patient`. It required an in-depth design analysis 
-  to reduce coupling and avoid cyclic dependency. The auto-filling feature required the implementation of `ModelContext` 
-  to retrieve these information.
+  to reduce coupling and avoid cyclic dependency. The auto-filling feature required the implementation of `ModelContext`.
 
 
 * **New Feature**: Doctor verification when editing or deleting medical notes
