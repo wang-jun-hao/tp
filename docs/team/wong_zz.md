@@ -5,46 +5,49 @@ title: John Doe's Project Portfolio Page
 
 ## Project: MediBook
 
-MediBook - MediBook is a desktop app for managing patient details, optimised for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+MediBook is a desktop medical records software targeting doctors and administrative staffs in clinics or hospitals to help manage patient details. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI), implemented using JavaFX.
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added a new Height field for the Patient class.
-  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
-
-* **New Feature**: Added a Record class.
+* **New Feature**: Added a `Record` class.
   * What it does: Allows the application to store a history of a patient's height and weight.
   * Justification: This feature allows the application to record past height and weight to be used in the Charts UI.
   * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+  
+* **New Feature**: Implemented storage of the `Record` class.
+  
+* **New Feature**: Implemented storage of medical notes data.
+  * What it does: Stores the list of medical notes in `JSON` format for each individual patient.
+  * Justification: This feature allows the application to start up without having to load the medical notes of every single patient, reducing start up time and memory used.
+  * Highlights: There were many features that had to modified in order to ensure that the application is able to handle the storing of patient's medical notes in separate files. For example, the application has to rename the file if the user chooses to edit the ID of the patient since the file name is determined by the ID of the patient.
+  
+* **New Feature**: Added a `Context` class.
+  * What it does: Stores information related to the command that was just called.
+  * Justification: Due to the `Command` design pattern, `LogicManager` is unable to know what command was just executed and the `Context` class addresses this issue, allowing `LogicManager` to perform actions based on the commadn that was most recently executed.
+  * Highlights: It took a long to decide on the implementation of the `Context` class in order to prevent any cyclic dependencies between `LogicManager` and `Command`. The decision was made to implement `Context` as an interface in order to prevent the cyclic dependency and also to maintain the `Command` design pattern.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=Wong-ZZ&tabRepo=AY2021S1-CS2103T-F13-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code)
 
-* **Project management**:
-  * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-
 * **Enhancements to existing features**:
-  * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-  * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+  * Added a new `Height` field for the Patient class.
+  * Improved the find function such that the application is able to match substrings and find patients using multiple fields.
+  * Enhanced `NameContainsKeywordsPredicate` to `FieldContainsKeywordsPredicate` such that it is able to handle fields other than `Name`.
+
+* **Team-Based Tasks**:
+  * Setting up the GitHub Team Organisation.
+  * Setting up the GitHub Team Repo.
+  * Created labels for the issue tracker.
+
+* **Project management**:
+  * Tagged and labelled all issues created during PE dry run.
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `delete` and `find` [\#72]()
-    * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+    * Added documentation for the features `find` and `charts`.
+    * Fix multiple formatting issues.
   * Developer Guide:
-    * Added implementation details of the `delete` feature.
+    * Added implementation details for the enhanced `find` command.
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-  * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
-
-* **Tools**:
-  * Integrated a third party library (Natty) to the project ([\#42]())
-  * Integrated a new Github plugin (CircleCI) to the team repo
-
-* _{you can add/remove categories in the list above}_
+  * PRs reviewed (with non-trivial review comments): [\#39](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/39), [\#58](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/58), [\#13](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/13), [\#77](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/77)
+  * Reported multiple high/medium severity issues for other teams in the class (examples: [1](https://github.com/AY2021S1-CS2103T-W16-3/tp/issues/242), [2](https://github.com/AY2021S1-CS2103T-W16-3/tp/issues/245), [3](https://github.com/AY2021S1-CS2103T-W16-3/tp/issues/246))
