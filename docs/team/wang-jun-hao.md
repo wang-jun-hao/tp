@@ -23,14 +23,14 @@ Main highlights of MediBook include:
 
 
 * **New Feature**: Added the ability to create/edit/delete medical notes for each patient
-  * What it does: Allows users to create, edit and delete medical notes belonging to a patient, when logged in as a doctor
+  * What it does: Allows users to create, edit and delete medical consultation notes belonging to a patient, when logged in as a doctor
   and viewing a patient profile page. Autofills doctor's and patient's information.
-  * Justification: This is a fundamental feature of a medical records software as it allows doctors to store text notes 
-  following a consultation. By only allowing these commands when logged in and viewing a patient profile page, the 
-  commands themselves can be streamlined as certain information are automatically retrieved.
+  * Justification: This is a fundamental feature of a medical records software. By only allowing these commands when 
+  logged in and viewing a patient profile page, the commands themselves can be streamlined as certain information 
+  are automatically retrieved.
   * Highlights: This enhancement took significant effort and required the implementation of many underlying classes, such as `Doctor` and
   `MedicalNoteList`, and established a connection between these classes and `Patient`. It required an in-depth design analysis 
-  to reduce coupling and avoid cyclic dependency. The autofilling feature required the implementation of `ModelContext` 
+  to reduce coupling and avoid cyclic dependency. The auto-filling feature required the implementation of `ModelContext` 
   to retrieve these information.
 
 
