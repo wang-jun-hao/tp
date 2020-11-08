@@ -28,7 +28,7 @@ Main highlights of MediBook include:
   * Justification: This is a fundamental feature of a medical records software as it allows doctors to store text notes 
   following a consultation. By only allowing these commands when logged in and viewing a patient profile page, the 
   commands themselves can be streamlined as certain information are automatically retrieved.
-  * Highlights: This enhancement required the implementation of many underlying classes, such as `Doctor` and
+  * Highlights: This enhancement took significant effort and required the implementation of many underlying classes, such as `Doctor` and
   `MedicalNoteList`, and established a connection between these classes and `Patient`. It required an in-depth design analysis 
   to reduce coupling and avoid cyclic dependency. The autofilling feature required the implementation of `ModelContext` 
   to retrieve these information.
