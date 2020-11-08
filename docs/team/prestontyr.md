@@ -50,11 +50,15 @@ This was challenging as the use of `Optionals` had to be implemented throughout 
 **Code Contributed:** [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=prestontyr)
 
 * **Project management**:
-* Ensured milestones set were met project team members.
+* Ensured milestones set were met by project team members.
 * Closed issues that were completed or issues that we decided not to resolve on GitHub.
 
 **Enhancements to Existing Features:**
 * Wrote additional test cases for existing features. (Pull requests [\#76](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/76))
+* Fixed bugs in the product before each major release. (Pull requests [\#150](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/150),
+[\#151](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/151), [\#159](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/159),
+[\#167](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/167), [\#207](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/207),
+[\#211](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/211), [\#224](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/224))
 
 **Documentation:**
 * User Guide:

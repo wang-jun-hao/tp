@@ -9,7 +9,7 @@ import seedu.medibook.model.commonfields.Name;
 /**
  * Represents a doctor in MediBook.
  */
-public class Doctor {
+public class Doctor implements Comparable<Doctor> {
     private static final String TITLE = "Dr";
 
     private final Name name;
@@ -69,5 +69,11 @@ public class Doctor {
     @Override
     public String toString() {
         return TITLE + " " + name.toString() + " (" + mcr.toString() + ")";
+    }
+
+    @Override
+    public int compareTo(Doctor otherDoctor) {
+        Name otherName = otherDoctor.name;
+        return name.compareTo(otherName);
     }
 }
