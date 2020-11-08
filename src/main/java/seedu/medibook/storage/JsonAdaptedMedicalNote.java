@@ -45,8 +45,8 @@ class JsonAdaptedMedicalNote {
      */
     public JsonAdaptedMedicalNote(MedicalNote medicalNote) {
         this.date = medicalNote.getInputDateString();
-        this.doctorName = medicalNote.getDoctorNameNoTitle();
-        this.doctorMcr = medicalNote.getDoctorStringMcr();
+        this.doctorName = medicalNote.getDoctorNameString();
+        this.doctorMcr = medicalNote.getDoctorMcrString();
         this.content = medicalNote.getContentString();
     }
 

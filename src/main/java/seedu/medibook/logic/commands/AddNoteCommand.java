@@ -12,6 +12,7 @@ import seedu.medibook.commons.core.LogsCenter;
 import seedu.medibook.logic.commands.exceptions.CommandException;
 import seedu.medibook.model.Model;
 import seedu.medibook.model.commonfields.Date;
+import seedu.medibook.model.doctor.Doctor;
 import seedu.medibook.model.medicalnote.Content;
 import seedu.medibook.model.medicalnote.MedicalNote;
 import seedu.medibook.model.patient.Patient;
@@ -26,7 +27,7 @@ public class AddNoteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a medical note to the current patient "
             + "in MediBook. "
             + "Parameters: "
-            + PREFIX_DATE + "DATE "
+            + "[" + PREFIX_DATE + "DATE]"
             + PREFIX_CONTENT + "MEDICAL NOTE CONTENT "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DATE + "04-11-1991 "
@@ -70,7 +71,8 @@ public class AddNoteCommand extends Command {
             throw new CommandException(MESSAGE_USER_CANNOT_ADD);
         }
 
-        MedicalNote newMedicalNote = new MedicalNote(medicalNoteDate, model.getActiveUser().get(), medicalNoteContent);
+        Doctor activeUser = model.getActiveUser().get();
+        MedicalNote newMedicalNote = new MedicalNote(medicalNoteDate, activeUser, medicalNoteContent);
 
         if (displayedPatient.alreadyHasMedicalNote(newMedicalNote)) {
             throw new CommandException(MESSAGE_DUPLICATE_NOTE);
