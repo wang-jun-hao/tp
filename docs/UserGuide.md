@@ -57,10 +57,11 @@ specified patient in MediBook can be added, edited, deleted or found using comma
   * `HEIGHT` must be a whole number between 1 - 299 inclusive and is measured in cms.
   * `WEIGHT` must be a positive number correct to 1 decimal place and is measured in kgs.
   * `BLOOD_TYPE` must be a valid blood type i.e. one of A, B, O or AB followed by '+' or '-". For example A+, AB- etc.
-  * For medical detail fields i.e. `ALLERGY`, `CONDITION` and `TREATMENT`, any number of entries can be specified, following the given format for each entry.
-  All entries will be added.
   * If multiple values for the same personal detail field are given, MediBook accepts the last value. 
-  For eg. if you type `add i/S9123456A n/Divakar d/29-02-2000 p/91234567 b/A+ b/O+`, O+ will be accepted as the actual blood type.
+    Eg. if you type `add i/S9123456A n/Divakar d/29-02-2000 p/91234567 b/A+ b/O+`, O+ will be accepted as the actual blood type.
+  * For medical detail fields i.e. `ALLERGY`, `CONDITION` and `TREATMENT`, any number of entries can be specified, following the given format for each entry.
+  All entries will be added. Note that entries are not cumulative over different command instances 
+  i.e. when you edit a patient's allergies, all the original allergies will be overwritten (and the same goes for other medical detail fields).
 
 </div>
 
@@ -152,8 +153,9 @@ The `edit` command is also used to fill in unspecified fields.
 [al/ALLERGY]... [con/CONDITION]... [t/TREATMENT]...`
 
 * You have to be on the main list page to access a patient's profile. Use the `list` command to return to the main list page if you are viewing a patient's profile.
-* `edit` on a field that already exists will update it from the previous value to the new value
-* `edit` on an optional field that was not specified at the point of adding patient will fill the field with the given value
+* `edit` on a field that already exists will update it from the previous value to the new value.
+* `edit` on an optional field that was not specified at the point of adding patient will fill the field with the given value.
+* `edit` on a medical detail field i.e. `ALLERGY`, `CONDITION` and `TREATMENT` will replace all original values in the field.
 
 **Examples:**
 
