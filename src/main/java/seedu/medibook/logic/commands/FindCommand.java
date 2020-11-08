@@ -52,6 +52,7 @@ public class FindCommand extends Command {
         requireNonNull(model);
         Predicate<Patient> combinedPredicates = predicates.stream().reduce(x -> true, Predicate::and);
         model.updateFilteredPatientList(combinedPredicates);
+        model.resetAccessedPatient();
 
         return new CommandResult(
                 String.format(Messages.MESSAGE_PATIENT_LISTED_OVERVIEW, model.getFilteredPatientList().size()),
