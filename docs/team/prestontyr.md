@@ -50,7 +50,7 @@ This was challenging as the use of `Optionals` had to be implemented throughout 
 **Code Contributed:** [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=prestontyr)
 
 * **Project management**:
-* Ensured milestones set were met project team members.
+* Ensured milestones set were met by project team members.
 * Closed issues that were completed or issues that we decided not to resolve on GitHub.
 
 **Enhancements to Existing Features:**
