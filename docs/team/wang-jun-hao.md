@@ -5,7 +5,6 @@ title: Wang Jun Hao's Project Portfolio Page
 
 ## Project: MediBook
 
-### Overview
 MediBook is a **desktop medical records software** targeting **doctors and administrative staffs** in clinics or hospitals to 
 help **manage patient details.** It is **optimized for use via a Command Line Interface** (CLI) while 
 still having the benefits of a Graphical User Interface (GUI). The GUI is implemented using JavaFX.
@@ -16,10 +15,8 @@ still having the benefits of a Graphical User Interface (GUI). The GUI is implem
 * Displaying of health metric charts such as `BMI`
 * Login accounts for Doctors for a more streamlined experience (e.g. auto-fill name and medical IC)
 
-### Summary of Contributions
 Given below are my contributions to the project.
 
-#### Enhancement
 * **New Feature**: Added the ability to create/edit/delete medical consultation notes for each patient
   * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
   * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
