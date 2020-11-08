@@ -21,6 +21,7 @@ Main highlights of MediBook include:
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=wang-jun-hao)
 
+
 * **New Feature**: Added the ability to create/edit/delete medical notes for each patient
   * What it does: Allows users to create, edit and delete medical notes belonging to a patient, when logged in as a doctor
   and viewing a patient profile page. Autofills doctor's and patient's information.
@@ -60,8 +61,8 @@ Main highlights of MediBook include:
 
 * **Project management**:
   * Managed releases `v1.2.1` - `v1.4` (3 releases) on GitHub
-  * Created and wrapped up milestones `v1.1` - `v1.4` on GitHub
-  * Created branches on team repo for integration
+  * Managed milestones `v1.1` - `v1.4` on GitHub
+  * Managed branches on team repo for integration
 
 * **Contributions to team-based tasks**
   * Liaised with tutor on project matters
