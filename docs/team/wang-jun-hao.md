@@ -35,31 +35,20 @@ Main highlights of MediBook include:
   * What it does: Restricts editing and deleting of medical notes to the doctor who authored them.
   * Justification: Medical notes are important sensitive information that affect treatment decisions. The integrity of
   medical notes should be protected. This feature prevents tampering of medical notes by other doctors.
-  * Highlights: This feature interacts with the login and model context feature to check for account match.
+  * Highlights: This feature interacts with login and model context features to check for account match.
   
-* **New Feature**: Display of medical notes in patient profile page
-  * What it does: 
-
-* **New Feature**: Reverse chronological sorting of medical notes within list
+* **New Feature**: Display of medical notes in reverse chronological order
+  * What it does: Sorts medical notes in reverse chronological order and display them in patient profile page
 
 * **New Feature**: Added support for `BMI` for patients
-  * Highlights: Auto computation of a patient's `BMI` from `Height` and `Weight` fields.
-
-* **New Feature**: Added support for `MCR` for doctors
-
-
-  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed 
-  by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the 
-  app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth 
-  analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-
+  * What it does: Auto computation and storing of a patient's `BMI` from `Height` and `Weight` fields if present.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=wang-jun-hao)
 
 * **Project management**:
-  * Managed all releases `v1.2.1` - `v1.4` (3 releases) on GitHub
+  * Managed releases `v1.2.1` - `v1.4` (3 releases) on GitHub
+  * Created and wrapped up milestones `v1.1` - `v1.4` on GitHub
+  * Created branches on team repo for integration
 
 * **Enhancements to existing features**:
   * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
