@@ -1,6 +1,6 @@
 ---
 layout: page
-title: John Doe's Project Portfolio Page
+title: Wong Zheng Zhi's Project Portfolio Page
 ---
 
 ## Project: MediBook
@@ -31,7 +31,7 @@ Given below are my contributions to the project.
 * **Enhancements to existing features**:
   * Added a new `Height` field for the Patient class.
   * Improved the find function such that the application is able to match substrings and find patients using multiple fields.
-  * Enhanced `NameContainsKeywordsPredicate` to `FieldContainsKeywordsPredicate` such that it is able to handle fields other than `Name`.
+  * Modified `NameContainsKeywordsPredicate` to `FieldContainsKeywordsPredicate` such that it is able to handle fields other than `Name`.
 
 * **Team-Based Tasks**:
   * Setting up the GitHub Team Organisation.
