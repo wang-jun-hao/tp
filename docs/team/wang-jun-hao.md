@@ -9,13 +9,13 @@ MediBook is a **desktop medical records software** targeting **doctors and admin
 help **manage patient details.** It is **optimized for use via a Command Line Interface** (CLI) while 
 still having the benefits of a Graphical User Interface (GUI). The GUI is implemented using JavaFX.
 
-**Main highlights** of MediBook include:
+Main highlights of MediBook include:
 * Ability to keep track of patients’ administrative details, such as `IC`, `Name` etc, and medical details, like `Weight`, `BMI`, `Blood Type` etc. 
 * Ability to store medical consultation notes for each patient
 * Displaying of health metric charts such as `BMI`
 * Login accounts for Doctors for a more streamlined experience (e.g. auto-fill name and medical IC)
 
-Given below are my contributions to the project.
+**Given below are my contributions to the project.**
 
 * **New Feature**: Added the ability to create/edit/delete medical consultation notes for each patient
   * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
