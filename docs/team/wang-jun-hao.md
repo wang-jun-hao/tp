@@ -42,22 +42,23 @@ Main highlights of MediBook include:
 
 
 * **New Feature**: Display of medical notes in reverse chronological order
-  * What it does: Sorts medical notes in reverse chronological order and display them in patient profile page
+
 
 * **New Feature**: Added support for `BMI` for patients
   * What it does: Auto computation and storing of a patient's `BMI` from `Height` and `Weight` fields if present.
 
+
 * **Enhancements to existing features**:
-  * Updated help command window
-  
+  * Implemented new `Weight` field for `add` feature (Pull requests [\#26](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/26))
+
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `addnote`, `editnote` and `deletenote`
-    * Introduction of UG    
-    * Re-ordered features so that related features are back-to-back
-    * Added elaboration on `login` feature
+    * Added documentation for the features `addnote`, `editnote` and `deletenote` (Pull requests [\#154](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/154))
+    * Added elaboration to introduction of UG (Pull requests [\#154](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/154))
+    * Tweaked layout and re-ordered features so that related features are back-to-back (Pull requests [\#154](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/154))
+    * Added elaboration on `login` and `edit` feature (Pull requests [\#121](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/121), [\#174](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/174))
   * Developer Guide:
-    * Added implementation details of `addnote`, `editnote` and `deletenote` features.
+    * Added implementation details of `addnote`, `editnote` and `deletenote` features (Pull requests [\#111](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/111), [\#122](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/122), [\#125](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/125))
 
 * **Project management**:
   * Managed releases `v1.2.1` - `v1.4` (3 releases) on GitHub
@@ -68,8 +69,9 @@ Main highlights of MediBook include:
   * Liaised with tutor on project matters
   * Created platform for team notes
   * Release and milestones management
-  * Managed build number, javaFx version and enabled assertions in gradle
+  * Managed build number, javaFx version and enabled assertions in gradle (Pull requests [\#119](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/119), [\#127](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/127), [\#171](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/171))
+  * Updated help command (Pull requests [\#72](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/72))
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-  * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
+  * PRs reviewed (with non-trivial review comments): [\#42](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/42), [\#56](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/56), [\#74](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/74), [\#75](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/75), [\#152](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/152)
+  * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/wang-jun-hao/ped/issues/11), [2](https://github.com/wang-jun-hao/ped/issues/10), [3](https://github.com/wang-jun-hao/ped/issues/8), [4](https://github.com/wang-jun-hao/ped/issues/7))
