@@ -19,33 +19,26 @@ Main highlights of MediBook include:
 
 **Given below are my contributions to the project.**
 
-* **New Feature**: Added the ability to create/edit/delete medical consultation notes for each patient
+* **New Feature**: Added the ability to create/edit/delete medical notes for each patient
   * What it does: Allows users to create, edit and delete medical notes belonging to a patient, when logged in as a doctor
   and viewing a patient profile page. Autofills doctor's and patient's information.
   * Justification: This is a fundamental feature of a medical records software as it allows doctors to store text notes 
   following a consultation with a patient. By only allowing these commands when logged in and 
-  viewing a patient profile page, the commands themselves, frequently used by doctors, 
-  can be streamlined as information about the doctor and patient are automatically retrieved.
-  * Highlights: This enhancement required the implementation of many underlying classes, such as `Doctor`, `MedicalNote` and
+  viewing a patient profile page, the commands themselves can be streamlined as information about the doctor and patient 
+  are automatically retrieved.
+  * Highlights: This enhancement required the implementation of many underlying classes, such as `Doctor` and
   `MedicalNoteList`, and established a connection between these classes and `Patient`. It required an in-depth design analysis 
   to reduce coupling and avoid cyclic dependency. The autofilling feature required the implementation of `ModelContext` 
-  to retrieve these information. The implementation was challenging as it involved all major components and hence 
-  demanded an understanding of their interaction.
+  to retrieve these information.
 
 * **New Feature**: Doctor verification when editing or deleting medical notes
-  * What it does: Allows users to create, edit and delete medical notes belonging to a patient, when logged in as a doctor
-  and viewing a patient profile page. Autofills doctor's and patient's information.
-  * Justification: This is a fundamental feature of a medical records software as it allows doctors to store text notes 
-  following a consultation with a patient. By only allowing these commands when logged in and 
-  viewing a patient profile page, the commands themselves, frequently used by doctors, 
-  can be streamlined as information about the doctor and patient are automatically retrieved.
-  * Highlights: This enhancement required the implementation of many underlying classes, such as `Doctor`, `MedicalNote` and
-  `MedicalNoteList`, and established a connection between these classes and `Patient`. It required an in-depth design analysis 
-  to reduce coupling and avoid cyclic dependency. The autofilling feature required the implementation of `ModelContext` 
-  to retrieve these information. The implementation was challenging as it involved all major components and hence 
-  demanded an understanding of their interaction.
+  * What it does: Restricts editing and deleting of medical notes to the doctor who authored them.
+  * Justification: Medical notes are important sensitive information that affect treatment decisions. The integrity of
+  medical notes should be protected. This feature prevents tampering of medical notes by other doctors.
+  * Highlights: This feature interacts with the login and model context feature to check for account match.
   
 * **New Feature**: Display of medical notes in patient profile page
+  * What it does: 
 
 * **New Feature**: Reverse chronological sorting of medical notes within list
 
