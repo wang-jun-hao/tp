@@ -82,6 +82,10 @@ Shows a list of all patient's records in the system.
 
 `list`
 
+Anything typed after list will be ignored and the list of all patient records will be displayed.
+
+<img src="images/screenshots/list.PNG">
+
 <a id="addcommand"></a>
 ### 3.4 Adding a patient: `add` 
 
@@ -98,8 +102,10 @@ IC, Name, Date of Birth and Phone Number are compulsory fields while the rest ar
 * `IC` should be of the format @xxxxxxx#, where @ is a letter S, T, F or G, xxxxxxx is a 7 digit number and # is any letter.
 * `HEIGHT` must be a whole number between 1 - 299 inclusive and is measured in cms.
 * `WEIGHT` must be a positive number correct to 1 decimal place and is measured in kgs.
+* `BLOOD_TYPE` must be a valid blood type i.e. one of A, B, O or AB followed by '+' or '-". For example A+, AB- etc.
 * For `ALLERGY`, `CONDITION` and `TREATMENT`, any number of entries can be specified, following the given format for each entry.
 All entries will be added.
+* If multiple values for the same personal detail field are given, the later one is accepted. For eg. if you type `add i/S9123456A n/Divakar d/29-02-2000 p/91234567 b/A+ b/O+`, O+ will be accepted as the actual blood type.
 
 **Examples:**
 
@@ -107,6 +113,8 @@ All entries will be added.
 
 `add i/T0123456Q n/Divakar d/29-02-2000 p/91234567 e/divakarmal@medibook.com a/NUS, Kent Ridge Drive h/178 w/75.0 b/O+
 al/Peanut con/Mitral valve prolapse con/asthma t/EpiPen t/metered-dose inhaler`
+
+<img src="images/screenshots/addcmd.PNG">
 
 <a id="editcommand"></a>
 ### 3.5 Editing a patient: `edit` 
@@ -128,6 +136,7 @@ The `edit` command is also used to fill in unspecified fields.
 `edit 1 n/Divakar` edits the name of patient with index `1` in the displayed list to `Divakar`
 
 `edit 3 n/Divakar p/91111111 h/201` edits the name, phone number and height of patient with index `3` in the displayed list to `Divakar`, `91111111` and `201`cm  respectively.
+<img src="images/screenshots/editresult.PNG">
 
 ### 3.6 Deleting a patient : `delete`
 
@@ -157,6 +166,8 @@ Finds patient records by multiple fields and multiple keywords.
 * `find i/S9123456A` returns the patient record with IC `S9123456A`
 * `find n/Billy Alice a/Clementi i/S99` returns the patient records with Name containing `Billy` or `Alice`, Address containing `Clementi` and IC containing `S99`
 
+<img src="images/screenshots/enhancedFind.PNG">
+
 <a id="accesscommand"></a>
 ### 3.8 Accessing a patient's profile : `access` 
 
@@ -171,6 +182,8 @@ Accesses a specified patient's profile in MediBook.
     * Personal Details section (top left): Shows the personal details of the patient, including their Name, IC, Date of Birth, and Phone Number, as well as their Email, Address, Height, Weight, BMI and Blood Type if available.
     * Medical Details section (bottom left): Shows medical details as tags separated into 3 categories, namely: Allergies, (preexisting) Conditions and (ongoing) Treatments.
     * Medical Notes section (right): A scrollable panel showing the list of medical notes recorded for the specified patient.
+    
+<img src="images/screenshots/access.PNG">
 
 ### 3.9 Adding a medical note: `addnote`
 
@@ -292,7 +305,7 @@ Action | Format, Examples
 **Add** | `add i/IC n/NAME d/DATE_OF_BIRTH p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE]` <br> e.g.,<br>`add i/S9123456A n/Divakar d/29-02-2000 p/91234567` <br> `add i/T0123456Q n/Divakar d/29-02-2000 p/91234567 e/divakarmal@medibook.com a/NUS, Kent Ridge Drive h/178 w/75.0 b/O+`
 **Edit** | `edit INDEX [i/IC] [n/NAME] [d/DATE OF BIRTH] [p/PHONE] [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD TYPE][t/TAG]` <br> e.g., <br> `edit 1 n/Divakar` <br> `edit 3 n/Divakar p/91111111 h/201`
 **Delete** | `delete INDEX`<br> e.g., `delete 1`
-**Find** | `find [i/IC] [n/NAME] [d/DATE_OF_BIRTH] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE]`<br> e.g., <br> `find i/G1234567S`<br>`find n/Jack i/T00 dob/2000 h/17 a/Changi`
+**Find** | `find [i/IC] [n/NAME] [d/DATE_OF_BIRTH] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE]`<br> e.g., <br> `find i/G1234567S`<br>`find n/Jack i/T00 d/2000 h/17 a/Changi`
 **Access** | `access INDEX` <br> e.g., `access 1`
 **Add Note** | `addnote [d/DATE] c/CONTENT_OF_MEDICAL_NOTE` <br> e.g. `addnote c/Patient is having fever. Prescribed panadol.`
 **Edit Note** | `editnote INDEX [d/DATE] [c/CONTENT_OF_MEDICAL_NOTE]` <br> e.g. `editnote 1 d/20-02-2018 c/Patient is having migraine.`
