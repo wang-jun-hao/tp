@@ -307,8 +307,7 @@ The corresponding UI element is displayed on the right of the `PatientProfile` U
 * `MedicalNoteCard` represents a single `MedicalNote`. It provides the graphics for an element in the `ListView` of `MedicalNotesPanel`.
 
 `PatientProfile` is displayed on the `MainWindow` when the `AccessCommand` is invoked. The following sequence diagram shows how accessing a `PatientProfile` works:
-
-[//]: # (todo)
+![AccessCommandSequenceDiagram](images/AccessCommandSequenceDiagram.png)
 
 Thereafter, this next sequence diagram shows how displaying the `PatientProfile` works:
 ![PatientProfileSequenceDiagram](images/PatientProfileSequenceDiagram.png)
