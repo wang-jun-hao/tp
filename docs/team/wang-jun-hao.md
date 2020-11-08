@@ -15,6 +15,8 @@ Main highlights of MediBook include:
 * Displaying of health metric charts such as `BMI`
 * Login accounts for Doctors for a more streamlined experience (e.g. auto-fill name and medical IC)
 
+<br/>
+
 **Given below are my contributions to the project.**
 
 * **New Feature**: Added the ability to create/edit/delete medical consultation notes for each patient
