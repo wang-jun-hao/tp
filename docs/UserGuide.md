@@ -291,8 +291,11 @@ Patients' data are saved in the hard disk automatically after any command that c
 
 ## 4. FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MediBook home folder.
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Follow these steps on the new computer:
+1. Install the app in the other computer. You may follow the instructions in [Quick start](#2-quick-start) to do so.
+2. Run the app and try out any command. This should create a data folder (named **"data"**) in the home folder (that you chose in [Quick start](#2-quick-start)).
+3. Replace the data folder on this new computer with that of the first computer.
 
 --------------------------------------------------------------------------------------------------------------------
 
