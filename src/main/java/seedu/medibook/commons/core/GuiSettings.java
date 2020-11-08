@@ -16,6 +16,7 @@ public class GuiSettings implements Serializable {
     private final double windowWidth;
     private final double windowHeight;
     private final Point windowCoordinates;
+    private boolean isFirstStartup;
 
     /**
      * Constructs a {@code GuiSettings} with the default height, width and position.
@@ -24,14 +25,16 @@ public class GuiSettings implements Serializable {
         windowWidth = DEFAULT_WIDTH;
         windowHeight = DEFAULT_HEIGHT;
         windowCoordinates = null; // null represent no coordinates
+        isFirstStartup = true;
     }
 
     /**
      * Constructs a {@code GuiSettings} with the specified height, width and position.
      */
-    public GuiSettings(double windowWidth, double windowHeight, int xPosition, int yPosition) {
+    public GuiSettings(double windowWidth, double windowHeight, int xPosition, int yPosition, boolean isFirstStartup) {
         this.windowWidth = windowWidth;
         this.windowHeight = windowHeight;
+        this.isFirstStartup = isFirstStartup;
         windowCoordinates = new Point(xPosition, yPosition);
     }
 
@@ -45,6 +48,10 @@ public class GuiSettings implements Serializable {
 
     public Point getWindowCoordinates() {
         return windowCoordinates != null ? new Point(windowCoordinates) : null;
+    }
+
+    public boolean isFirstStartup() {
+        return this.isFirstStartup;
     }
 
     @Override

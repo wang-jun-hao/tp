@@ -133,7 +133,7 @@ public class CreateAccountWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), false);
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
@@ -195,7 +195,7 @@ public class CreateAccountWindow extends UiPart<Stage> {
             logic.createAccount(username, password, doctorName, doctorMcr);
             logic.processLoginInfo(username, password);
             GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                    (int) primaryStage.getX(), (int) primaryStage.getY());
+                    (int) primaryStage.getX(), (int) primaryStage.getY(), false);
             logic.setGuiSettings(guiSettings);
             mainWindow = new MainWindow(primaryStage, logic);
             mainWindow.fillInnerParts();
@@ -206,7 +206,7 @@ public class CreateAccountWindow extends UiPart<Stage> {
 
     private void back() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), false);
         logic.setGuiSettings(guiSettings);
         loginWindow = new LoginWindow(primaryStage, logic);
     }
