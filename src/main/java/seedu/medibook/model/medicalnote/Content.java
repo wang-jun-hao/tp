@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 /**
  * Represents the textual content of a medical note.
  */
-public class Content {
+public class Content implements Comparable<Content> {
 
     public static final String MESSAGE_CONSTRAINTS = "Content cannot be blank.";
 
@@ -50,5 +50,10 @@ public class Content {
 
         Content otherContent = (Content) other;
         return otherContent.innerString.equals(innerString);
+    }
+
+    @Override
+    public int compareTo(Content o) {
+        return innerString.compareToIgnoreCase(o.innerString);
     }
 }

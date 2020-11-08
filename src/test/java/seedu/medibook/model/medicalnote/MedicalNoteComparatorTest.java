@@ -35,13 +35,12 @@ class MedicalNoteComparatorTest {
 
     @Test
     void compare_sameDateSameFields_zero() {
-
         assertTrue(comparator.compare(medicalNote1, medicalNote2) == 0);
     }
 
     @Test
-    void compare_sameDateDiffFields_zero() {
-        assertTrue(comparator.compare(medicalNote1, medicalNote3) == 0);
+    void compare_sameDateDiffDoctor_zero() {
+        assertTrue(comparator.compare(medicalNote1, medicalNote3) < 0);
     }
 
     @Test
