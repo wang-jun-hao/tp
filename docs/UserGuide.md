@@ -32,19 +32,35 @@ This user guide helps you get familiar with its features and get started with us
 
 ## 3. Features
 
+Listed below are the features of MediBook.
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**:information_source: Notes about patients in MediBook:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add i/IC`, `IC` is a parameter which can be used as `add i/S91234567A`.
-
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [w/WEIGHT]` can be used as `n/John Doe w/60.5` or as `n/John Doe`.
-
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+MediBook stores patients with their personal details, medical details and medical notes. A representation of any
+specified patient in MediBook can be added, edited, deleted or found using commands. Here are some things to take note when dealing with patient records in MediBook:
+  * The personal detail fields are: `IC`, `NAME`, `DATE_OF_BIRTH`, `PHONE_NUMBER`, `EMAIL`, `ADDRESS`, `HEIGHT`, `WEIGHT`, `BLOOD_TYPE` and `BMI`.
+  `BMI` is the only non-editable field since it is automatically calculated from `HEIGHT` and `WEIGHT`.
+  * The medical detail fields are: `ALLERGY`, `CONDITION` and `TREATMENT`.
+  * `IC` should be of the format @xxxxxxx#, where @ is a letter S, T, F or G, xxxxxxx is a 7 digit number and # is any letter.
+  * `NAME` should only have alphanumeric characters and spaces.
+  * `DATE_OF_BIRTH` should be given in the format "DD-MM-YYYY" where D, M and Y represent digits of the day, month and year of the date respectively.
+  * `PHONE_NUMBER` has to be within 7 to 15 digits long (to support international numbers).
+  * `EMAIL` Emails should be of the format "local-part@domain" and adhere to the following constraints:
+    * The local-part should only contain alphanumeric characters and these special characters, excluding parentheses, (!#$%&'*+/=?`{|}~^.-").
+    * This is followed by a '@' and then a domain name. The domain name must:
+        * be at least 2 characters long
+        * start and end with alphanumeric characters
+        * consist of alphanumeric characters, a period or a hyphen for the characters in between, if any.
+  * `ADDRESS` can take any values but should not be blank.  
+  * `HEIGHT` must be a whole number between 1 - 299 inclusive and is measured in cms.
+  * `WEIGHT` must be a positive number correct to 1 decimal place and is measured in kgs.
+  * `BLOOD_TYPE` must be a valid blood type i.e. one of A, B, O or AB followed by '+' or '-". For example A+, AB- etc.
+  * For medical detail fields i.e. `ALLERGY`, `CONDITION` and `TREATMENT`, any number of entries can be specified, following the given format for each entry.
+  All entries will be added.
+  * If multiple values for the same personal detail field are given, MediBook accepts the last value. 
+  For eg. if you type `add i/S9123456A n/Divakar d/29-02-2000 p/91234567 b/A+ b/O+`, O+ will be accepted as the actual blood type.
 
 </div>
 
@@ -65,8 +81,26 @@ Alternatively, you can also login as an **administrative staff** using the usern
 As an **administrative staff**, you can only add, edit, delete and find patients. 
 You are unable to add, edit or delete medical notes.
 
+### 3.2 Commands
 
-### 3.2 Viewing help : `help`
+Use the follow commands by typing into the command box and hitting enter.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command format:**<br>
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+  e.g. in `add i/IC`, `IC` is a parameter which can be used as `add i/S91234567A`.
+
+* Parameters in square brackets are optional, whilst parameters not in square brackets are compulsory for that command.<br>
+  e.g `n/NAME [w/WEIGHT]` can be used as `n/John Doe w/60.5` or as `n/John Doe`.
+
+* Parameters can be in any order.<br>
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+
+</div>
+
+#### 3.2.1 Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -74,7 +108,7 @@ Shows a message explaining how to access the help page.
 
 `help`
 
-### 3.3 Listing all patients: `list`
+#### 3.2.2 Listing all patients: `list`
 
 Shows a list of all patient's records in the system.
 
@@ -87,25 +121,14 @@ Anything typed after list will be ignored and the list of all patient records wi
 <img src="images/screenshots/list.PNG">
 
 <a id="addcommand"></a>
-### 3.4 Adding a patient: `add` 
+#### 3.2.3 Adding a patient: `add` 
 
 Adds a patient to the system.
-
-IC, Name, Date of Birth and Phone Number are compulsory fields while the rest are optional.
 
 **Format:**
 
 `add i/IC n/NAME d/DATE_OF_BIRTH p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE] 
 [al/ALLERGY]... [con/CONDITION]... [t/TREATMENT]...`
-
-* `PHONE_NUMBER` has to be within 7 to 15 digits long (support for international numbers).
-* `IC` should be of the format @xxxxxxx#, where @ is a letter S, T, F or G, xxxxxxx is a 7 digit number and # is any letter.
-* `HEIGHT` must be a whole number between 1 - 299 inclusive and is measured in cms.
-* `WEIGHT` must be a positive number correct to 1 decimal place and is measured in kgs.
-* `BLOOD_TYPE` must be a valid blood type i.e. one of A, B, O or AB followed by '+' or '-". For example A+, AB- etc.
-* For `ALLERGY`, `CONDITION` and `TREATMENT`, any number of entries can be specified, following the given format for each entry.
-All entries will be added.
-* If multiple values for the same personal detail field are given, the later one is accepted. For eg. if you type `add i/S9123456A n/Divakar d/29-02-2000 p/91234567 b/A+ b/O+`, O+ will be accepted as the actual blood type.
 
 **Examples:**
 
@@ -117,7 +140,7 @@ al/Peanut con/Mitral valve prolapse con/asthma t/EpiPen t/metered-dose inhaler`
 <img src="images/screenshots/addcmd.PNG">
 
 <a id="editcommand"></a>
-### 3.5 Editing a patient: `edit` 
+#### 3.2.4 Editing a patient: `edit` 
 
 Edits the specified patient's information from MediBook. 
 
@@ -138,7 +161,7 @@ The `edit` command is also used to fill in unspecified fields.
 `edit 3 n/Divakar p/91111111 h/201` edits the name, phone number and height of patient with index `3` in the displayed list to `Divakar`, `91111111` and `201`cm  respectively.
 <img src="images/screenshots/editresult.PNG">
 
-### 3.6 Deleting a patient : `delete`
+#### 3.2.5 Deleting a patient : `delete`
 
 Deletes the specified patient from MediBook.
 
@@ -149,7 +172,7 @@ Deletes the specified patient from MediBook.
 **Example:**
 * `delete 1` deletes the patient with index `1` in the displayed list
 
-### 3.7 Finding a patient: `find`
+#### 3.2.6 Finding a patient: `find`
 
 Finds patient records by multiple fields and multiple keywords.
 
@@ -169,7 +192,7 @@ Finds patient records by multiple fields and multiple keywords.
 <img src="images/screenshots/enhancedFind.PNG">
 
 <a id="accesscommand"></a>
-### 3.8 Accessing a patient's profile : `access` 
+#### 3.2.7 Accessing a patient's profile : `access` 
 
 Accesses a specified patient's profile in MediBook.
 
@@ -185,7 +208,7 @@ Accesses a specified patient's profile in MediBook.
     
 <img src="images/screenshots/access.PNG">
 
-### 3.9 Adding a medical note: `addnote`
+#### 3.2.8 Adding a medical note: `addnote`
 
 Adds a medical note to a patient.
 
@@ -212,7 +235,7 @@ Context: You are logged in as Dr John Doe (M06371K) and viewing the profile page
 Adds a medical note that is dated today, by Dr John Doe (M06371K) with content "Patient complains of stomach ache and headache. 
 No signs of fever. Prescribed painkillers and probiotics." to patient with IC 'S9123456A'.
 
-### 3.10 Editing a medical note: `editnote`
+#### 3.2.9 Editing a medical note: `editnote`
 
 Edits the date and/or content of an existing medical note belonging to a patient, authored by you.
 
@@ -239,7 +262,7 @@ the medical note at index 1 authored by you.
 Updates the date of the medical note with index 1 in the displayed list of medical notes 
 to '20-02-2018' and content to 'Patient is having migraine.'.
 
-### 3.11 Deleting a medical note: `deletenote`
+#### 3.2.10 Deleting a medical note: `deletenote`
 
 Deletes a medical note belonging to a patient, authored by you.
 
@@ -263,7 +286,7 @@ the medical note at index 1 authored by you.
 
 Deletes the medical note with index 1 in the displayed list of medical notes belonging to patient with IC 'S9123456A'.
 
-### 3.12 Exiting the program : `exit`
+#### 3.2.11 Exiting the program : `exit`
 
 Exits the program.
 
@@ -271,7 +294,7 @@ Exits the program.
 
 `exit`
 
-### 3.13 Charts
+### 3.3 Charts
 
 MediBook keeps a record of a patient's height and weight. This record can be viewed in chart form when [accessing a patient's profile](#accesscommand).
 [Adding a patient](#addcommand) or [Editing a patient's profile](#editcommand) will automatically update the patient's height and weight records (assuming the height/weight field is not empty).
@@ -282,7 +305,7 @@ MediBook also derives a patient's BMI records based on the patient's height and 
 record for a particular date can only be derived if the patient also has both the height and weight records on that day.
 
 
-### 3.14 Saving the data
+### 3.4 Saving the data
 
 Patients' data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
