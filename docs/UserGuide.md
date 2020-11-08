@@ -151,6 +151,7 @@ The `edit` command is also used to fill in unspecified fields.
 `edit INDEX [i/IC] [n/NAME] [d/DATE OF BIRTH] [p/PHONE] [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD TYPE] 
 [al/ALLERGY]... [con/CONDITION]... [t/TREATMENT]...`
 
+* You have to be on the main list page to access a patient's profile. Use the `list` command to return to the main list page if you are viewing a patient's profile.
 * `edit` on a field that already exists will update it from the previous value to the new value
 * `edit` on an optional field that was not specified at the point of adding patient will fill the field with the given value
 
@@ -169,6 +170,8 @@ Deletes the specified patient from MediBook.
 
 `delete INDEX`
 
+* You have to be on the main list page to access a patient's profile. Use the `list` command to return to the main list page if you are viewing a patient's profile.
+
 **Example:**
 * `delete 1` deletes the patient with index `1` in the displayed list
 
@@ -180,6 +183,7 @@ Finds patient records by multiple fields and multiple keywords.
 
 `find [i/IC] [n/NAME] [d/DATE_OF_BIRTH] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [h/HEIGHT] [w/WEIGHT] [b/BLOOD_TYPE]`
 
+* You have to be on the main list page to access a patient's profile. Use the `list` command to return to the main list page if you are viewing a patient's profile.
 * At least one field must be specified for the command to be valid
 * The search is case-insensitive. e.g `S9123456A` will match `s9123456a`
 * The search will match substrings e.g `S912345` will match `S9123456A`
@@ -200,7 +204,7 @@ Accesses a specified patient's profile in MediBook.
 
 `access INDEX`
 
-* Use the `list` command to return to the main list page
+* You have to be on the main list page to access a patient's profile. Use the `list` command to return to the main list page if you are viewing a patient's profile.
 * Each patient's profile consists of 3 sections: Personal Details, Medical Details and Medical Notes.
     * Personal Details section (top left): Shows the personal details of the patient, including their Name, IC, Date of Birth, and Phone Number, as well as their Email, Address, Height, Weight, BMI and Blood Type if available.
     * Medical Details section (bottom left): Shows medical details as tags separated into 3 categories, namely: Allergies, (preexisting) Conditions and (ongoing) Treatments.
