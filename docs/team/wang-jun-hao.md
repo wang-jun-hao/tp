@@ -7,24 +7,61 @@ title: Wang Jun Hao's Project Portfolio Page
 
 MediBook is a **desktop medical records software** targeting **doctors and administrative staffs** in clinics or hospitals to 
 help **manage patient details.** It is **optimized for use via a Command Line Interface** (CLI) while 
-still having the benefits of a Graphical User Interface (GUI). The GUI is implemented using JavaFX.
+still having the benefits of a Graphical User Interface (GUI), implemented using JavaFX.
 
 Main highlights of MediBook include:
-* Ability to keep track of patients’ administrative details, such as `IC`, `Name` etc, and medical details, like `Weight`, `BMI`, `Blood Type` etc. 
+* Ability to keep track of patients’ administrative and medical details
 * Ability to store medical consultation notes for each patient
 * Displaying of health metric charts such as `BMI`
-* Login accounts for Doctors for a more streamlined experience (e.g. auto-fill name and medical IC)
+* Login accounts for doctors for a more streamlined experience (e.g. auto-fill name and medical IC)
 
 <br/>
 
 **Given below are my contributions to the project.**
 
 * **New Feature**: Added the ability to create/edit/delete medical consultation notes for each patient
-  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+  * What it does: Allows users to create, edit and delete medical notes belonging to a patient, when logged in as a doctor
+  and viewing a patient profile page. Autofills doctor's and patient's information.
+  * Justification: This is a fundamental feature of a medical records software as it allows doctors to store text notes 
+  following a consultation with a patient. By only allowing these commands when logged in and 
+  viewing a patient profile page, the commands themselves, frequently used by doctors, 
+  can be streamlined as information about the doctor and patient are automatically retrieved.
+  * Highlights: This enhancement required the implementation of many underlying classes, such as `Doctor`, `MedicalNote` and
+  `MedicalNoteList`, and established a connection between these classes and `Patient`. It required an in-depth design analysis 
+  to reduce coupling and avoid cyclic dependency. The autofilling feature required the implementation of `ModelContext` 
+  to retrieve these information. The implementation was challenging as it involved all major components and hence 
+  demanded an understanding of their interaction.
 
-* **New Feature**: Auto computation of a patient's `BMI` from `Height` and `Weight` fields
+* **New Feature**: Doctor verification when editing or deleting medical notes
+  * What it does: Allows users to create, edit and delete medical notes belonging to a patient, when logged in as a doctor
+  and viewing a patient profile page. Autofills doctor's and patient's information.
+  * Justification: This is a fundamental feature of a medical records software as it allows doctors to store text notes 
+  following a consultation with a patient. By only allowing these commands when logged in and 
+  viewing a patient profile page, the commands themselves, frequently used by doctors, 
+  can be streamlined as information about the doctor and patient are automatically retrieved.
+  * Highlights: This enhancement required the implementation of many underlying classes, such as `Doctor`, `MedicalNote` and
+  `MedicalNoteList`, and established a connection between these classes and `Patient`. It required an in-depth design analysis 
+  to reduce coupling and avoid cyclic dependency. The autofilling feature required the implementation of `ModelContext` 
+  to retrieve these information. The implementation was challenging as it involved all major components and hence 
+  demanded an understanding of their interaction.
+  
+* **New Feature**: Display of medical notes in patient profile page
+
+* **New Feature**: Reverse chronological sorting of medical notes within list
+
+* **New Feature**: Added support for `BMI` for patients
+  * Highlights: Auto computation of a patient's `BMI` from `Height` and `Weight` fields.
+
+* **New Feature**: Added support for `MCR` for doctors
+
+
+  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed 
+  by using the redo command.
+  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the 
+  app should provide a convenient way to rectify them.
+  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth 
+  analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=wang-jun-hao)
 
