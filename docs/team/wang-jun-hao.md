@@ -19,6 +19,8 @@ Main highlights of MediBook include:
 
 **Given below are my contributions to the project.**
 
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=wang-jun-hao)
+
 * **New Feature**: Added the ability to create/edit/delete medical notes for each patient
   * What it does: Allows users to create, edit and delete medical notes belonging to a patient, when logged in as a doctor
   and viewing a patient profile page. Autofills doctor's and patient's information.
@@ -43,23 +45,28 @@ Main highlights of MediBook include:
 * **New Feature**: Added support for `BMI` for patients
   * What it does: Auto computation and storing of a patient's `BMI` from `Height` and `Weight` fields if present.
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=wang-jun-hao)
+* **Enhancements to existing features**:
+  * Updated help command window
+  
+* **Documentation**:
+  * User Guide:
+    * Added documentation for the features `addnote`, `editnote` and `deletenote`
+    * Introduction of UG    
+    * Re-ordered features so that related features are back-to-back
+    * Added elaboration on `login` feature
+  * Developer Guide:
+    * Added implementation details of `addnote`, `editnote` and `deletenote` features.
 
 * **Project management**:
   * Managed releases `v1.2.1` - `v1.4` (3 releases) on GitHub
   * Created and wrapped up milestones `v1.1` - `v1.4` on GitHub
   * Created branches on team repo for integration
 
-* **Enhancements to existing features**:
-  * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-  * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
-
-* **Documentation**:
-  * User Guide:
-    * Added documentation for the features `delete` and `find` [\#72]()
-    * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
-  * Developer Guide:
-    * Added implementation details of the `delete` feature.
+* **Contributions to team-based tasks**
+  * Liaised with tutor on project matters
+  * Created platform for team notes
+  * Release and milestones management
+  * Managed build number, javaFx version and enabled assertions in gradle
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
