@@ -284,14 +284,14 @@ Step 3. `Logic#processLoginInfo()` then calls `Storage#login()` on the login inf
 
 Step 4. If there is no match, an error is thrown. If there is a match, the UI then changes from `LoginWindow` to `MainWindow`, which signifies that the user has succesfully logged in.
 
-#### Design Consideration
+#### Design consideration
 
 We decided to implement this feature due to the nature of our application. Since it is intended for use by medical staff
 and contains personal information for patients, the ability to protect such information is necessary. Thus, we came up with
 this feature so that only valid users are able to use the system, thereby protecting the information of every patient
 the system contains.
 
-#### \[Proposed\] Admin Accounts
+#### \[Proposed\] Admin accounts
 
 Currently, the system is only capable of allowing the user to create new doctor's accounts. For all administrative staff,
 there is only one account that they can use.
