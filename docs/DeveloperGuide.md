@@ -252,9 +252,9 @@ Step 4. `EditNoteCommand` attempts to delete the target `MedicalNote` object and
 If the edit results in duplicates, an exception is thrown and no changes are made.
 
 
-### Account creation and login
+### Account creation and logging in
 
-#### Implementation
+#### Account creation implementation
 
 The account creation feature is facilitated by a new `CreateAccountWindow` class in the UI.
 
@@ -270,6 +270,8 @@ The following activity diagram summarises what happens when a user attempts to c
 
 ![CreateAccountActivityDiagram](images/CreateAccountActivityDiagram.png)
 
+#### Login implementation
+
 The login feature is facilitated by a new `LoginWindow` class in the UI.
 
 ![LoginSequenceDiagram](images/LoginSequenceDiagram.png)
@@ -281,6 +283,24 @@ Step 2. The UI calls `Logic#processLoginInfo()` with the login information as in
 Step 3. `Logic#processLoginInfo()` then calls `Storage#login()` on the login information, to check if the information matches any of the account details saved.
 
 Step 4. If there is no match, an error is thrown. If there is a match, the UI then changes from `LoginWindow` to `MainWindow`, which signifies that the user has succesfully logged in.
+
+#### Design Consideration
+
+We decided to implement this feature due to the nature of our application. Since it is intended for use by medical staff
+and contains personal information for patients, the ability to protect such information is necessary. Thus, we came up with
+this feature so that only valid users are able to use the system, thereby protecting the information of every patient
+the system contains.
+
+#### \[Proposed\] Admin Accounts
+
+Currently, the system is only capable of allowing the user to create new doctor's accounts. For all administrative staff,
+there is only one account that they can use.
+
+By allowing users to create either an admin account or a doctor account, the administrative staff would be allowed to
+have a personalised account to use the system with. However, as there is no section of the application usable by
+administrative staff that needs to keep track of the current user, this feature is low priority and we have not implemented
+it.
+
 
 ### Enhanced find command
 
@@ -426,7 +446,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `MediBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**UC00 Add a patient**
+**UC00 Login**
+
+**MSS**
+
+1. User requests to login with their username and password.
+2. MediBook switches from the login window to the main app window.
+
+    Use case ends.
+
+**Extensions**
+* 1a. MediBook detects an invalid username or password.
+    *1a1. MediBook shows an error message.
+    *1a2. User requests to login again but with edited inputs.
+    Steps 1a1-1a2 are repeated until the username and password entered are valid.
+    Use case resumes from step 2.
+    
+**UC01 Create an account**
+
+**MSS**
+1. User requests to create a new account with their details. (username, password, name and MCR)
+2. MediBook switches from the create account window to the main app window.
+
+    Use case ends.
+
+**Extensions**
+* 1a. MediBook detects an invalid username, password, name or MCR.
+    *1a1. MediBook shows an error message.
+    *1a2. User requests to create an account again with edited inputs.
+    Steps 1a1-1a2 are repeated until the username, password, name and MCR are valid.
+    Use case resumes from step 2.
+    
+**UC02 Add a patient**
 
 **MSS**
 
@@ -447,7 +498,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Steps 1b1-1b2 are repeated until the compulsory fields are all provided.
     Use case resumes from step 2.
 
-**UC01 Find a patient**
+**UC03 Find a patient**
 
 **MSS**
 
@@ -464,7 +515,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Steps 1a1-1a2 are repeated until the syntax of the command is correct.
     Use case resumes from step 2.
 
-**UC02 Delete a patient**
+**UC04 Delete a patient**
 
 **MSS**
 

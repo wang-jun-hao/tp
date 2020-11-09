@@ -110,8 +110,23 @@ specified patient in MediBook can be added, edited, deleted or found using comma
 
 ### 3.1 Login and Create Account
 
-Type in your `username` and `password` to login as to the system. If you do not have a `username` and `password`, pick the
+#### 3.1.1 Logging In
+
+When you first startup MediBook, you will be presented with the following login screen.
+
+<img src="images/screenshots/login.PNG">
+
+Type in your `username` and `password` to login to the system as a **doctor**.
+As a **doctor**, you can use all features of MediBook.
+
+If you do not have a `username` and `password`, pick the
 `create account` option, which would let you create a new **doctor** account.
+
+Alternatively, you can also login as an **administrative staff** using the username: `admin` and password: `admin`. 
+As an **administrative staff**, you can only add, edit, delete and find patients. 
+You are unable to add, edit or delete medical notes.
+
+#### 3.1.2 Creating Account
 
 When creating your new account, fill in your desired `username`, `password`, your `name` and your `MCR`, then click create.
 
@@ -119,13 +134,12 @@ When creating your new account, fill in your desired `username`, `password`, you
 * `MCR` is your medical registration number as given by the Singapore Medical Council, e.g. 'M35477G'.
 * `MCR` has to be of the format 'M@####$', where @ is a letter/digit, # is a digit and $ is a letter.
 
-As a **doctor**, you can use all features of MediBook.
-
-Alternatively, you can also login as an **administrative staff** using the username: `admin` and password: `admin`. 
-As an **administrative staff**, you can only add, edit, delete and find patients. 
-You are unable to add, edit or delete medical notes.
-
 <img src="images/screenshots/createAccount.PNG">
+
+#### 3.1.3 Logout
+
+At any point when using the app, the user can choose to logout and return to the login screen by either using the option
+in the menu bar at the top or using the key `F2`.
 
 ### 3.2 Commands
 
