@@ -287,7 +287,7 @@ Notes:
 * All classes used to display a patient profile (shown in the above diagram) inherit from the abstract `UiPart` class. 
 Hence, they each represent a visible part of the UI.
 * Some of these classes are dependent on the `Model` package which is shown in the [full UI diagram](#ui-component). 
-Namely, `PatientProfile`, `PersonalDetailsCard`, `MedicalDetailsCard`, `MedicalNotesPanel` and `MedicalNoteCard`.
+Namely, `PatientProfile`, `PersonalDetailsCard`, `MedicalDetailsCard`, `MedicalNotesPanel`, `MedicalNoteCard` and `PatientChartCard`.
 This is to retrieve the required information of a `patient`.
 
 Classes used in this implementation can be described as follows:
@@ -305,6 +305,7 @@ The corresponding UI element is displayed on the right of the `PatientProfile` U
 * `PersonalDetailsRow` represents a single `patient` personal detail. It provides the graphics for a row in the `ListView` of `PersonalDetailsCard`.
 * `MedicalDetailsRow` represents a single `patient` personal detail. It provides the graphics for a row in the `ListView` of `MedicalDetailsCard`.
 * `MedicalNoteCard` represents a single `MedicalNote`. It provides the graphics for an element in the `ListView` of `MedicalNotesPanel`.
+`PatientChartCard` represents a UI element displaying the height, weight and BMI charts of a `patient`.
 
 `PatientProfile` is displayed on the `MainWindow` when the `AccessCommand` is invoked. The following sequence diagram shows how accessing a `PatientProfile` works:
 
