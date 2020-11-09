@@ -9,10 +9,10 @@ Participant ":Storage" as storage STORAGE_COLOR
 user -[USER_COLOR]> ui : input login details
 activate ui UI_COLOR
 
-ui -[UI_COLOR]> logic : login("details")
+ui -[UI_COLOR]> logic : processLoginInfo("details")
 activate logic LOGIC_COLOR
 
-logic -[LOGIC_COLOR]> storage : checkAccountDetails("details")
+logic -[LOGIC_COLOR]> storage : login("details")
 activate storage STORAGE_COLOR
 
 storage --[STORAGE_COLOR]> logic
@@ -21,7 +21,7 @@ deactivate storage
 logic --[LOGIC_COLOR]> ui
 deactivate logic
 
-ui -[UI_COLOR]> ui: switch to main window
+ui -[UI_COLOR]> ui: handleLogin()
 
 ui--[UI_COLOR]> user
 deactivate ui
