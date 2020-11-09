@@ -31,7 +31,7 @@ adding a way to store account information.
 
 **New Feature:** Added the ability to access a patient's profile, which shows all their information.
 * What it does: Allows the user to access a patient's profile, which shows all of a patient's information along with
-medical notes oertaining to the patient.
+medical notes pertaining to the patient.
 * Justification: This feature improves the usability of the product. Since each patient has many fields of information
 along with plenty of medical notes, having all of the information displayed while viewing the list of patients will make
 it cluttered and difficult to use.
