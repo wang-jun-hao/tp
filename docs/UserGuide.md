@@ -32,6 +32,7 @@ This user guide contains everything that you will need to know about MediBook. T
 
 ## 2. Quick start
 
+### 2.1 Setting up
 
 1. Ensure you have Java 11 or above installed in your Computer.
 2. Download the latest medibook.jar from [https://github.com/AY2021S1-CS2103T-F13-3/tp/releases](https://github.com/AY2021S1-CS2103T-F13-3/tp/releases).
@@ -40,6 +41,33 @@ This user guide contains everything that you will need to know about MediBook. T
 5. Login to the program or create an account if you do not already have one.
 6. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.
 7. Refer to the Features below for details on each command.
+
+### 2.2 Starting MediBook for the first time
+
+After starting up MediBook, you should be greeted by the login screen as seen below. New users should click on the
+`Create` button to proceed with creating a new account.
+
+<img src="images/screenshots/login.png">
+
+After clicking on the `Create` button, you should see the account creation page as seen below.
+Proceed with filling in the relevant details for your account.
+For more information about account creation, refer to [Section 3.1 Login and Create Account](#31-login-and-create-account).
+
+<img src="images/screenshots/createaccount.png">
+
+If the account creation is successful, you should now be brought to the main page where you can view the details of all the patients.
+The Command Box (marked by the blue rectangle) is where users type the commands needed to use MediBook.
+The Result Display (marked by the red rectangle) is where MediBook displays the result/error for each command input by the user.
+
+<img src="images/screenshots/mainpage.png">
+
+The screenshot below shows the patient profile page which you can enter by [accessing a patient's profile](#327-accessing-a-patients-profile--access).
+The patient profile page displays the specific patient's medical details, medical notes and charts of the patient's height, weight and BMI.
+
+<img src="images/screenshots/patientprofile.png">
+
+For more information regarding the features, refer to the next section!
+
 
 ---------------------------------------------------------------------------------------------------------------
 
