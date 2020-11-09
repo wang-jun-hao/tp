@@ -10,6 +10,7 @@ import seedu.medibook.commons.core.Messages;
 import seedu.medibook.commons.core.index.Index;
 import seedu.medibook.logic.commands.exceptions.CommandException;
 import seedu.medibook.model.Model;
+import seedu.medibook.model.doctor.Doctor;
 import seedu.medibook.model.medicalnote.MedicalNote;
 import seedu.medibook.model.medicalnote.MedicalNoteList;
 import seedu.medibook.model.patient.Patient;
@@ -72,9 +73,10 @@ public class DeleteNoteCommand extends Command {
             throw new CommandException(MESSAGE_USER_CANNOT_DELETE);
         }
 
+        Doctor activeUser = model.getActiveUser().get();
         MedicalNote noteToDelete = medicalNoteList.getMedicalNoteAtIndex(zeroBasedIndex);
 
-        if (noteToDelete.getDoctorMcr().equals(model.getActiveUser().get().getMcr())) {
+        if (noteToDelete.isAuthoredBy(activeUser)) {
             medicalNoteList.deleteMedicalNoteAtIndex(zeroBasedIndex);
         } else {
             throw new CommandException(MESSAGE_CANNOT_DELETE_OTHER_DOCTOR_NOTES);

@@ -39,6 +39,10 @@ public class MedicalNote {
         return date;
     }
 
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
     public Name getDoctorName() {
         return doctor.getName();
     }
@@ -55,20 +59,20 @@ public class MedicalNote {
         return date.inputValue;
     }
 
-    public String getDoctorNameWithTitle() {
-        return doctor.getStringNameWithTitle();
-    }
-
-    public String getDoctorNameNoTitle() {
+    public String getDoctorNameString() {
         return doctor.getStringNameNoTitle();
     }
 
-    public String getDoctorStringMcr() {
+    public String getDoctorMcrString() {
         return doctor.getStringMcr();
     }
 
     public String getContentString() {
         return content.toString();
+    }
+
+    public boolean isAuthoredBy(Doctor testDoctor) {
+        return doctor.equals(testDoctor);
     }
 
     @Override
