@@ -388,7 +388,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `MediBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**UC00 Add a patient**
+**UC00 Login**
+
+**MSS**
+
+1. User requests to login with their username and password.
+2. MediBook switches from the login window to the main app window.
+
+    Use case ends.
+
+**Extensions**
+* 1a. MediBook detects an invalid username or password.
+    *1a1. MediBook shows an error message.
+    *1a2. User requests to login again but with edited inputs.
+    Steps 1a1-1a2 are repeated until the username and password entered are valid.
+    Use case resumes from step 2.
+    
+**UC01 Create an account**
+
+**MSS**
+1. User requests to create a new account with their details. (username, password, name and MCR)
+2. MediBook switches from the create account window to the main app window.
+
+    Use case ends.
+
+**Extensions**
+* 1a. MediBook detects an invalid username, password, name or MCR.
+    *1a1. MediBook shows an error message.
+    *1a2. User requests to create an account again with edited inputs.
+    Steps 1a1-1a2 are repeated until the username, password, name and MCR are valid.
+    Use case resumes from step 2.
+    
+**UC02 Add a patient**
 
 **MSS**
 
@@ -409,7 +440,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Steps 1b1-1b2 are repeated until the compulsory fields are all provided.
     Use case resumes from step 2.
 
-**UC01 Find a patient**
+**UC03 Find a patient**
 
 **MSS**
 
@@ -426,7 +457,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Steps 1a1-1a2 are repeated until the syntax of the command is correct.
     Use case resumes from step 2.
 
-**UC02 Delete a patient**
+**UC04 Delete a patient**
 
 **MSS**
 
