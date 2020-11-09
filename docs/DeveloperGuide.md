@@ -216,7 +216,7 @@ Elaboration on point 1:
 
 #### Implementation
 
-* The implementation of parsing of a `deletenote` command is similar to that of a `AddNote` command, involving 
+* The implementation of parsing of a `deletenote` command is similar to that of a `addnote` command, involving 
 `DeleteNoteCommand` and `DeleteNoteCommandParser` instead.
 * The general action of `DeleteNoteCommand#execute()` is similar to that of `AddNoteCommand#execute()`, using
 `Patient#deleteMedicalNoteAtIndex(int)` instead.
@@ -246,27 +246,22 @@ given for `addnote` command.
 
 #### Implementation
 
-* The implementation of parsing of a `editnote` command is similar to that of a `AddNote` command, involving 
-`EditNoteCommand` and `EditNoteCommandParser` instead.
-* The general action of `EditNoteCommand#execute()` is similar to that of `DeleteNoteCommand#execute()`, using
-`Patient#deleteMedicalNoteAtIndex(int)` instead.
+* The implementation of `EditNoteCommand#execute()` makes use of `addnote` and `deletenote` implementations.
+
+Step 1. `EditNoteCommand` identifies the target `MedicalNote` object.
+
+Step 2. `EditNoteCommand` verifies that `activeUser` is the author of the target `MedicalNote`.
+Note that an exception is thrown at this point if the author does not match `activeUser`.
+
+Step 3. `EditNoteCommand` creates a new `MedicalNote` object based on `EditNoteDescriptor`.
+
+Step 4. `EditNoteCommand` attempts to delete the target `MedicalNote` object and add the newly created `MedicalNote` object.
+If the edit results in duplicates, an exception is thrown and no changes are made.
 
 #### Design consideration
 
 `editnote` command can only be called when viewing a `patient`'s profile for the same reason as
 given for `addnote` command.
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ### Account creation and login

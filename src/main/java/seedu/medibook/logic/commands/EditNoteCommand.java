@@ -75,31 +75,31 @@ public class EditNoteCommand extends Command {
             throw new CommandException(MESSAGE_EDIT_NOTE_ON_LIST);
         }
 
-        Patient displayedPatient = patientOptional.get();
-
-        assert model.hasPatient(displayedPatient) : "Patient in Context does not exist in model";
-
-        int indexZeroBased = index.getZeroBased();
-
-        if (indexZeroBased >= displayedPatient.getNumOfMedicalNotes()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_NOTE_DISPLAYED_INDEX);
-        }
-
-        MedicalNote noteToEdit = displayedPatient.getMedicalNoteAtIndex(indexZeroBased);
-        MedicalNote newMedicalNote = createEditedNote(noteToEdit, editNoteDescriptor);
-
         if (model.getActiveUser().isEmpty()) {
             throw new CommandException(MESSAGE_USER_CANNOT_EDIT);
         }
 
+        Patient displayedPatient = patientOptional.get();
+
         Doctor activeUser = model.getActiveUser().get();
+
+        assert model.hasPatient(displayedPatient) : "Patient in Context does not exist in model";
+
+        int zeroBasedIndex = index.getZeroBased();
+
+        if (zeroBasedIndex >= displayedPatient.getNumOfMedicalNotes()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_NOTE_DISPLAYED_INDEX);
+        }
+
+        MedicalNote noteToEdit = displayedPatient.getMedicalNoteAtIndex(zeroBasedIndex);
+        MedicalNote newMedicalNote = createEditedNote(noteToEdit, editNoteDescriptor);
 
         if (!noteToEdit.isAuthoredBy(activeUser)) {
             throw new CommandException(MESSAGE_CANNOT_EDIT_OTHER_DOCTOR_NOTES);
         }
 
         try {
-            displayedPatient.deleteMedicalNoteAtIndex(indexZeroBased);
+            displayedPatient.deleteMedicalNoteAtIndex(zeroBasedIndex);
 
             if (displayedPatient.alreadyHasMedicalNote(newMedicalNote)) {
                 throw new CommandException(MESSAGE_DUPLICATE_NOTE);
