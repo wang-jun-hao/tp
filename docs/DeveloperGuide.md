@@ -307,8 +307,9 @@ The corresponding UI element is displayed on the right of the `PatientProfile` U
 * `MedicalNoteCard` represents a single `MedicalNote`. It provides the graphics for an element in the `ListView` of `MedicalNotesPanel`.
 
 `PatientProfile` is displayed on the `MainWindow` when the `AccessCommand` is invoked. The following sequence diagram shows how accessing a `PatientProfile` works:
-
-[//]: # (todo)
+![AccessCommandSequenceDiagram](images/AccessCommandSequenceDiagram.png)
+* When the access command is parsed, the `access()` command is called in the model so it remembers which patient is accessed.
+* The `commandResult` is then passed all the way back up to the UI, where the `handleProfile()` method is called and `PatientList` UI region is changed to the `PatientProfile` region.
 
 Thereafter, this next sequence diagram shows how displaying the `PatientProfile` works:
 ![PatientProfileSequenceDiagram](images/PatientProfileSequenceDiagram.png)

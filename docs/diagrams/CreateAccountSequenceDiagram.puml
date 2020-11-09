@@ -15,7 +15,7 @@ activate logic LOGIC_COLOR
 logic -[LOGIC_COLOR]> storage : createAccount(user details)
 activate storage STORAGE_COLOR
 
-storage -[STORAGE_COLOR]> storage : Save to file
+storage -[STORAGE_COLOR]> storage : createAccount(user details)
 activate storage STORAGE_COLOR_T1
 storage --[STORAGE_COLOR]> storage
 deactivate storage
