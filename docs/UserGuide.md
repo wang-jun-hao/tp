@@ -65,6 +65,8 @@ Alternatively, you can also login as an **administrative staff** using the usern
 As an **administrative staff**, you can only add, edit, delete and find patients. 
 You are unable to add, edit or delete medical notes.
 
+<img src="images/screenshots/createAccount.PNG">
+
 
 ### 3.2 Viewing help : `help`
 
@@ -73,6 +75,8 @@ Shows a message explaining how to access the help page.
 **Format:**
 
 `help`
+
+<img src="images/screenshots/helpCmd.PNG">
 
 ### 3.3 Listing all patients: `list`
 
@@ -149,6 +153,8 @@ Deletes the specified patient from MediBook.
 **Example:**
 * `delete 1` deletes the patient with index `1` in the displayed list
 
+<img src="images/screenshots/deleteCmd.PNG">
+
 ### 3.7 Finding a patient: `find`
 
 Finds patient records by multiple fields and multiple keywords.
@@ -212,6 +218,8 @@ Context: You are logged in as Dr John Doe (M06371K) and viewing the profile page
 Adds a medical note that is dated today, by Dr John Doe (M06371K) with content "Patient complains of stomach ache and headache. 
 No signs of fever. Prescribed painkillers and probiotics." to patient with IC 'S9123456A'.
 
+<img src="images/screenshots/addNote.PNG">
+
 ### 3.10 Editing a medical note: `editnote`
 
 Edits the date and/or content of an existing medical note belonging to a patient, authored by you.
@@ -239,6 +247,8 @@ the medical note at index 1 authored by you.
 Updates the date of the medical note with index 1 in the displayed list of medical notes 
 to '20-02-2018' and content to 'Patient is having migraine.'.
 
+<img src="images/screenshots/editNote.PNG">
+
 ### 3.11 Deleting a medical note: `deletenote`
 
 Deletes a medical note belonging to a patient, authored by you.
@@ -263,6 +273,8 @@ the medical note at index 1 authored by you.
 
 Deletes the medical note with index 1 in the displayed list of medical notes belonging to patient with IC 'S9123456A'.
 
+<img src="images/screenshots/deleteNote.PNG">
+
 ### 3.12 Exiting the program : `exit`
 
 Exits the program.
@@ -280,6 +292,8 @@ within a single day, only the last edit of the patient's height/weight would be 
 
 MediBook also derives a patient's BMI records based on the patient's height and weight records. As of v1.3, a patient's BMI
 record for a particular date can only be derived if the patient also has both the height and weight records on that day.
+
+<img src="images/screenshots/chartScreenShot.PNG">
 
 
 ### 3.14 Saving the data
