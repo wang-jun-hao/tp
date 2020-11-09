@@ -236,11 +236,6 @@ Note that an exception is thrown at this point if the author does not match `act
 
 Step 4. `DeleteNoteCommand` updates the model with the medical note deleted from the patient using `Patient#deleteMedicalNoteAtIndex(int)`.
 
-#### Design consideration
-
-`deletenote` command can only be called when viewing a `patient`'s profile for the same reason as
-given for `addnote` command.
-
 
 ### Editing medical notes of a patient
 
@@ -257,11 +252,6 @@ Step 3. `EditNoteCommand` creates a new `MedicalNote` object based on `EditNoteD
 
 Step 4. `EditNoteCommand` attempts to delete the target `MedicalNote` object and add the newly created `MedicalNote` object.
 If the edit results in duplicates, an exception is thrown and no changes are made.
-
-#### Design consideration
-
-`editnote` command can only be called when viewing a `patient`'s profile for the same reason as
-given for `addnote` command.
 
 
 ### Account creation and login
