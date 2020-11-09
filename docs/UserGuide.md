@@ -56,7 +56,9 @@ For more information about account creation, refer to [Section 3.1 Login and Cre
 <img src="images/screenshots/createaccount.png">
 
 If the account creation is successful, you should now be brought to the main page where you can view the details of all the patients.
+
 The Command Box (marked by the blue rectangle) is where users type the commands needed to use MediBook.
+
 The Result Display (marked by the red rectangle) is where MediBook displays the result/error for each command input by the user.
 
 <img src="images/screenshots/mainpage.png">
