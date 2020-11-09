@@ -37,7 +37,7 @@ You can reach us at wangjunhao@u.nus.edu, foojingyi@u.nus.edu, E0415577@u.nus.ed
 <img src="images/wong-zz.png" width="200px">
 
 [[github](https://github.com/Wong-ZZ)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/wong-zz.md)]
 
 * Role: **Developer**
 * Responsibilities:
