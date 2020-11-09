@@ -111,7 +111,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 ### Model component
 
-![Structure of the Model Component](images/ModelClassDiagramUpdated.png)
+![Structure of the Model Component](images/ModelClassDiagram.png)
 
 **Model**
 
@@ -141,6 +141,8 @@ The `Patient`,
 The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the medi book data in json format and read it back.
+* can save the medical notes data in separate json file for each individual patient and read it back.
+* can rename or delete the medical note data.
 
 ### Common classes
 
@@ -274,10 +276,6 @@ which determines which field of the patient to search for. When `FieldContainsKe
 is called, it will check if each keyword is a substring of the specified field of the patient. So long as at least one
 of the keyword passes the check, `FieldContainsKeywordsPredicate#test(Patient patient)` will return true.
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 ### Patient profile (GUI feature)
 This feature allows the application to display a patient's details in a clean and readable fashion.
 
@@ -318,6 +316,33 @@ The corresponding UI element is displayed on the right of the `PatientProfile` U
 
 Thereafter, this next sequence diagram shows how displaying the `PatientProfile` works:
 ![PatientProfileSequenceDiagram](images/PatientProfileSequenceDiagram.png)
+
+### Charts and `Record` class
+
+This feature allows MediBook to display charts of a patient's past height, weight and BMI records in the patient
+profile page.
+
+#### Implementation
+
+The datapoints displayed on the charts are all obtained from the `Record` class. As seen in the [Model Component](#model-component) section,
+a patient contains a single `Record` object in its field. The `Record` class contains two different `HashMap` that maps
+a `Date` object to a `Height` or `Weight` object.
+
+![RecordSequenceDiagram](images/RecordSequenceDiagram.png)
+
+Everytime a command that updates a patient's `Height` or `Weight` is executed, the new `Height` or `Weight` would be added
+to the `Record` object along with the current `Date`. This means that only `AddCommand` and `EditCommand` will actually update the patient's `Record`.
+The sequence diagram above shows how a patient's `Height` or `Weight` is updated conditionally when an `EditCommand` is executed.
+The sequence diagram for `AddCommand` would look similar to this diagram as well.
+
+* Step 1: An inputs an `EditCommand` for example `edit n/John p/94347823 ...`.
+
+* Step 2: MediBook then parses the input and executes it through the `EditCommand` object created.
+
+* Step 3: The `EditCommand` object then retrieves the patient that is being edited from the `Model`.
+
+* Step 4: The `EditCommand` object then checks if the `Height` or `Weight` of the patient was updated. If either one of the field
+was updated, the `addHeightRecord` and `addWeightRecord` methods would be called in order to store the newly updated `Height`/`Weight`.
 
 --------------------------------------------------------------------------------------------------------------------
 

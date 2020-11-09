@@ -26,6 +26,7 @@ Class BloodType
 Class Address
 Class Email
 Class Phone
+Class Record
 Class UniquePatientList
 }
 
@@ -68,6 +69,7 @@ Patient *--> "0..1" BloodType
 Patient *--> "0..1" Bmi
 Patient *--> "*" Tag
 Patient *--> "1" MedicalNoteList
+Patient *--> "1" Record
 Bmi --> Height
 Bmi --> Weight
 
