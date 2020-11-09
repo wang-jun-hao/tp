@@ -44,9 +44,15 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `find` and `charts`.
-    * Fix multiple formatting issues.
+    * Added subsection for editing of save data.
+    * Added overview for the user guide.
+    * Added screenshots in the `Getting started` section to familiarize new users with the UI.
+    * Fixed multiple formatting issues.
   * Developer Guide:
     * Added implementation details for the enhanced `find` command.
+    * Added implementation details for the `Context` interface.
+    * Added implementation details for the `Record` class.
+    * Added and updated multiple sequence/class diagrams.
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#39](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/39), [\#58](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/58), [\#13](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/13), [\#77](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/77)
