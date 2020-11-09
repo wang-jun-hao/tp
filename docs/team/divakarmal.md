@@ -53,7 +53,10 @@ New test cases for testing this additional field were added and existing test ca
     * Added documentation for charts feature.
     * Added instruction for valid input formats.
     * Added screenshots in User Guide.
-    * Added documentation for UI segment in Developer Guide.
+    
+* Developer Guide
+    * Added documentation for UI segment.
+    * Added documentation for charts.
 
 **Community:**
 * PRs reviewed and [approved](https://github.com/AY2021S1-CS2103T-F13-3/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Adivakarmal+)
