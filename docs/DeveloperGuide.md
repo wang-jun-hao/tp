@@ -317,6 +317,38 @@ The corresponding UI element is displayed on the right of the `PatientProfile` U
 Thereafter, this next sequence diagram shows how displaying the `PatientProfile` works:
 ![PatientProfileSequenceDiagram](images/PatientProfileSequenceDiagram.png)
 
+### `Context` interface
+
+The `Context` interface acts as a way for MediBook to store the information pertaining to what command was just executed.
+The main reason for needing a `Context` interface is due to the Command design pattern used in the application.
+
+![ContextClassDiagram](images/ContextClassDiagram.png)
+
+Referring to the class diagram above, `LogicManager` is dependent on `Model`, `Command` and `Storage`. Depending on the
+command that was executed, `LogicManager` might want to call different methods from the `Storage` interface. For example,
+if the user wants to edit the IC of a patient, `LogicManager` would want to call the method from `Storage` that would rename the
+medical notes files of the patient to fit the newly updated IC.
+
+However, due to polymorphism and the command design pattern, `LogicManager` does not know what command is being executed yet, it
+needs to know this information in order to decide what to do next. The `Context` interface is thus implemented to solve this issue while
+maintaining the command design pattern.
+
+When any command that can affect the logic within `LogicManager` is executed (such as `EditCommand`, `AccessCommand` etc..), the relevant
+command objects would call the relevant setter method from the class that implements the `Context` interface. `LogicManager` then retrieves
+this information from that very same class, thereby solving the issue without causing any cyclic dependencies while maintaining the command design pattern.
+
+Note:
+
+Some of the commands that makes use of the `Context` interface are:
+* `AccessCommand`
+* `AddCommand`
+* `AddNoteCommand`
+* `ClearCommand`
+* `DeleteCommand`
+* `DeleteNoteCommand`
+* `EditCommand`
+* `EditNoteCommand`
+
 ### Charts and `Record` class
 
 This feature allows MediBook to display charts of a patient's past height, weight and BMI records in the patient
