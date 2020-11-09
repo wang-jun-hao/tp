@@ -166,26 +166,15 @@ The following sequence diagrams show how add medical note operation works:
 
 ![NoteSequenceDiagramSD](images/NoteSequenceDiagramSDUpdatePatientInModel.png)
 
-Step 1. The user launches the application and `find` the patient to access. 
-
-Note: Every `patient` in the `model` has a `MedicalNoteList` that is initialised as an empty list at 
-program start-up to optimise start-up time.
-
-Step 2. The user then `access`es the patient using the index of the patient in the filtered list. 
-
-Note: `LogicManager` will load the list of medical notes of the `patient` from storage into program's memory via
-`LogicManager#handleMedicalNoteListIo`. `LogicManager` then calls `Patient#setMedicalNoteList()` to load
-the list of medical notes onto the `patient` object in memory.
-
-Step 3. While on the patient's profile page, the user inputs `addnote c/Patient...`.
+Step 1. While on the patient's profile page, the user inputs `addnote c/Patient...`.
 The user input is handled by `LogicManager`, which then passes it to `MediBookParser` to be parsed.
 
-Step 4. `MediBookParser` creates an instance of `AddNoteCommandParser` to parse the user input as a `AddNoteCommand`. 
+Step 2. `MediBookParser` creates an instance of `AddNoteCommandParser` to parse the user input as a `AddNoteCommand`. 
 It returns a `AddNoteCommand` object to `LogicManager`
 
-Step 5. `LogicManager` then executes the `AddNoteCommand` via `AddNoteCommand#execute()`.
+Step 3. `LogicManager` then executes the `AddNoteCommand` via `AddNoteCommand#execute()`.
 
-Step 6. `AddNoteCommand#execute()` identifies the target `patient` object via `ModelManager#getPatientToAccess()`.
+Step 4. `AddNoteCommand#execute()` identifies the target `patient` object via `ModelManager#getPatientToAccess()`.
 It then updates the model with the new medical note added to the patient using `Patient#addMedicalNote()`.
 
 #### Design consideration
@@ -199,6 +188,8 @@ Only allowing `addnote` after `access` ensures that the patient's list of medica
 
 Elaboration on point 1:
 * A medical records software contains many `patients`, each with potentially many `medical note`s.
+* Every `patient` in the `model` has a `MedicalNoteList` that is initialised as an empty list at 
+  program start-up to optimise start-up time
 * `MedicalNoteList` of every patient is loaded only when necessary (`access` on patient)
 * `access`-ing a `patient` loads the stored medical note list and sets the `MedicalNoteList` of the `patient` to the retrieved list
 * Hence, `addnote` command can only be called when viewing a `patient`'s profile as it ensures that the `MedicalNoteList` has already been loaded
