@@ -196,9 +196,9 @@ Elaboration on point 1:
 * `access`-ing a `patient` loads the stored medical note list and sets the `MedicalNoteList` of the `patient` to the retrieved list
 * Hence, `addnote` command can only be called when viewing a `patient`'s profile as it ensures that the `MedicalNoteList` has already been loaded
 
-### Account creation and login
+### Account creation and logging in
 
-#### Implementation
+#### Account creation implementation
 
 The account creation feature is facilitated by a new `CreateAccountWindow` class in the UI.
 
@@ -214,6 +214,8 @@ The following activity diagram summarises what happens when a user attempts to c
 
 ![CreateAccountActivityDiagram](images/CreateAccountActivityDiagram.png)
 
+#### Login implementation
+
 The login feature is facilitated by a new `LoginWindow` class in the UI.
 
 ![LoginSequenceDiagram](images/LoginSequenceDiagram.png)
@@ -225,6 +227,24 @@ Step 2. The UI calls `Logic#processLoginInfo()` with the login information as in
 Step 3. `Logic#processLoginInfo()` then calls `Storage#login()` on the login information, to check if the information matches any of the account details saved.
 
 Step 4. If there is no match, an error is thrown. If there is a match, the UI then changes from `LoginWindow` to `MainWindow`, which signifies that the user has succesfully logged in.
+
+#### Design Consideration
+
+We decided to implement this feature due to the nature of our application. Since it is intended for use by medical staff
+and contains personal information for patients, the ability to protect such information is necessary. Thus, we came up with
+this feature so that only valid users are able to use the system, thereby protecting the information of every patient
+the system contains.
+
+#### \[Proposed\] Admin Accounts
+
+Currently, the system is only capable of allowing the user to create new doctor's accounts. For all administrative staff,
+there is only one account that they can use.
+
+By allowing users to create either an admin account or a doctor account, the administrative staff would be allowed to
+have a personalised account to use the system with. However, as there is no section of the application usable by
+administrative staff that needs to keep track of the current user, this feature is low priority and we have not implemented
+it.
+
 
 ### Enhanced find command
 
