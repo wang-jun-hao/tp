@@ -146,10 +146,11 @@ This section describes some noteworthy details on how certain features are imple
 
 * Each medical note is stored as a `MedicalNote` object.
 * Every `patient` has a `MedicalNoteList` object that represents the list of medical notes belonging to that `patient`.
-* `NoteCommandParser` parses user's string input into a `NoteCommand`
+* `AddNoteCommandParser` parses user's string input into a `AddNoteCommand`
 * Target `patient` is retrieved from `ModelManager#getPatientToAccess()`
+* `doctor` is retrieved from `ModelManager#getActiveUser()` 
 
-The following sequence diagram shows how note adding operation works:
+The following sequence diagram shows how add medical note operation works:
 
 ![NoteSequenceDiagramMain](images/NoteSequenceDiagramFocusLogic.png)
 
@@ -163,18 +164,18 @@ program start-up to optimise start-up time.
 Step 2. The user then `access`es the patient using the index of the patient in the filtered list. 
 
 Note: `LogicManager` will load the list of medical notes of the `patient` from storage into program's memory via
-`LogicManager#handleMedicalNoteListIo`. `LogicManager` then calls `Patient#setMedicalNoteList()` on the `patient` object to load
+`LogicManager#handleMedicalNoteListIo`. `LogicManager` then calls `Patient#setMedicalNoteList()` to load
 the list of medical notes onto the `patient` object in memory.
 
-Step 3. While on the patient's profile page, the user inputs `note n/Dr John c/Patient...`.
+Step 3. While on the patient's profile page, the user inputs `addnote c/Patient...`.
 The user input is handled by `LogicManager`, which then passes it to `MediBookParser` to be parsed.
 
-Step 4. `MediBookParser` creates an instance of `NoteCommandParser` to parse the user input as a `NoteCommand`. It returns 
-a `NoteCommand` object to `LogicManager`
+Step 4. `MediBookParser` creates an instance of `AddNoteCommandParser` to parse the user input as a `AddNoteCommand`. 
+It returns a `AddNoteCommand` object to `LogicManager`
 
-Step 5. `LogicManager` then executes the `NoteCommand` via `NoteCommand#execute()`.
+Step 5. `LogicManager` then executes the `AddNoteCommand` via `AddNoteCommand#execute()`.
 
-Step 6. `NoteCommand#execute()` identifies the target `patient` object via `ModelManager#getPatientToAccess()`.
+Step 6. `AddNoteCommand#execute()` identifies the target `patient` object via `ModelManager#getPatientToAccess()`.
 It then updates the model with the new medical note added to the patient using `Patient#addMedicalNote()`.
 
 #### Design consideration
