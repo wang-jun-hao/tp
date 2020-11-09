@@ -79,13 +79,13 @@ public class EditNoteCommand extends Command {
 
         assert model.hasPatient(displayedPatient) : "Patient in Context does not exist in model";
 
-        int indexZeroBased = index.getZeroBased();
+        int zeroBasedIndex = index.getZeroBased();
 
-        if (indexZeroBased >= displayedPatient.getNumOfMedicalNotes()) {
+        if (zeroBasedIndex >= displayedPatient.getNumOfMedicalNotes()) {
             throw new CommandException(Messages.MESSAGE_INVALID_NOTE_DISPLAYED_INDEX);
         }
 
-        MedicalNote noteToEdit = displayedPatient.getMedicalNoteAtIndex(indexZeroBased);
+        MedicalNote noteToEdit = displayedPatient.getMedicalNoteAtIndex(zeroBasedIndex);
         MedicalNote newMedicalNote = createEditedNote(noteToEdit, editNoteDescriptor);
 
         if (model.getActiveUser().isEmpty()) {
@@ -99,7 +99,7 @@ public class EditNoteCommand extends Command {
         }
 
         try {
-            displayedPatient.deleteMedicalNoteAtIndex(indexZeroBased);
+            displayedPatient.deleteMedicalNoteAtIndex(zeroBasedIndex);
 
             if (displayedPatient.alreadyHasMedicalNote(newMedicalNote)) {
                 throw new CommandException(MESSAGE_DUPLICATE_NOTE);
