@@ -10,6 +10,7 @@ participant ":MedicalDetailsCard" as MedicalDetailsCard UI_COLOR
 participant ":MedicalDetailsRow" as MedicalDetailsRow UI_COLOR
 participant ":MedicalNotesPanel" as MedicalNotesPanel UI_COLOR
 participant ":MedicalNoteCard" as MedicalNoteCard UI_COLOR
+participant ":PatientChartCard" as PatientChartCard UI_COLOR
 end box
 
 create PatientProfile
@@ -66,6 +67,13 @@ end
 
 PatientProfile <-- MedicalNotesPanel
 deactivate MedicalNotesPanel
+
+create PatientChartCard
+PatientProfile --> PatientChartCard
+activate PatientChartCard
+
+PatientProfile <-- PatientChartCard
+deactivate PatientChartCard
 
 MainWindow <-- PatientProfile
 deactivate PatientProfile
