@@ -130,7 +130,8 @@ The `Patient`,
 * stores `IC`, `Name`, `DateOfBirth` and `Phone` objects that represent the patient's IC number, name, date of birth and phone number respectively.
 * stores `Optionals` of `Address`, `Email`, `Height`, `Weight`, `Bmi` and `BloodType` objects.
 * `Bmi` is automatically computed and stored within Optional if both `Height` and `Weight` are present.
-
+* stores `Allergy`, `Condition` and `Treatment` objects, where each patient can store any number of such objects.
+* `Allergy`, `Condition` and `Treatment` are considered "medical details"/"medical tags", and inherit from the `Tag` class.
 
 ### Storage component
 
@@ -144,7 +145,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.medibook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
