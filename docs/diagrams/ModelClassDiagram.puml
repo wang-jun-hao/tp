@@ -34,8 +34,11 @@ Class Date
 Class Name
 }
 
-Package Tag {
+Package MedicalDetail {
 Class Tag
+Class Allergy
+Class Condition
+Class Treatment
 }
 
 Package MedicalNote {
@@ -54,6 +57,10 @@ ModelManager o--> "1" MediBook
 ModelManager o-left-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
+Allergy -down-|> Tag
+Condition -down-|> Tag
+Treatment -down-|> Tag
+
 MediBook *--> "1" UniquePatientList
 UniquePatientList o--> "*" Patient
 Patient *--> "1" IC
@@ -66,7 +73,9 @@ Patient *--> "0..1" Height
 Patient *--> "0..1" Weight
 Patient *--> "0..1" BloodType
 Patient *--> "0..1" Bmi
-Patient *--> "*" Tag
+Patient *--> "*" Allergy
+Patient *--> "*" Condition
+Patient *--> "*" Treatment
 Patient *--> "1" MedicalNoteList
 Bmi --> Height
 Bmi --> Weight
