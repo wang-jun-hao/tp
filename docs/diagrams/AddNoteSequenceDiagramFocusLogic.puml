@@ -13,10 +13,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("addnote c/Patient...")
+[-> LogicManager : execute("addnote...")
 activate LogicManager
 
-LogicManager -> MediBookParser : parseCommand("addnote c/Patient...")
+LogicManager -> MediBookParser : parseCommand("addnote...")
 activate MediBookParser
 
 create AddNoteCommandParser
@@ -26,7 +26,7 @@ activate AddNoteCommandParser
 AddNoteCommandParser --> MediBookParser
 deactivate AddNoteCommandParser
 
-MediBookParser -> AddNoteCommandParser : parse("c/Patient...")
+MediBookParser -> AddNoteCommandParser : parse("...")
 activate AddNoteCommandParser
 
 AddNoteCommandParser -> Model
