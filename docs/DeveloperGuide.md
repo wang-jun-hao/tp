@@ -113,6 +113,8 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 ![Structure of the Model Component](images/ModelClassDiagramUpdated.png)
 
+**Model**
+
 **API** : [`Model.java`](../src/main/java/seedu/medibook/model/Model.java)
 
 The `Model`,
