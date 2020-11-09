@@ -25,13 +25,24 @@ Class Bmi
 Class BloodType
 Class Address
 Class Email
-Class Name
 Class Phone
 Class UniquePatientList
 }
 
-Package Tag {
+Package CommonFields {
+Class Date
+Class Name
+}
+
+Package MedicalDetail {
 Class Tag
+Class Allergy
+Class Condition
+Class Treatment
+}
+
+Package MedicalNote {
+Class MedicalNoteList
 }
 }
 
@@ -46,6 +57,10 @@ ModelManager o--> "1" MediBook
 ModelManager o-left-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
+Allergy -down-|> Tag
+Condition -down-|> Tag
+Treatment -down-|> Tag
+
 MediBook *--> "1" UniquePatientList
 UniquePatientList o--> "*" Patient
 Patient *--> "1" IC
@@ -58,17 +73,26 @@ Patient *--> "0..1" Height
 Patient *--> "0..1" Weight
 Patient *--> "0..1" BloodType
 Patient *--> "0..1" Bmi
-Patient *--> "*" Tag
+Patient *--> "*" Allergy
+Patient *--> "*" Condition
+Patient *--> "*" Treatment
+Patient *--> "1" MedicalNoteList
 Bmi --> Height
 Bmi --> Weight
 
+DateOfBirth *--> Date
+
+DateOfBirth -[hidden]down-> Date
+Date -[hidden]right-> Name
+
 IC -[hidden]right-> Name
-Name -[hidden]right-> DateOfBirth
 DateOfBirth -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 Bmi -[hidden]down-> Height
 Bmi -[hidden]down-> Weight
+Tag -[hidden]down-> MedicalNoteList
+
 
 ModelManager -->"1" Patient : filtered list
 @enduml

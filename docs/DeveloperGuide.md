@@ -7,6 +7,16 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Introduction**
+MediBook is a **desktop medical records software targeting doctors and administrative staffs in clinics or hospitals to 
+help manage patient details.** It is **optimized for use via a Command Line Interface** (CLI) while 
+still having the benefits of a Graphical User Interface (GUI).
+
+This developer guide helps you get familiar with the architecture design of the program and the implementation details of
+main features.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
@@ -103,6 +113,8 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 ![Structure of the Model Component](images/ModelClassDiagramUpdated.png)
 
+**Model**
+
 **API** : [`Model.java`](../src/main/java/seedu/medibook/model/Model.java)
 
 The `Model`,
@@ -118,7 +130,8 @@ The `Patient`,
 * stores `IC`, `Name`, `DateOfBirth` and `Phone` objects that represent the patient's IC number, name, date of birth and phone number respectively.
 * stores `Optionals` of `Address`, `Email`, `Height`, `Weight`, `Bmi` and `BloodType` objects.
 * `Bmi` is automatically computed and stored within Optional if both `Height` and `Weight` are present.
-
+* stores `Allergy`, `Condition` and `Treatment` objects, where each patient can store any number of such objects.
+* `Allergy`, `Condition` and `Treatment` are considered "medical details"/"medical tags", and inherit from the `Tag` class.
 
 ### Storage component
 
@@ -132,7 +145,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.medibook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -146,51 +159,43 @@ This section describes some noteworthy details on how certain features are imple
 
 * Each medical note is stored as a `MedicalNote` object.
 * Every `patient` has a `MedicalNoteList` object that represents the list of medical notes belonging to that `patient`.
-* `NoteCommandParser` parses user's string input into a `NoteCommand`
+* `AddNoteCommandParser` parses user's string input into a `AddNoteCommand`
 * Target `patient` is retrieved from `ModelManager#getPatientToAccess()`
+* `doctor` is retrieved from `ModelManager#getActiveUser()` 
 
-The following sequence diagram shows how note adding operation works:
+The following sequence diagrams show how add medical note operation works:
 
 ![NoteSequenceDiagramMain](images/NoteSequenceDiagramFocusLogic.png)
 
 ![NoteSequenceDiagramSD](images/NoteSequenceDiagramSDUpdatePatientInModel.png)
 
-Step 1. The user launches the application and `find` the patient to access. 
-
-Note: Every `patient` in the `model` has a `MedicalNoteList` that is initialised as an empty list at 
-program start-up to optimise start-up time.
-
-Step 2. The user then `access`es the patient using the index of the patient in the filtered list. 
-
-Note: `LogicManager` will load the list of medical notes of the `patient` from storage into program's memory via
-`LogicManager#handleMedicalNoteListIo`. `LogicManager` then calls `Patient#setMedicalNoteList()` on the `patient` object to load
-the list of medical notes onto the `patient` object in memory.
-
-Step 3. While on the patient's profile page, the user inputs `note n/Dr John c/Patient...`.
+Step 1. While on the patient's profile page, the user inputs `addnote c/Patient...`.
 The user input is handled by `LogicManager`, which then passes it to `MediBookParser` to be parsed.
 
-Step 4. `MediBookParser` creates an instance of `NoteCommandParser` to parse the user input as a `NoteCommand`. It returns 
-a `NoteCommand` object to `LogicManager`
+Step 2. `MediBookParser` creates an instance of `AddNoteCommandParser` to parse the user input as a `AddNoteCommand`. 
+It returns a `AddNoteCommand` object to `LogicManager`
 
-Step 5. `LogicManager` then executes the `NoteCommand` via `NoteCommand#execute()`.
+Step 3. `LogicManager` then executes the `AddNoteCommand` via `AddNoteCommand#execute()`.
 
-Step 6. `NoteCommand#execute()` identifies the target `patient` object via `ModelManager#getPatientToAccess()`.
+Step 4. `AddNoteCommand#execute()` identifies the target `patient` object via `ModelManager#getPatientToAccess()`.
 It then updates the model with the new medical note added to the patient using `Patient#addMedicalNote()`.
 
 #### Design consideration
 
-`note` command can only be called when viewing a `patient`'s profile (after an `access` command)
+`addnote` command can only be called when viewing a `patient`'s profile (after an `access` command)
 
-We have decided to implement `note` command this way for 2 reasons:
+We have decided to implement `addnote` command this way for 2 reasons:
 1. When user starts MediBook, not all `patient`s' list of medical notes would have been loaded into the program's memory. 
-Only allowing `note` after `access` ensures that the patient's list of medical notes would have been loaded at the point of adding new medical notes.
-2. It allows for a shorter `note` command as the user does not need to specify a target `patient`.
+Only allowing `addnote` after `access` ensures that the patient's list of medical notes would have been loaded at the point of adding new medical notes.
+2. It allows for a shorter `addnote` command as the user does not need to specify a target `patient`.
 
 Elaboration on point 1:
 * A medical records software contains many `patients`, each with potentially many `medical note`s.
-* `MedicalNoteList` of every patient is properly loaded only when necessary (`access` on patient)
+* Every `patient` in the `model` has a `MedicalNoteList` that is initialised as an empty list at 
+  program start-up to optimise start-up time
+* `MedicalNoteList` of every patient is loaded only when necessary (`access` on patient)
 * `access`-ing a `patient` loads the stored medical note list and sets the `MedicalNoteList` of the `patient` to the retrieved list
-* Hence, `note` command can only be called when viewing a `patient`'s profile as it ensures that the `MedicalNoteList` has already been properly loaded by executing `access` command beforehand
+* Hence, `addnote` command can only be called when viewing a `patient`'s profile as it ensures that the `MedicalNoteList` has already been loaded
 
 ### Account creation and login
 
@@ -287,7 +292,7 @@ Notes:
 * All classes used to display a patient profile (shown in the above diagram) inherit from the abstract `UiPart` class. 
 Hence, they each represent a visible part of the UI.
 * Some of these classes are dependent on the `Model` package which is shown in the [full UI diagram](#ui-component). 
-Namely, `PatientProfile`, `PersonalDetailsCard`, `MedicalDetailsCard`, `MedicalNotesPanel` and `MedicalNoteCard`.
+Namely, `PatientProfile`, `PersonalDetailsCard`, `MedicalDetailsCard`, `MedicalNotesPanel`, `MedicalNoteCard` and `PatientChartCard`.
 This is to retrieve the required information of a `patient`.
 
 Classes used in this implementation can be described as follows:
@@ -305,10 +310,12 @@ The corresponding UI element is displayed on the right of the `PatientProfile` U
 * `PersonalDetailsRow` represents a single `patient` personal detail. It provides the graphics for a row in the `ListView` of `PersonalDetailsCard`.
 * `MedicalDetailsRow` represents a single `patient` personal detail. It provides the graphics for a row in the `ListView` of `MedicalDetailsCard`.
 * `MedicalNoteCard` represents a single `MedicalNote`. It provides the graphics for an element in the `ListView` of `MedicalNotesPanel`.
+`PatientChartCard` represents a UI element displaying the height, weight and BMI charts of a `patient`.
 
 `PatientProfile` is displayed on the `MainWindow` when the `AccessCommand` is invoked. The following sequence diagram shows how accessing a `PatientProfile` works:
-
-[//]: # (todo)
+![AccessCommandSequenceDiagram](images/AccessCommandSequenceDiagram.png)
+* When the access command is parsed, the `access()` command is called in the model so it remembers which patient is accessed.
+* The `commandResult` is then passed all the way back up to the UI, where the `handleProfile()` method is called and `PatientList` UI region is changed to the `PatientProfile` region.
 
 Thereafter, this next sequence diagram shows how displaying the `PatientProfile` works:
 ![PatientProfileSequenceDiagram](images/PatientProfileSequenceDiagram.png)

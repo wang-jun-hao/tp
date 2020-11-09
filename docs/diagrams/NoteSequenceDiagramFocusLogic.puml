@@ -4,71 +4,69 @@
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":MediBookParser" as MediBookParser LOGIC_COLOR
-participant ":NoteCommandParser" as NoteCommandParser LOGIC_COLOR
-participant "nc:NoteCommand" as NoteCommand LOGIC_COLOR
+participant ":AddNoteCommandParser" as AddNoteCommandParser LOGIC_COLOR
+participant "anc:AddNoteCommand" as AddNoteCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant "mn:MedicalNote" as MedicalNote MODEL_COLOR
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("note n/Dr John c/Patient...")
+[-> LogicManager : execute("addnote c/Patient...")
 activate LogicManager
 
-LogicManager -> MediBookParser : parseCommand("note n/Dr John c/Patient...")
+LogicManager -> MediBookParser : parseCommand("addnote c/Patient...")
 activate MediBookParser
 
-create NoteCommandParser
-MediBookParser -> NoteCommandParser
-activate NoteCommandParser
+create AddNoteCommandParser
+MediBookParser -> AddNoteCommandParser
+activate AddNoteCommandParser
 
-NoteCommandParser --> MediBookParser
-deactivate NoteCommandParser
+AddNoteCommandParser --> MediBookParser
+deactivate AddNoteCommandParser
 
-MediBookParser -> NoteCommandParser : parse("n/Dr John c/Patient...")
-activate NoteCommandParser
+MediBookParser -> AddNoteCommandParser : parse("c/Patient...")
+activate AddNoteCommandParser
 
-create MedicalNote
-NoteCommandParser -> MedicalNote
-activate MedicalNote
+AddNoteCommandParser -> Model
+activate Model
 
-MedicalNote --> NoteCommandParser : mn
-deactivate MedicalNote
+Model --> AddNoteCommandParser : mn
+deactivate Model
 
-create NoteCommand
-NoteCommandParser -> NoteCommand : NoteCommand(mn)
-activate NoteCommand
+create AddNoteCommand
+AddNoteCommandParser -> AddNoteCommand : AddNoteCommand(mn)
+activate AddNoteCommand
 
-NoteCommand --> NoteCommandParser : nc
-deactivate NoteCommand
+AddNoteCommand --> AddNoteCommandParser : anc
+deactivate AddNoteCommand
 
-NoteCommandParser --> MediBookParser : nc
-deactivate NoteCommandParser
+AddNoteCommandParser --> MediBookParser : anc
+deactivate AddNoteCommandParser
 
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 
-NoteCommandParser -[hidden]-> MediBookParser
-destroy NoteCommandParser
+AddNoteCommandParser -[hidden]-> MediBookParser
+destroy AddNoteCommandParser
 
-MediBookParser --> LogicManager : nc
+MediBookParser --> LogicManager : anc
 deactivate MediBookParser
 
-LogicManager -> NoteCommand : execute()
-activate NoteCommand
+LogicManager -> AddNoteCommand : execute()
+activate AddNoteCommand
 
-ref over NoteCommand, Model : update patient in model
+ref over AddNoteCommand, Model : update patient in model
 
 create CommandResult
-NoteCommand -> CommandResult
+AddNoteCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> NoteCommand : r
+CommandResult --> AddNoteCommand : r
 deactivate CommandResult
 
-NoteCommand --> LogicManager : r
-deactivate NoteCommand
+AddNoteCommand --> LogicManager : r
+deactivate AddNoteCommand
 
 [<--LogicManager : r
 deactivate LogicManager
