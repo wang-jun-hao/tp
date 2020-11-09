@@ -134,7 +134,6 @@ Anything typed after list will be ignored and the list of all patient records wi
 
 <img src="images/screenshots/list.PNG">
 
-<a id="addcommand"></a>
 #### 3.2.3 Adding a patient: `add` 
 
 Adds a patient to the system.
@@ -153,7 +152,6 @@ al/Peanut con/Mitral valve prolapse con/asthma t/EpiPen t/metered-dose inhaler`
 
 <img src="images/screenshots/addcmd.PNG">
 
-<a id="editcommand"></a>
 #### 3.2.4 Editing a patient: `edit` 
 
 Edits the specified patient's information from MediBook. 
@@ -210,7 +208,6 @@ Finds patient records by multiple fields and multiple keywords.
 
 <img src="images/screenshots/enhancedFind.PNG">
 
-<a id="accesscommand"></a>
 #### 3.2.7 Accessing a patient's profile : `access` 
 
 Accesses a specified patient's profile in MediBook.
@@ -315,8 +312,8 @@ Exits the program.
 
 ### 3.3 Charts
 
-MediBook keeps a record of a patient's height and weight. This record can be viewed in chart form when [accessing a patient's profile](#accesscommand).
-[Adding a patient](#3-2-3-adding-a-patient-add) or [Editing a patient's profile](#editcommand) will automatically update the patient's height and weight records (assuming the height/weight field is not empty).
+MediBook keeps a record of a patient's height and weight. This record can be viewed in chart form when [accessing a patient's profile](#327-accessing-a-patients-profile--access).
+[Adding a patient](#323-adding-a-patient-add) or [Editing a patient's profile](#324-editing-a-patient-edit) will automatically update the patient's height and weight records (assuming the height/weight field is not empty).
 MediBook only stores the latest height/weight record of the day. This means that editing a patient's height or weight multiple times
 within a single day, only the last edit of the patient's height/weight would be recorded.
 
