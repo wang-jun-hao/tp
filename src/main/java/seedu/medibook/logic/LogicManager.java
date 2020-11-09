@@ -174,6 +174,7 @@ public class LogicManager implements Logic {
     @Override
     public void logout() {
         model.setActiveUser(Optional.empty());
+        model.resetAccessedPatient();
     }
 
 }

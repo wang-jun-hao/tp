@@ -32,8 +32,12 @@ adding a way to store account information.
 **New Feature:** Added the ability to access a patient's profile, which shows all their information.
 * What it does: Allows the user to access a patient's profile, which shows all of a patient's information along with
 medical notes pertaining to the patient.
+
+<div style="page-break-after: always;"></div>
+
 * Justification: This feature improves the usability of the product. Since each patient has many fields of information
-along with plenty of medical notes, having all of the information displayed while viewing the list of patients will make
+along with plenty of medical notes, having all of the information 
+displayed while viewing the list of patients will make
 it cluttered and difficult to use.
 * Highlights: This feature required a command, which is parsed by the logic manager to also interact with the UI element
 of the application. This was challenging as it required changing how the CommandResult worked, so that when the
@@ -61,6 +65,8 @@ This was challenging as the use of `Optionals` had to be implemented throughout 
 [\#211](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/211), [\#224](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/224),
 [\#244](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/244))
 
+<div style="page-break-after: always;"></div>
+
 **Documentation:**
 * User Guide:
     * Added documentation for logging in and creating account features. (Pull request [\#152](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/152))
@@ -74,3 +80,5 @@ This was challenging as the use of `Optionals` had to be implemented throughout 
 
 **Community:**
 * PRs reviewed and [approved](https://github.com/AY2021S1-CS2103T-F13-3/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3APrestonTYR+)
+* Reported bugs and suggestions for other teams in the class (Examples: [1](https://github.com/PrestonTYR/ped/issues/1),
+[2](https://github.com/PrestonTYR/ped/issues/2), [3](https://github.com/PrestonTYR/ped/issues/3))
