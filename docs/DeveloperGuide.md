@@ -7,6 +7,16 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Introduction**
+MediBook is a **desktop medical records software targeting doctors and administrative staffs in clinics or hospitals to 
+help manage patient details.** It is **optimized for use via a Command Line Interface** (CLI) while 
+still having the benefits of a Graphical User Interface (GUI).
+
+This developer guide helps you get familiar with the architecture design of the program and the implementation details of
+main features.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
