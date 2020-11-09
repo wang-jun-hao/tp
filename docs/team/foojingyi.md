@@ -41,15 +41,17 @@ Given below are my contributions to the project.
 
 * **Project management**:
   * Helped to keep track of small details to change e.g. variable names, errors and typos in code documentation, decisions to keep in view
-  * Reviewed pull requests for refactoring done to fit the product i.e.:
-    * Person to Patient (Pull request [\#55](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/55), 5 comments)
-    * AddressBook to MediBook(Pull request [\#60](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/60), reviewed >4 times)
   * Reviewed elements related to code quality i.e. variable naming, documentation, application of SLAP
-  * Resized GUI elements for more user friendly viewing (Pull request [\#212](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/212))
+
+* **Contributions to team-based tasks**
+  * Drew and added new logo and icon (Pull requests [\#172](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/172), [\#237](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/237))
+  * Reviewed pull requests for refactoring done to fit the product i.e.:
+      * Person to Patient (Pull request [\#55](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/55), 5 comments)
+      * AddressBook to MediBook(Pull request [\#60](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/60), reviewed >4 times)
 
 * **Enhancements to existing features**:
   * Updated the GUI color scheme (Pull request [\#212](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/212))
-  * Drew and added new logo and icon (Pull request [\#172](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/172))
+  * Resized GUI elements for more user-friendly viewing (Pull request [\#212](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/212))
 
 * **Documentation**:
   * User Guide (UG):
@@ -58,7 +60,7 @@ Given below are my contributions to the project.
     * Reformatted UG and added details to clarify command validity and requirements: [\#223](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/223)
     * Specified behaviour for adding medical details: [\#223](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/223)
   * Developer Guide (DG):
-    * Added implementation details of the patient profile GUI element: [\#144](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/144)
+    * Added implementation details of the patient profile GUI element including diagrams: [\#144](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/144)
 
 * **Community**:
   * PRs reviewed and [approved](https://github.com/AY2021S1-CS2103T-F13-3/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Afoojingyi+)
