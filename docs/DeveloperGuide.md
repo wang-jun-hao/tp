@@ -150,7 +150,7 @@ This section describes some noteworthy details on how certain features are imple
 * Target `patient` is retrieved from `ModelManager#getPatientToAccess()`
 * `doctor` is retrieved from `ModelManager#getActiveUser()` 
 
-The following sequence diagram shows how add medical note operation works:
+The following sequence diagrams show how add medical note operation works:
 
 ![NoteSequenceDiagramMain](images/NoteSequenceDiagramFocusLogic.png)
 
@@ -180,18 +180,18 @@ It then updates the model with the new medical note added to the patient using `
 
 #### Design consideration
 
-`note` command can only be called when viewing a `patient`'s profile (after an `access` command)
+`addnote` command can only be called when viewing a `patient`'s profile (after an `access` command)
 
-We have decided to implement `note` command this way for 2 reasons:
+We have decided to implement `addnote` command this way for 2 reasons:
 1. When user starts MediBook, not all `patient`s' list of medical notes would have been loaded into the program's memory. 
-Only allowing `note` after `access` ensures that the patient's list of medical notes would have been loaded at the point of adding new medical notes.
-2. It allows for a shorter `note` command as the user does not need to specify a target `patient`.
+Only allowing `addnote` after `access` ensures that the patient's list of medical notes would have been loaded at the point of adding new medical notes.
+2. It allows for a shorter `addnote` command as the user does not need to specify a target `patient`.
 
 Elaboration on point 1:
 * A medical records software contains many `patients`, each with potentially many `medical note`s.
-* `MedicalNoteList` of every patient is properly loaded only when necessary (`access` on patient)
+* `MedicalNoteList` of every patient is loaded only when necessary (`access` on patient)
 * `access`-ing a `patient` loads the stored medical note list and sets the `MedicalNoteList` of the `patient` to the retrieved list
-* Hence, `note` command can only be called when viewing a `patient`'s profile as it ensures that the `MedicalNoteList` has already been properly loaded by executing `access` command beforehand
+* Hence, `addnote` command can only be called when viewing a `patient`'s profile as it ensures that the `MedicalNoteList` has already been loaded
 
 ### Account creation and login
 
