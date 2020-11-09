@@ -61,6 +61,7 @@ Given below are my contributions to the project.
     * Specified behaviour for adding medical details: [\#223](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/223)
   * Developer Guide (DG):
     * Added implementation details of the patient profile GUI element including diagrams: [\#144](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/144)
+    * Added medical details to `Model` components design: [\#238](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/238)
 
 * **Community**:
   * PRs reviewed and [approved](https://github.com/AY2021S1-CS2103T-F13-3/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Afoojingyi+)
