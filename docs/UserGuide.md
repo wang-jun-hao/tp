@@ -47,13 +47,13 @@ This user guide contains everything that you will need to know about MediBook. T
 After starting up MediBook, you should be greeted by the login screen as seen below. New users should click on the
 `Create` button to proceed with creating a new account.
 
-<img src="images/screenshots/login.png">
+<img src="images/screenshots/login.PNG">
 
 After clicking on the `Create` button, you should see the account creation page as seen below.
 Proceed with filling in the relevant details for your account.
 For more information about account creation, refer to [Section 3.1 Login and Create Account](#31-login-and-create-account).
 
-<img src="images/screenshots/createaccount.png">
+<img src="images/screenshots/createAccount.PNG">
 
 If the account creation is successful, you should now be brought to the main page where you can view the details of all the patients.
 
