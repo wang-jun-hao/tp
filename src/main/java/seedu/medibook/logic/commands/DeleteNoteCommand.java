@@ -61,11 +61,9 @@ public class DeleteNoteCommand extends Command {
 
         assert model.hasPatient(displayedPatient) : "Patient in context does not exist in model";
 
-        MedicalNoteList medicalNoteList = displayedPatient.getMedicalNoteList();
-
         int zeroBasedIndex = targetIndex.getZeroBased();
 
-        if (zeroBasedIndex >= medicalNoteList.size()) {
+        if (zeroBasedIndex >= displayedPatient.getNumOfMedicalNotes()) {
             throw new CommandException(Messages.MESSAGE_INVALID_NOTE_DISPLAYED_INDEX);
         }
 
@@ -74,10 +72,10 @@ public class DeleteNoteCommand extends Command {
         }
 
         Doctor activeUser = model.getActiveUser().get();
-        MedicalNote noteToDelete = medicalNoteList.getMedicalNoteAtIndex(zeroBasedIndex);
+        MedicalNote noteToDelete = displayedPatient.getMedicalNoteAtIndex(zeroBasedIndex);
 
         if (noteToDelete.isAuthoredBy(activeUser)) {
-            medicalNoteList.deleteMedicalNoteAtIndex(zeroBasedIndex);
+            displayedPatient.deleteMedicalNoteAtIndex(zeroBasedIndex);
         } else {
             throw new CommandException(MESSAGE_CANNOT_DELETE_OTHER_DOCTOR_NOTES);
         }
