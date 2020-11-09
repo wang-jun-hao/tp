@@ -191,8 +191,7 @@ It returns a `AddNoteCommand` object to `LogicManager`.
 
 Step 3. `LogicManager` then executes the `AddNoteCommand` via `AddNoteCommand#execute()`.
 
-Step 4. `AddNoteCommand#execute()` identifies the target `patient` object via `ModelManager#getPatientToAccess()` and
-the `doctor` authoring the note via `ModelManager#getActiveUser()`.
+Step 4. `AddNoteCommand#execute()` identifies the target `patient` object and the `doctor` authoring the note.
 It then updates the model with the new medical note added to the patient using `Patient#addMedicalNote()`.
 
 #### Design consideration
@@ -201,30 +200,27 @@ It then updates the model with the new medical note added to the patient using `
 
 We have decided to implement `addnote` command this way for 2 reasons:
 1. When user starts MediBook, not all `patient`s' list of medical notes would have been loaded into the program's memory. 
-Only allowing `addnote` after `access` ensures that the patient's list of medical notes would have been loaded at the point of adding new medical notes.
+Only allowing `addnote` after `access` ensures that the patient's list of medical notes would have been loaded at that point.
 2. It allows for a shorter `addnote` command as the user does not need to specify a target `patient`.
 
 Elaboration on point 1:
 * A medical records software contains many `patients`, each with potentially many `medical note`s.
 * Every `patient` in the `model` has a `MedicalNoteList` that is initialised as an empty list at 
   program start-up to optimise start-up time
-* `MedicalNoteList` of every patient is loaded only when necessary (`access` on patient)
+* `MedicalNoteList` of every patient is loaded only when necessary.
 * `access`-ing a `patient` loads the stored medical note list and sets the `MedicalNoteList` of the `patient` to the retrieved list
-* Hence, `addnote` command can only be called when viewing a `patient`'s profile as it ensures that the `MedicalNoteList` has already been loaded
 
 
 ### Deleting medical notes from a patient
 
 #### Implementation
 
-* The implementation of parsing of a `deletenote` command is similar to that of a `addnote` command, involving 
-`DeleteNoteCommand` and `DeleteNoteCommandParser` instead.
-* The general action of `DeleteNoteCommand#execute()` is similar to that of `AddNoteCommand#execute()`, using
-`Patient#deleteMedicalNoteAtIndex(int)` instead.
+* The implementation of parsing of a `deletenote` command is similar to that of a `addnote` command.
+* The general action of `DeleteNoteCommand#execute()` is similar to that of `AddNoteCommand#execute()`.
 * A key difference is that the `DeleteNoteCommand#execute()` verifies that the logged in `Doctor`
-is the same `Doctor` who authored the target `MedicalNote` object before proceeding with the update.
+is the same `Doctor` who authored the `MedicalNote` object before proceeding with the update.
 
-The following sequence diagram highlights the unique aspects of delete note operation:
+The following sequence diagram highlights unique aspects of delete note operation:
 
 ![DeleteNoteSequenceDiagramModel](images/DeleteNoteSequenceModel.png)
 
