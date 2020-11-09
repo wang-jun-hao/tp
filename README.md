@@ -8,7 +8,7 @@ If you would like to know more [about us](https://ay2021s1-cs2103t-f13-3.github.
 
 ![ug](docs/images/Ui.png)
 
-MediBook is a desktop app for managing patient details, optimised for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MediBook can get your contact management tasks done faster than traditional GUI apps.
+MediBook is a desktop app for managing patient records, optimised for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MediBook can get your patient records management tasks done faster than traditional GUI apps.
 
 MediBook aims to increase efficiency in a clinical setting by providing a convenient interface for clinical staff to record and keep track of patient details.
 
