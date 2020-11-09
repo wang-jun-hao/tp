@@ -144,6 +144,8 @@ The `Patient`,
 The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the medi book data in json format and read it back.
+* can save the medical notes data in separate json file for each individual patient and read it back.
+* can rename or delete the medical note data.
 
 ### Common classes
 
@@ -350,10 +352,6 @@ which determines which field of the patient to search for. When `FieldContainsKe
 is called, it will check if each keyword is a substring of the specified field of the patient. So long as at least one
 of the keyword passes the check, `FieldContainsKeywordsPredicate#test(Patient patient)` will return true.
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 ### Patient profile (GUI feature)
 This feature allows the application to display a patient's details in a clean and readable fashion.
 
@@ -394,6 +392,65 @@ The corresponding UI element is displayed on the right of the `PatientProfile` U
 
 Thereafter, this next sequence diagram shows how displaying the `PatientProfile` works:
 ![PatientProfileSequenceDiagram](images/PatientProfileSequenceDiagram.png)
+
+### `Context` interface
+
+The `Context` interface acts as a way for MediBook to store the information pertaining to what command was just executed.
+The main reason for needing a `Context` interface is due to the Command design pattern used in the application.
+
+![ContextClassDiagram](images/ContextClassDiagram.png)
+
+Referring to the class diagram above, `LogicManager` is dependent on `Model`, `Command` and `Storage`. Depending on the
+command that was executed, `LogicManager` might want to call different methods from the `Storage` interface. For example,
+if the user wants to edit the IC of a patient, `LogicManager` would want to call the method from `Storage` that would rename the
+medical notes files of the patient to fit the newly updated IC.
+
+However, due to polymorphism and the command design pattern, `LogicManager` does not know what command is being executed yet, it
+needs to know this information in order to decide what to do next. The `Context` interface is thus implemented to solve this issue while
+maintaining the command design pattern.
+
+When any command that can affect the logic within `LogicManager` is executed (such as `EditCommand`, `AccessCommand` etc..), the relevant
+command objects would call the relevant setter method from the class that implements the `Context` interface. `LogicManager` then retrieves
+this information from that very same class, thereby solving the issue without causing any cyclic dependencies while maintaining the command design pattern.
+
+Note:
+
+Some of the commands that makes use of the `Context` interface are:
+* `AccessCommand`
+* `AddCommand`
+* `AddNoteCommand`
+* `ClearCommand`
+* `DeleteCommand`
+* `DeleteNoteCommand`
+* `EditCommand`
+* `EditNoteCommand`
+
+### Charts and `Record` class
+
+This feature allows MediBook to display charts of a patient's past height, weight and BMI records in the patient
+profile page.
+
+#### Implementation
+
+The datapoints displayed on the charts are all obtained from the `Record` class. As seen in the [Model Component](#model-component) section,
+a patient contains a single `Record` object in its field. The `Record` class contains two different `HashMap` that maps
+a `Date` object to a `Height` or `Weight` object.
+
+![RecordSequenceDiagram](images/RecordSequenceDiagram.png)
+
+Everytime a command that updates a patient's `Height` or `Weight` is executed, the new `Height` or `Weight` would be added
+to the `Record` object along with the current `Date`. This means that only `AddCommand` and `EditCommand` will actually update the patient's `Record`.
+The sequence diagram above shows how a patient's `Height` or `Weight` is updated conditionally when an `EditCommand` is executed.
+The sequence diagram for `AddCommand` would look similar to this diagram as well.
+
+* Step 1: An inputs an `EditCommand` for example `edit n/John p/94347823 ...`.
+
+* Step 2: MediBook then parses the input and executes it through the `EditCommand` object created.
+
+* Step 3: The `EditCommand` object then retrieves the patient that is being edited from the `Model`.
+
+* Step 4: The `EditCommand` object then checks if the `Height` or `Weight` of the patient was updated. If either one of the field
+was updated, the `addHeightRecord` and `addWeightRecord` methods would be called in order to store the newly updated `Height`/`Weight`.
 
 --------------------------------------------------------------------------------------------------------------------
 
