@@ -316,7 +316,7 @@ Exits the program.
 ### 3.3 Charts
 
 MediBook keeps a record of a patient's height and weight. This record can be viewed in chart form when [accessing a patient's profile](#accesscommand).
-[Adding a patient](#addcommand) or [Editing a patient's profile](#editcommand) will automatically update the patient's height and weight records (assuming the height/weight field is not empty).
+[Adding a patient](#3-2-3-adding-a-patient-add) or [Editing a patient's profile](#editcommand) will automatically update the patient's height and weight records (assuming the height/weight field is not empty).
 MediBook only stores the latest height/weight record of the day. This means that editing a patient's height or weight multiple times
 within a single day, only the last edit of the patient's height/weight would be recorded.
 
