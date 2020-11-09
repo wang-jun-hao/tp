@@ -75,13 +75,7 @@ public class EditNoteCommand extends Command {
             throw new CommandException(MESSAGE_EDIT_NOTE_ON_LIST);
         }
 
-        if (model.getActiveUser().isEmpty()) {
-            throw new CommandException(MESSAGE_USER_CANNOT_EDIT);
-        }
-
         Patient displayedPatient = patientOptional.get();
-
-        Doctor activeUser = model.getActiveUser().get();
 
         assert model.hasPatient(displayedPatient) : "Patient in Context does not exist in model";
 
@@ -93,6 +87,12 @@ public class EditNoteCommand extends Command {
 
         MedicalNote noteToEdit = displayedPatient.getMedicalNoteAtIndex(zeroBasedIndex);
         MedicalNote newMedicalNote = createEditedNote(noteToEdit, editNoteDescriptor);
+
+        if (model.getActiveUser().isEmpty()) {
+            throw new CommandException(MESSAGE_USER_CANNOT_EDIT);
+        }
+
+        Doctor activeUser = model.getActiveUser().get();
 
         if (!noteToEdit.isAuthoredBy(activeUser)) {
             throw new CommandException(MESSAGE_CANNOT_EDIT_OTHER_DOCTOR_NOTES);
