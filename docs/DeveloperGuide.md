@@ -410,12 +410,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | registration admin                                       | add a patient along with their details (fields)               |                                                                        |
-| `* * *`  | registration admin                                       | delete a patient's records                | remove unwanted records from the system                                  |
-| `* * *`  | registration admin                                       | search for a patient's information          | retrieve his/her details |
-| `* *` | registration admin | edit a patient's details
+| `* * *`  | administrative staff                                       | add a patient along with their details (fields)               |   keep track of their details                                                                     |
+| `* * *`  | administrative staff                                     | delete a patient's records                | remove unwanted records from the system                                  |
+| `* * *`  | administrative staff                                      | search for a patient's information          | retrieve his/her details |
+| `* * *` | administrative staff| edit a patient's details | update their details
+| `* * *` | doctor | add a medical note | keep track of their medical history and store consultation notes
+| `* * *` | doctor | delete a medical note | remove wrong entries
+| `* * *` | doctor | edit a medical note | correct wrong entries
 
-*{More to be added}*
 
 ### Use cases
 
