@@ -175,8 +175,6 @@ public class LogicManager implements Logic {
     public void logout() {
         model.setActiveUser(Optional.empty());
         model.resetAccessedPatient();
-        model.resetDeletedPatient();
-        model.resetEditedPatient();
     }
 
 }
