@@ -255,7 +255,6 @@ Finds patient records by multiple fields and multiple keywords.
 
 **Examples:**
 * `find i/S9123456A` returns the patient record with IC `S9123456A`
-* `find n/Billy Alice a/Clementi i/S99` returns the patient records with Name containing `Billy` or `Alice`, Address containing `Clementi` and IC containing `S99`
 * `find n/charlotte a/ang mo kio` returns the patient records with Name containing `charlotte` and Address containing `ang mo kio`
 
 <img src="images/screenshots/enhancedFind.PNG">
