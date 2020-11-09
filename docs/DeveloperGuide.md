@@ -160,7 +160,6 @@ This section describes some noteworthy details on how certain features are imple
 ![Structure of MedicalNote Package (Higher Level)](images/MedicalNoteClassDiagram1.png)
 
 The `MedicalNoteList`,
-* is a mutable object
 * stores `MedicalNote` objects belonging to a patient
 * exposes a `ObservableList<MedicalNote>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * sorts `MedicalNote` objects from most recent to least recent using a `MedicalNoteComparator` object 
