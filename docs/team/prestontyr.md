@@ -64,11 +64,13 @@ This was challenging as the use of `Optionals` had to be implemented throughout 
 **Documentation:**
 * User Guide:
     * Added documentation for logging in and creating account features. (Pull request [\#152](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/152))
+    * Added documentation for logout feature. (Pull request [\#242](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/242))
     * Added documentation for `edit` feature. (Pull request [\#118](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/118))
 * Developer's Guide:
-    * Added implementation details for creating accounts and logging in. (Pull request [\#152](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/103))
+    * Added implementation details for creating accounts and logging in. (Pull requests [\#152](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/103),
+    [\#242]((https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/242)))
     * Added details for optional fields. (Pull request [\#103](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/103))
-    * Added diagram for accessing patient's profile. (Pull request [\#231](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/231))
+    * Added sequence diagram for accessing patient's profile. (Pull request [\#231](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/231))
 
 **Community:**
 * PRs reviewed and [approved](https://github.com/AY2021S1-CS2103T-F13-3/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3APrestonTYR+)
