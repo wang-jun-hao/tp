@@ -40,7 +40,7 @@ New test cases for testing this additional field were added and existing test ca
 
 **Code Contributed:** [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=divakarmal)
 
-* **Project management**:
+**Project management**:
 * Ensured proper documentation was done for all features and enhancements.
 * Closed issues that were completed or issues that we decided not to resolve on GitHub.
 
