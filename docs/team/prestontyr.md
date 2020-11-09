@@ -58,7 +58,8 @@ This was challenging as the use of `Optionals` had to be implemented throughout 
 * Fixed bugs in the product before each major release. (Pull requests [\#150](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/150),
 [\#151](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/151), [\#159](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/159),
 [\#167](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/167), [\#207](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/207),
-[\#211](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/211), [\#224](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/224))
+[\#211](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/211), [\#224](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/224),
+[\#244](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/244))
 
 **Documentation:**
 * User Guide:
