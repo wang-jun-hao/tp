@@ -49,7 +49,7 @@ You can reach us at wangjunhao@u.nus.edu, foojingyi@u.nus.edu, E0415577@u.nus.ed
 <img src="images/foojingyi.png" width="200px">
 
 [[github](https://github.com/foojingyi)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/foojingyi.md)]
 
 * Role: **Developer**
 * Responsibilities:
