@@ -193,10 +193,10 @@ Adds a patient to the system.
 
 **Examples:**
 
-`add i/S9123456A n/Divakar d/29-02-2000 p/91234567`
-
-`add i/T0123456Q n/Divakar d/29-02-2000 p/91234567 e/divakarmal@medibook.com a/NUS, Kent Ridge Drive h/178 w/75.0 b/O+
+*  `add i/T0123456Q n/Divakar d/29-02-2000 p/91234567 e/divakarmal@medibook.com a/NUS, Kent Ridge Drive h/178 w/75.0 b/O+
 al/Peanut con/Mitral valve prolapse con/asthma t/EpiPen t/metered-dose inhaler`
+
+*  `add i/S9123579A n/Jon d/29-02-2000 p/91234567`
 
 <img src="images/screenshots/addcmd.PNG">
 
@@ -218,9 +218,10 @@ The `edit` command is also used to fill in unspecified fields.
 
 **Examples:**
 
-`edit 1 n/Divakar` edits the name of patient with index `1` in the displayed list to `Divakar`
+*  `edit 3 n/Divakar p/91111111 h/201` edits the name, phone number and height of patient with index `3` in the displayed list to `Divakar`, `91111111` and `201`cm  respectively
 
-`edit 3 n/Divakar p/91111111 h/201` edits the name, phone number and height of patient with index `3` in the displayed list to `Divakar`, `91111111` and `201`cm  respectively
+*  `edit 4 n/John` edits the name of patient with index `4` in the displayed list to `John`
+
 <img src="images/screenshots/editresult.PNG">
 
 #### 3.2.5 Deleting a patient : `delete`
@@ -234,7 +235,7 @@ Deletes the specified patient from MediBook.
 * You have to be on the main list page to access a patient's profile. Use the `list` command to return to the main list page if you are viewing a patient's profile.
 
 **Example:**
-* `delete 1` deletes the patient with index `1` in the displayed list
+* `delete 3` deletes the patient with index `3` in the displayed list
 
 <img src="images/screenshots/deleteCmd.PNG">
 
@@ -255,6 +256,7 @@ Finds patient records by multiple fields and multiple keywords.
 **Examples:**
 * `find i/S9123456A` returns the patient record with IC `S9123456A`
 * `find n/Billy Alice a/Clementi i/S99` returns the patient records with Name containing `Billy` or `Alice`, Address containing `Clementi` and IC containing `S99`
+* `find n/charlotte a/ang mo kio` returns the patient records with Name containing `charlotte` and Address containing `ang mo kio`
 
 <img src="images/screenshots/enhancedFind.PNG">
 
@@ -271,7 +273,10 @@ Accesses a specified patient's profile in MediBook.
     * Personal Details section (top left): Shows the personal details of the patient, including their Name, IC, Date of Birth, and Phone Number, as well as their Email, Address, Height, Weight, BMI and Blood Type if available.
     * Medical Details section (bottom left): Shows medical details as tags separated into 3 categories, namely: Allergies, (preexisting) Conditions and (ongoing) Treatments.
     * Medical Notes section (right): A scrollable panel showing the list of medical notes recorded for the specified patient.
-    
+
+**Examples:**
+* `access 1`
+
 <img src="images/screenshots/access.PNG">
 
 #### 3.2.8 Adding a medical note: `addnote`
@@ -294,12 +299,11 @@ when on the main list and then `access`-ing the patient's index on the filtered 
 
 **Example:**
 
-Context: You are logged in as Dr John Doe (M06371K) and viewing the profile page of patient with IC 'S9123456A'
+Context: You are logged in as Dr Strange (M12345K) and viewing the profile page of patient with IC 'S9123456A'
 
-* `addnote c/Patient complains of stomach ache and headache. No signs of fever. Prescribed painkillers and probiotics.`
+* `addnote d/09-11-2020 c/Patient had mild fever and throat pain`
 
-Adds a medical note that is dated today, by Dr John Doe (M06371K) with content "Patient complains of stomach ache and headache. 
-No signs of fever. Prescribed painkillers and probiotics." to patient with IC 'S9123456A'.
+Adds a medical note that is dated 9 Nov 2020, by Dr Strange (M12345K) with content "Patient had mild fever and throat pain" to patient with IC 'S9123456A'.
 
 <img src="images/screenshots/addNote.PNG">
 
@@ -322,13 +326,13 @@ when on the main list and then `access`-ing the patient's index on the filtered 
 
 **Example:**
 
-Context: You are logged in as Dr John Doe (M06371K), viewing the profile page of patient with IC 'S9123456A' with 
+Context: You are logged in as Dr Strange (M12345K) and viewing the profile page of patient with IC 'S9123456A' with
 the medical note at index 1 authored by you.
 
-* `editnote 1 d/20-02-2018 c/Patient is having migraine.`
+* `editnote 1 d/09-11-2020 c/Patient had high fever and throat pain`
 
 Updates the date of the medical note with index 1 in the displayed list of medical notes 
-to '20-02-2018' and content to 'Patient is having migraine.'.
+to '09-11-2020' and content to 'Patient had high fever and throat pain'.
 
 <img src="images/screenshots/editNote.PNG">
 
@@ -349,7 +353,7 @@ when on the main list and then `access`-ing the patient's index on the filtered 
 
 **Example:**
 
-Context: You are logged in as Dr John Doe (M06371K), viewing the profile page of patient with IC 'S9123456A' with 
+Context: You are logged in as Dr Strange (M12345K) and viewing the profile page of patient with IC 'S9123456A' with
 the medical note at index 1 authored by you.
 
 * `deletenote 1`
