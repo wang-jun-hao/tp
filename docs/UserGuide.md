@@ -274,7 +274,7 @@ Accesses a specified patient's profile in MediBook.
     * Medical Notes section (right): A scrollable panel showing the list of medical notes recorded for the specified patient.
 
 **Examples:**
-* `access 1`
+* `access 1` accesses the first patient in the displayed list
 
 <img src="images/screenshots/access.PNG">
 
