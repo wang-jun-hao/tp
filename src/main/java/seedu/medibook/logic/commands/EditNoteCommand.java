@@ -16,6 +16,7 @@ import seedu.medibook.commons.util.CollectionUtil;
 import seedu.medibook.logic.commands.exceptions.CommandException;
 import seedu.medibook.model.Model;
 import seedu.medibook.model.commonfields.Date;
+import seedu.medibook.model.doctor.Doctor;
 import seedu.medibook.model.medicalnote.Content;
 import seedu.medibook.model.medicalnote.MedicalNote;
 import seedu.medibook.model.patient.Patient;
@@ -91,7 +92,9 @@ public class EditNoteCommand extends Command {
             throw new CommandException(MESSAGE_USER_CANNOT_EDIT);
         }
 
-        if (!model.getActiveUser().get().equals(noteToEdit.doctor)) {
+        Doctor activeUser = model.getActiveUser().get();
+
+        if (!noteToEdit.isAuthoredBy(activeUser)) {
             throw new CommandException(MESSAGE_CANNOT_EDIT_OTHER_DOCTOR_NOTES);
         }
 

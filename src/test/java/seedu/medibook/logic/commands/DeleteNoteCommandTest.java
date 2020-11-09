@@ -78,21 +78,8 @@ public class DeleteNoteCommandTest {
 
         Patient targetPatient = model.getFilteredPatientList().get(INDEX_FIRST.getZeroBased());
         DeleteNoteCommand deleteNoteCommand = new DeleteNoteCommand(validIndex);
-        MedicalNote medicalNoteToDelete =
-                targetPatient.getMedicalNoteAtIndex(validIndex.getZeroBased());
 
         model.accessPatient(targetPatient);
-
-
-        String expectedMessage = String.format(DeleteNoteCommand.MESSAGE_DELETE_NOTE_SUCCESS, medicalNoteToDelete);
-        ModelManager expectedModel = new ModelManager(model.getMediBook(), new UserPrefs());
-
-        Patient targetPatientWithDeletedNote = new PatientBuilder(targetPatient).build();
-
-        targetPatientWithDeletedNote.deleteMedicalNoteAtIndex(validIndex.getZeroBased());
-        expectedModel.setPatient(targetPatient, targetPatientWithDeletedNote);
-        expectedModel.accessPatient(targetPatientWithDeletedNote);
-        expectedModel.setShouldLoadMedicalNotes(false);
 
         assertCommandFailure(deleteNoteCommand, model, DeleteNoteCommand.MESSAGE_USER_CANNOT_DELETE);
     }
@@ -104,22 +91,9 @@ public class DeleteNoteCommandTest {
 
         Patient targetPatient = model.getFilteredPatientList().get(INDEX_FIRST.getZeroBased());
         DeleteNoteCommand deleteNoteCommand = new DeleteNoteCommand(validIndex);
-        MedicalNote medicalNoteToDelete =
-                targetPatient.getMedicalNoteAtIndex(validIndex.getZeroBased());
 
         model.accessPatient(targetPatient);
         model.setActiveUser(Optional.of(new Doctor(new Name("Tom"), new Mcr("M41259K"))));
-
-
-        String expectedMessage = String.format(DeleteNoteCommand.MESSAGE_DELETE_NOTE_SUCCESS, medicalNoteToDelete);
-        ModelManager expectedModel = new ModelManager(model.getMediBook(), new UserPrefs());
-
-        Patient targetPatientWithDeletedNote = new PatientBuilder(targetPatient).build();
-
-        targetPatientWithDeletedNote.deleteMedicalNoteAtIndex(validIndex.getZeroBased());
-        expectedModel.setPatient(targetPatient, targetPatientWithDeletedNote);
-        expectedModel.accessPatient(targetPatientWithDeletedNote);
-        expectedModel.setShouldLoadMedicalNotes(false);
 
         assertCommandFailure(deleteNoteCommand, model, DeleteNoteCommand.MESSAGE_CANNOT_DELETE_OTHER_DOCTOR_NOTES);
     }
