@@ -12,7 +12,6 @@ import seedu.medibook.logic.commands.exceptions.CommandException;
 import seedu.medibook.model.Model;
 import seedu.medibook.model.doctor.Doctor;
 import seedu.medibook.model.medicalnote.MedicalNote;
-import seedu.medibook.model.medicalnote.MedicalNoteList;
 import seedu.medibook.model.patient.Patient;
 
 /**
