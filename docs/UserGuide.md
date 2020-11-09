@@ -48,7 +48,7 @@ specified patient in MediBook can be added, edited, deleted or found using comma
   * `DATE_OF_BIRTH` should be given in the format "DD-MM-YYYY" where D, M and Y represent digits of the day, month and year of the date respectively.
   * `PHONE_NUMBER` has to be within 7 to 15 digits long (to support international numbers).
   * `EMAIL` Emails should be of the format "local-part@domain" and adhere to the following constraints:
-    * The local-part should only contain alphanumeric characters and these special characters, excluding parentheses, (!#$%&'*+/=?`{|}~^.-").
+    * The local-part should only contain alphanumeric characters and these special characters, excluding parentheses, (!#$%&'*+/=?`{&#124;}~^.-").
     * This is followed by a '@' and then a domain name. The domain name must:
         * be at least 2 characters long
         * start and end with alphanumeric characters
