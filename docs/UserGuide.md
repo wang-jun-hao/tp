@@ -7,12 +7,25 @@ title: User Guide
 {:toc}
 
 ## 1. Introduction
+
+### 1.1 Welcome to MediBook
+
 MediBook is a **desktop medical records software targeting doctors and administrative staffs in clinics or hospitals to 
 help manage patient details.** It is **optimized for use via a Command Line Interface** (CLI) while 
 still having the benefits of a Graphical User Interface (GUI). If you can type fast, MediBook can get your patient 
 details management tasks done faster than traditional methods.
 
-This user guide helps you get familiar with its features and get started with using MediBook.
+### 1.2 Overview
+
+This user guide contains everything that you will need to know about MediBook. The information contained in this user guide will be useful to both new and experienced users alike.
+
+[Section 2. Quick start](#2-quick-start) contains information for new users who wish to start using Medibook.
+
+[Section 3. Features](#3-features) contains all the details of the the different features that MediBook provides. The description and/or sample usage for each feature is provided so that users can easily learn how to use each feature.
+
+[Section 4. FAQ](#4-faq) provides answers to typical issues which users might have that are not covered in the previous sections.
+
+[Section 5. Command summary](#5-command-summary) summarizes the format for each command in a table. This is particularly useful for users who simply wish to have a quick reference on the correct format for the commands.
 
 --------------------------------------------------------------------------------------------------------------------
 
