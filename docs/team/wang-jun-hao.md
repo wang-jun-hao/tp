@@ -57,7 +57,8 @@ Main highlights of MediBook include:
     * Tweaked layout and re-ordered features so that related features are back-to-back (Pull requests [\#154](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/154))
     * Added elaboration on `login` and `edit` feature (Pull requests [\#121](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/121), [\#174](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/174))
   * Developer Guide:
-    * Added implementation details of `addnote`, `editnote` and `deletenote` features (Pull requests [\#111](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/111), [\#122](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/122), [\#125](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/125))
+    * Added implementation details of `MedicalNote` and `MedicalNoteList` (Pull requests [\#239](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/239))
+    * Added implementation details of `addnote`, `editnote` and `deletenote` features (Pull requests [\#111](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/111), [\#122](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/122), [\#125](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/125), [\#247](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/247))
 
 * **Project management**:
   * Managed releases `v1.2.1` - `v1.4` (3 releases) on GitHub
@@ -68,7 +69,7 @@ Main highlights of MediBook include:
   * Liaised with tutor on project matters
   * Created platform for team notes
   * Release and milestones management
-  * Managed build number, javaFx version and enabled assertions in gradle (Pull requests [\#119](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/119), [\#127](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/127), [\#171](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/171))
+  * Managed build number, javaFx version and enabled assertions in gradle (Pull requests [\#119](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/119), [\#127](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/127), [\#171](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/171), [\#230](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/230))
   * Updated help command (Pull requests [\#72](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/72))
 
 * **Community**:
