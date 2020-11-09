@@ -333,7 +333,7 @@ Patients' data are saved in the hard disk automatically after any command that c
 
 **:information_source: Note:**<br>
 
-The information contained in this subsection is meant for advanced users. Improper usage of this feature can potentially cause permanent loss of data~
+The information contained in this subsection is meant for advanced users. Improper usage of this feature can potentially cause permanent loss of data!
 
 </div>
 
