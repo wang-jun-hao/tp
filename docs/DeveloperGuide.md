@@ -225,7 +225,7 @@ is the same `Doctor` who authored the target `MedicalNote` object before proceed
 
 The following sequence diagram highlights the unique aspects of delete note operation:
 
-![DeleteNoteSequenceDiagramModel](images/DeleteNoteSequenceModel.png)
+![DeleteNoteSequenceDiagramModel](images/DeleteNoteSequenceModel.png =100x100)
 
 Step 1. `LogicManager` executes the `DeleteNoteCommand` via `DeleteNoteCommand#execute()`.
 
