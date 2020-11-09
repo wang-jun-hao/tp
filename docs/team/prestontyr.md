@@ -31,7 +31,7 @@ adding a way to store account information.
 
 **New Feature:** Added the ability to access a patient's profile, which shows all their information.
 * What it does: Allows the user to access a patient's profile, which shows all of a patient's information along with
-medical notes oertaining to the patient.
+medical notes pertaining to the patient.
 * Justification: This feature improves the usability of the product. Since each patient has many fields of information
 along with plenty of medical notes, having all of the information displayed while viewing the list of patients will make
 it cluttered and difficult to use.
@@ -50,16 +50,24 @@ This was challenging as the use of `Optionals` had to be implemented throughout 
 **Code Contributed:** [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=prestontyr)
 
 * **Project management**:
-* Ensured milestones set were met project team members.
+* Ensured milestones set were met by project team members.
 * Closed issues that were completed or issues that we decided not to resolve on GitHub.
 
 **Enhancements to Existing Features:**
 * Wrote additional test cases for existing features. (Pull requests [\#76](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/76))
+* Fixed bugs in the product before each major release. (Pull requests [\#150](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/150),
+[\#151](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/151), [\#159](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/159),
+[\#167](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/167), [\#207](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/207),
+[\#211](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/211), [\#224](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/224))
 
 **Documentation:**
 * User Guide:
-    * Added documentation for logging in and creating account features.
-    * Added documentation for `access` feature.
+    * Added documentation for logging in and creating account features. (Pull request [\#152](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/152))
+    * Added documentation for `edit` feature. (Pull request [\#118](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/118))
+* Developer's Guide:
+    * Added implementation details for creating accounts and logging in. (Pull request [\#152](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/103))
+    * Added details for optional fields. (Pull request [\#103](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/103))
+    * Added diagram for accessing patient's profile. (Pull request [\#231](https://github.com/AY2021S1-CS2103T-F13-3/tp/pull/231))
 
 **Community:**
 * PRs reviewed and [approved](https://github.com/AY2021S1-CS2103T-F13-3/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3APrestonTYR+)

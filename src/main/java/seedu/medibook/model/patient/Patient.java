@@ -419,7 +419,7 @@ public class Patient {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getIc())
-                .append(" Name ")
+                .append(" Name: ")
                 .append(getName())
                 .append(" Date of Birth: ")
                 .append(getDateOfBirth())
