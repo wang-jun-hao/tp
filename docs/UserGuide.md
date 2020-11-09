@@ -314,17 +314,33 @@ Exits the program.
 
 MediBook keeps a record of a patient's height and weight. This record can be viewed in chart form when [accessing a patient's profile](#327-accessing-a-patients-profile--access).
 [Adding a patient](#323-adding-a-patient-add) or [Editing a patient's profile](#324-editing-a-patient-edit) will automatically update the patient's height and weight records (assuming the height/weight field is not empty).
-MediBook only stores the latest height/weight record of the day. This means that editing a patient's height or weight multiple times
-within a single day, only the last edit of the patient's height/weight would be recorded.
+MediBook only stores the latest height/weight record of the day. This means that only the last edit of the patient's height/weight would be recorded
+if a patient's height or weight is edited multiple times within a single day.
 
-MediBook also derives a patient's BMI records based on the patient's height and weight records. As of v1.3, a patient's BMI
+MediBook also derives a patient's BMI records based on the patient's height and weight records. As of v1.4, a patient's BMI
 record for a particular date can only be derived if the patient also has both the height and weight records on that day.
 
 
-### 3.4 Saving the data
+### 3.4 Data
+
+#### 3.4.1 Saving the data
 
 Patients' data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
+#### 3.4.2 Editing the data
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
+The information contained in this subsection is meant for advanced users. Improper usage of this feature can potentially cause permanent loss of data~
+
+</div>
+
+The MediBook's save data files are stored in the `data` folder which can be found in the home folder which was chosen in [Quick start](#2-quick-start) step 3.
+Details of the patients' medical details can be found in `data` --> `medibook.json`. The medical notes for each patient can be found in `data` --> `medicalnotes` --> `IC.json` where `IC` refers to the IC of the patient. Account details can be found in `data` --> `accounts.json`.
+
+The saved data follow the same formatting restriction as stated in the [Features](#3-features) section. If the saved data is edited such that the file or data format becomes invalid, MediBook will reset the data for that particular file, causing data to be lost.
 
 --------------------------------------------------------------------------------------------------------------------
 
